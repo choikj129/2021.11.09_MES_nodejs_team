@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("./head.ejs") %>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            .border{
+                position:absolute; 
+                margin-top: 5px;
+                width:100px; 
+                height:50px;
+                text-align:center; 
+                line-height: 40px; 
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .border1{
+                color : #ffc831;
+            }
+            .border2{
+                color: tomato;
+            }
+        </style>
+    </head>
+    
+    <body>
+        
+
+        <button type="button" class="btn btn-primary" style="position: absolute; top: 90px; left:150px; width: 100px;">START</button>
+        <button type="button" class="btn btn-danger" style="position: absolute; top: 90px; right:150px; width: 100px;">비상정지</button>
+
+        <div class="container" style="position:absolute; top: 150px; margin-left:30px; width:400px">
+            <table class="table table-bordered border-primary table-hover">
+                <thead>
+                    <tr>
+                        <td colspan="4">조건값</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>최적값</th>
+                        <th>입력값</th>
+                        <th>현재값</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>금형온도</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>용융온도</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>사출속도</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>보압</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>사출시간</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>보압시간</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>배압시간</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>총시간</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="position: absolute; width: 350px; height: 300px; margin-top: 200px; right:0px">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <script>
+            const DATA_COUNT = 5;
+            const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+
+            const data = {
+                labels: ['양품', '불량품'],
+                datasets: [
+                    {
+                        label: 'Dataset 1',
+                        data: [90, 10],
+                        backgroundColor: ['royalblue', 'orangered'],
+                        hoverOffset: 5
+                    }
+                ]
+            };
+            const config = {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: '제품 상태'
+                    }
+                    }
+                },
+            };
+            var myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
+            var show = true
+        </script>
+
+        <div style="padding-top: 500px; text-align: center; ">
+            <img src="/img/motion.gif">
+        </div>
+
+        
+    </body>
+</html>
