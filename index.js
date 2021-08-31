@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     port : 3306,
     user : 'root',
     password : '1111',
-    database : 'test'    
+    database : 'project'    
 })
 
 app.set("views", __dirname+"/views");
@@ -19,7 +19,35 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.static("public"));
 
 app.get("/", function(req, res){
-    res.render("main");
+    connection.query(
+        `select * from monitoring`,
+        function(err, result){
+            if (err){
+                console.log(err)
+            }else{
+                
+                res.render('main', {
+                    'monitor' : result
+                })
+            }
+        }
+    )
+})
+
+app.get("/now_update", function(req, res){
+    var id = req.query._id
+    connection.query(
+        `select * from monitoring where monitor_id=`+id,
+        function(err, result){
+            if (err){
+                console.log(err)
+            }else{
+                res.json({
+                    "monitor" : result[0]
+                })
+            }
+        }
+    )
 })
 
 app.listen(3000, function(){
