@@ -25,7 +25,6 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `order_id` int NOT NULL,
   `lego_id` int NOT NULL,
-  `lego_name` varchar(45) NOT NULL,
   `quantity` int NOT NULL,
   `start_time` varchar(45) NOT NULL,
   `end_time` varchar(45) NOT NULL,
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-30 15:50:20
+-- Dump completed on 2021-09-01 12:45:29
