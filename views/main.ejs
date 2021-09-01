@@ -21,7 +21,7 @@
                 color: tomato;
             }
         </style>
-        <script>
+         <script>
             var count = 0;
             function now(){
                 count += 1
@@ -46,11 +46,9 @@
         </script>
     </head>
     
-    <body>
-        
-
+    <body>      
         <button type="button" class="btn btn-primary" style="position: absolute; top: 90px; left:150px; width: 100px;">START</button>
-        <button type="button" class="btn btn-danger" style="position: absolute; top: 90px; right:150px; width: 100px;">비상정지</button>
+        <button type="button" class="btn btn-danger" style="position: absolute; top: 90px; right:150px; width: 100px;">비상정지</button>      
 
         <div class="container" style="position:absolute; top: 150px; margin-left:30px; width:400px">
             <table class="table table-bordered border-primary table-hover">
@@ -68,51 +66,85 @@
                 <tbody>
                     <tr>
                         <td>금형온도</td>
-                        <td id="now_mold_temp"><%=monitor[0].mold_temp%></td>
+                        <td>1</td>
                         <td>2</td>
-                        <td>3</td>
+                        <td><%=monitoring[0].mold_temp%></td>
                     </tr>
                     <tr>
                         <td>용융온도</td>
-                        <td id="now_melt_temp"><%=monitor[0].melt_temp%></td>
+                        <td>1</td>
                         <td>2</td>
-                        <td>3</td>
+                        <td><%=monitoring[0].melt_temp%></td>
                     </tr>
                     <tr>
                         <td>사출속도</td>
-                        <td id="now_injection_speed"><%=monitor[0].injection_speed%></td>
+                        <td>1</td>
                         <td>2</td>
-                        <td>3</td>
+                        <td><%=monitoring[0].injection_speed%></td>
                     </tr>
                     <tr>
                         <td>보압</td>
-                        <td id="now_hold_pressure"><%=monitor[0].hold_pressure%></td>
+                        <td>1</td>
                         <td>2</td>
-                        <td>3</td>
+                        <td><%=monitoring[0].hold_pressure%></td>
                     </tr>
                     <tr>
                         <td>사출시간</td>
-                        <td id="now_injection_time"><%=monitor[0].injection_time%></td>
+                        <td>1</td>
                         <td>2</td>
-                        <td>3</td>
+                        <td><%=monitoring[0].injection_time%></td>
                     </tr>
                     <tr>
                         <td>보압시간</td>
-                        <td id="now_hold_time"><%=monitor[0].hold_time%></td>
+                        <td>1</td>
                         <td>2</td>
-                        <td>3</td>
+                        <td><%=monitoring[0].hold_time%></td>
                     </tr>
                     <tr>
                         <td>배압시간</td>
-                        <td id="now_filling_time"><%=monitor[0].filling_time%></td>
+                        <td>1</td>
                         <td>2</td>
-                        <td>3</td>
+                        <td><%=monitoring[0].filling_time%></td>
                     </tr>
                     <tr>
                         <td>총시간</td>
-                        <td id="now_cycle_time"><%=monitor[0].cycle_time%></td>
+                        <td>1</td>
                         <td>2</td>
-                        <td>3</td>
+                        <td><%=monitoring[0].cycle_time%></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="container" style="position:absolute; top: 150px; margin-left:430px; width:300px">
+            <table class="table table-bordered border-primary table-hover">
+                <thead>
+                    <tr>
+                        <td colspan="4"><button type="button" class="btn btn-outline-secondary">X</button></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><button type="button" class="btn btn-outline-secondary">1</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">2</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">3</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="btn btn-outline-secondary">4</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">5</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">6</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="btn btn-outline-secondary">7</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">8</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">9</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button type="button" class="btn btn-outline-secondary">0</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button type="button" class="btn btn-outline-secondary">OK</button></td>
                     </tr>
                 </tbody>
             </table>

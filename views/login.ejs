@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("./head.ejs")%>
+    </head>
+    <style>
+        .login{
+            height : 100vh;
+            display : flex;
+            align-items : center;
+            justify-content: center;
+        }
+        ._label{
+            width : 35%;
+        }
+        ._button{
+            width: 100px;
+
+        }
+        .center{
+            display : flex;
+            justify-content: space-around;
+        }
+    </style>
+    <body>
+        <div class = "container login">
+            <form action="/login" method="post">
+                <div class="input-group mb-3">
+                    <span class="input-group-text _label" id="basic-addon1">ID</span>
+                    <input type="" class="form-control" placeholder="UserID" name="_id">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text _label" id="basic-addon1">Password</span>
+                    <input type="password" class="form-control" placeholder="Password" name="_password">
+                </div>
+                <div align="center">
+                    <input type="submit" class="btn btn-outline-dark _button" value="login">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
