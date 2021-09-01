@@ -63,17 +63,15 @@ app.get("/main", function(req, res){
     if(!req.session.logged){
         res.redirect("/")
     }else{
-        var sql1;
-        sql1 = "select * from monitoring";
         connection.query(
-            sql1,
+            `select * from monitoring`,
             function(err, result){
-                if(err){
-                    console.log(err);
-                    res.send("search SQL select Error")
+                if (err){
+                    console.log(err)
                 }else{
-                    res.render("main", {
-                        "monitor" : result
+                    
+                    res.render('main', {
+                        'monitor' : result
                     })
                 }
             }
