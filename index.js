@@ -6,9 +6,9 @@ const session = require("express-session");
 
 const connection = mysql.createConnection({
     host : 'localhost',
-    port : 330,
+    port : 3306,
     user : 'root',
-    password : '1223',
+    password : '1111',
     database : 'project'    
 })
 
@@ -78,9 +78,9 @@ app.get("/main", function(req, res){
         )
     }
 })
-
+var id;
 app.get("/now_update", function(req, res){
-    var id = req.query._id
+    id = req.query._id
     connection.query(
         `select * from monitoring where monitor_id=`+id,
         function(err, result){
