@@ -39,7 +39,7 @@
                     $("#now_cycle_time").text(result.monitor.cycle_time)
                 })
             }
-            
+
             var interval;
             function start(){
                 interval = setInterval(function(){
@@ -121,6 +121,39 @@
                         <td id="now_cycle_time"></td>
                         <td>2</td>
                         <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="container" style="position:absolute; top: 150px; margin-left:430px; width:300px">
+            <table class="table table-bordered border-primary table-hover">
+                <thead>
+                    <tr>
+                        <td colspan="4"><button type="button" class="btn btn-outline-secondary">X</button></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><button type="button" class="btn btn-outline-secondary">1</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">2</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">3</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="btn btn-outline-secondary">4</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">5</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">6</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="btn btn-outline-secondary">7</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">8</button></td>
+                        <td><button type="button" class="btn btn-outline-secondary">9</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button type="button" class="btn btn-outline-secondary">0</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button type="button" class="btn btn-outline-secondary">OK</button></td>
                     </tr>
                 </tbody>
             </table>
