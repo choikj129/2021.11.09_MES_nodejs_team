@@ -3,7 +3,6 @@ const app = express();
 const mysql = require("mysql2");
 const moment = require("moment");
 const session = require("express-session");
-const { render } = require("ejs");
 
 const connection = mysql.createConnection({
     host : 'localhost',
