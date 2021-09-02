@@ -3,12 +3,13 @@ const app = express();
 const mysql = require("mysql2");
 const moment = require("moment");
 const session = require("express-session");
+const { render } = require("ejs");
 
 const connection = mysql.createConnection({
     host : 'localhost',
     port : 3306,
     user : 'root',
-    password : '1111',
+    password : '1234',
     database : 'project'    
 })
 
@@ -59,6 +60,8 @@ app.post("/login", function(req, res){
     )
 })
 
+var id=0;
+
 app.get("/main", function(req, res){
     if(!req.session.logged){
         res.redirect("/")
@@ -69,7 +72,6 @@ app.get("/main", function(req, res){
                 if (err){
                     console.log(err)
                 }else{
-                    
                     res.render('main', {
                         'monitor' : result
                     })
@@ -78,7 +80,7 @@ app.get("/main", function(req, res){
         )
     }
 })
-var id;
+
 app.get("/now_update", function(req, res){
     id = req.query._id
     connection.query(
@@ -95,11 +97,25 @@ app.get("/now_update", function(req, res){
     )
 })
 app.get("/defect", function(req,res){
-    connection.query(
-        
-
-    )
+    if(!req.session.logged){
+       res.redirect("/")
+    }else{
+        connection.query(
+            `select A.monitor_id, A.time, A.mold_temp, A.melt_temp, A.injection_speed, A.hold_pressure, A.injection_time, A.hold_time, 
+            A.filling_time, B.cause from monitoring A, defect B where A.monitor_id=B.monitor_id and A.monitor_id <= `+id,
+            function(err,result){
+                if(err){
+                    console.log(err)
+                }else{
+                    res.render("defect",{
+                        'defect' : result
+                    });
+                }
+            }
+        )
+    }
 })
+
 
 app.listen(3000, function(){
     console.log("monitor server start")
