@@ -20,6 +20,10 @@
             .border2{
                 color: tomato;
             }
+            td {
+                padding: 5px 10px;
+                text-align: center;
+            }
         </style>
         <script>
             var count = 0;
@@ -50,7 +54,13 @@
             function stop(){
                 clearInterval(interval);
             }
-            
+            function add(char){
+                var display = document.getElementById('display');
+                display.value += char; 
+            }
+            function reset(){
+                document.getElementById('display').value = "";
+            }
         </script>
     </head>
     
@@ -75,87 +85,80 @@
                     <tr>
                         <td>금형온도</td>
                         <td id="now_mold_temp"></td>
-                        <td>2</td>
+                        <td><input type=text id="display"></td>
                         <td>3</td>
                     </tr>
                     <tr>
                         <td>용융온도</td>
                         <td id="now_melt_temp"></td>
-                        <td>2</td>
+                        <td><input type=text id="display"></td>
                         <td>3</td>
                     </tr>
                     <tr>
                         <td>사출속도</td>
                         <td id="now_injection_speed"></td>
-                        <td>2</td>
+                        <td><input type=text id="display"></td>
                         <td>3</td>
                     </tr>
                     <tr>
                         <td>보압</td>
                         <td id="now_hold_pressure"></td>
-                        <td>2</td>
+                        <td><input type=text id="display"></td>
                         <td>3</td>
                     </tr>
                     <tr>
                         <td>사출시간</td>
                         <td id="now_injection_time"></td>
-                        <td>2</td>
+                        <td><input type=text id="display"></td>
                         <td>3</td>
                     </tr>
                     <tr>
                         <td>보압시간</td>
                         <td id="now_hold_time"></td>
-                        <td>2</td>
+                        <td><input type=text id="display"></td>
                         <td>3</td>
                     </tr>
                     <tr>
                         <td>배압시간</td>
                         <td id="now_filling_time"></td>
-                        <td>2</td>
+                        <td><input type=text id="display"></td>
                         <td>3</td>
                     </tr>
                     <tr>
                         <td>총시간</td>
                         <td id="now_cycle_time"></td>
-                        <td>2</td>
+                        <td><input type=text id="display"></td>
                         <td>3</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         
-        <div class="container" style="position:absolute; top: 150px; margin-left:430px; width:200px;">
-            <table class="table table-bordered border-primary table-hover" style="border-collapse:collapse; table-layout:fixed;" frame=void>
-                <thead>
-                    <tr>
-                        <td colspan="3"><button type="button" class="btn btn-outline-secondary">X</button></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><button type="button" class="btn btn-outline-secondary">1</button></td>
-                        <td><button type="button" class="btn btn-outline-secondary">2</button></td>
-                        <td><button type="button" class="btn btn-outline-secondary">3</button></td>
-                    </tr>
-                    <tr>
-                        <td><button type="button" class="btn btn-outline-secondary">4</button></td>
-                        <td><button type="button" class="btn btn-outline-secondary">5</button></td>
-                        <td><button type="button" class="btn btn-outline-secondary">6</button></td>
-                    </tr>
-                    <tr>
-                        <td><button type="button" class="btn btn-outline-secondary">7</button></td>
-                        <td><button type="button" class="btn btn-outline-secondary">8</button></td>
-                        <td><button type="button" class="btn btn-outline-secondary">9</button></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><button type="button" class="btn btn-outline-secondary">0</button></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><button type="button" class="btn btn-outline-secondary">OK</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="table table-bordered" style="border-color: black; position:absolute; margin-left:430px; margin-top:150px; table-layout: fixed; width:120px">
+            <tr>
+                <td onclick="add(1)">1</td>
+                <td onclick="add(2)">2</td>
+                <td onclick="add(3)">3</td>
+            </tr>
+            <tr>
+                <td onclick="add(4)">4</td>
+                <td onclick="add(5)">5</td>
+                <td onclick="add(6)">6</td>
+            </tr>
+            <tr>
+                <td onclick="add(7)">7</td>
+                <td onclick="add(8)">8</td>
+                <td onclick="add(9)">9</td>
+            </tr>
+            <tr>
+                <td onclick="add(0)">0</td>
+                <td onclick="add('.')">.</td>
+                <td onclick="reset()">AC</td>
+            </tr>
+            <tr>
+                <td colspan="3">OK</td>
+            </tr>
+        </table>
 
         <div style="position: absolute; width: 350px; height: 300px; margin-top: 200px; right:0px">
             <canvas id="myChart"></canvas>
