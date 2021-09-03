@@ -20,7 +20,20 @@
               </tr>
             </thead>
             <tbody>
-              
+              <% for(var i =0; i < defect.length; i++){ %>
+                <tr>
+                  <td><%=defect[i].monitor_id %></td>
+                  <td><%=defect[i].time %></td>
+                  <td><%=defect[i].mold_temp %></td>
+                  <td><%=defect[i].melt_temp %></td>
+                  <td><%=defect[i].injection_speed %></td>
+                  <td><%=defect[i].hold_pressure %></td>
+                  <td><%=defect[i].injection_time %></td>
+                  <td><%=defect[i].hold_time %></td>
+                  <td><%=defect[i].filling_time %></td>
+                  <td><%=defect[i].cause %></td>
+                </tr>
+                <% } %>
              
             </tbody>
           </table>
