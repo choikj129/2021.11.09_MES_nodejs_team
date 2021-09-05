@@ -116,26 +116,13 @@ app.get("/defect", function(req,res){
 })
 
 app.get("/current", function(req, res){
-    var sql;
-    if(req.session.logged==0){
-        sql = "select * from monitoring"
+    if(!req.session.logged){
+        res.redirect("/")
     }else{
-        sql =  `select * from monitoring where monitor_id=`+ req.session.monitor_id
+        res.render("current")
     }
-    connection.query(
-       sql,
-        function(err, result){
-            if(err){
-                console.log(err);
-                res.send("current SQL select Error")
-            }else{                
-                res.render("current",{
-                    'current' : result
-                })              
-            }
-        }
-    )
 })
+
 app.listen(3000, function(){
     console.log("monitor server start")
 })
