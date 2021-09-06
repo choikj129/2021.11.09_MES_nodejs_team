@@ -2,22 +2,29 @@
 <html>
 <head>
     <%- include("./head.ejs") %>
+    <title>현황확인 페이지</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div style="position: absolute; width: 350px; height: 300px; margin-top: 200px; right:0px">
-        <canvas id="Chart1"></canvas>
+    <div class="container" style="position:absolute; margin: 100px 50px; margin-left: 150px; margin-right: 150px">
+        <canvas id="Chart1" width="1200" height="250"></canvas>
+    </div>
+    <div class="container" style="position:absolute; margin: 400px 50px; margin-left: 150px; margin-right: 0px;">
+        <canvas id="Chart2" width="600" height="250"></canvas>
+    </div>
+    <div class="container" style="position:absolute; margin: 400px 50px; margin-left: 750px; margin-right: 250px;">
+        <canvas id="Chart3" width="600" height="250"></canvas>
     </div>
     <script>
-        const labels = [
+        const labels1 = [
                 '시간1',
-                '시간2',
+                '시간2', 
                 '시간3',
                 '시간4'              
             ];          
            
-            const data = {
-            labels: labels,
+            const data1 = {
+            labels: labels1,
             datasets: [
                 {
                 label: '목표생산량',
@@ -33,32 +40,32 @@
                 }
             ]
             };
-            const config = {
+            const config1 = {
             type: 'line',
-            data: data,
+            data: data1,
             options: {
-                responsive: true,
+                responsive: false,
                 plugins: {
                 legend: {
                     position: 'top',
                 },
                 title: {
                     display: true,
-                    text: '현황확인'
+                    text: '현황확인1'
                 }
-                }
+                },                          
+                              
             },
             };
-            var myChart = new Chart(
-                document.getElementById('chart1'),
-                config
+
+            var myChart1 = new Chart(
+                document.getElementById('Chart1'),
+                config1
             );
-    </script>
-    <div>
-        <canvas id="Chart2"></canvas>
-    </div>
-    <script>
-        const labels = [
+            var show = true
+
+            
+            const labels2 = [
                 '시간1',
                 '시간2',
                 '시간3',
@@ -66,28 +73,28 @@
                 '시간5',              
                 '시간6'
             ];
-            const data = {
-            labels: labels,
+            const data2 = {
+            labels: labels2,
             datasets: [
                 {
                 label: '금형온도',
                 data: [4.3, 2.5, 3.5, 4.5, 4.2, 6.2 ],
-                borderColor: 'rgb(237, 125, 49)',
-                backgroundColor: 'rgb(237, 125, 49)',
+                borderColor: 'rgb(91, 155, 213)',
+                backgroundColor: 'rgb(91, 155, 213)',
                 },
                 {
                 label: '용융온도',
                 data: [2.4, 4.4, 1.8, 2.8, 3.7, 2.8],
-                borderColor: 'rgb(91, 155, 213)',
-                backgroundColor: 'rgb(91, 155, 213)',
+                borderColor: 'rgb(237, 125, 49)',
+                backgroundColor: 'rgb(237, 125, 49)',
                 }
             ]
             };
-            const config = {
+            const config2 = {
             type: 'line',
-            data: data,
+            data: data2,
             options: {
-                responsive: true,
+                responsive: false,
                 plugins: {
                 legend: {
                     position: 'top',
@@ -99,44 +106,40 @@
                 }
             },
             };
-            var myChart = new Chart(
-                document.getElementById('chart2'),
-                config
+            var myChart2 = new Chart(
+                document.getElementById('Chart2'),
+                config2
             );
-    </script>
-    <div>
-        <canvas id="Chart3"></canvas>
-    </div>
+            var show = true
 
-    <script>
-        const labels = [
+            const labels3 = [
                 '시간1',
                 '시간2',
                 '시간3',
                 '시간4'              
             ];
-            const data = {
-            labels: labels,
+            const data3 = {
+            labels: labels3,
             datasets: [
                 {
                 label: '보압',
                 data: [4.3, 2.3, 3.5, 4.5],
-                borderColor: 'rgb(237, 125, 49)',
-                backgroundColor: 'rgb(237, 125, 49)',
+                borderColor: 'rgb(91, 155, 213)',
+                backgroundColor: 'rgb(91, 155, 213)',
                 },
                 {
                 label: '배압',
                 data: [2.4, 4.4, 1.8, 2.8],
-                borderColor: 'rgb(91, 155, 213)',
-                backgroundColor: 'rgb(91, 155, 213)',
+                borderColor: 'rgb(237, 125, 49)',
+                backgroundColor: 'rgb(237, 125, 49)',
                 }
             ]
             };
-            const config = {
+            const config3 = {
             type: 'line',
-            data: data,
+            data: data3,
             options: {
-                responsive: true,
+                responsive: false,
                 plugins: {
                 legend: {
                     position: 'top',
@@ -147,11 +150,21 @@
                 }
                 }
             },
+            scales: {
+            y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                min: 0,
+                max: 5.0,
+            }
+            }
             };
-            var myChart = new Chart(
-                document.getElementById('chart3'),
-                config
+            var myChart3 = new Chart(
+                document.getElementById('Chart3'),
+                config3
             );
-    </script>
+            var show = true
+    </script>   
 </body>
 </html>

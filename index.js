@@ -115,6 +115,13 @@ app.get("/defect", function(req,res){
     }
 })
 
+app.get("/current", function(req, res){
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        res.render("current")
+    }
+})
 
 app.listen(3000, function(){
     console.log("monitor server start")
