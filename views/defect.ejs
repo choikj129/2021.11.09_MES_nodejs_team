@@ -4,39 +4,39 @@
         <%- include("./head.ejs") %>
     </head>
     <body>
-        <table class="table table-bordered table-striped table-hover">
-            <thead>
+      <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">시리얼번호</th>
+              <th scope="col">시간</th>
+              <th scope="col">금형온도</th>
+              <th scope="col">사출온도</th>
+              <th scope="col">사출속도</th>
+              <th scope="col">보압</th>
+              <th scope="col">사출시간</th>
+              <th scope="col">보압시간</th>
+              <th scope="col">배압시간</th>
+              <th scope="col">결함원인</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i =0; i < defect.length; i++){ %>
               <tr>
-                <th scope="col">시리얼번호</th>
-                <th scope="col">시간</th>
-                <th scope="col">금형온도</th>
-                <th scope="col">사출온도</th>
-                <th scope="col">사출속도</th>
-                <th scope="col">보압</th>
-                <th scope="col">사출시간</th>
-                <th scope="col">보압시간</th>
-                <th scope="col">배압시간</th>
-                <th scope="col">결함원인</th>
+                <td><%=defect[i].monitor_id %></td>
+                <td><%=defect[i].time %></td>
+                <td><%=defect[i].mold_temp %></td>
+                <td><%=defect[i].melt_temp %></td>
+                <td><%=defect[i].injection_speed %></td>
+                <td><%=defect[i].hold_pressure %></td>
+                <td><%=defect[i].injection_time %></td>
+                <td><%=defect[i].hold_time %></td>
+                <td><%=defect[i].filling_time %></td>
+                <td><%=defect[i].cause %></td>
               </tr>
-            </thead>
-            <tbody>
-              <% for(var i =0; i < defect.length; i++){ %>
-                <tr>
-                  <td><%=defect[i].monitor_id %></td>
-                  <td><%=defect[i].time %></td>
-                  <td><%=defect[i].mold_temp %></td>
-                  <td><%=defect[i].melt_temp %></td>
-                  <td><%=defect[i].injection_speed %></td>
-                  <td><%=defect[i].hold_pressure %></td>
-                  <td><%=defect[i].injection_time %></td>
-                  <td><%=defect[i].hold_time %></td>
-                  <td><%=defect[i].filling_time %></td>
-                  <td><%=defect[i].cause %></td>
-                </tr>
-                <% } %>
-             
-            </tbody>
-          </table>
+              <% } %>
+            
+          </tbody>
+        </table>
        
     </body>
 </html>
