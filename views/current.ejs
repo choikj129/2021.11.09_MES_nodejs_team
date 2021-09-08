@@ -53,8 +53,14 @@
                     display: true,
                     text: '현황확인1'
                 }
-                },                          
-                              
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 105,
+                    }
+                }      
+                
             },
             };
 
@@ -103,7 +109,13 @@
                     display: true,
                     text: '현황확인2'
                 }
-                }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 7,
+                    }
+                }      
             },
             };
             var myChart2 = new Chart(
@@ -148,17 +160,14 @@
                     display: true,
                     text: '현황확인3'
                 }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 5,
+                    }
                 }
             },
-            scales: {
-            y: {
-                type: 'linear',
-                display: true,
-                position: 'left',
-                min: 0,
-                max: 5.0,
-            }
-            }
             };
             var myChart3 = new Chart(
                 document.getElementById('Chart3'),
