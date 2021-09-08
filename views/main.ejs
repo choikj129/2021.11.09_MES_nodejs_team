@@ -4,12 +4,13 @@
         <%- include("./head.ejs") %>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-            var count = 0;
+            $(function(){
+                if ('<%=run%>'==true){
+                    start()
+                }
+            })
             function now(){
-                count += 1
-                $.getJSON("/now_update",{
-                    "_id" : count
-                },
+                $.getJSON("/now_update",
                 function(result){
                     $("#now_mold_temp").text(result.monitor.mold_temp)
                     $("#now_melt_temp").text(result.monitor.melt_temp)
@@ -19,19 +20,23 @@
                     $("#now_hold_time").text(result.monitor.hold_time)
                     $("#now_filling_time").text(result.monitor.filling_time)
                     $("#now_cycle_time").text(result.monitor.cycle_time)
+                    $("#title").text("조건값 ("+result.monitor.monitor_id+")")
                 })
             }
 
             var interval;
+            
             function start(){
                 interval = setInterval(function(){
                     now()
-                },1000)
+                },5000)
             }
 
             function stop(){
                 clearInterval(interval);
+                location.href("/stop")
             }
+            
             function add(char){
                 var display = document.getElementById('display');
                 display.value += char; 
@@ -48,14 +53,17 @@
     </head>
     
     <body>
+        <!-- 시작/정지 버튼 -->
         <button type="button" class="btn btn-primary" style="position: absolute; top: 90px; left:150px; width: 100px;" onclick="start()">START</button>
         <button type="button" class="btn btn-danger" style="position: absolute; top: 90px; right:150px; width: 100px;" onclick="stop()">비상정지</button>
 
-        <div class="container" style="position:absolute; top: 150px; margin-left:30px; width:400px">
+        <div class="container" style="position:absolute; top: 150px; margin-left:30px; width:400px; text-align: center;">
+
+            <!-- 테이블 -->
             <table class="table table-bordered border-primary table-hover">
                 <thead>
                     <tr>
-                        <td colspan="4">조건값</td>
+                        <td colspan="4" id="title">조건값</td>
                     </tr>
                     <tr>
                         <th></th>
@@ -69,54 +77,87 @@
                         <td>금형온도</td>  
                         <td>3</td>
                         <td><input type=text id="display"></td>                        
-                        <td id="now_mold_temp"></td>
+                        <td id="now_mold_temp">
+                            <% if(monitor){%>
+                                <%= monitor.mold_temp%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>용융온도</td>                        
                         <td>3</td>
                         <td><input type=text id="display"></td>
-                        <td id="now_melt_temp"></td>
+                        <td id="now_melt_temp">
+                            <% if(monitor){%>
+                                <%= monitor.melt_temp%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>사출속도</td>
                         <td>3</td>                        
                         <td><input type=text id="display"></td>
-                        <td id="now_injection_speed"></td>
+                        <td id="now_injection_speed">
+                            <% if(monitor){%>
+                                <%= monitor.injection_speed%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>보압</td>   
                         <td>3</td>                     
                         <td><input type=text id="display"></td>
-                        <td id="now_hold_pressure"></td>
+                        <td id="now_hold_pressure">
+                            <% if(monitor){%>
+                                <%= monitor.hold_pressure%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>사출시간</td> 
                         <td>3</td>                      
                         <td><input type=text id="display"></td>
-                        <td id="now_injection_time"></td>
+                        <td id="now_injection_time">
+                            <% if(monitor){%>
+                                <%= monitor.injection_time%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>보압시간</td> 
                         <td>3</td>                       
                         <td><input type=text id="display"></td>
-                        <td id="now_hold_time"></td>
+                        <td id="now_hold_time">
+                            <% if(monitor){%>
+                                <%= monitor.hold_time%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>배압시간</td>   
                         <td>3</td>                    
                         <td><input type=text id="display"></td>
-                        <td id="now_filling_time"></td>
+                        <td id="now_filling_time">
+                            <% if(monitor){%>
+                                <%= monitor.filling_time%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>총시간</td>       
                         <td>3</td>                 
                         <td><input type=text id="display"></td>
-                        <td id="now_cycle_time"></td>
+                        <td id="now_cycle_time">
+                            <% if(monitor){%>
+                                <%= monitor.cycle_time%>
+                            <% } %>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         
+        <!-- 자판 -->
         <table class="table table-bordered" style="border-color: black; position:absolute; margin-left:430px; margin-top:150px; table-layout: fixed; width:120px">
             <tr>
                 <td onclick="add(1)">1</td>
@@ -147,6 +188,7 @@
             <canvas id="myChart"></canvas>
         </div>
 
+        <!-- 차트 -->
         <script>
             const DATA_COUNT = 5;
             const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
@@ -185,10 +227,10 @@
             var show = true
         </script>
 
+        <!-- 사출기 이미지 -->
         <div style="padding-top: 500px; text-align: center; ">
             <img src="/img/motion.gif">
         </div>
-
-        
     </body>
+
 </html>
