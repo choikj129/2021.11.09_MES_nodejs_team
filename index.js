@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     host : 'localhost',
     port : 3306,
     user : 'root',
-    password : '1234',
+    password : '1111',
     database : 'project'    
 })
 
@@ -59,42 +59,63 @@ app.post("/login", function(req, res){
     )
 })
 
-var id=0;
+var id = 0;
+var run = false;
 
 app.get("/main", function(req, res){
+    console.log(id)
     if(!req.session.logged){
         res.redirect("/")
     }else{
         connection.query(
-            `select * from monitoring`,
+            `select * from monitoring order by monitor_id desc limit 1`,
             function(err, result){
                 if (err){
                     console.log(err)
                 }else{
+                    console.log(result[0])
                     res.render('main', {
-                        'monitor' : result
+                        'monitor' : result[0],
+                        "run" : run
                     })
                 }
             }
-        )
+        )        
     }
 })
 
 app.get("/now_update", function(req, res){
-    id = req.query._id
-    connection.query(
-        `select * from monitoring where monitor_id=`+id,
-        function(err, result){
-            if (err){
-                console.log(err)
-            }else{
-                res.json({
-                    "monitor" : result[0]
-                })
+    id += 1
+    run = true;
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        connection.query(
+            `insert into monitoring select *, now() from data where monitor_id = `+id,
+            function(err0, result0){
+                if (err0){
+                    console.log(err0)
+                }else{
+                    connection.query(
+                        `select * from monitoring order by monitor_id desc limit 1`,
+                        function(err, result){
+                            if (err){
+                                console.log(err)
+                            }else{
+                                res.json({
+                                    "monitor" : result[0]
+                                })
+                            }
+                        }
+                    )
+                }
             }
-        }
-    )
+            
+        )
+    }
 })
+
+
 app.get("/defect", function(req,res){
     if(!req.session.logged){
        res.redirect("/")
@@ -106,13 +127,19 @@ app.get("/defect", function(req,res){
                 if(err){
                     console.log(err)
                 }else{
+                    console.log(result)
                     res.render("defect",{
-                        'defect' : result
+                        'defect' : result,
+                        'id' : id
                     });
                 }
             }
         )
     }
+})
+
+app.get("/stop", function(req, res){
+    run = false;
 })
 
 app.get("/current", function(req, res){
