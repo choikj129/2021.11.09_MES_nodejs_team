@@ -6,15 +6,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container" style="position:absolute; margin: 100px 50px; margin-left: 150px; margin-right: 150px">
-        <canvas id="Chart1" width="1200" height="250"></canvas>
+    <div style="position: absolute; margin-left: 50%;">
+        <div class="container" style="position:absolute; margin: 100px -600px;">
+            <canvas id="Chart1" width="1200" height="250"></canvas>
+        </div>
+        <div class="container" style="position:absolute; margin: 400px -600px;">
+            <canvas id="Chart2" width="600" height="250"></canvas>
+        </div>
+        <div class="container" style="position:absolute; margin: 400px auto;">
+            <canvas id="Chart3" width="600" height="250"></canvas>
+        </div>
     </div>
-    <div class="container" style="position:absolute; margin: 400px 50px; margin-left: 150px; margin-right: 0px;">
-        <canvas id="Chart2" width="600" height="250"></canvas>
-    </div>
-    <div class="container" style="position:absolute; margin: 400px 50px; margin-left: 750px; margin-right: 250px;">
-        <canvas id="Chart3" width="600" height="250"></canvas>
-    </div>
+    
     <script>
         const labels1 = [
                 '시간1',
