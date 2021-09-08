@@ -2,20 +2,27 @@
 <html>
     <head>
         <%- include("./head.ejs") %>
+        <style>
+          .table{
+            margin : 100px auto;
+            width: 80%;
+            text-align: center;
+          }
+        </style>
     </head>
     <body>
       <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
-              <th scope="col">시리얼번호</th>
-              <th scope="col">시간</th>
-              <th scope="col">금형온도</th>
-              <th scope="col">사출온도</th>
-              <th scope="col">사출속도</th>
-              <th scope="col">보압</th>
-              <th scope="col">사출시간</th>
-              <th scope="col">보압시간</th>
-              <th scope="col">배압시간</th>
+              <th scope="col" style="width: 50px;">번호</th>
+              <th scope="col" style="width: 150px;">시간</th>
+              <th scope="col" style="width: 100px;">금형온도</th>
+              <th scope="col" style="width: 100px;">사출온도</th>
+              <th scope="col" style="width: 100px;">사출속도</th>
+              <th scope="col" style="width: 100px;">보압</th>
+              <th scope="col" style="width: 100px;">사출시간</th>
+              <th scope="col" style="width: 100px;">보압시간</th>
+              <th scope="col" style="width: 100px;">배압시간</th>
               <th scope="col">결함원인</th>
             </tr>
           </thead>
@@ -33,10 +40,8 @@
                 <td><%=defect[i].filling_time %></td>
                 <td><%=defect[i].cause %></td>
               </tr>
-              <% } %>
-            
+            <% } %>
           </tbody>
-        </table>
-       
+      </table>
     </body>
 </html>
