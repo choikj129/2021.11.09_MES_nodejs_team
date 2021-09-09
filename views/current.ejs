@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%- include("./head.ejs") %>
     <title>현황확인 페이지</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <div style="position: absolute; margin-left: 50%;">
-        <div class="container" style="position:absolute; margin: 100px -600px;">
-            <canvas id="Chart1" width="1200" height="250"></canvas>
+<style>
+    .wrapper1 {
+                width:700;
+                height:250;                
+                background-color: rgb(68,84,106);
+            }   
+</style>
+<body>    
+    <div class="wrapper" style="position: absolute; margin-left: 50%;">
+        <div class="container" style="position:absolute; margin: 100px -700px; margin-right: 10rem;">
+            <canvas id="Chart1" width="700" height="250"></canvas>
         </div>
-        <div class="container" style="position:absolute; margin: 400px -600px;">
-            <canvas id="Chart2" width="600" height="250"></canvas>
+        <div class="container" style="position:absolute; margin: 400px -700px;">
+            <canvas id="Chart2" width="700" height="250"></canvas>
+        </div>
+        <div class="container" style="position:absolute; margin: 100px auto; margin-right: 10rem;">
+            <canvas id="Chart3" width="700" height="250"></canvas>
         </div>
         <div class="container" style="position:absolute; margin: 400px auto;">
-            <canvas id="Chart3" width="600" height="250"></canvas>
+            <canvas id="Chart4" width="700" height="250"></canvas>
         </div>
     </div>
     
@@ -23,7 +32,13 @@
                 '시간1',
                 '시간2', 
                 '시간3',
-                '시간4'              
+                '시간4', 
+                '시간5',
+                '시간6',
+                '시간7',
+                '시간8',
+                '시간9',
+                '시간10'             
             ];          
            
             const data1 = {
@@ -31,13 +46,13 @@
             datasets: [
                 {
                 label: '목표생산량',
-                data: [100, 100, 100, 100],
+                data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
                 borderColor: 'rgb(237, 125, 49)',
                 backgroundColor: 'rgb(237, 125, 49)',
                 },
                 {
                 label: '생산량',
-                data: [13,25,57,78],
+                data: [13, 25, 57, 78, 90, 100, 110, 122, 145, 167],
                 borderColor: 'rgb(91, 155, 213)',
                 backgroundColor: 'rgb(91, 155, 213)',
                 }
@@ -54,13 +69,13 @@
                 },
                 title: {
                     display: true,
-                    text: '현황확인1'
+                    text: '생산량'
                 }
                 },
                 scales: {
                     y: {
                         min: 0,
-                        max: 105,
+                        max: 170,
                     }
                 }      
                 
@@ -80,20 +95,24 @@
                 '시간3',
                 '시간4',
                 '시간5',              
-                '시간6'
+                '시간6',
+                '시간7',
+                '시간8',
+                '시간9',
+                '시간10'
             ];
             const data2 = {
             labels: labels2,
             datasets: [
                 {
-                label: '금형온도',
-                data: [4.3, 2.5, 3.5, 4.5, 4.2, 6.2 ],
+                label: '현재 금형온도',
+                data: [4.3, 2.5, 3.5, 4.5, 3.7, 6.2, 5.5, 5.6, 4.9, 6.1],
                 borderColor: 'rgb(91, 155, 213)',
                 backgroundColor: 'rgb(91, 155, 213)',
                 },
                 {
                 label: '용융온도',
-                data: [2.4, 4.4, 1.8, 2.8, 3.7, 2.8],
+                data: [2.4, 4.4, 1.8, 2.8, 3.7, 2.8, 2.5, 2.8, 1.9, 2],
                 borderColor: 'rgb(237, 125, 49)',
                 backgroundColor: 'rgb(237, 125, 49)',
                 }
@@ -110,14 +129,15 @@
                 },
                 title: {
                     display: true,
-                    text: '현황확인2'
+                    text: '온도'
                 }
                 },
                 scales: {
                     y: {
                         min: 0,
-                        max: 7,
-                    }
+                        max: 8,
+                    },
+
                 }      
             },
             };
@@ -137,14 +157,14 @@
             labels: labels3,
             datasets: [
                 {
-                label: '보압',
-                data: [4.3, 2.3, 3.5, 4.5],
+                label: '양품',
+                data: [50, 100, 150, 200],
                 borderColor: 'rgb(91, 155, 213)',
                 backgroundColor: 'rgb(91, 155, 213)',
                 },
                 {
-                label: '배압',
-                data: [2.4, 4.4, 1.8, 2.8],
+                label: '불량품',
+                data: [3, 5, 9, 15],
                 borderColor: 'rgb(237, 125, 49)',
                 backgroundColor: 'rgb(237, 125, 49)',
                 }
@@ -161,13 +181,13 @@
                 },
                 title: {
                     display: true,
-                    text: '현황확인3'
+                    text: '불량율'
                 }
                 },
                 scales: {
                     y: {
                         min: 0,
-                        max: 5,
+                        max: 250,
                     }
                 }
             },
@@ -175,6 +195,66 @@
             var myChart3 = new Chart(
                 document.getElementById('Chart3'),
                 config3
+            );
+            var show = true
+
+            const labels4 = [
+                '시간1',
+                '시간2',
+                '시간3',
+                '시간4',
+                '시간5',              
+                '시간6',
+                '시간7',
+                '시간8',
+                '시간9',
+                '시간10'              
+            ];          
+           
+            const data4 = {
+            labels: labels4,
+            datasets: [
+                {
+                label: '보압',
+                data: [4.3, 2.5, 3.5, 4.5, 4, 4.2, 4.3, 3.7, 2.9, 4],
+                borderColor: 'rgb(91, 155, 213)',
+                backgroundColor: 'rgb(91, 155, 213)',
+                },
+                {
+                label: '배압',
+                data: [2.4, 4.4, 1.8, 2.8, 3, 3.5, 4, 3.9, 3.9, 2.9],
+                borderColor: 'rgb(237, 125, 49)',
+                backgroundColor: 'rgb(237, 125, 49)',
+                }
+            ]
+            };
+            const config4 = {
+            type: 'line',
+            data: data4,
+            options: {
+                responsive: false,
+                plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: '압력'
+                }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 5,
+                    }
+                }      
+                
+            },
+            };
+
+            var myChart4 = new Chart(
+                document.getElementById('Chart4'),
+                config4
             );
             var show = true
     </script>   
