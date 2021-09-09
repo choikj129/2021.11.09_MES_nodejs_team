@@ -4,6 +4,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <!-- 부트스트랩 링크 복사 -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <a href="https://storyset.com/work"></a>
+        <div><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons"></a><a href="https://www.flaticon.com/" title="Flaticon"></a></div>
     </head>
     <style>
         .login{
@@ -23,22 +25,47 @@
             display : flex;
             justify-content: space-around;
         }
+        .wrapper {
+            position:absolute;
+            top:50%;
+            left:50%;
+            height:30rem;
+            width:20rem;
+            margin:-15rem 0rem 0rem 0rem;
+            background-color: white;
+        }
+        .wrapper1 {
+            position:absolute;
+            top:50%;
+            left:50%;
+            height:30rem;
+            width:20rem;
+            margin:-15rem 0rem 0rem -20rem;
+            background-color: rgb(173, 185, 202);
+        }
     </style>
-    <body>
-        <div class = "container login">
-            <form action="/login" method="post">
-                <div class="input-group mb-3">
-                    <span class="input-group-text _label" id="basic-addon1">ID</span>
-                    <input type="" class="form-control" placeholder="UserID" name="_id">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text _label" id="basic-addon1">Password</span>
-                    <input type="password" class="form-control" placeholder="Password" name="_password">
-                </div>
-                <div align="center">
-                    <input type="submit" class="btn btn-outline-dark _button" value="login">
-                </div>
-            </form>
+    <body style="background-color: rgb(68,84,106); overflow-y: hidden;">
+        <div class="wrapper1">
+            <b style="padding-left:35px; position: absolute; padding-top: 80px; font-size:40px;">레고 사출공정</b><br>
+            <p style="padding-left:50px; position: absolute; padding-top: 120px; font-size:25px">최적화 분석 시스템</p>
+            <img src="/img/amico.png" style="position:absolute; width:280px; height:230px; left:20px; bottom:20px">
         </div>
+        <div class="wrapper" >
+            <div class = "container login">
+                <img src="/img/blocks.png" style="position:absolute; width:100px; height:100px; left:100px; top:110px">
+                <form action="/login" method="post">
+                    <div class="input-group mb-3">
+                        <input type="id" class="form-control" placeholder="ID" name="_id">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password" name="_password">
+                    </div>
+                    <div align="center">
+                        <input type="submit" class="btn btn-outline-dark _button" value="login">
+                    </div>
+                </form>
+            </div>
+        </div>
+        
     </body>
 </html>
