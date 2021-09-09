@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("./head.ejs") %>
+        <style>
+        
+          .table{
+            margin : 100px auto;
+            width: 80%;
+            text-align: center;
+            background-color: rgb(173, 185, 202);
+          }
+          .input-group{
+            margin : 10px auto;
+            margin-top: 10px;
+            width: 50%;
+            text-align: center;
+            background-color: rgb(173, 185, 202);
+          }
+          
+        </style>
+    </head>
+
+    <body>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-default">지시 번호</span>
+      <input type="text" class="form-control">
+      <span class="input-group-text" id="inputGroup-sizing-default">지시 수량</span>
+      <input type="text" class="form-control">
+      
+    </div>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">품목 번호</label>
+        <select class="form-select" id="inputGroupSelect01">
+          <option selected> </option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <label class="input-group-text" for="inputGroupSelect01">지시 기간</label>
+        <select class="form-select" id="inputGroupSelect01">
+          <option selected> </option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      
+      
+      <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 100px;">작업지시번호</th>
+              <th scope="col" style="width: 100px;">품목 코드</th>
+              <th scope="col" style="width: 100px;">품목명</th>
+              <th scope="col" style="width: 100px;">지시 수량</th>
+              <th scope="col" style="width: 100px;">작업 날짜</th>
+              <th scope="col" style="width: 100px;">상태</th>
+              
+            </tr>
+          </thead>
+          
+      </table>
+    </body>
+</html>
