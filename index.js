@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     host : 'localhost',
     port : 3306,
     user : 'root',
-    password : '1111',
+    password : '1234',
     database : 'project'    
 })
 
@@ -59,7 +59,7 @@ app.post("/login", function(req, res){
     )
 })
 
-var id = 46;
+var id = 0;
 var run = false;
 
 app.get("/main", function(req, res){
@@ -87,7 +87,6 @@ app.get("/main", function(req, res){
 app.get("/now_update", function(req, res){
     id += 1
     run = true;
-    console.log(id)
     if(!req.session.logged){
         res.redirect("/")
     }else{
@@ -148,6 +147,14 @@ app.get("/current", function(req, res){
         res.redirect("/")
     }else{
         res.render("current")
+    }
+})
+
+app.get("/instruct",function(req,res){
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        res.render("instruct")
     }
 })
 
