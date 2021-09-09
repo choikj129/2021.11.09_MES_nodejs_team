@@ -3,42 +3,15 @@
     <head>
         <%- include("./head.ejs") %>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            var count = 0;
-            function now(){
-                count += 1
-                $.getJSON("/now_update",{
-                    "_id" : count
-                },
-                function(result){
-                    $("#now_mold_temp").text(result.monitor.mold_temp)
-                    $("#now_melt_temp").text(result.monitor.melt_temp)
-                    $("#now_injection_speed").text(result.monitor.injection_speed)
-                    $("#now_hold_pressure").text(result.monitor.hold_pressure)
-                    $("#now_injection_time").text(result.monitor.injection_time)
-                    $("#now_hold_time").text(result.monitor.hold_time)
-                    $("#now_filling_time").text(result.monitor.filling_time)
-                    $("#now_cycle_time").text(result.monitor.cycle_time)
-                })
-            }
-
-            var interval;
-            function start(){
-                interval = setInterval(function(){
-                    now()
-                },1000)
-            }
-
-            function stop(){
-                clearInterval(interval);
-            }
+        <script src="/js/now.js"></script>
+        <script>      
             function add(char){
                 var display = document.getElementById('display');
                 display.value += char; 
             }
             function reset(){
                 document.getElementById('display').value = "";
-            }
+            }            
         </script>
         <style>
             #display{
@@ -51,22 +24,28 @@
     </head>
     
     <body>
+        <!-- 진행 단계 -->
         <div id="osj2-container">
             <div align="center" id="osj2-spinner" style="position: fixed; margin-top: 90px; margin-left: 400px; line-height: 60px; font-size: 20px;">준비</div>
         </div>
         <div id="osj2-container">
             <div align="center" id="osj2-spinner" style="position: fixed; margin-top: 90px; margin-left: 580px; line-height: 60px; font-size: 20px;">사출</div>
-        </div><div id="osj2-container">
+        </div>
+        <div id="osj2-container">
             <div align="center" id="osj2-spinner" style="position: fixed; margin-top: 90px; margin-left: 760px; line-height: 60px; font-size: 20px;">배압</div>
-        </div><div id="osj2-container">
+        </div>
+        <div id="osj2-container">
             <div align="center" id="osj2-spinner" style="position: fixed; margin-top: 90px; margin-left: 940px; line-height: 60px; font-size: 20px;">보압</div>
-        </div><div id="osj2-container">
+        </div>
+        <div id="osj2-container">
             <div align="center" id="osj2-spinner" style="position: fixed; margin-top: 90px; margin-left: 1120px; line-height: 60px; font-size: 20px;">분리</div>
         </div>
 
+        <!-- 시작/종료 버튼 -->
         <button type="button" class="btn btn-primary" style="position: absolute; top: 200px; left:370px; width: 100px;" onclick="start()">START</button>
         <button type="button" class="btn btn-danger" style="position: absolute; top: 250px; left:370px; width: 100px;" onclick="stop()">비상정지</button>
 
+        <!-- 테이블 -->
         <div style="position:absolute; top: 80px; margin-left:50px; width:300px; line-height: 25px;">
             <table id="condition-value" class="table table-bordered border-primary table-hover">
                 <thead>
@@ -85,54 +64,87 @@
                         <td>금형온도</td>
                         <td>3</td>
                         <td><input type=text id="display"></td>
-                        <td id="now_mold_temp"></td>
+                        <td id="now_mold_temp">
+                            <% if(monitor){%>
+                                <%= monitor.mold_temp%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>용융온도</td>
                         <td>3</td>
                         <td><input type=text id="display"></td>
-                        <td id="now_melt_temp"></td>
+                        <td id="now_melt_temp">
+                            <% if(monitor){%>
+                                <%= monitor.melt_temp%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>사출속도</td>
                         <td>3</td>
                         <td><input type=text id="display"></td>
-                        <td id="now_injection_speed"></td>
+                        <td id="now_injection_speed">
+                            <% if(monitor){%>
+                                <%= monitor.injection_speed%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>보압</td>
                         <td>3</td>
                         <td><input type=text id="display"></td>
-                        <td id="now_hold_pressure"></td>
+                        <td id="now_hold_pressure">
+                            <% if(monitor){%>
+                                <%= monitor.hold_pressure%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>사출시간</td>
                         <td>3</td>
                         <td><input type=text id="display"></td>
-                        <td id="now_injection_time"></td>
+                        <td id="now_injection_time">
+                            <% if(monitor){%>
+                                <%= monitor.injection_time%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>보압시간</td>
                         <td>3</td>
                         <td><input type=text id="display"></td>
-                        <td id="now_hold_time"></td>
+                        <td id="now_hold_time">
+                            <% if(monitor){%>
+                                <%= monitor.hold_time%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>배압시간</td>
                         <td>3</td>
                         <td><input type=text id="display"></td>
-                        <td id="now_filling_time"></td>
+                        <td id="now_filling_time">
+                            <% if(monitor){%>
+                                <%= monitor.filling_time%>
+                            <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>총시간</td>
                         <td>3</td>
                         <td><input type=text id="display"></td>
-                        <td id="now_cycle_time"></td>
+                        <td id="now_cycle_time">
+                            <% if(monitor){%>
+                                <%= monitor.cycle_time%>
+                            <% } %>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         
+        <!-- 자판 -->
         <table class="table table-bordered" style="border-color: black; position:absolute; margin-left:360px; margin-top:340px; table-layout: fixed; width:120px">
             <tr>
                 <td onclick="add(1)">1</td>
@@ -159,6 +171,7 @@
             </tr>
         </table>
 
+        <!-- 차트 -->
         <div style="position: absolute; width: 200px; height: 150px; margin-top: 300px; right:50px;">
             <canvas id="myChart"></canvas>
         </div>
@@ -201,6 +214,7 @@
             var show = true
         </script>
 
+        <!-- 이미지 -->
         <div style="padding-top: 200px; margin-left:550px">
             <img src="/img/motion.gif">
         </div>
