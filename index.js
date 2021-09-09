@@ -59,6 +59,18 @@ app.post("/login", function(req, res){
     )
 })
 
+app.get("/logout", function(req, res){
+    req.session.destroy(function(err){
+        if(err){
+            console.log(err);
+            res.send("Logout session destroy Error")
+        }else{
+            res.redirect("/")
+        }
+    })
+})
+
+
 var id = 0;
 var run = false;
 
