@@ -59,7 +59,7 @@ app.post("/login", function(req, res){
     )
 })
 
-var id = 0;
+var id = 46;
 var run = false;
 
 app.get("/main", function(req, res){
@@ -87,6 +87,7 @@ app.get("/main", function(req, res){
 app.get("/now_update", function(req, res){
     id += 1
     run = true;
+    console.log(id)
     if(!req.session.logged){
         res.redirect("/")
     }else{
