@@ -1,0 +1,98 @@
+<div class="wrapper" style="width:21rem; height:30rem; position:absolute; top: 0.7em; left:13em;">
+    <table id="condition-value" class="table table-bordered" style="border-style:hidden; text-align: center; position:absolute; margin-top: 0.5em; left:0.5em; width:20em; line-height: 1em; background-color: rgba(199, 202, 241, 0.308); color:white; font-weight: 500;">
+        <thead>
+            <tr>
+                <th></th>
+                <th>최적값</th>
+                <th>입력값</th>
+                <th>현재값</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>금형온도</b></td>
+                <td>3</td>
+                <td><input type=text id="display"></td>
+                <td id="now_mold_temp">
+                    <% if(monitor){%>
+                        <%= monitor.mold_temp%>
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td><b>용융온도</b></td>
+                <td>3</td>
+                <td><input type=text id="display"></td>
+                <td id="now_melt_temp">
+                    <% if(monitor){%>
+                        <%= monitor.melt_temp%>
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td><b>사출속도</b></td>
+                <td>3</td>
+                <td><input type=text id="display"></td>
+                <td id="now_injection_speed">
+                    <% if(monitor){%>
+                        <%= monitor.injection_speed%>
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td><b>보압</b></td>
+                <td>3</td>
+                <td><input type=text id="display"></td>
+                <td id="now_hold_pressure">
+                    <% if(monitor){%>
+                        <%= monitor.hold_pressure%>
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td><b>사출시간</b></td>
+                <td>3</td>
+                <td><input type=text id="display"></td>
+                <td id="now_injection_time">
+                    <% if(monitor){%>
+                        <%= monitor.injection_time%>
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td><b>보압시간</b></td>
+                <td>3</td>
+                <td><input type=text id="display"></td>
+                <td id="now_hold_time">
+                    <% if(monitor){%>
+                        <%= monitor.hold_time%>
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td><b>배압시간</b></td>
+                <td>3</td>
+                <td><input type=text id="display"></td>
+                <td id="now_filling_time">
+                    <% if(monitor){%>
+                        <%= monitor.filling_time%>
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td><b>총시간</b></td>
+                <td>3</td>
+                <td><input type=text id="display"></td>
+                <td id="now_cycle_time">
+                    <% if(monitor){%>
+                        <%= monitor.cycle_time%>
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <!-- 시작/종료 버튼 -->
+                <td style="height:3rem" colspan="4"><button type="button" class="btn btn-light" style="width:6.5rem; height:2.5rem; position:absolute; bottom:0.3rem; left:15%; font-size:1.3em; line-height: 1em;" onclick="start()"><b>START</b></button><button type="button" class="btn btn-danger" style="width:6.5rem; height:2.5rem; position:absolute; bottom:0.3rem; right:15%; font-size:1.2em; line-height: 1em;" onclick="stop()"><b>비상정지</b></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
