@@ -12,7 +12,7 @@
             <tr>
                 <td><b>금형온도</b></td>
                 <td>3</td>
-                <td><input type=text id="display"></td>
+                <td class="display" id="set_mold_temp" onclick="clicked('#set_mold_temp')"></td>
                 <td id="now_mold_temp">
                     <% if(monitor){%>
                         <%= monitor.mold_temp%>
@@ -22,7 +22,7 @@
             <tr>
                 <td><b>용융온도</b></td>
                 <td>3</td>
-                <td><input type=text id="display"></td>
+                <td class="display" id="set_melt_temp" onclick="clicked('#set_melt_temp')"></td>
                 <td id="now_melt_temp">
                     <% if(monitor){%>
                         <%= monitor.melt_temp%>
@@ -32,7 +32,7 @@
             <tr>
                 <td><b>사출속도</b></td>
                 <td>3</td>
-                <td><input type=text id="display"></td>
+                <td class="display" id="set_injection_speed" onclick="clicked('#set_injection_speed')"></td>
                 <td id="now_injection_speed">
                     <% if(monitor){%>
                         <%= monitor.injection_speed%>
@@ -42,7 +42,7 @@
             <tr>
                 <td><b>보압</b></td>
                 <td>3</td>
-                <td><input type=text id="display"></td>
+                <td class="display" id="set_hold_pressure" onclick="clicked('#set_hold_pressure')"></td>
                 <td id="now_hold_pressure">
                     <% if(monitor){%>
                         <%= monitor.hold_pressure%>
@@ -52,7 +52,7 @@
             <tr>
                 <td><b>사출시간</b></td>
                 <td>3</td>
-                <td><input type=text id="display"></td>
+                <td class="display" id="set_injection_time" onclick="clicked('#set_injection_time')"></td>
                 <td id="now_injection_time">
                     <% if(monitor){%>
                         <%= monitor.injection_time%>
@@ -62,7 +62,7 @@
             <tr>
                 <td><b>보압시간</b></td>
                 <td>3</td>
-                <td><input type=text id="display"></td>
+                <td class="display" id="set_hold_time" onclick="clicked('#set_hold_time')"></td>
                 <td id="now_hold_time">
                     <% if(monitor){%>
                         <%= monitor.hold_time%>
@@ -72,7 +72,7 @@
             <tr>
                 <td><b>배압시간</b></td>
                 <td>3</td>
-                <td><input type=text id="display"></td>
+                <td class="display" id="set_filling_time" onclick="clicked('#set_filling_time')"></td>
                 <td id="now_filling_time">
                     <% if(monitor){%>
                         <%= monitor.filling_time%>
@@ -82,7 +82,7 @@
             <tr>
                 <td><b>총시간</b></td>
                 <td>3</td>
-                <td><input type=text id="display"></td>
+                <td class="display" id="set_cycle_time" onclick="clicked('#set_cycle_time')"></td>
                 <td id="now_cycle_time">
                     <% if(monitor){%>
                         <%= monitor.cycle_time%>
