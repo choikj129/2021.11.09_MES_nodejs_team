@@ -1,8 +1,10 @@
-<div class="wrapper" style="position: absolute; margin-top: 0.5em; right:4em;">
-    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em"></div>
-    <div style="position:absolute; width:50%; left:25%;">
-        <canvas id="myChart"></canvas>
-    </div>
+<div class="wrapper" style="position: absolute; top: 0.7em; right:3em;">
+    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em;text-align: center; color:white; line-height: 1.7rem;"><b>불량율</b></div>
+        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.5em">
+            <div style="position:absolute; top:-2rem; width:70%; left:20%">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
 </div>
 
 <script>
@@ -16,7 +18,7 @@
                 label: 'Dataset 1',
                 data: [90, 10],
                 backgroundColor: ['royalblue', 'orangered'],
-                hoverOffset: 5
+                hoverOffset: 5,
             }
         ]
     };
@@ -24,7 +26,15 @@
         type: 'doughnut',
         data: data,
         options: {
-            responsive: true
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels:{
+                        color : "white"
+                    }
+                },
+            }
         },
     };
     var myChart = new Chart(
@@ -35,11 +45,13 @@
 </script>
 
 <!-- 생산현황 그래프 -->
-<div class="wrapper" style="position: absolute; margin-top: 0.5em; right:25em;">
-    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em"></div>
-    <div style="width:100%;">
-        <canvas id="Chart1"></canvas>
-    </div>
+<div class="wrapper" style="position: absolute; top: 0.7em; right:27.5em;">
+    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em; text-align: center; color:white; line-height: 2rem;"><b>생산 현황</b></div>
+        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.5em">
+            <div style="position:absolute; top:1em; left:8%">
+                <canvas id="Chart1"></canvas>
+            </div>
+        </div>    
 </div>
 
 <script>
@@ -74,12 +86,11 @@
             responsive: false,
             plugins: {
             legend: {
-                position: 'top',
+                labels : {
+                    fontColor : 'rgba(255,255,255,0.7)'
+                },
+                position: 'bottom',
             },
-            title: {
-                display: true,
-                text: '현황확인1'
-            }
             },
             scales: {
                 y: {
@@ -97,11 +108,13 @@
 </script>
 
 <!-- 온도조건 차트 -->
-<div class="wrapper" style="position: absolute; margin-top: 13em; right:4em;">
-    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em"></div>
-    <div style="width:100%;">
-        <canvas id="Chart2"></canvas>
-    </div>
+<div class="wrapper" style="position: absolute; top: 16em; right:3em;">
+    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em; text-align: center; color:white; line-height: 2rem;"><b>온도 현황</b></div>
+        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.5em">
+            <div style="position:absolute; width:100%; top:1em; left:8%">
+                <canvas id="Chart2"></canvas>
+            </div>
+        </div>
 </div>
 <script>
     const labels2 = [
@@ -133,13 +146,9 @@
     options: {
         responsive: false,
         plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: '현황확인2'
-        }
+            legend: {
+                position: 'bottom',
+            },
         },
         scales: {
             y: {
@@ -157,11 +166,13 @@
 </script>
 
 <!-- 압력조건 라인차트 -->
-<div class="wrapper" style="position: absolute; margin-top: 13em; right:25em;">
-    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em;"></div>
-    <div style="width:100%;">
-        <canvas id="Chart3"></canvas>
-    </div>
+<div class="wrapper" style="position: absolute; top: 16em; right:27.5em;">
+    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em;text-align: center; color:white; line-height: 2rem;"><b>압력 현황</b></div>
+        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.5em">
+            <div style="position:absolute; width:100%; top:1em; left:8%">
+                <canvas id="Chart3"></canvas>
+            </div>
+        </div>
 </div>
 <script>
     const labels3 = [
@@ -193,13 +204,9 @@
     options: {
         responsive: false,
         plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: '현황확인3'
-        }
+            legend: {
+                position: 'bottom',
+            },
         },
         scales: {
             y: {
