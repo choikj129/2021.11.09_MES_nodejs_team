@@ -4,18 +4,10 @@
         <%- include("./head.ejs") %>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="/js/now.js"></script>
-        <script>      
-            function add(char){
-                var display = document.getElementById('display');
-                display.value += char; 
-            }
-            function reset(){
-                document.getElementById('display').value = "";
-            }            
-        </script>
         <style>
-            #display{
-                width : 50px;
+            #condition-value{
+                width: 500px;
+                height: 420px;
             }
             .wrapper {
                 height:12rem;
@@ -27,16 +19,26 @@
                 width:19rem;
                 border:0.1em solid white;
             }
+            #keyboard{
+                display: none;
+                background-color: rgb(68,84,106);
+                color: white; 
+                position:absolute; 
+                left:500px; 
+                top:200px; 
+                table-layout: fixed; 
+                width:120px;
+            }
         </style>
     </head>
     
     <body style="background-color: rgb(34, 42, 53);">
         <!-- 시작/종료 버튼 -->
-        <button type="button" class="btn btn-primary" style="position: absolute; top: 30rem; left:28rem; width: 100px;" onclick="start()">START</button>
-        <button type="button" class="btn btn-danger" style="position: absolute; top: 33rem; left:28rem; width: 100px;" onclick="stop()">비상정지</button>
+        <button type="button" class="btn btn-primary" style="position: fixed; top: 30rem; left:28rem; width: 100px;" onclick="start()">START</button>
+        <button type="button" class="btn btn-danger" style="position: fixed; top: 33rem; left:28rem; width: 100px;" onclick="stop()">비상정지</button>
 
         <!-- 조건 테이블 -->
-            <table id="condition-value" class="table table-bordered" style="position:absolute; margin-top: 0.5em; margin-left:7em; width:20em; line-height: 1em; background-color: rgb(68,84,106); color:white; font-weight: 500;">
+            <table id="condition-value" class="table table-bordered" style="position:fixed; top: 0.5em; left:7em; width:20em; line-height: 1em; background-color: rgb(68,84,106); color:white; font-weight: 500;">
                 <thead>
                     <tr>
                         <td colspan="4"><b>조건값</b></td>
@@ -52,7 +54,7 @@
                     <tr>
                         <td><b>금형온도</b></td>
                         <td>3</td>
-                        <td><input type=text id="display"></td>
+                        <td class="display" id="set_mold_temp" onclick="clicked('#set_mold_temp')"></td>
                         <td id="now_mold_temp">
                             <% if(monitor){%>
                                 <%= monitor.mold_temp%>
@@ -62,7 +64,7 @@
                     <tr>
                         <td><b>용융온도</b></td>
                         <td>3</td>
-                        <td><input type=text id="display"></td>
+                        <td class="display" id="set_melt_temp" onclick="clicked('#set_melt_temp')"></td>
                         <td id="now_melt_temp">
                             <% if(monitor){%>
                                 <%= monitor.melt_temp%>
@@ -72,7 +74,7 @@
                     <tr>
                         <td><b>사출속도</b></td>
                         <td>3</td>
-                        <td><input type=text id="display"></td>
+                        <td class="display" id="set_injection_speed" onclick="clicked('#set_injection_speed')"></td>
                         <td id="now_injection_speed">
                             <% if(monitor){%>
                                 <%= monitor.injection_speed%>
@@ -82,7 +84,7 @@
                     <tr>
                         <td><b>보압</b></td>
                         <td>3</td>
-                        <td><input type=text id="display"></td>
+                        <td class="display" id="set_hold_pressure" onclick="clicked('#set_hold_pressure')"></td>
                         <td id="now_hold_pressure">
                             <% if(monitor){%>
                                 <%= monitor.hold_pressure%>
@@ -92,7 +94,7 @@
                     <tr>
                         <td><b>사출시간</b></td>
                         <td>3</td>
-                        <td><input type=text id="display"></td>
+                        <td class="display" id="set_injection_time" onclick="clicked('#set_injection_time')"></td>
                         <td id="now_injection_time">
                             <% if(monitor){%>
                                 <%= monitor.injection_time%>
@@ -102,7 +104,7 @@
                     <tr>
                         <td><b>보압시간</b></td>
                         <td>3</td>
-                        <td><input type=text id="display"></td>
+                        <td class="display" id="set_hold_time" onclick="clicked('#set_hold_time')"></td>
                         <td id="now_hold_time">
                             <% if(monitor){%>
                                 <%= monitor.hold_time%>
@@ -112,7 +114,7 @@
                     <tr>
                         <td><b>배압시간</b></td>
                         <td>3</td>
-                        <td><input type=text id="display"></td>
+                        <td class="display" id="set_filling_time" onclick="clicked('#set_filling_time')"></td>
                         <td id="now_filling_time">
                             <% if(monitor){%>
                                 <%= monitor.filling_time%>
@@ -122,7 +124,7 @@
                     <tr>
                         <td><b>총시간</b></td>
                         <td>3</td>
-                        <td><input type=text id="display"></td>
+                        <td class="display" id="set_cycle_time" onclick="clicked('#set_cycle_time')"></td>
                         <td id="now_cycle_time">
                             <% if(monitor){%>
                                 <%= monitor.cycle_time%>
@@ -132,8 +134,8 @@
                 </tbody>
             </table>
         
-        <!-- 자판 
-        <table class="table table-bordered" style="border-color: black; position:absolute; margin-left:360px; margin-top:340px; table-layout: fixed; width:120px">
+        <!-- 자판  -->
+        <table class="table table-bordered " id="keyboard">
             <tr>
                 <td onclick="add(1)">1</td>
                 <td onclick="add(2)">2</td>
@@ -150,14 +152,15 @@
                 <td onclick="add(9)">9</td>
             </tr>
             <tr>
+                <td onclick="reset()">AC</td>
                 <td onclick="add(0)">0</td>
                 <td onclick="add('.')">.</td>
-                <td onclick="reset()">AC</td>
             </tr>
             <tr>
-                <td colspan="3">OK</td>
+                <td colspan="2" id="ok">OK</td>
+                <td onclick="del()">←</td>
             </tr>
-        </table>-->        
+        </table>        
         <%- include("./chart.ejs") %>
         
         <!-- 진행 단계 -->
@@ -180,8 +183,34 @@
             </div>
         </div>
 
-        <div style="padding-top: 27rem;; margin-left:7em;">
+        <div style="padding-top: 27rem; margin-left:7em;">
             <img style="width: 20rem; height:10rem" src="/img/motion.gif">
         </div>
+
+        <script>
+            var set = "";
+            function clicked(c){
+                set = c;
+            }
+            function add(char){
+                $(set).append(char)
+            }
+            function reset(){
+                $(set).text("")
+            }
+            function del(){
+                var c = document.getElementById(set.slice(1)).innerText
+                $(set).text(c.slice(0,-1))
+            }
+            $(".display").click(function(e){
+                $("#keyboard").css("left", e.pageX+"px")
+                $("#keyboard").css("top", e.pageY+"px")
+                $("#keyboard").show()
+            })
+            $("#ok").click(function(){
+                $("#keyboard").hide()
+            })
+            
+        </script>
     </body>
 </html>
