@@ -4,29 +4,43 @@
     <%- include("./head.ejs") %>
     <title>현황확인 페이지</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<style>
-    .wrapper1 {
+    <style>
+    .wrapper1{
                 width:700;
                 height:250;                
-                background-color: rgb(68,84,106);
-            }   
-</style>
-<body>    
-    <div class="wrapper" style="position: absolute; margin-left: 50%;">
-        <div class="container" style="position:absolute; margin: 100px -700px; margin-right: 10rem;">
-            <canvas id="Chart1" width="700" height="250"></canvas>
+                background-color: rgba(68,84,106,0.5);
+                position: absolute;
+                border:0.1em solid white;
+            }
+    .white {    
+                color: white;
+            }
+    
+    </style>
+</head>
+
+<body style="background-color: rgb(34, 42, 53);">
+    <div style="position: absolute; margin-left: 46%;">
+
+        <!-- 생산량 -->
+        <div class="wrapper1" style="position:absolute; margin: 1em -37em;">
+            <canvas id="Chart1" width="700" height="350"></canvas>        
         </div>
-        <div class="container" style="position:absolute; margin: 400px -700px;">
-            <canvas id="Chart2" width="700" height="250"></canvas>
+        <!-- 온도 -->
+        <div class="wrapper1" style="position:absolute; margin: 20em -37em;">
+            <canvas id="Chart2" width="700" height="350"></canvas>
         </div>
-        <div class="container" style="position:absolute; margin: 100px auto; margin-right: 10rem;">
-            <canvas id="Chart3" width="700" height="250"></canvas>
+        <!-- 불량율 -->
+        <div class="wrapper1" style="position:absolute; margin: 1em -0.5em;">
+            <canvas id="Chart3" width="700" height="350"></canvas>
         </div>
-        <div class="container" style="position:absolute; margin: 400px auto;">
-            <canvas id="Chart4" width="700" height="250"></canvas>
+        <!-- 압력 -->
+        <div class="wrapper1" style="position:absolute; margin: 20em -0.5em;">
+            <canvas id="Chart4" width="700" height="350"></canvas>
         </div>
-    </div>
+    </div>    
+
+    
     
     <script>
         const labels1 = [
@@ -65,21 +79,32 @@
             options: {
                 responsive: false,
                 plugins: {
-                legend: {
-                    position: 'top',
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: "white"
+                        }
                 },
-                title: {
-                    display: true,
-                    text: '생산량'
-                }
+                    title: {
+                        display: true,
+                        text: '생산량',
+
+                    }
                 },
                 scales: {
+                    x:{
+                        ticks:{
+                            color: "white"
+                        }
+                    },
                     y: {
                         min: 0,
                         max: 170,
+                       ticks:{
+                            color: "white"
+                        }
                     }
-                }      
-                
+                }
             },
             };
 
@@ -126,7 +151,11 @@
                 responsive: false,
                 plugins: {
                 legend: {
-                    position: 'top',
+                    position: 'bottom',
+                        labels: {
+                            color: "white"
+                        }
+                    
                 },
                 title: {
                     display: true,
@@ -134,12 +163,19 @@
                 }
                 },
                 scales: {
+                    x:{
+                        ticks:{
+                            color: "white"
+                        }
+                    },
                     y: {
                         min: 0,
-                        max: 8,
-                    },
-
-                }      
+                        max: 7,
+                       ticks:{
+                            color: "white"
+                        }
+                    }
+                }
             },
             };
             var myChart2 = new Chart(
@@ -178,17 +214,28 @@
                 responsive: false,
                 plugins: {
                 legend: {
-                    position: 'top',
+                    position: 'bottom',
+                        labels: {
+                            color: "white"
+                        }
                 },
                 title: {
                     display: true,
-                    text: '불량율'
+                    text: '불량율',
                 }
                 },
                 scales: {
+                    x:{
+                        ticks:{
+                            color: "white"
+                        }
+                    },
                     y: {
                         min: 0,
                         max: 250,
+                        ticks:{
+                            color: "white"
+                        }
                     }
                 }
             },
@@ -236,7 +283,10 @@
                 responsive: false,
                 plugins: {
                 legend: {
-                    position: 'top',
+                    position: 'bottom',
+                        labels: {
+                            color: "white"
+                        }
                 },
                 title: {
                     display: true,
@@ -244,11 +294,19 @@
                 }
                 },
                 scales: {
+                    x:{
+                        ticks:{
+                            color: "white"
+                        }
+                    },
                     y: {
                         min: 0,
                         max: 5,
+                       ticks:{
+                            color: "white"
+                        }
                     }
-                }      
+                } 
                 
             },
             };
