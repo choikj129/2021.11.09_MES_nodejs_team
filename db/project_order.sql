@@ -26,8 +26,7 @@ CREATE TABLE `order` (
   `order_id` int NOT NULL,
   `lego_id` int NOT NULL,
   `quantity` int NOT NULL,
-  `start_time` varchar(45) NOT NULL,
-  `end_time` varchar(45) NOT NULL,
+  `date` varchar(45) NOT NULL,
   PRIMARY KEY (`order_id`),
   KEY `lego_id_fk_idx` (`lego_id`),
   CONSTRAINT `lego_id_fk` FOREIGN KEY (`lego_id`) REFERENCES `lego` (`lego_id`)
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-01 12:45:29
+-- Dump completed on 2021-09-10 12:27:16
