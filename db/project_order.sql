@@ -23,13 +23,12 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order` (
-  `order_id` int NOT NULL,
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `manager` varchar(45) NOT NULL,
   `lego_id` int NOT NULL,
   `quantity` int NOT NULL,
   `date` varchar(45) NOT NULL,
-  PRIMARY KEY (`order_id`),
-  KEY `lego_id_fk_idx` (`lego_id`),
-  CONSTRAINT `lego_id_fk` FOREIGN KEY (`lego_id`) REFERENCES `lego` (`lego_id`)
+  PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-10 12:27:16
+-- Dump completed on 2021-09-14 14:34:19

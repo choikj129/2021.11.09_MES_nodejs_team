@@ -33,9 +33,7 @@ CREATE TABLE `defect` (
   `thick_defect` varchar(45) NOT NULL,
   `error` text NOT NULL,
   `cause` text NOT NULL,
-  PRIMARY KEY (`defect_id`),
-  KEY `defect_fk_idx` (`monitor_id`),
-  CONSTRAINT `defect_fk` FOREIGN KEY (`monitor_id`) REFERENCES `monitoring` (`monitor_id`)
+  PRIMARY KEY (`defect_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-30 15:50:19
+-- Dump completed on 2021-09-14 14:34:20

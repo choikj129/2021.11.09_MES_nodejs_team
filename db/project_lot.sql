@@ -29,11 +29,7 @@ CREATE TABLE `lot` (
   `end_time` varchar(45) NOT NULL,
   `lego_id` int NOT NULL,
   `optimum_id` int NOT NULL,
-  PRIMARY KEY (`lot_id`),
-  KEY `optimum_fk_idx` (`optimum_id`),
-  KEY `lego_fk_idx` (`lego_id`),
-  CONSTRAINT `lego_fk` FOREIGN KEY (`lego_id`) REFERENCES `lego` (`lego_id`),
-  CONSTRAINT `optimum_fk` FOREIGN KEY (`optimum_id`) REFERENCES `optimum` (`optimum_id`)
+  PRIMARY KEY (`lot_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-30 15:50:19
+-- Dump completed on 2021-09-14 14:34:19
