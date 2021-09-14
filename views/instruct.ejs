@@ -28,9 +28,9 @@
       <form action="/instruct" method="POST">
         <div class="input-group mb-3">
           <span class="input-group-text" id="inputGroup-sizing-default">담당자</span>
-          <input type="text" class="form-control" placeholder="담당자" name="_manager">
+          <input type="text" class="form-control" placeholder="담당자" id = "manager" name="_manager">
           <span class="input-group-text" id="inputGroup-sizing-default">지시 수량</span>
-          <input type="text" class="form-control" placeholder="지시 수량" name="_quantity">
+          <input type="text" class="form-control" placeholder="지시 수량"id = "quantity" name="_quantity">
         </div>
         <div class="input-group mb-3">
           <label class="input-group-text" for="inputGroupSelect01">품목 번호</label>
@@ -41,11 +41,11 @@
             <option value="floor">floor</option>
           </select>
           <label class="input-group-text" for="inputGroupSelect01">작업 날짜</label>
-          <input type = "text" id = "testDatepicker" name="_date">
+          <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> ">
 
         </div>
         <div align="center">
-          <button type="submit" class="btn btn-primary">등록</button>
+          <button type="submit" class="btn btn-primary" id = "register" disabled>등록</button>
         </div>
       </form>
       
@@ -93,6 +93,19 @@
             
           });
         });
+
+        $("input").keyup(function(){
+          var manager = $("#manager").val();
+          var quantity = $("#quantity").val();
+          var date = $("#testDatepicker").val();
+          
+          if(manager && quantity && date){    
+              $("#register").removeAttr("disabled")
+          }else{
+              $("#register").attr("disabled", "disabled")
+            }
+        })
+      
         
       </script>
     </body>
