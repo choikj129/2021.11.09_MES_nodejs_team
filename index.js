@@ -185,6 +185,7 @@ app.get("/current", function(req, res){
 })
 
 app.get("/instruct",function(req,res){
+    var date = moment().format("YYYY-MM-DD")
     if(!req.session.logged){
         res.redirect("/")
     }else{
@@ -196,13 +197,15 @@ app.get("/instruct",function(req,res){
                     res.send("search SQL select Error")
                 }else{
                     res.render("instruct",{
-                        "ordert" : result
+                        "ordert" : result,
+                        "date" : date
                     })
                 }
             }
         )
     }
 })
+
 
 app.listen(3000, function(){
     console.log("monitor server start")
