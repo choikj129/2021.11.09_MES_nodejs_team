@@ -24,6 +24,7 @@
     "install": "^0.13.0",
     "moment": "^2.29.1",
     "mysql2": "^2.3.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "sweetalert": "^2.1.2"
   }
 }
