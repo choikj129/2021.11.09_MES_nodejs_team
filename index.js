@@ -168,9 +168,8 @@ app.post("/instruct", function(req, res){
             }
         }
     )
-
-
 })
+
 
 app.get("/stop", function(req, res){
     run = false;
@@ -188,20 +187,28 @@ app.get("/instruct",function(req,res){
     if(!req.session.logged){
         res.redirect("/")
     }else{
-        connection.query(
-            `select * from ordert`,
-            function(err, result){
-                if(err){
-                    console.log(err);
-                    res.send("search SQL select Error")
-                }else{
-                    res.render("instruct",{
-                        "ordert" : result
-                    })
+        if(req.session.logged.linkcode == 1){
+            res.redirect("/alert")
+        }else{
+            connection.query(
+                `select * from ordert`,
+                function(err, result){
+                    if(err){
+                        console.log(err);
+                        res.send("search SQL select Error")
+                    }else{
+                        res.render("instruct",{
+                            "ordert" : result
+                        })
+                    }
                 }
-            }
-        )
+            )
+        }
     }
+})
+
+app.get("/alert", function(req, res){
+    res.render("alert")
 })
 
 app.listen(3000, function(){
