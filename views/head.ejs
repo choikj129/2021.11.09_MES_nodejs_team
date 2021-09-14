@@ -28,6 +28,10 @@
     font-size: 3.5rem;
     }
   }  
+  .first_color{
+    background-color: var(--first-color);
+  }
+  
   
 </style>
 <link rel="stylesheet" href="/css/style.css">
@@ -41,24 +45,24 @@
               <div cldivss="nav__logo">메뉴</div>
             </div>
             <div class="nav__list">
-                <a class="nav__link active" onclick="location.href = '/main'">
-                  <ion-icon name="home-outline" class="nav__icon" ></ion-icon>
-                  <span class="nav_name">메인</span>
-                </a>
-                <a class="nav__link" onclick="location.href = '/defect'">
-                  <ion-icon name="warning" class="nav__icon" ></ion-icon>
-                  <span class="nav_name">결함</span>
-                </a>
-                <a  class="nav__link" onclick="location.href = '/current'">
-                  <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                  <span class="nav_name">현황</span>
-                </a>
-                <a class="nav__link" onclick="location.href='/instruct'">
-                  <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
-                  <span class="nav_name">작업지시</span>
-                </a>
+              <a class="nav__link active" id="main_icon" onclick="location.href = '/main'">
+                <ion-icon name="home-outline" class="nav__icon"></ion-icon>
+                <span class="nav_name">메인</span>
+              </a>
+              <a class="nav__link" id="defect_icon" onclick="location.href = '/defect'">
+                <ion-icon name="warning" class="nav__icon" ></ion-icon>
+                <span class="nav_name">결함</span>
+              </a>
+              <a  class="nav__link" id="current_icon" onclick="location.href = '/current'">
+                <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
+                <span class="nav_name">현황</span>
+              </a>
+              <a class="nav__link" id="instruct_icon" onclick="location.href='/instruct'">
+                <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
+                <span class="nav_name">작업지시</span>
+              </a>
             </div>
-              <a class="nav__link"  onclick="location.href='/logout'">
+              <a class="nav__link" onclick="location.href='/logout'">
                 <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                 <span class="nav_name" >로그아웃</span>
               </a>
@@ -70,4 +74,7 @@
   <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
   <!-- JS -->
   <script src="/js/sidebar.js"></script>
+  <script>
+    
+  </script>
 </body>

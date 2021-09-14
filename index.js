@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     host : 'localhost',
     port : 3306,
     user : 'root',
-    password : '1234',
+    password : '1111',
     database : 'project'    
 })
 
@@ -168,8 +168,6 @@ app.post("/instruct", function(req, res){
             }
         }
     )
-
-
 })
 
 app.get("/stop", function(req, res){
@@ -189,23 +187,30 @@ app.get("/instruct",function(req,res){
     if(!req.session.logged){
         res.redirect("/")
     }else{
-        connection.query(
-            `select * from ordert`,
-            function(err, result){
-                if(err){
-                    console.log(err);
-                    res.send("search SQL select Error")
-                }else{
-                    res.render("instruct",{
-                        "ordert" : result,
-                        "date" : date
-                    })
+        if(req.session.logged.linkcode == 1){
+            res.redirect("/alert")
+        }else{
+            connection.query(
+                `select * from ordert`,
+                function(err, result){
+                    if(err){
+                        console.log(err);
+                        res.send("search SQL select Error")
+                    }else{
+                        res.render("instruct",{
+                            "ordert" : result,
+                            "date" : date
+                        })
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 })
 
+app.get("/alert", function(req, res){
+    res.render("alert")
+})
 
 app.listen(3000, function(){
     console.log("monitor server start")

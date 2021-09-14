@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include("./head.ejs") %>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body style="background-color : rgb(68,84,106)">
+	<script>
+        $(function(){
+            swal("페이지 권한이 없습니다.","관리자에게 문의하세요.").then(function(){
+                location.href="/main"
+            })
+        })
+	</script>
+</body>
+</html>
