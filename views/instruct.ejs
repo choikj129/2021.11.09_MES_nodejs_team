@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <%- include("./head.ejs") %>
-        <style>
-        
-          .table{
-            margin : 100px auto;
-            width: 80%;
-            text-align: center;
-            background-color: rgb(173, 185, 202);
-          }
-          .input-group{
-            margin : 10px auto;
-            margin-top: 10px;
-            width: 50%;
-            text-align: center;
-            background-color: rgb(173, 185, 202);
-          }
-          
-        </style>
-    </head>
+  <head>
+    <%- include("./head.ejs") %>
+    <style>
+      .table{
+        width: 70em;
+        text-align: center;
+        background-color: rgb(173, 185, 202);
+      }
+      .input-group{
+        width: 20rem;
+        text-align: center;
+        background-color: rgb(173, 185, 202);
+      } 
+      .wrapper{
+        height:11rem;
+        width:70em;
+        background-color: rgba(199, 202, 241, 0.308);
+      }
+    </style>
+  </head>
 
-    <body>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="inputGroup-sizing-default">지시 번호</span>
-      <input type="text" class="form-control">
-      <span class="input-group-text" id="inputGroup-sizing-default">지시 수량</span>
-      <input type="text" class="form-control">
-      
-    </div>
-      <div class="input-group mb-3">
+  <body style="background-color: rgb(41, 48, 63);">
+    <div class="wrapper" style="position: absolute; left:15%">
+      <div class="input-group mb-3" style="position: absolute; left:15%; top:10%">
+        <span class="input-group-text" id="inputGroup-sizing-default">지시 번호</span>
+        <input type="text" class="form-control">
+      </div>
+      <div class="input-group mb-3" style="position: absolute; left:55%; top:10%">
+        <span class="input-group-text" id="inputGroup-sizing-default">지시 수량</span>
+        <input type="text" class="form-control">
+      </div>
+      <div class="input-group mb-3" style="position: absolute; left:15%; top:40%">
         <label class="input-group-text" for="inputGroupSelect01">품목 번호</label>
         <select class="form-select" id="inputGroupSelect01">
           <option selected> </option>
@@ -37,6 +39,8 @@
           <option value="2">Two</option>
           <option value="3">Three</option>
         </select>
+      </div>
+      <div class="input-group mb-3" style="position: absolute; left:55%; top:40%">
         <label class="input-group-text" for="inputGroupSelect01">작업 날짜</label>
         <select class="form-select" id="inputGroupSelect01">
           <option selected> </option>
@@ -45,21 +49,21 @@
           <option value="3">Three</option>
         </select>
       </div>
-      
-      
-      <table class="table table-bordered table-striped table-hover">
-          <thead>
+    </div>
+    
+    <div style="position: absolute; top:13.5em; left:15%; color:white; text-align: center;">
+      <table>
+          <thead style="background-color: rgba(199, 202, 241, 0.308); height:3em;">
             <tr>
-              <th scope="col" style="width: 100px;">작업지시번호</th>
-              <th scope="col" style="width: 100px;">품목 코드</th>
-              <th scope="col" style="width: 100px;">품목명</th>
-              <th scope="col" style="width: 100px;">지시 수량</th>
-              <th scope="col" style="width: 100px;">작업 날짜</th>
-              <th scope="col" style="width: 100px;">상태</th>
-              
+              <th scope="col" style="width: 11em;">작업지시번호</th>
+              <th scope="col" style="width: 11em;">품목 코드</th>
+              <th scope="col" style="width: 11em;">품목명</th>
+              <th scope="col" style="width: 7em;">지시 수량</th>
+              <th scope="col" style="width: 20em;">작업 날짜</th>
+              <th scope="col" style="width: 10em;">상태</th>
             </tr>
-          </thead>
-          
+          </thead>  
       </table>
-    </body>
+    </div>  
+  </body>
 </html>
