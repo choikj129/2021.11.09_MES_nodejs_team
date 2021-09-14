@@ -1,10 +1,17 @@
+<style>
+    canvas{
+        width:23.4em;
+        height:12em;
+    }
+</style>
 <div class="wrapper" style="position: absolute; top: 0.7em; right:3em;">
-    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em;text-align: center; color:white; line-height: 1.7rem;"><b>불량율</b></div>
-        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.5em">
+    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.3em;text-align: center; color:white; line-height: 1.7rem;"><b>불량율</b></div>
+        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.3em">
             <div style="position:absolute; top:-2rem; width:70%; left:20%">
                 <canvas id="myChart"></canvas>
             </div>
         </div>
+    </div>
 </div>
 
 <script>
@@ -46,11 +53,9 @@
 
 <!-- 생산현황 그래프 -->
 <div class="wrapper" style="position: absolute; top: 0.7em; right:27.5em;">
-    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em; text-align: center; color:white; line-height: 2rem;"><b>생산 현황</b></div>
-        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.5em">
-            <div style="position:absolute; top:1em; left:8%">
-                <canvas id="Chart1"></canvas>
-            </div>
+    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.3em; text-align: center; color:white; line-height: 2rem;"><b>생산 현황</b></div>
+        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.3em">
+            <canvas id="Chart1"></canvas>
         </div>    
 </div>
 
@@ -85,17 +90,25 @@
         options: {
             responsive: false,
             plugins: {
-            legend: {
-                labels : {
-                    fontColor : 'rgba(255,255,255,0.7)'
+                legend: {
+                    position: 'bottom',
+                    labels:{
+                        color : "white"
+                    }
                 },
-                position: 'bottom',
-            },
             },
             scales: {
+                x:{
+                    ticks:{
+                        color: "white",
+                    }
+                },
                 y: {
                     min: 0,
                     max: 105,
+                    ticks:{
+                        color: "white",
+                    }
                 }
             }        
         },
@@ -109,11 +122,9 @@
 
 <!-- 온도조건 차트 -->
 <div class="wrapper" style="position: absolute; top: 16em; right:3em;">
-    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em; text-align: center; color:white; line-height: 2rem;"><b>온도 현황</b></div>
-        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.5em">
-            <div style="position:absolute; width:100%; top:1em; left:8%">
-                <canvas id="Chart2"></canvas>
-            </div>
+    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.3em; text-align: center; color:white; line-height: 2rem;"><b>온도 현황</b></div>
+        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.3em">
+            <canvas id="Chart2"></canvas>
         </div>
 </div>
 <script>
@@ -127,16 +138,16 @@
     labels: labels2,
     datasets: [
         {
-        label: '금형온도',
-        data: [4.3, 2.5, 3.5, 4.5],
-        borderColor: 'rgb(91, 155, 213)',
-        backgroundColor: 'rgb(91, 155, 213)',
+            label: '금형온도',
+            data: [4.3, 2.5, 3.5, 4.5],
+            borderColor: 'rgb(91, 155, 213)',
+            backgroundColor: 'rgb(91, 155, 213)',
         },
         {
-        label: '용융온도',
-        data: [2.4, 4.4, 1.8, 2.8],
-        borderColor: 'rgb(237, 125, 49)',
-        backgroundColor: 'rgb(237, 125, 49)',
+            label: '용융온도',
+            data: [2.4, 4.4, 1.8, 2.8],
+            borderColor: 'rgb(237, 125, 49)',
+            backgroundColor: 'rgb(237, 125, 49)',
         }
     ]
     };
@@ -148,12 +159,23 @@
         plugins: {
             legend: {
                 position: 'bottom',
+                labels:{
+                    color : "white"
+                }
             },
         },
         scales: {
+            x:{
+                ticks:{
+                    color: "white",
+                }
+            },
             y: {
                 min: 0,
                 max: 7,
+                ticks:{
+                    color: "white",
+                }
             }
         }      
     },
@@ -167,11 +189,9 @@
 
 <!-- 압력조건 라인차트 -->
 <div class="wrapper" style="position: absolute; top: 16em; right:27.5em;">
-    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.5em;text-align: center; color:white; line-height: 2rem;"><b>압력 현황</b></div>
-        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.5em">
-            <div style="position:absolute; width:100%; top:1em; left:8%">
-                <canvas id="Chart3"></canvas>
-            </div>
+    <div class="wrapper1" style="position:absolute; top:0.3em; left:0.3em;text-align: center; color:white; line-height: 2rem;"><b>압력 현황</b></div>
+        <div class="wrapper2" style="position: absolute; top:2.5em; left:0.3em">
+            <canvas id="Chart3"></canvas>
         </div>
 </div>
 <script>
@@ -185,16 +205,16 @@
     labels: labels3,
     datasets: [
         {
-        label: '보압',
-        data: [4.3, 2.3, 3.5, 4.5],
-        borderColor: 'rgb(91, 155, 213)',
-        backgroundColor: 'rgb(91, 155, 213)',
+            label: '보압',
+            data: [4.3, 2.3, 3.5, 4.5],
+            borderColor: 'rgb(91, 155, 213)',
+            backgroundColor: 'rgb(91, 155, 213)',
         },
         {
-        label: '배압',
-        data: [2.4, 4.4, 1.8, 2.8],
-        borderColor: 'rgb(237, 125, 49)',
-        backgroundColor: 'rgb(237, 125, 49)',
+            label: '배압',
+            data: [2.4, 4.4, 1.8, 2.8],
+            borderColor: 'rgb(237, 125, 49)',
+            backgroundColor: 'rgb(237, 125, 49)',
         }
     ]
     };
@@ -206,12 +226,23 @@
         plugins: {
             legend: {
                 position: 'bottom',
+                labels:{
+                    color : "white"
+                }
             },
         },
         scales: {
+            x:{
+                ticks:{
+                    color: "white",
+                }
+            },
             y: {
                 min: 0,
                 max: 5,
+                ticks:{
+                    color: "white",
+                }
             }
         }
     },
