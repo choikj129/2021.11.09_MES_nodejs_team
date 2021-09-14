@@ -2,78 +2,96 @@
 <html>
 <head>
     <%- include("./head.ejs") %>
-    <title>현황확인 페이지</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-    .wrapper1{
-                width:700;
-                height:250;                
-                background-color: rgba(68,84,106,0.5);
-                position: absolute;
-                border:0.1em solid white;
-            }
-    .white {    
-                color: white;
-            }
-    
+        .wrapper1{
+            width:36em;
+            height:19em;                
+            background-color: rgba(68,84,106,0.5);
+            /*border:0.1em solid white;*/
+        }
+        .wrapper2{
+            width:3em;
+            height:19em;
+            background-color:rgba(199, 202, 241, 0.308);
+            text-align: center;
+            color:white;
+            line-height:2.5em;
+            /*border:0.1em solid white;*/
+        }
     </style>
 </head>
 
-<body style="background-color: rgb(34, 42, 53);">
-    <div style="position: absolute; margin-left: 46%;">
-
-        <!-- 생산량 -->
-        <div class="wrapper1" style="position:absolute; margin: 1em -37em;">
-            <canvas id="Chart1" width="700" height="350"></canvas>        
+<body style="background-color: rgb(41, 48, 63);">
+    <!-- 생산량 -->
+    <div class="wrapper1" style="position:absolute; top: 1em; left:11em;">
+        <canvas id="Chart1" style="position: absolute; width:90%; top:1em; left:5%"></canvas>  
+    </div>
+    <div class="wrapper2" style="position: absolute; top:1em; left:7.5em;">
+        <div style="font-size:1.2em">
+            <b>생<br>산<br>현<br>황</b>
         </div>
-        <!-- 온도 -->
-        <div class="wrapper1" style="position:absolute; margin: 20em -37em;">
-            <canvas id="Chart2" width="700" height="350"></canvas>
+    </div>
+    <!-- 불량율 -->
+    <div class="wrapper1" style="position:absolute; top: 1em; right:1em;">
+        <canvas id="Chart2" style="position: absolute; width:90%; top:1em; left:5%"></canvas>
+    </div>
+    <div class="wrapper2" style="position: absolute; top:1em; right:37.5em;">
+        <div style="font-size:1.2em">
+            <b>불<br>량<br>율</b>
         </div>
-        <!-- 불량율 -->
-        <div class="wrapper1" style="position:absolute; margin: 1em -0.5em;">
-            <canvas id="Chart3" width="700" height="350"></canvas>
+    </div>
+    <!-- 온도 -->
+    <div class="wrapper1" style="position:absolute; top:21em; left:11em;">
+        <canvas id="Chart3" style="position: absolute; width:90%; top:1em; left:5%"></canvas>
+    </div>
+    <div class="wrapper2" style="position: absolute; top:21em; left:7.5em;">
+        <div style="font-size:1.2em">
+            <b>온<br>도<br>현<br>황</b>
         </div>
-        <!-- 압력 -->
-        <div class="wrapper1" style="position:absolute; margin: 20em -0.5em;">
-            <canvas id="Chart4" width="700" height="350"></canvas>
+    </div>
+    <!-- 압력 -->
+    <div class="wrapper1" style="position:absolute; top:21em; right:1em">
+        <canvas id="Chart4" style="position: absolute; width:90%; top:1em; left:5%"></canvas>
+    </div>
+    <div class="wrapper2" style="position: absolute; top:21em; right:37.5em;">
+        <div style="font-size:1.2em">
+            <b>압<br>력<br>현<br>황</b>
         </div>
-    </div>    
-
-    
+    </div>
     
     <script>
         const labels1 = [
-                '시간1',
-                '시간2', 
-                '시간3',
-                '시간4', 
-                '시간5',
-                '시간6',
-                '시간7',
-                '시간8',
-                '시간9',
-                '시간10'             
-            ];          
+            '시간1',
+            '시간2', 
+            '시간3',
+            '시간4', 
+            '시간5',
+            '시간6',
+            '시간7',
+            '시간8',
+            '시간9',
+            '시간10'             
+        ];          
            
-            const data1 = {
+        const data1 = {
             labels: labels1,
             datasets: [
                 {
-                label: '목표생산량',
-                data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
-                borderColor: 'rgb(237, 125, 49)',
-                backgroundColor: 'rgb(237, 125, 49)',
+                    label: '목표생산량',
+                    data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+                    borderColor: 'rgb(237, 125, 49)',
+                    backgroundColor: 'rgb(237, 125, 49)',
                 },
                 {
-                label: '생산량',
-                data: [13, 25, 57, 78, 90, 100, 110, 122, 145, 167],
-                borderColor: 'rgb(91, 155, 213)',
-                backgroundColor: 'rgb(91, 155, 213)',
+                    label: '생산량',
+                    data: [13, 25, 57, 78, 90, 100, 110, 122, 145, 167],
+                    borderColor: 'rgb(91, 155, 213)',
+                    backgroundColor: 'rgb(91, 155, 213)',
                 }
             ]
-            };
-            const config1 = {
+        };
+        const config1 = {
             type: 'line',
             data: data1,
             options: {
@@ -84,145 +102,66 @@
                         labels: {
                             color: "white"
                         }
-                },
-                    title: {
-                        display: true,
-                        text: '생산량',
-
-                    }
+                    },
                 },
                 scales: {
                     x:{
                         ticks:{
-                            color: "white"
+                            color: "white",
                         }
                     },
                     y: {
                         min: 0,
                         max: 170,
-                       ticks:{
+                        ticks:{
                             color: "white"
                         }
                     }
                 }
             },
-            };
+        };
 
-            var myChart1 = new Chart(
-                document.getElementById('Chart1'),
-                config1
-            );
-            var show = true
+        var myChart1 = new Chart(
+            document.getElementById('Chart1'),
+            config1
+        );
+        var show = true
 
-            
-            const labels2 = [
-                '시간1',
-                '시간2',
-                '시간3',
-                '시간4',
-                '시간5',              
-                '시간6',
-                '시간7',
-                '시간8',
-                '시간9',
-                '시간10'
-            ];
-            const data2 = {
+        const labels2 = [
+            '시간1',
+            '시간2',
+            '시간3',
+            '시간4'              
+        ];
+        const data2 = {
             labels: labels2,
             datasets: [
                 {
-                label: '현재 금형온도',
-                data: [4.3, 2.5, 3.5, 4.5, 3.7, 6.2, 5.5, 5.6, 4.9, 6.1],
-                borderColor: 'rgb(91, 155, 213)',
-                backgroundColor: 'rgb(91, 155, 213)',
+                    label: '양품',
+                    data: [50, 100, 150, 200],
+                    borderColor: 'rgb(91, 155, 213)',
+                    backgroundColor: 'rgb(91, 155, 213)',
                 },
                 {
-                label: '용융온도',
-                data: [2.4, 4.4, 1.8, 2.8, 3.7, 2.8, 2.5, 2.8, 1.9, 2],
-                borderColor: 'rgb(237, 125, 49)',
-                backgroundColor: 'rgb(237, 125, 49)',
+                    label: '불량품',
+                    data: [3, 5, 9, 15],
+                    borderColor: 'rgb(237, 125, 49)',
+                    backgroundColor: 'rgb(237, 125, 49)',
                 }
             ]
-            };
-            const config2 = {
+        };
+        const config2 = {
             type: 'line',
             data: data2,
             options: {
                 responsive: false,
                 plugins: {
-                legend: {
-                    position: 'bottom',
-                        labels: {
-                            color: "white"
-                        }
-                    
-                },
-                title: {
-                    display: true,
-                    text: '온도'
-                }
-                },
-                scales: {
-                    x:{
-                        ticks:{
-                            color: "white"
-                        }
+                    legend: {
+                        position: 'bottom',
+                            labels: {
+                                color: "white"
+                            }
                     },
-                    y: {
-                        min: 0,
-                        max: 7,
-                       ticks:{
-                            color: "white"
-                        }
-                    }
-                }
-            },
-            };
-            var myChart2 = new Chart(
-                document.getElementById('Chart2'),
-                config2
-            );
-            var show = true
-
-            const labels3 = [
-                '시간1',
-                '시간2',
-                '시간3',
-                '시간4'              
-            ];
-            const data3 = {
-            labels: labels3,
-            datasets: [
-                {
-                label: '양품',
-                data: [50, 100, 150, 200],
-                borderColor: 'rgb(91, 155, 213)',
-                backgroundColor: 'rgb(91, 155, 213)',
-                },
-                {
-                label: '불량품',
-                data: [3, 5, 9, 15],
-                borderColor: 'rgb(237, 125, 49)',
-                backgroundColor: 'rgb(237, 125, 49)',
-                }
-            ]
-            };
-            const config3 = {
-            type: 'line',
-            data: data3,
-            options: {
-                responsive: false,
-                plugins: {
-                legend: {
-                    position: 'bottom',
-                        labels: {
-                            color: "white"
-                        }
-                },
-                title: {
-                    display: true,
-                    text: '불량율',
-                }
                 },
                 scales: {
                     x:{
@@ -239,59 +178,119 @@
                     }
                 }
             },
-            };
-            var myChart3 = new Chart(
-                document.getElementById('Chart3'),
-                config3
-            );
-            var show = true
+        };
+        var myChart2 = new Chart(
+            document.getElementById('Chart2'),
+            config2
+        );
+        var show = true
 
-            const labels4 = [
-                '시간1',
-                '시간2',
-                '시간3',
-                '시간4',
-                '시간5',              
-                '시간6',
-                '시간7',
-                '시간8',
-                '시간9',
-                '시간10'              
-            ];          
+        const labels3 = [
+            '시간1',
+            '시간2',
+            '시간3',
+            '시간4',
+            '시간5',              
+            '시간6',
+            '시간7',
+            '시간8',
+            '시간9',
+            '시간10'
+        ];
+        const data3 = {
+            labels: labels3,
+            datasets: [
+                {
+                    label: '현재 금형온도',
+                    data: [4.3, 2.5, 3.5, 4.5, 3.7, 6.2, 5.5, 5.6, 4.9, 6.1],
+                    borderColor: 'rgb(91, 155, 213)',
+                    backgroundColor: 'rgb(91, 155, 213)',
+                },
+                {
+                    label: '용융온도',
+                    data: [2.4, 4.4, 1.8, 2.8, 3.7, 2.8, 2.5, 2.8, 1.9, 2],
+                    borderColor: 'rgb(237, 125, 49)',
+                    backgroundColor: 'rgb(237, 125, 49)',
+                }
+            ]
+        };
+        const config3 = {
+            type: 'line',
+            data: data3,
+            options: {
+                responsive: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: "white"
+                        }    
+                    },
+                },
+                scales: {
+                    x:{
+                        ticks:{
+                            color: "white"
+                        }
+                    },
+                    y: {
+                        min: 0,
+                        max: 7,
+                       ticks:{
+                            color: "white"
+                        }
+                    }
+                }
+            },
+        };
+        var myChart3 = new Chart(
+            document.getElementById('Chart3'),
+            config3
+        );
+        var show = true
+
+        const labels4 = [
+            '시간1',
+            '시간2',
+            '시간3',
+            '시간4',
+            '시간5',              
+            '시간6',
+            '시간7',
+            '시간8',
+            '시간9',
+            '시간10'              
+        ];          
            
-            const data4 = {
+        const data4 = {
             labels: labels4,
             datasets: [
                 {
-                label: '보압',
-                data: [4.3, 2.5, 3.5, 4.5, 4, 4.2, 4.3, 3.7, 2.9, 4],
-                borderColor: 'rgb(91, 155, 213)',
-                backgroundColor: 'rgb(91, 155, 213)',
+                    label: '보압',
+                    data: [4.3, 2.5, 3.5, 4.5, 4, 4.2, 4.3, 3.7, 2.9, 4],
+                    borderColor: 'rgb(91, 155, 213)',
+                    backgroundColor: 'rgb(91, 155, 213)',
                 },
                 {
-                label: '배압',
-                data: [2.4, 4.4, 1.8, 2.8, 3, 3.5, 4, 3.9, 3.9, 2.9],
-                borderColor: 'rgb(237, 125, 49)',
-                backgroundColor: 'rgb(237, 125, 49)',
+                    label: '배압',
+                    data: [2.4, 4.4, 1.8, 2.8, 3, 3.5, 4, 3.9, 3.9, 2.9],
+                    borderColor: 'rgb(237, 125, 49)',
+                    backgroundColor: 'rgb(237, 125, 49)',
                 }
             ]
-            };
-            const config4 = {
+        };
+        const config4 = {
             type: 'line',
             data: data4,
             options: {
                 responsive: false,
                 plugins: {
-                legend: {
-                    position: 'bottom',
-                        labels: {
-                            color: "white"
-                        }
-                },
-                title: {
-                    display: true,
-                    text: '압력'
-                }
+                    legend: {
+                        position: 'bottom',
+                            labels: {
+                                color: "white"
+                            }
+                    },
                 },
                 scales: {
                     x:{
@@ -302,20 +301,20 @@
                     y: {
                         min: 0,
                         max: 5,
-                       ticks:{
+                        ticks:{
                             color: "white"
                         }
                     }
                 } 
                 
             },
-            };
+        };
 
-            var myChart4 = new Chart(
-                document.getElementById('Chart4'),
-                config4
-            );
-            var show = true
+        var myChart4 = new Chart(
+            document.getElementById('Chart4'),
+            config4
+        );
+        var show = true
     </script>   
 </body>
 </html>
