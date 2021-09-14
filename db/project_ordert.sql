@@ -16,29 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `order`
+-- Table structure for table `ordert`
 --
 
-DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS `ordert`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `order` (
+CREATE TABLE `ordert` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `manager` varchar(45) NOT NULL,
-  `lego_id` int NOT NULL,
+  `lego_id` varchar(45) NOT NULL,
   `quantity` int NOT NULL,
   `date` varchar(45) NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order`
+-- Dumping data for table `ordert`
 --
 
-LOCK TABLES `order` WRITE;
-/*!40000 ALTER TABLE `order` DISABLE KEYS */;
-/*!40000 ALTER TABLE `order` ENABLE KEYS */;
+LOCK TABLES `ordert` WRITE;
+/*!40000 ALTER TABLE `ordert` DISABLE KEYS */;
+INSERT INTO `ordert` VALUES (2,'ckj','bricks_rect',1000,'2021-09-15'),(3,'ckj','품목 번호',1000,'2021-09-16');
+/*!40000 ALTER TABLE `ordert` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-14 14:34:19
+-- Dump completed on 2021-09-14 16:19:00
