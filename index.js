@@ -150,6 +150,28 @@ app.get("/defect", function(req,res){
     }
 })
 
+app.post("/instruct", function(req, res){
+    var name = req.body._manager;
+    var quantity = req.body._quantity;
+    var id = req.body._id;
+    var date = req.body._date;
+    console.log(quantity, id, date);
+    connection.query(
+        `insert into ordert(manager, lego_id, quantity, date) values (?, ?, ?, ?)`,
+        [name, id, quantity, date],
+        function(err, result){
+            if(err){
+                console.log(err);
+                res.send("instruct SQL insert Error")
+            }else{
+                res.redirect("/instruct")
+            }
+        }
+    )
+
+
+})
+
 app.get("/stop", function(req, res){
     run = false;
 })
@@ -166,7 +188,19 @@ app.get("/instruct",function(req,res){
     if(!req.session.logged){
         res.redirect("/")
     }else{
-        res.render("instruct")
+        connection.query(
+            `select * from ordert`,
+            function(err, result){
+                if(err){
+                    console.log(err);
+                    res.send("search SQL select Error")
+                }else{
+                    res.render("instruct",{
+                        "ordert" : result
+                    })
+                }
+            }
+        )
     }
 })
 
