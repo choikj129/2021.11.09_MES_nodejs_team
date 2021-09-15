@@ -6,22 +6,23 @@
         <script src="/js/now.js"></script>
         <style>
             .wrapper {
-                height:15rem;
-                width:24rem;
+                height:35vh;
+                width:28vw;
                 background-color: rgba(95, 100, 126, 0.699);
             }   
             .wrapper1{
-                height:2rem;
-                width:23rem;
+                height:4.5vh;
+                width:27.4vw;
                 background-color: rgba(199, 202, 241, 0.308);
             }
             .wrapper2{
-                height:12rem;
-                width:23rem;
-                background-color: rgba(40, 41, 59, 0.637); 
+                height:29vh;
+                width:27.4vw;
+                background-color: rgba(53, 54, 68, 0.637); 
             }
             td{
                 vertical-align: middle;
+                height : 2vh;
             }
             #keyboard{
                 display: none;
@@ -81,28 +82,25 @@
         <%- include("./chart.ejs") %>
         
         <!-- 진행 단계 -->
-        <div style="width: 48.5rem; height: 10rem; background-color: rgba(95, 100, 126, 0.699); position: absolute; top: 31.5rem; right:3em; color:white; font-weight: 1000;">
-            <div class="wrapper1" style="width:98%; position:absolute; top:0.3em; left:1%;text-align: center; color:white; line-height: 2rem;"><b>현재 진행 상태</b></div>
-                <div style="height:7rem; width:98%; background-color: rgba(40, 41, 59, 0.637); position:absolute; top:2.5em; left:0.5em;">    
+        <div style="width: 57vw; height: 26vh; background-color: rgba(95, 100, 126, 0.699); position: absolute; top: 73vh; right:3vw; color:white; font-weight: 1000;">
+            <div class="wrapper1" style="width:56.4vw; position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>현재 진행 상태</b></div>
+                <div style="height:20vh; width:56.4vw; background-color: rgba(53, 54, 68, 0.637); position:absolute; top:5.5vh; left:0.3vw;">    
                     <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 0.8em; left: 3.5rem; line-height: 60px; font-size: 20px;">준비</div>
+                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 6.5%; line-height: 70px; font-size: 20px;">준비</div>
                     </div>
                     <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 0.8em; left: 12.5rem; line-height: 60px; font-size: 20px;">사출</div>
+                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 25.5%; line-height: 70px; font-size: 20px;">사출</div>
                     </div>
                     <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 0.8em; left: 21.5rem; line-height: 60px; font-size: 20px;">배압</div>
+                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 44.5%; line-height: 70px; font-size: 20px;">배압</div>
                     </div>
                     <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 0.8em; left: 30.5rem; line-height: 60px; font-size: 20px;">보압</div>
+                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 63.5%; line-height: 70px; font-size: 20px;">보압</div>
                     </div>
                     <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 0.8em; left: 39.5rem; line-height: 60px; font-size: 20px;">분리</div>
+                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 82.5%; line-height: 70px; font-size: 20px;">분리</div>
                     </div>
                 </div>
-            </div>
-        <div style="position:absolute; top: 31rem; left:15em;">
-            <img style="width: 17rem; height:10rem" src="/img/motion.gif">
         </div>
 
         <script>

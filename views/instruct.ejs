@@ -8,63 +8,75 @@
         <style>
         
           .table{
-            margin : 100px auto;
-            width: 80%;
+            width: 70em;
             text-align: center;
             background-color: rgb(173, 185, 202);
           }
           .input-group{
-            margin : 10px auto;
-            margin-top: 10px;
-            width: 50%;
+            width: 20rem;
             text-align: center;
             background-color: rgb(173, 185, 202);
+          } 
+          .wrapper{
+            height:11rem;
+            width:70em;
+            background-color: rgba(199, 202, 241, 0.308);
           }
           #instruct_icon{
             background-color: var(--first-color);
+          }
+          .input-group-text{
+            border-radius:0
+          }
+          .form-control{
+            border-radius: 0;
           }
           
         </style>
     </head>
 
-    <body>
+    <body style="background-color: rgb(41, 48, 63);">
       <form action="/instruct" method="POST">
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default">담당자</span>
-          <input type="text" class="form-control" placeholder="담당자" id = "manager" name="_manager">
-          <span class="input-group-text" id="inputGroup-sizing-default">지시 수량</span>
-          <input type="text" class="form-control" placeholder="지시 수량"id = "quantity" name="_quantity">
+        <div class="wrapper" style="position: absolute; left:15%">
+          <div class="input-group mb-3" style="position: absolute; left:15%; top:10%">
+            <span class="input-group-text" id="inputGroup-sizing-default">담당자</span>
+            <input type="text" class="form-control" placeholder="담당자" id = "manager" name="_manager">
+          </div>
+          <div class="input-group mb-3" style="position: absolute; left:55%; top:10%">
+            <span class="input-group-text" id="inputGroup-sizing-default">지시 수량</span>
+            <input type="text" class="form-control" placeholder="지시 수량" id = "quantity" name="_quantity">
+          </div>
+          <div class="input-group mb-3" style="position: absolute; left:15%; top:40%">
+            <label class="input-group-text" for="inputGroupSelect01">품목 번호</label>
+            <select class="form-select" id="inputGroupSelect01" name ="_id">
+              <option value="bricks_rect">bricks_rect</option>
+              <option value="bricks_square">bricks_square</option>
+              <option value="circle">circle</option>
+              <option value="floor">floor</option>
+            </select>
+          </div>
+          <div class="input-group mb-3" style="position: absolute; left:55%; top:40%">
+            <label class="input-group-text" for="inputGroupSelect01">작업 날짜</label>
+            <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> ">
+          </div>
+          <div align="center">
+            <button type="submit" class="btn btn-dark" id = "register" disabled>등록</button>
+          </div>
         </div>
-        <div class="input-group mb-3">
-          <label class="input-group-text" for="inputGroupSelect01">품목 번호</label>
-          <select class="form-select" id="inputGroupSelect01" name ="_id">
-            <option value="bricks_rect">bricks_rect</option>
-            <option value="bricks_square">bricks_square</option>
-            <option value="circle">circle</option>
-            <option value="floor">floor</option>
-          </select>
-          <label class="input-group-text" for="inputGroupSelect01">작업 날짜</label>
-          <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> ">
-
-        </div>
-        <div align="center">
-          <button type="submit" class="btn btn-dark" id = "register" disabled>등록</button>
-        </div>
+        
       </form>
       
-      
-      <table class="table table-bordered table-striped table-hover">
-          <thead>
+      <div style="position: absolute; top:13.5em; left:15%; color:white; text-align: center;">
+        <table>
+          <thead style="background-color: rgba(199, 202, 241, 0.308); height:3em;">
             <tr>
-              <th scope="col" style="width: 100px;">작업지시번호</th>
-              <th scope="col" style="width: 100px;">품목명</th>
-              <th scope="col" style="width: 100px;">지시 수량</th>
-              <th scope="col" style="width: 100px;">작업 날짜</th>
-              <th scope="col" style="width: 100px;">상태</th>
-              
+              <th scope="col" style="width: 11em;">작업지시번호</th>
+              <th scope="col" style="width: 11em;">품목명</th>
+              <th scope="col" style="width: 7em;">지시 수량</th>
+              <th scope="col" style="width: 20em;">작업 날짜</th>
+              <th scope="col" style="width: 10em;">상태</th>
             </tr>
           </thead>
-
           <tbody>
             <% for(var i=0; i < ordert.length; i++) {%>
               <tr>
@@ -76,8 +88,9 @@
               </tr>
             <%}%>
           </tbody>
-          
-      </table>
+        </table>
+      </div>
+      
       <script>
         $(function(){
           $("#testDatepicker").datepicker({
