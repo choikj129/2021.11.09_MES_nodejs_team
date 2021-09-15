@@ -107,7 +107,7 @@ var interval;
 function start(){
     interval = setInterval(function(){
         now()
-    },5000)
+    },3000)
 }
 
 function stop(){

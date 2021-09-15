@@ -57,7 +57,7 @@ a {
     height: 100vh;
     background-color: var(--bg-color);
     color: var(--white-color);
-    padding: 1.5rem 1.5rem 2rem;
+    padding: 1.5rem 25px 2rem;
     transition: .5s;
     z-index: var(--z-fixed);
 }
@@ -126,9 +126,9 @@ a {
 }
 
 /* Active links menu */
-.active {
+/* .active {
     background-color: var(--first-color);
-}
+} */
 
 /* COLLAPSE */
 .collapse {
