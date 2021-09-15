@@ -70,7 +70,6 @@ app.get("/logout", function(req, res){
     })
 })
 
-
 var id = 0;
 var run = false;
 
@@ -88,7 +87,8 @@ app.get("/main", function(req, res){
                     console.log(result[0])
                     res.render('main', {
                         'monitor' : result[0],
-                        "run" : run
+                        "run" : run,
+                        "linkcode" : req.session.logged.linkcode
                     })
                 }
             }
@@ -142,7 +142,8 @@ app.get("/defect", function(req,res){
                     console.log(result)
                     res.render("defect",{
                         'defect' : result,
-                        'id' : id
+                        'id' : id,
+                        "linkcode" : req.session.logged.linkcode
                     });
                 }
             }
@@ -178,7 +179,9 @@ app.get("/current", function(req, res){
     if(!req.session.logged){
         res.redirect("/")
     }else{
-        res.render("current")
+        res.render("current",{
+            "linkcode" : req.session.logged.linkcode
+        })
     }
 })
 
@@ -199,7 +202,8 @@ app.get("/instruct",function(req,res){
                     }else{
                         res.render("instruct",{
                             "ordert" : result,
-                            "date" : date
+                            "date" : date,
+                            "linkcode" : req.session.logged.linkcode
                         })
                     }
                 }

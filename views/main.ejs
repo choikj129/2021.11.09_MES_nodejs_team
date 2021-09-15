@@ -107,6 +107,13 @@
 
         <script>
             var set = "";
+            $(function(){
+                if ("<%=linkcode%>"==0){
+                    $("#linkcode").text("관리자")
+                }else{
+                    $("#linkcode").text("작업자")
+                }
+            })
             function clicked(c){
                 set = c;
             }

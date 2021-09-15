@@ -46,5 +46,14 @@
             <% } %>
           </tbody>
       </table>
+      <script>
+        $(function(){
+          if ("<%=linkcode%>"==0){
+              $("#linkcode").text("관리자")
+          }else{
+              $("#linkcode").text("작업자")
+          }
+        })
+      </script>
     </body>
 </html>
