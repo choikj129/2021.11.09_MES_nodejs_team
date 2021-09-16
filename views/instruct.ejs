@@ -13,7 +13,7 @@
             background-color: rgb(173, 185, 202);
           }
           .input-group{
-            width: 40vw;
+            width: 25vw;
             text-align: center;
             background-color: rgb(173, 185, 202);
           } 
@@ -39,19 +39,19 @@
         </style>
     </head>
 
-    <body style="background-color: rgb(41, 48, 63);">
+    <body style="background-color: rgb(70, 79, 99); overflow-y: hidden;">
       <form action="/instruct" method="POST">
         <div class="wrapper" style="position: absolute; left:8.5vw">
           <div class="input-group mb-3" style="position: absolute; left:3vw; top:4vh">
-            <span class="input-group-text" id="inputGroup-sizing-default">담당자</span>
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">담당자</span>
             <input type="text" class="form-control" placeholder="담당자" id = "manager" name="_manager">
           </div>
           <div class="input-group mb-3" style="position: absolute; left:46vw; top:4vh">
-            <span class="input-group-text" id="inputGroup-sizing-default">지시 수량</span>
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">지시 수량</span>
             <input type="text" class="form-control" placeholder="지시 수량" id = "quantity" name="_quantity">
           </div>
           <div class="input-group mb-3" style="position: absolute; left:3vw; top:14vh">
-            <label class="input-group-text" for="inputGroupSelect01">품목 번호</label>
+            <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목 번호</label>
             <select class="form-select" id="inputGroupSelect01" name ="_id">
               <option value="bricks_rect">bricks_rect</option>
               <option value="bricks_square">bricks_square</option>
@@ -60,7 +60,7 @@
             </select>
           </div>
           <div class="input-group mb-3" style="position: absolute; left:46vw; top:14vh">
-            <label class="input-group-text" for="inputGroupSelect01">작업 날짜</label>
+            <label class="input-group-text" for="inputGroupSelect01" style="width:10.9vw">작업 날짜</label>
             <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> ">
           </div>
           <div align="center">

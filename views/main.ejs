@@ -8,12 +8,12 @@
             .wrapper {
                 height:35vh;
                 width:28vw;
-                background-color: rgba(95, 100, 126, 0.699);
+                background-color: rgba(199, 202, 241, 0.308);
             }   
             .wrapper1{
                 height:4.5vh;
                 width:27.4vw;
-                background-color: rgba(199, 202, 241, 0.308);
+                background-color: rgba(161, 160, 175, 0.637);
             }
             .wrapper2{
                 height:29vh;
@@ -47,7 +47,7 @@
         </style>
     </head>
     
-    <body style="background-color: rgb(44, 47, 54);">
+    <body style="background-color: rgb(70, 79, 99); overflow-y: hidden;">
 
         <!-- 조건 테이블 -->
         <%- include("./table.ejs") %> 
@@ -82,24 +82,28 @@
         <%- include("./chart.ejs") %>
         
         <!-- 진행 단계 -->
-        <div style="width: 57vw; height: 26vh; background-color: rgba(95, 100, 126, 0.699); position: absolute; top: 73vh; right:3vw; color:white; font-weight: 1000;">
+        <div style="width: 57vw; height: 26vh; background-color: rgba(199, 202, 241, 0.308); position: absolute; top: 73vh; right:3vw; color:white; font-weight: 1000;">
             <div class="wrapper1" style="width:56.4vw; position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>현재 진행 상태</b></div>
                 <div style="height:20vh; width:56.4vw; background-color: rgba(53, 54, 68, 0.637); position:absolute; top:5.5vh; left:0.3vw;">    
-                    <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 6.5%; line-height: 70px; font-size: 20px;">준비</div>
+                    <div id="osj2-container" style="position: absolute; top:19%; left: 3%;">
+                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">준비</div>
                     </div>
-                    <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 25.5%; line-height: 70px; font-size: 20px;">사출</div>
+                    <div id="osj2-container" style="position: absolute; top:19%; left:20%">
+                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">사출</div>
                     </div>
-                    <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 44.5%; line-height: 70px; font-size: 20px;">배압</div>
+                    <div id="osj2-container" style="position: absolute; top:19%; left:37%;">
+                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">배압</div>
                     </div>
-                    <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 63.5%; line-height: 70px; font-size: 20px;">보압</div>
+                    <div id="osj2-container" style="position: absolute; top:19%; left:54%;">
+                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">보압</div>
                     </div>
-                    <div id="osj2-container">
-                        <div align="center" id="osj2-spinner" style="position: absolute; top: 3.2vh; left: 82.5%; line-height: 70px; font-size: 20px;">분리</div>
+                    <div id="osj2-container" style="position: absolute; top:19%; left:71%;">
+                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">분리</div>
                     </div>
+                    <!-- 시작/종료 버튼 -->
+                    <button type="button" class="btn btn-danger" style="position: absolute; right:2vw; top:33%; font-size:1.2em;" onclick="stop()">
+                        <b>비상정지</b>
+                    </button>
                 </div>
         </div>
 
