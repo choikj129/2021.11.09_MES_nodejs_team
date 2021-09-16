@@ -109,6 +109,11 @@
             prevText : '이전달'
             
           });
+          if ("<%=linkcode%>"==0){
+              $("#linkcode").text("관리자")
+          }else{
+              $("#linkcode").text("작업자")
+          }
         });
 
         $("input").keyup(function(){

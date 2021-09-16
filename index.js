@@ -70,7 +70,6 @@ app.get("/logout", function(req, res){
     })
 })
 
-
 var id = 0;
 var run = false;
 
@@ -88,7 +87,8 @@ app.get("/main", function(req, res){
                     console.log(result[0])
                     res.render('main', {
                         'monitor' : result[0],
-                        "run" : run
+                        "run" : run,
+                        "linkcode" : req.session.logged.linkcode
                     })
                 }
             }
@@ -127,6 +127,9 @@ app.get("/now_update", function(req, res){
     }
 })
 
+app.get("/stop", function(req, res){
+    run = false;
+})
 
 app.get("/defect", function(req,res){
     if(!req.session.logged){
@@ -142,11 +145,49 @@ app.get("/defect", function(req,res){
                     console.log(result)
                     res.render("defect",{
                         'defect' : result,
-                        'id' : id
+                        'id' : id,
+                        "linkcode" : req.session.logged.linkcode
                     });
                 }
             }
         )
+    }
+})
+
+app.get("/current", function(req, res){
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        res.render("current",{
+            "linkcode" : req.session.logged.linkcode
+        })
+    }
+})
+
+app.get("/instruct",function(req,res){
+    var date = moment().format("YYYY-MM-DD")
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        if(req.session.logged.linkcode == 1){
+            res.redirect("/alert")
+        }else{
+            connection.query(
+                `select * from ordert`,
+                function(err, result){
+                    if(err){
+                        console.log(err);
+                        res.send("search SQL select Error")
+                    }else{
+                        res.render("instruct",{
+                            "ordert" : result,
+                            "date" : date,
+                            "linkcode" : req.session.logged.linkcode
+                        })
+                    }
+                }
+            )
+        }
     }
 })
 
@@ -168,44 +209,6 @@ app.post("/instruct", function(req, res){
             }
         }
     )
-})
-
-app.get("/stop", function(req, res){
-    run = false;
-})
-
-app.get("/current", function(req, res){
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        res.render("current")
-    }
-})
-
-app.get("/instruct",function(req,res){
-    var date = moment().format("YYYY-MM-DD")
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        if(req.session.logged.linkcode == 1){
-            res.redirect("/alert")
-        }else{
-            connection.query(
-                `select * from ordert`,
-                function(err, result){
-                    if(err){
-                        console.log(err);
-                        res.send("search SQL select Error")
-                    }else{
-                        res.render("instruct",{
-                            "ordert" : result,
-                            "date" : date
-                        })
-                    }
-                }
-            )
-        }
-    }
 })
 
 app.get("/alert", function(req, res){
