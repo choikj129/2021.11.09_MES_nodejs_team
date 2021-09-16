@@ -18,7 +18,7 @@
             width : 35%;
         }
         ._button{
-            width: 100px;
+            width: 7vw;
 
         }
         .center{
@@ -26,41 +26,33 @@
             justify-content: space-around;
         }
         .wrapper {
-            position:absolute;
-            top:50%;
-            left:50%;
-            height:30rem;
-            width:20rem;
-            margin:-15rem 0rem 0rem 0rem;
+            height:66vh;
+            width:24vw;
             background-color: white;
         }
         .wrapper1 {
-            position:absolute;
-            top:50%;
-            left:50%;
-            height:30rem;
-            width:20rem;
-            margin:-15rem 0rem 0rem -20rem;
+            height:66vh;
+            width:24vw;
             background-color: rgb(173, 185, 202);
         }
     </style>
     <body style="background-color: rgb(68,84,106); overflow-y: hidden;">
-        <div class="wrapper1">
-            <b style="padding-left:35px; position: absolute; padding-top: 80px; font-size:40px;">레고 사출공정</b><br>
-            <p style="padding-left:50px; position: absolute; padding-top: 120px; font-size:25px">최적화 분석 시스템</p>
-            <img src="/img/amico.png" style="position:absolute; width:280px; height:230px; left:20px; bottom:20px">
+        <div class="wrapper1" style="position: absolute; top:17vh; left:26vw;">
+            <b style="position: absolute; left:13%; top:15%; font-size:40px;">레고 사출공정</b><br>
+            <p style="position: absolute; left:17%; top:30%; font-size:25px">최적화 분석 시스템</p>
+            <img src="/img/amico.png" style="position:absolute; width:18vw; top:26vh; left:3vw;">
         </div>
-        <div class="wrapper" >
+        <div class="wrapper" style="position: absolute; top:17vh; right:26vw;">
             <div class = "container login">
-                <img src="/img/blocks.png" style="position:absolute; width:100px; height:100px; left:100px; top:110px">
+                <img src="/img/blocks.png" style="position:absolute; width:100px; height:100px; left:35%; top:110px">
                 <form action="/login" method="post">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3" style="width:14vw; position:absolute; left:5vw; top: 55%">
                         <input type="id" class="form-control" placeholder="ID" name="_id">
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3" style="width:14vw; position:absolute; left:5vw; top:65%">
                         <input type="password" class="form-control" placeholder="Password" name="_password">
                     </div>
-                    <div align="center">
+                    <div align="center" style="position: absolute; top:80%; left:35%">
                         <input type="submit" class="btn btn-outline-dark _button" value="login">
                     </div>
                 </form>
