@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `defect`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `defect` (
-  `defect_id` int NOT NULL,
+  `defect_id` int NOT NULL AUTO_INCREMENT,
   `monitor_id` int NOT NULL,
   `x_defect` varchar(45) NOT NULL,
   `y_defect` varchar(45) NOT NULL,
@@ -31,10 +31,10 @@ CREATE TABLE `defect` (
   `stud_h_defect` varchar(45) NOT NULL,
   `stud_d_defect` varchar(45) NOT NULL,
   `thick_defect` varchar(45) NOT NULL,
-  `error` text NOT NULL,
-  `cause` text NOT NULL,
+  `error` text,
+  `cause` text,
   PRIMARY KEY (`defect_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `defect` (
 
 LOCK TABLES `defect` WRITE;
 /*!40000 ALTER TABLE `defect` DISABLE KEYS */;
-INSERT INTO `defect` VALUES (1,48,'Y','Y','Y','Y','Y','N','',''),(2,81,'Y','Y','Y','N','Y','N','',''),(3,96,'N','N','Y','Y','Y','N','',''),(4,100,'N','N','Y','Y','Y','N','',''),(5,102,'N','N','Y','Y','Y','N','',''),(6,104,'N','N','Y','Y','Y','N','',''),(7,106,'Y','N','Y','Y','Y','N','',''),(8,108,'Y','Y','N','N','Y','N','',''),(9,110,'Y','Y','Y','N','N','N','',''),(10,112,'Y','Y','N','N','Y','N','',''),(11,114,'Y','N','Y','N','Y','N','',''),(12,116,'Y','N','Y','N','Y','N','',''),(13,117,'Y','N','Y','N','Y','N','',''),(14,118,'Y','N','Y','N','Y','N','',''),(15,119,'Y','N','Y','N','Y','N','',''),(16,120,'Y','N','Y','N','Y','N','',''),(17,121,'Y','N','Y','N','Y','N','','');
+INSERT INTO `defect` VALUES (1,48,'Y','Y','Y','Y','Y','N',NULL,NULL);
 /*!40000 ALTER TABLE `defect` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-14 16:19:01
+-- Dump completed on 2021-09-28 19:41:39
