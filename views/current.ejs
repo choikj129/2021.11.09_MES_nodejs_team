@@ -3,6 +3,8 @@
 <head>
     <%- include("./head.ejs") %>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.min.js"></script>
+
     <style>
         .wrapper1{
             width:42vw;
@@ -25,381 +27,501 @@
     </style>
 </head>
 <body style="background-color: rgb(70, 79, 99); overflow-y: hidden;">
-    <!-- 생산량 -->
+    <!-- 시간현황 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:4.5vh; left:11vw;">
-            <canvas id="Chart1" style="position: absolute; width:40vw; top:3vh; left:1vw"></canvas>  
+            <div id="Chart1" style="width:100%; height:100%"></div>  
         </div>
         <div class="wrapper2" style="position: absolute; top:4.5vh; left:7.5vw;">
             <div style="font-size:2.8vh">
-                <b>생<br>산<br>현<br>황</b>
+                <b>시<br>간<br>현<br>황</b>
             </div>
         </div>
     </div>
-    <!-- 불량율 -->
-    <!-- <div>
-        <div class="wrapper1" style="position: absolute; top:4.5vh; right:1.5vw;">
-            <canvas id="Chart2" style="position: absolute; width:40vw; top:3vh; left:1vw"> </canvas>
-        </div>
-        <div class="wrapper2" style="position: absolute; top:4.5vh; right:89.5vh;">
-            <div style="font-size:2.8vh">
-                <b>불<br>량<br>율</b>
-            </div>
-        </div>
-    </div> -->
+    <!-- 속도현황 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:4.5vh; right:0.8vw;">
-            <canvas id="Chart2" style="position: absolute; width:40vw; top:3vh; left:1vw"> </canvas>
+            <div id="Chart2" style="width:100%; height:100%"></div>
         </div>
         <div class="wrapper2" style="position: absolute; top:4.5vh; right:43.3vw;">
             <div style="font-size:2.8vh">
-                <b>사<br>출<br>속<br>도</b>
+                <b>속<br>도<br>현<br>황</b>
             </div>
         </div>
     </div>
-    <!-- 온도 --> 
+    <!-- 압력현황 --> 
     <div>
         <div class="wrapper1" style="position: absolute; top:50.5vh; left:11vw;"> 
-            <canvas id="Chart3" style="position: absolute; width:40vw; top:3vh; left:1vw"></canvas>
+            <div id="Chart3" style="width:100%; height:100%"></div>
         </div>
         <div class="wrapper2" style="position: absolute; top:50.5vh; left:7.5vw;">
-            <div style="font-size:2.8vh">
-                <b>온<br>도<br>현<br>황</b>
-            </div>
-        </div>
-    </div>
-    <!-- 압력 -->
-    <div>
-        <div class="wrapper1" style="position: absolute; top:50.5vh; right:0.8vw">
-            <canvas id="Chart4" style="position: absolute; width:40vw; top:3vh; left:1vw"></canvas>
-        </div>
-        <div class="wrapper2" style="position: absolute; top:50.5vh; right:43.3vw;">
             <div style="font-size:2.8vh">
                 <b>압<br>력<br>현<br>황</b>
             </div>
         </div>
     </div>
+    <!-- 온도현황 -->
+    <div>
+        <div class="wrapper1" style="position: absolute; top:50.5vh; right:0.8vw">
+            <div id="Chart4" style="width:100%; height:100%"></div>
+        </div>
+        <div class="wrapper2" style="position: absolute; top:50.5vh; right:43.3vw;">
+            <div style="font-size:2.8vh">
+                <b>온<br>도<br>현<br>황</b>
+            </div>
+        </div>
+    </div>
+
+    <!--시간 실시간 그래프-->
     <script>
-        const labels1 = [
-            '시간1',
-            '시간2', 
-            '시간3',
-            '시간4', 
-            '시간5',
-            '시간6',
-            '시간7',
-            '시간8',
-            '시간9',
-            '시간10'             
-        ];          
-           
-        const data1 = {
-            labels: labels1,
-            datasets: [
-                {
-                    label: '목표생산량',
-                    data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
-                    borderColor: 'rgb(237, 125, 49)',
-                    backgroundColor: 'rgb(237, 125, 49)',
-                },
-                {
-                    label: '생산량',
-                    data: [13, 25, 57, 78, 90, 100, 110, 122, 145, 167],
-                    borderColor: 'rgb(91, 155, 213)',
-                    backgroundColor: 'rgb(91, 155, 213)',
-                }
-            ]
-        };
-        const config1 = {
-            type: 'line',
-            data: data1,
-            options: {
-                responsive: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: "white"
-                        }
-                    },
-                },
-                scales: {
-                    x:{
-                        ticks:{
-                            color: "white",
-                        }
-                    },
-                    y: {
-                        min: 0,
-                        max: 170,
-                        ticks:{
-                            color: "white"
-                        }
+        // DOM을 준비하고 echart 객체를 만듭니다.
+        var myChart0 = echarts.init(document.getElementById('Chart1'));
+
+        //chart의 설정을 정합니다.
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    label: {
+                        backgroundColor: '#283b56'
                     }
                 }
             },
-        };
-
-        var myChart1 = new Chart(
-            document.getElementById('Chart1'),
-            config1
-        );
-        var show = true
-        // 불량율
-        // const labels2 = [
-        //     '시간1',
-        //     '시간2',
-        //     '시간3',
-        //     '시간4'              
-        // ];
-        // const data2 = {
-        //     labels: labels2,
-        //     datasets: [
-        //         {
-        //             label: '양품',
-        //             data: [50, 100, 150, 200],
-        //             borderColor: 'rgb(91, 155, 213)',
-        //             backgroundColor: 'rgb(91, 155, 213)',
-        //         },
-        //         {
-        //             label: '불량품',
-        //             data: [3, 5, 9, 15],
-        //             borderColor: 'rgb(237, 125, 49)',
-        //             backgroundColor: 'rgb(237, 125, 49)',
-        //         }
-        //     ]
-        // };
-        // const config2 = {
-        //     type: 'line',
-        //     data: data2,
-        //     options: {
-        //         responsive: false,
-        //         plugins: {
-        //             legend: {
-        //                 position: 'bottom',
-        //                     labels: {
-        //                         color: "white"
-        //                     }
-        //             },
-        //         },
-        //         scales: {
-        //             x:{
-        //                 ticks:{
-        //                     color: "white"
-        //                 }
-        //             },
-        //             y: {
-        //                 min: 0,
-        //                 max: 250,
-        //                 ticks:{
-        //                     color: "white"
-        //                 }
-        //             }
-        //         }
-        //     },
-        // };
-        // var myChart2 = new Chart(
-        //     document.getElementById('Chart2'),
-        //     config2
-        // );
-        // var show = true
-        const labels2 = [
-            '시간1',
-            '시간2',
-            '시간3',
-            '시간4',
-            '시간5',              
-            '시간6',
-            '시간7',
-            '시간8',
-            '시간9',
-            '시간10'              
-        ];
-        const data2 = {
-            labels: labels2,
-            datasets: [
+            legend: {
+                data:['순수익']
+            },
+            dataZoom: {
+                show: false,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
                 {
-                    label: '사출속도',
-                    data: [2.4, 4.4, 1.8, 2.8, 3, 3.5, 4, 3.9, 3.9, 2.9],
-                    borderColor: 'rgb(237, 125, 49)',
-                    backgroundColor: 'rgb(237, 125, 49)',
+                    type: 'category',
+                    boundaryGap: true,
+                    data: (function (){
+                        var now = new Date();
+                        var res = [];
+                        var len = 20;
+                        while (len--) {
+                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                            now = new Date(now - 2000);
+                        }
+                        return res;
+                    })()
+                },
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    name: '순수익',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2],
+                    axisLabel: {
+                        formatter: '{value} %'
+                    },
+                }
+            ],
+            series: [
+                {
+                    name: '사출시간',
+                    type: 'line',
+                    lineStyle:{
+                        color:'#2A265C' //line차트 색상 변경
+                    },
+                    yAxisIndex: 0, //yAxis 1번째 사용
+                    data: (function (){
+                        var res = [];
+                        var len = 0;
+                        while (len < 20) {
+                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
+                            len++;
+                        }
+                        return res;
+                    })()
+                },
+                {
+                    name: '보압시간',
+                    type: 'line',
+                    lineStyle:{
+                        color:'yellow' //line차트 색상 변경
+                    },
+                    yAxisIndex: 0, //yAxis 1번째 사용
+                    data: (function (){
+                        var res = [];
+                        var len = 0;
+                        while (len < 20) {
+                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
+                            len++;
+                        }
+                        return res;
+                    })()
+                },
+                {
+                    name: '배압시간',
+                    type: 'line',
+                    lineStyle:{
+                        color:'orange' //line차트 색상 변경
+                    },
+                    yAxisIndex: 0, //yAxis 1번째 사용
+                    data: (function (){
+                        var res = [];
+                        var len = 0;
+                        while (len < 20) {
+                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
+                            len++;
+                        }
+                        return res;
+                    })()
                 }
             ]
         };
-        const config2 = {
-            type: 'line',
-            data: data2,
-            options: {
-                responsive: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                            labels: {
-                                color: "white"
-                            }
-                    },
-                },
-                scales: {
-                    x:{
-                        ticks:{
-                            color: "white"
-                        }
-                    },
-                    y: {
-                        min: 0,
-                        max: 7,
-                        ticks:{
-                            color: "white"
-                        }
-                    }
-                }
-            },
-        };
-        var myChart2 = new Chart(
-            document.getElementById('Chart2'),
-            config2
-        );
-        var show = true
 
-        const labels3 = [
-            '시간1',
-            '시간2',
-            '시간3',
-            '시간4',
-            '시간5',              
-            '시간6',
-            '시간7',
-            '시간8',
-            '시간9',
-            '시간10'
-        ];
-        const data3 = {
-            labels: labels3,
-            datasets: [
-                {
-                    label: '현재 금형온도',
-                    data: [4.3, 2.5, 3.5, 4.5, 3.7, 6.2, 5.5, 5.6, 4.9, 6.1],
-                    borderColor: 'rgb(91, 155, 213)',
-                    backgroundColor: 'rgb(91, 155, 213)',
-                },
-                {
-                    label: '용융온도',
-                    data: [2.4, 4.4, 1.8, 2.8, 3.7, 2.8, 2.5, 2.8, 1.9, 2],
-                    borderColor: 'rgb(237, 125, 49)',
-                    backgroundColor: 'rgb(237, 125, 49)',
-                }
-            ]
-        };
-        const config3 = {
-            type: 'line',
-            data: data3,
-            options: {
-                responsive: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: "white"
-                        }    
-                    },
-                },
-                scales: {
-                    x:{
-                        ticks:{
-                            color: "white"
-                        }
-                    },
-                    y: {
-                        min: 0,
-                        max: 7,
-                       ticks:{
-                            color: "white"
-                        }
-                    }
-                }
-            },
-        };
-        var myChart3 = new Chart(
-            document.getElementById('Chart3'),
-            config3
-        );
-        var show = true
+        // 위에서 설정한 속성을 차트에 반영합니다.
+        myChart0.setOption(option);
 
-        const labels4 = [
-            '시간1',
-            '시간2',
-            '시간3',
-            '시간4',
-            '시간5',              
-            '시간6',
-            '시간7',
-            '시간8',
-            '시간9',
-            '시간10'              
-        ];          
-           
-        const data4 = {
-            labels: labels4,
-            datasets: [
-                {
-                    label: '보압',
-                    data: [4.3, 2.5, 3.5, 4.5, 4, 4.2, 4.3, 3.7, 2.9, 4],
-                    borderColor: 'rgb(91, 155, 213)',
-                    backgroundColor: 'rgb(91, 155, 213)',
-                }
-                // {
-                //     label: '배압',
-                //     data: [2.4, 4.4, 1.8, 2.8, 3, 3.5, 4, 3.9, 3.9, 2.9],
-                //     borderColor: 'rgb(237, 125, 49)',
-                //     backgroundColor: 'rgb(237, 125, 49)',
-                // }
-            ]
-        };
-        const config4 = {
-            type: 'line',
-            data: data4,
-            options: {
-                responsive: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                            labels: {
-                                color: "white"
-                            }
-                    },
-                },
-                scales: {
-                    x:{
-                        ticks:{
-                            color: "white"
-                        }
-                    },
-                    y: {
-                        min: 0,
-                        max: 6,
-                        ticks:{
-                            color: "white"
-                        }
-                    }
-                } 
-                
-            },
-        };
+        //데이터를 생성하고 삭제합니다.
+        setInterval(function (){
+            //x축에 실시간 데이터 생성
+            var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-        var myChart4 = new Chart(
-            document.getElementById('Chart4'),
-            config4
-        );
-        var show = true
-    </script>   
+            var data0 = option.series[0].data; //순수익 데이터
+            var data1 = option.series[1].data;
+            var data2 = option.series[2].data;
+
+            //데이터의 가장 왼쪽 값을 제거
+            data0.shift();
+            data1.shift();
+            data2.shift();
+
+            //데이터의 가장 오른쪽 값을 추가
+            data0.push(Math.round(Math.random() * 100));
+            data1.push(Math.round(Math.random() * 100));
+            data2.push(Math.round(Math.random() * 100));
+
+            //x축에 시간 데이터 추가
+            option.xAxis[0].data.shift();
+            option.xAxis[0].data.push(axisData);
+
+            //차트에 반영
+            myChart0.setOption(option);
+        }, 2100);
+    </script>
+
+    <!--속도 실시간 그래프-->
     <script>
-        $(function(){
-            if ("<%=linkcode%>"==0){
-                $("#linkcode").text("관리자")
-            }else{
-                $("#linkcode").text("작업자")
-            }
-        })
-    </script> 
+        // DOM을 준비하고 echart 객체를 만듭니다.
+        var myChart = echarts.init(document.getElementById('Chart2'));
+
+        //chart의 설정을 정합니다.
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    label: {
+                        backgroundColor: '#283b56'
+                    }
+                }
+            },
+            legend: {
+                data:['순수익']
+            },
+            dataZoom: {
+                show: false,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: (function (){
+                        var now = new Date();
+                        var res = [];
+                        var len = 20;
+                        while (len--) {
+                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                            now = new Date(now - 2000);
+                        }
+                        return res;
+                    })()
+                },
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    name: '순수익',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2],
+                    axisLabel: {
+                        formatter: '{value} %'
+                    },
+                }
+            ],
+            series: [
+                {
+                    name: '사출속도',
+                    type: 'line',
+                    lineStyle:{
+                        color:'#2A265C' //line차트 색상 변경
+                    },
+                    yAxisIndex: 0, //yAxis 1번째 사용
+                    data: (function (){
+                        var res = [];
+                        var len = 0;
+                        while (len < 20) {
+                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
+                            len++;
+                        }
+                        return res;
+                    })()
+                }
+            ]
+        };
+
+        // 위에서 설정한 속성을 차트에 반영합니다.
+        myChart.setOption(option);
+
+        //데이터를 생성하고 삭제합니다.
+        setInterval(function (){
+            //x축에 실시간 데이터 생성
+            var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+
+            var data0 = option.series[0].data; //순수익 데이터
+
+            //데이터의 가장 왼쪽 값을 제거
+            data0.shift();
+
+            //데이터의 가장 오른쪽 값을 추가
+            data0.push(Math.round(Math.random() * 100));
+
+            //x축에 시간 데이터 추가
+            option.xAxis[0].data.shift();
+            option.xAxis[0].data.push(axisData);
+
+            //차트에 반영
+            myChart.setOption(option);
+        }, 2100);
+    </script>
+
+    <!--압력 실시간 그래프-->
+    <script>
+        // DOM을 준비하고 echart 객체를 만듭니다.
+        var myChart = echarts.init(document.getElementById('Chart3'));
+
+        //chart의 설정을 정합니다.
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    label: {
+                        backgroundColor: '#283b56'
+                    }
+                }
+            },
+            legend: {
+                data:['순수익']
+            },
+            dataZoom: {
+                show: false,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: (function (){
+                        var now = new Date();
+                        var res = [];
+                        var len = 20;
+                        while (len--) {
+                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                            now = new Date(now - 2000);
+                        }
+                        return res;
+                    })()
+                },
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    name: '순수익',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2],
+                    axisLabel: {
+                        formatter: '{value} %'
+                    },
+                }
+            ],
+            series: [
+                {
+                    name: '보압',
+                    type: 'line',
+                    lineStyle:{
+                        color:'#2A265C' //line차트 색상 변경
+                    },
+                    yAxisIndex: 0, //yAxis 1번째 사용
+                    data: (function (){
+                        var res = [];
+                        var len = 0;
+                        while (len < 20) {
+                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
+                            len++;
+                        }
+                        return res;
+                    })()
+                }
+            ]
+        };
+
+        // 위에서 설정한 속성을 차트에 반영합니다.
+        myChart.setOption(option);
+
+        //데이터를 생성하고 삭제합니다.
+        setInterval(function (){
+            //x축에 실시간 데이터 생성
+            var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+
+            var data0 = option.series[0].data; //순수익 데이터
+
+            //데이터의 가장 왼쪽 값을 제거
+            data0.shift();
+
+            //데이터의 가장 오른쪽 값을 추가
+            data0.push(Math.round(Math.random() * 100));
+
+            //x축에 시간 데이터 추가
+            option.xAxis[0].data.shift();
+            option.xAxis[0].data.push(axisData);
+
+            //차트에 반영
+            myChart.setOption(option);
+        }, 2100);
+    </script>
+
+    <!--온도 실시간 그래프-->
+    <script>
+        // DOM을 준비하고 echart 객체를 만듭니다.
+        var myChart = echarts.init(document.getElementById('Chart4'));
+
+        //chart의 설정을 정합니다.
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    label: {
+                        backgroundColor: '#283b56'
+                    }
+                }
+            },
+            legend: {
+                data:['순수익']
+            },
+            dataZoom: {
+                show: false,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: (function (){
+                        var now = new Date();
+                        var res = [];
+                        var len = 20;
+                        while (len--) {
+                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                            now = new Date(now - 2000);
+                        }
+                        return res;
+                    })()
+                },
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    scale: true,
+                    name: '순수익',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2],
+                    axisLabel: {
+                        formatter: '{value} %'
+                    },
+                }
+            ],
+            series: [
+                {
+                    name: '용융온도',
+                    type: 'line',
+                    lineStyle:{
+                        color:'#2A265C' //line차트 색상 변경
+                    },
+                    yAxisIndex: 0, //yAxis 1번째 사용
+                    data: (function (){
+                        var res = [];
+                        var len = 0;
+                        while (len < 20) {
+                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
+                            len++;
+                        }
+                        return res;
+                    })()
+                },
+                {
+                    name: '금형온도',
+                    type: 'line',
+                    lineStyle:{
+                        color:'yellow' //line차트 색상 변경
+                    },
+                    yAxisIndex: 0, //yAxis 1번째 사용
+                    data: (function (){
+                        var res = [];
+                        var len = 0;
+                        while (len < 20) {
+                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
+                            len++;
+                        }
+                        return res;
+                    })()
+                }
+            ]
+        };
+
+        // 위에서 설정한 속성을 차트에 반영합니다.
+        myChart.setOption(option);
+
+        //데이터를 생성하고 삭제합니다.
+        setInterval(function (){
+            //x축에 실시간 데이터 생성
+            var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+
+            var data0 = option.series[0].data; //순수익 데이터
+            var data1 = option.series[1].data;
+
+            //데이터의 가장 왼쪽 값을 제거
+            data0.shift();
+            data1.shift();
+
+            //데이터의 가장 오른쪽 값을 추가
+            data0.push(Math.round(Math.random() * 100));
+            data1.push(Math.round(Math.random() * 100));
+
+            //x축에 시간 데이터 추가
+            option.xAxis[0].data.shift();
+            option.xAxis[0].data.push(axisData);
+
+            //차트에 반영
+            myChart.setOption(option);
+        }, 2100);
+    </script>
 </body>
 </html>
