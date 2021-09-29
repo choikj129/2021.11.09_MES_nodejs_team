@@ -5,53 +5,51 @@
         <link rel = "stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
         <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src = "http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <style>
         
           .table{
-            width:89vw;
+            width: 70em;
             text-align: center;
             background-color: rgb(173, 185, 202);
           }
           .input-group{
-            width: 25vw;
+            width: 20rem;
             text-align: center;
             background-color: rgb(173, 185, 202);
           } 
           .wrapper{
-            height:30vh;
-            width:89vw;
-            background-color: rgba(199, 202, 241, 0.308);;
+            height:11rem;
+            width:70em;
+            background-color: rgba(199, 202, 241, 0.308);
           }
           #instruct_icon{
             background-color: var(--first-color);
           }
           .input-group-text{
-            border-radius:0;
-            width: 20vw;
+            border-radius:0
           }
           .form-control{
             border-radius: 0;
-          }
-          #instruct_icon{
-              background-color: var(--first-color);
           }
           
         </style>
     </head>
 
-    <body style="background-color: rgb(70, 79, 99); overflow-y: hidden;">
+    <body style="background-color: rgb(41, 48, 63);">
       <form action="/instruct" method="POST">
-        <div class="wrapper" style="position: absolute; left:8.5vw">
-          <div class="input-group mb-3" style="position: absolute; left:3vw; top:4vh">
-            <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">담당자</span>
+        <div class="wrapper" style="position: absolute; left:15%">
+          <div class="input-group mb-3" style="position: absolute; left:15%; top:10%">
+            <span class="input-group-text" id="inputGroup-sizing-default">담당자</span>
             <input type="text" class="form-control" placeholder="담당자" id = "manager" name="_manager">
           </div>
-          <div class="input-group mb-3" style="position: absolute; left:46vw; top:4vh">
-            <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">지시 수량</span>
+          <div class="input-group mb-3" style="position: absolute; left:55%; top:10%">
+            <span class="input-group-text" id="inputGroup-sizing-default">지시 수량</span>
             <input type="text" class="form-control" placeholder="지시 수량" id = "quantity" name="_quantity">
           </div>
-          <div class="input-group mb-3" style="position: absolute; left:3vw; top:14vh">
-            <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목 번호</label>
+          <div class="input-group mb-3" style="position: absolute; left:15%; top:40%">
+            <label class="input-group-text" for="inputGroupSelect01">품목 번호</label>
             <select class="form-select" id="inputGroupSelect01" name ="_id">
               <option value="bricks_rect">bricks_rect</option>
               <option value="bricks_square">bricks_square</option>
@@ -59,28 +57,32 @@
               <option value="floor">floor</option>
             </select>
           </div>
-          <div class="input-group mb-3" style="position: absolute; left:46vw; top:14vh">
-            <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
-            <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> " style="width: 60.15%; cursor: pointer;">
+          <div class="input-group mb-3" style="position: absolute; left:55%; top:40%">
+            <label class="input-group-text" for="inputGroupSelect01">작업 날짜</label>
+            <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> ">
           </div>
           <div align="center">
-            <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vw; right: 2.7vw;" id = "register" disabled>등록</button>
+            <button type="submit" class="btn btn-dark" id = "register" disabled>등록</button>
           </div>
         </div>
+        
       </form>
       
-      <div style="position: absolute; top:36vh; left:8.5vw; color:white; text-align: center;">
-        <table>
-          <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
+      <div style="position: absolute; top:13.5em; left:15%; color:white; text-align: center;">
+        <table class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+          <thead style="background-color: rgba(199, 202, 241, 0.308); height:3em;">
             <tr>
-              <th scope="col" style="width: 17vw;">작업지시번호</th>
-              <th scope="col" style="width: 17vw;">품목명</th>
-              <th scope="col" style="width: 10vw;">지시 수량</th>
-              <th scope="col" style="width: 30vw;">작업 날짜</th>
-              <th scope="col" style="width: 15vw;">상태</th>
+              <th scope="col" style="width: 11em;">작업지시번호</th>
+              <th scope="col" style="width: 11em;">품목명</th>
+              <th scope="col" style="width: 7em;">지시 수량</th>
+              <th scope="col" style="width: 20em;">작업 날짜</th>
+              <th scope="col" style="width: 10em;">상태</th>
+              <th scope="col" style="width: 5vw;">비고</th>
+              
             </tr>
           </thead>
           <tbody>
+            
             <% for(var i=0; i < ordert.length; i++) {%>
               <tr>
                 <td><%=ordert[i].order_id%></td>
@@ -88,6 +90,7 @@
                 <td><%=ordert[i].quantity%></td>
                 <td><%=ordert[i].date%></td>
                 <td>진행중</td>
+                <td style="padding: 3px;"><button style="height: 5vh;"type="submit" class="btn btn-danger " onclick="del('<%=ordert[i].order_id%>')">삭제</button></td>
               </tr>
             <%}%>
           </tbody>
@@ -111,11 +114,6 @@
             prevText : '이전달'
             
           });
-          if ("<%=linkcode%>"==0){
-              $("#linkcode").text("관리자")
-          }else{
-              $("#linkcode").text("작업자")
-          }
         });
 
         $("input").keyup(function(){
@@ -129,6 +127,15 @@
               $("#register").attr("disabled", "disabled")
             }
         })
+        function del(id){
+          if(confirm("삭제 하시겠습니까?")) {
+            alert("삭제되었습니다.");
+            location.href="/del?_id="+id
+          }
+          
+        }
+        
+        
       </script>
     </body>
 </html>

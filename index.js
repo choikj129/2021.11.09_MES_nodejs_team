@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     host : 'localhost',
     port : 3306,
     user : 'root',
-    password : '1111',
+    password : '1234',
     database : 'project'    
 })
 
@@ -191,6 +191,7 @@ app.get("/instruct",function(req,res){
     }
 })
 
+
 app.post("/instruct", function(req, res){
     var name = req.body._manager;
     var quantity = req.body._quantity;
@@ -213,6 +214,25 @@ app.post("/instruct", function(req, res){
 
 app.get("/alert", function(req, res){
     res.render("alert")
+})
+
+app.get("/del", function(req,res){
+    var id=req.query._id;
+    console.log(id)
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        connection.query(
+            `delete from ordert where order_id =`+id,
+        function(err,result){
+            if(err){
+                console.log(err)
+                res.send("instruct SQL delete error")
+            }else{  
+                res.redirect("/instruct")
+            }
+        })
+    }
 })
 
 app.listen(3000, function(){
