@@ -61,12 +61,13 @@
           </div>
           <div class="input-group mb-3" style="position: absolute; left:46vw; top:14vh">
             <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
-            <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> " style="width: 60.15%; cursor: pointer;">
+            <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> " style="width: 60.2%;">
           </div>
           <div align="center">
             <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vw; right: 2.7vw;" id = "register" disabled>등록</button>
           </div>
         </div>
+        
       </form>
       
       <div style="position: absolute; top:36vh; left:8.5vw; color:white; text-align: center;">
@@ -76,8 +77,9 @@
               <th scope="col" style="width: 17vw;">작업지시번호</th>
               <th scope="col" style="width: 17vw;">품목명</th>
               <th scope="col" style="width: 10vw;">지시 수량</th>
-              <th scope="col" style="width: 30vw;">작업 날짜</th>
+              <th scope="col" style="width: 25vw;">작업 날짜</th>
               <th scope="col" style="width: 15vw;">상태</th>
+              <th scope="col" style="width: 5vw;">비고</th>
             </tr>
           </thead>
           <tbody>
@@ -88,6 +90,7 @@
                 <td><%=ordert[i].quantity%></td>
                 <td><%=ordert[i].date%></td>
                 <td>진행중</td>
+                <td style="padding: 3px;"><button style="height: 5vh;"type="submit" class="btn btn-danger " onclick="del('<%=ordert[i].order_id%>')">삭제</button></td>
               </tr>
             <%}%>
           </tbody>
@@ -129,6 +132,12 @@
               $("#register").attr("disabled", "disabled")
             }
         })
+        function del(id){
+          if(confirm("삭제 하시겠습니까?")) {
+            alert("삭제되었습니다.");
+            location.href="/del?_id="+id
+          }
+        }
       </script>
     </body>
 </html>
