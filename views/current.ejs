@@ -30,7 +30,7 @@
     <!-- 시간현황 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:4.5vh; left:11vw;">
-            <div id="Chart1" style="width:100%; height:100%"></div>  
+            <div id="Chart0" style="width:100%; height:100%"></div>  
         </div>
         <div class="wrapper2" style="position: absolute; top:4.5vh; left:7.5vw;">
             <div style="font-size:2.8vh">
@@ -41,7 +41,7 @@
     <!-- 속도현황 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:4.5vh; right:0.8vw;">
-            <div id="Chart2" style="width:100%; height:100%"></div>
+            <div id="Chart1" style="width:100%; height:100%"></div>
         </div>
         <div class="wrapper2" style="position: absolute; top:4.5vh; right:43.3vw;">
             <div style="font-size:2.8vh">
@@ -52,7 +52,7 @@
     <!-- 압력현황 --> 
     <div>
         <div class="wrapper1" style="position: absolute; top:50.5vh; left:11vw;"> 
-            <div id="Chart3" style="width:100%; height:100%"></div>
+            <div id="Chart2" style="width:100%; height:100%"></div>
         </div>
         <div class="wrapper2" style="position: absolute; top:50.5vh; left:7.5vw;">
             <div style="font-size:2.8vh">
@@ -63,7 +63,7 @@
     <!-- 온도현황 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:50.5vh; right:0.8vw">
-            <div id="Chart4" style="width:100%; height:100%"></div>
+            <div id="Chart3" style="width:100%; height:100%"></div>
         </div>
         <div class="wrapper2" style="position: absolute; top:50.5vh; right:43.3vw;">
             <div style="font-size:2.8vh">
@@ -72,13 +72,15 @@
         </div>
     </div>
 
-    <!--시간 실시간 그래프-->
+    
     <script>
+        // 시간 그래프
+
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart0 = echarts.init(document.getElementById('Chart1'));
+        var myChart0 = echarts.init(document.getElementById('Chart0'));
 
         //chart의 설정을 정합니다.
-        var option = {
+        var option0 = {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -180,16 +182,16 @@
         };
 
         // 위에서 설정한 속성을 차트에 반영합니다.
-        myChart0.setOption(option);
+        myChart0.setOption(option0);
 
         //데이터를 생성하고 삭제합니다.
         setInterval(function (){
             //x축에 실시간 데이터 생성
             var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-            var data0 = option.series[0].data; //순수익 데이터
-            var data1 = option.series[1].data;
-            var data2 = option.series[2].data;
+            var data0 = option0.series[0].data; //순수익 데이터
+            var data1 = option0.series[1].data;
+            var data2 = option0.series[2].data;
 
             //데이터의 가장 왼쪽 값을 제거
             data0.shift();
@@ -202,21 +204,21 @@
             data2.push(Math.round(Math.random() * 100));
 
             //x축에 시간 데이터 추가
-            option.xAxis[0].data.shift();
-            option.xAxis[0].data.push(axisData);
+            option0.xAxis[0].data.shift();
+            option0.xAxis[0].data.push(axisData);
 
             //차트에 반영
-            myChart0.setOption(option);
+            myChart0.setOption(option0);
         }, 2100);
-    </script>
 
-    <!--속도 실시간 그래프-->
-    <script>
+
+        //속도 그래프
+
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart = echarts.init(document.getElementById('Chart2'));
+        var myChart1 = echarts.init(document.getElementById('Chart1'));
 
         //chart의 설정을 정합니다.
-        var option = {
+        var option1 = {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -284,14 +286,14 @@
         };
 
         // 위에서 설정한 속성을 차트에 반영합니다.
-        myChart.setOption(option);
+        myChart1.setOption(option1);
 
         //데이터를 생성하고 삭제합니다.
         setInterval(function (){
             //x축에 실시간 데이터 생성
             var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-            var data0 = option.series[0].data; //순수익 데이터
+            var data0 = option1.series[0].data; //순수익 데이터
 
             //데이터의 가장 왼쪽 값을 제거
             data0.shift();
@@ -300,21 +302,21 @@
             data0.push(Math.round(Math.random() * 100));
 
             //x축에 시간 데이터 추가
-            option.xAxis[0].data.shift();
-            option.xAxis[0].data.push(axisData);
+            option1.xAxis[0].data.shift();
+            option1.xAxis[0].data.push(axisData);
 
             //차트에 반영
-            myChart.setOption(option);
+            myChart1.setOption(option1);
         }, 2100);
-    </script>
+        
 
-    <!--압력 실시간 그래프-->
-    <script>
+        // 압력 그래프
+
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart = echarts.init(document.getElementById('Chart3'));
+        var myChart2 = echarts.init(document.getElementById('Chart2'));
 
         //chart의 설정을 정합니다.
-        var option = {
+        var option2 = {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -382,14 +384,14 @@
         };
 
         // 위에서 설정한 속성을 차트에 반영합니다.
-        myChart.setOption(option);
+        myChart2.setOption(option2);
 
         //데이터를 생성하고 삭제합니다.
         setInterval(function (){
             //x축에 실시간 데이터 생성
             var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-            var data0 = option.series[0].data; //순수익 데이터
+            var data0 = option2.series[0].data; //순수익 데이터
 
             //데이터의 가장 왼쪽 값을 제거
             data0.shift();
@@ -398,21 +400,21 @@
             data0.push(Math.round(Math.random() * 100));
 
             //x축에 시간 데이터 추가
-            option.xAxis[0].data.shift();
-            option.xAxis[0].data.push(axisData);
+            option2.xAxis[0].data.shift();
+            option2.xAxis[0].data.push(axisData);
 
             //차트에 반영
-            myChart.setOption(option);
+            myChart2.setOption(option2);
         }, 2100);
-    </script>
 
-    <!--온도 실시간 그래프-->
-    <script>
+
+        //온도 그래프
+
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart = echarts.init(document.getElementById('Chart4'));
+        var myChart3 = echarts.init(document.getElementById('Chart3'));
 
         //chart의 설정을 정합니다.
-        var option = {
+        var option3 = {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -497,15 +499,15 @@
         };
 
         // 위에서 설정한 속성을 차트에 반영합니다.
-        myChart.setOption(option);
+        myChart3.setOption(option3);
 
         //데이터를 생성하고 삭제합니다.
         setInterval(function (){
             //x축에 실시간 데이터 생성
             var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-            var data0 = option.series[0].data; //순수익 데이터
-            var data1 = option.series[1].data;
+            var data0 = option3.series[0].data; //순수익 데이터
+            var data1 = option3.series[1].data;
 
             //데이터의 가장 왼쪽 값을 제거
             data0.shift();
@@ -516,12 +518,14 @@
             data1.push(Math.round(Math.random() * 100));
 
             //x축에 시간 데이터 추가
-            option.xAxis[0].data.shift();
-            option.xAxis[0].data.push(axisData);
+            option3.xAxis[0].data.shift();
+            option3.xAxis[0].data.push(axisData);
 
             //차트에 반영
-            myChart.setOption(option);
+            myChart3.setOption(option3);
         }, 2100);
+
     </script>
+
 </body>
 </html>
