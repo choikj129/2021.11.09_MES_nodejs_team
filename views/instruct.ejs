@@ -13,7 +13,7 @@
             background-color: rgb(173, 185, 202);
           }
           .input-group{
-            width: 25vw;
+            width: 27vw;
             text-align: center;
             background-color: rgb(173, 185, 202);
           } 
@@ -27,13 +27,10 @@
           }
           .input-group-text{
             border-radius:0;
-            width: 20vw;
+            /* width: 20vw; */
           }
           .form-control{
             border-radius: 0;
-          }
-          #instruct_icon{
-              background-color: var(--first-color);
           }
           
         </style>
@@ -42,15 +39,15 @@
     <body style="background-color: rgb(70, 79, 99); overflow-y: hidden;">
       <form action="/instruct" method="POST">
         <div class="wrapper" style="position: absolute; left:8.5vw">
-          <div class="input-group mb-3" style="position: absolute; left:3vw; top:4vh">
+          <div class="input-group mb-3" style="position: absolute; left:14.5vw; top:4vh">
             <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">담당자</span>
             <input type="text" class="form-control" placeholder="담당자" id = "manager" name="_manager">
           </div>
-          <div class="input-group mb-3" style="position: absolute; left:46vw; top:4vh">
+          <div class="input-group mb-3" style="position: absolute; left:47.5vw; top:4vh">
             <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">지시 수량</span>
             <input type="text" class="form-control" placeholder="지시 수량" id = "quantity" name="_quantity">
           </div>
-          <div class="input-group mb-3" style="position: absolute; left:3vw; top:14vh">
+          <div class="input-group mb-3" style="position: absolute; left:14.5vw; top:13vh">
             <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목 번호</label>
             <select class="form-select" id="inputGroupSelect01" name ="_id">
               <option value="bricks_rect">bricks_rect</option>
@@ -59,14 +56,15 @@
               <option value="floor">floor</option>
             </select>
           </div>
-          <div class="input-group mb-3" style="position: absolute; left:46vw; top:14vh">
+          <div class="input-group mb-3" style="position: absolute; left:47.5vw; top:13vh">
             <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
-            <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> " style="width: 60.15%; cursor: pointer;">
+            <input type = "text" style="width:17vw" id = "testDatepicker" name="_date" value="<%= date %> ">
           </div>
           <div align="center">
-            <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vw; right: 2.7vw;" id = "register" disabled>등록</button>
+            <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vw; right: 14.5vw;" id = "register" disabled>등록</button>
           </div>
         </div>
+        
       </form>
       
       <div style="position: absolute; top:36vh; left:8.5vw; color:white; text-align: center;">
