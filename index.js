@@ -74,25 +74,44 @@ var id = 0;
 var run = false;
 
 app.get("/main", function(req, res){
-    console.log(id)
+    var date = moment().format("YYYYMMDD")
     if(!req.session.logged){
         res.redirect("/")
     }else{
         connection.query(
-            `select * from monitoring order by monitor_id desc limit 1`,
-            function(err, result){
-                if (err){
-                    console.log(err)
+            `select * from ordert where date(date)=(select date_format(now(),'%Y-%m-%d') from dual)`,
+            function(err0, result0){
+                if (err0){
+                    console.log(err0)
                 }else{
-                    console.log(result[0])
-                    res.render('main', {
-                        'monitor' : result[0],
-                        "run" : run,
-                        "linkcode" : req.session.logged.linkcode
-                    })
+                    if(result0.length==0){
+                        console.log("No instruct")
+                        res.render("main",{
+                            'monitor' : result0[0],
+                            'run' : run,
+                            'linkcode' : req.session.logged.linkcode
+                        })
+                    }else{
+                        console.log("today")
+                        connection.query(
+                            `select * from monitoring`+date+` order by monitor_id desc limit 1`,
+                            function(err, result){
+                                if (err){
+                                    console.log(err)
+                                }else{
+                                    console.log(result[0])
+                                    res.render('main', {
+                                        'monitor' : result[0],
+                                        "run" : run,
+                                        "linkcode" : req.session.logged.linkcode
+                                    })
+                                }
+                            }
+                        )        
+                    }
                 }
             }
-        )        
+        )
     }
 })
 
@@ -173,7 +192,7 @@ app.get("/instruct",function(req,res){
             res.redirect("/alert")
         }else{
             connection.query(
-                `select * from ordert`,
+                `select * from ordert order by date desc`,
                 function(err, result){
                     if(err){
                         console.log(err);
@@ -196,6 +215,7 @@ app.post("/instruct", function(req, res){
     var quantity = req.body._quantity;
     var id = req.body._id;
     var date = req.body._date;
+    var date_array = date.split("-");
     console.log(quantity, id, date);
     connection.query(
         `insert into ordert(manager, lego_id, quantity, date) values (?, ?, ?, ?)`,
@@ -205,10 +225,56 @@ app.post("/instruct", function(req, res){
                 console.log(err);
                 res.send("instruct SQL insert Error")
             }else{
-                res.redirect("/instruct")
+                connection.query(
+                    `create table monitoring`+date_array[0]+date_array[1]+date_array[2]+`
+                    (monitor_id int auto_increment primary key,
+                     mold_temp double not null,
+                     melt_temp double not null,
+                     injection_speed double not null,
+                     hold_pressure double not null,
+                     injection_time double not null,
+                     hold_time double not null,
+                     filling_time double not null,
+                     cycle_time double not null,
+                     x double not null,
+                     y double not null,
+                     z double not null,
+                     stud_h double not null,
+                     stud_d double not null,
+                     thick double not null,
+                     defect varchar(5) not null,
+                     date text not null)`,
+                     function(err2, result2){
+                         if(err2){
+                             console.log(err2)
+                         }else{
+                            res.redirect("/instruct")
+                         }
+                     }
+                )
+                
             }
         }
     )
+})
+
+app.get("/del", function(req,res){
+    var id=req.query._id;
+    console.log(id)
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        connection.query(
+            `delete from ordert where order_id =`+id,
+        function(err,result){
+            if(err){
+                console.log(err)
+                res.send("instruct SQL delete error")
+            }else{  
+                res.redirect("/instruct")
+            }
+        })
+    }
 })
 
 app.get("/alert", function(req, res){
@@ -218,3 +284,4 @@ app.get("/alert", function(req, res){
 app.listen(3000, function(){
     console.log("monitor server start")
 })
+
