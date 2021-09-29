@@ -4,23 +4,32 @@
         <%- include("./head.ejs") %>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="/js/now.js"></script>
+        
         <style>
             .wrapper {
-                height:35vh;
-                width:28vw;
-                background-color: rgba(199, 202, 241, 0.308);
+                height:25.5vh;
+                width:22.5vw;
+                background-color: rgb(68, 84, 106);
             }   
             .wrapper1{
                 height:4.5vh;
-                width:27.4vw;
-                background-color: rgba(161, 160, 175, 0.637);
+                width:21.9vw;
+                background-color: rgb(132, 151, 176);
             }
             .wrapper2{
-                height:29vh;
-                width:27.4vw;
-                background-color: rgba(53, 54, 68, 0.637); 
+                height:10vh;
+                width:91.35vw;
+                background-color: rgb(68, 84, 106);
             }
-            td{
+            .wrapper3{
+                height:5vh;
+                width:10vw;
+                background-color: rgb(68, 84, 106);
+                position: absolute;
+                border:0.2em solid white;
+            }
+           
+            /* td{
                 vertical-align: middle;
                 height : 2vh;
             }
@@ -43,100 +52,165 @@
             }
             #main_icon{
                 background-color: var(--first-color);
-            }
+            } */
         </style>
     </head>
     
-    <body style="background-color: rgb(70, 79, 99); overflow-y: hidden;">
+    <body style="background-color: rgb(34, 42, 53);">
+    
+    <!-- 조건 테이블 -->
+    <!-- <%- include("./table.ejs") %>  -->
+        
+    <!-- 자판  -->
+    <!-- <table class="table table-bordered " id="keyboard">
+        <tr>
+            <td onclick="add(1)">1</td>
+            <td onclick="add(2)">2</td>
+            <td onclick="add(3)">3</td>
+        </tr>
+        <tr>
+            <td onclick="add(4)">4</td>
+            <td onclick="add(5)">5</td>
+            <td onclick="add(6)">6</td>
+        </tr>
+        <tr>
+            <td onclick="add(7)">7</td>
+            <td onclick="add(8)">8</td>
+            <td onclick="add(9)">9</td>
+        </tr>
+        <tr>
+            <td onclick="reset()">AC</td>
+            <td onclick="add(0)">0</td>
+            <td onclick="add('.')">.</td>
+        </tr>
+        <tr>
+            <td colspan="2" id="ok">OK</td>
+            <td onclick="del()">←</td>
+        </tr>
+    </table>        
+    <%- include("./chart.ejs") %> -->
 
-        <!-- 조건 테이블 -->
-        <%- include("./table.ejs") %> 
-        
-        <!-- 자판  -->
-        <table class="table table-bordered " id="keyboard">
-            <tr>
-                <td onclick="add(1)">1</td>
-                <td onclick="add(2)">2</td>
-                <td onclick="add(3)">3</td>
-            </tr>
-            <tr>
-                <td onclick="add(4)">4</td>
-                <td onclick="add(5)">5</td>
-                <td onclick="add(6)">6</td>
-            </tr>
-            <tr>
-                <td onclick="add(7)">7</td>
-                <td onclick="add(8)">8</td>
-                <td onclick="add(9)">9</td>
-            </tr>
-            <tr>
-                <td onclick="reset()">AC</td>
-                <td onclick="add(0)">0</td>
-                <td onclick="add('.')">.</td>
-            </tr>
-            <tr>
-                <td colspan="2" id="ok">OK</td>
-                <td onclick="del()">←</td>
-            </tr>
-        </table>        
-        <%- include("./chart.ejs") %>
-        
-        <!-- 진행 단계 -->
-        <div style="width: 57vw; height: 26vh; background-color: rgba(199, 202, 241, 0.308); position: absolute; top: 73vh; right:3vw; color:white; font-weight: 1000;">
-            <div class="wrapper1" style="width:56.4vw; position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>현재 진행 상태</b></div>
-                <div style="height:20vh; width:56.4vw; background-color: rgba(53, 54, 68, 0.637); position:absolute; top:5.5vh; left:0.3vw;">    
-                    <div id="osj2-container" style="position: absolute; top:19%; left: 3%;">
-                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">준비</div>
-                    </div>
-                    <div id="osj2-container" style="position: absolute; top:19%; left:20%">
-                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">사출</div>
-                    </div>
-                    <div id="osj2-container" style="position: absolute; top:19%; left:37%;">
-                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">배압</div>
-                    </div>
-                    <div id="osj2-container" style="position: absolute; top:19%; left:54%;">
-                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">보압</div>
-                    </div>
-                    <div id="osj2-container" style="position: absolute; top:19%; left:71%;">
-                        <div align="center" id="osj2-spinner" style="line-height: 60px; font-size: 20px;">분리</div>
-                    </div>
-                    <!-- 시작/종료 버튼 -->
-                    <button type="button" class="btn btn-danger" style="position: absolute; right:2vw; top:33%; font-size:1.2em;" onclick="stop()">
-                        <b>비상정지</b>
-                    </button>
+    <!-- 진행단계 -->
+            <div style="position: absolute; right:38.35vw; top:29.5vh; color:white;">
+            <div align="center" style="font-size: 1.5em;">준비</div>
+            </div>
+            <div style="position: absolute; right:31.35vw; top:29.5vh; color:white;">
+                <div align="center" style="font-size: 1.5em;">사출</div>
+            </div>
+            <div style="position: absolute; right:24.35vw; top:29.5vh; color:white;">
+                <div align="center" style="font-size: 1.5em;">배압</div>
+            </div>
+            <div style="position: absolute; right:17.35vw; top:29.5vh; color:white;">
+                <div align="center"  style="font-size: 1.5em;">보압</div>
+            </div>
+            <div style="position: absolute; right:10.35vw; top:29.5vh; color:white;">
+                <div align="center"  style="font-size: 1.5em;">분리</div>
+            </div>
+    
+
+    <!-- wrapper2 상단바 -->
+    <div class="wrapper2" style="position: absolute; top: 3vh; left:7.35vw; color:white; text-align:center; font-weight: 1000;">   
+        <div class="wrapper3" style="position: absolute; top: 2.5vh; left:3vw; color:white; text-align:center; font-weight: 1000;">생산목표</div>
+        <div class="wrapper3" style="position: absolute; top: 2.5vh; left:14vw; color:white; text-align:center; font-weight: 1000;">1000</div>
+        <div class="wrapper3" style="position: absolute; top: 2.5vh; left:25vw; color:white; text-align:center; font-weight: 1000;">생산실적</div>
+        <div class="wrapper3" style="position: absolute; top: 2.5vh; left:36vw; color:white; text-align:center; font-weight: 1000;">250</div>
+        <div class="wrapper3" style="position: absolute; top: 2.5vh; left:47vw; color:white; text-align:center; font-weight: 1000;">달성율</div>
+        <div class="wrapper3" style="position: absolute; top: 2.5vh; left:58vw; color:white; text-align:center; font-weight: 1000;">25%</div>
+        <div class="wrapper3" style="position: absolute; top: 2.5vh; left:69vw; color:white; text-align:center; font-weight: 1000;">불량율</div>
+        <div class="wrapper3" style="position: absolute; top: 2.5vh; left:80vw; color:white; text-align:center; font-weight: 1000;">1%</div>
+    </div>
+
+
+    <!-- 시작/종료/정지/입력 버튼 -->
+    <button type="button" class="btn btn-light" style="position: absolute; right:35.35vw; top:16vh; font-size:1.2em;" onclick="stop()">
+        <b>ON/OFF</b>
+    </button>
+    <button type="button" class="btn btn-danger" style="position: absolute; right:1.35vw; top:16vh; font-size:1.2em;" onclick="stop()">
+        <b>비상정지</b>
+    </button>
+    <button type="button" class="btn btn-light" style="position: absolute; right:1.35vw; top:35vh; font-size:1.2em;" onclick="stop()">
+        <b>입력</b>
+    </button>
+
+
+    
+    <!-- 용융온도 -->
+        <div class="wrapper" style="position: absolute; top: 45vh; left:7.35vw; color:white; font-weight: 1000;">
+            <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>용융온도</b></div>
                 </div>
         </div>
+    <!-- 사출시간 -->
+    <div class="wrapper" style="position: absolute; top: 72vh; left:7.35vw; color:white; font-weight: 1000;">
+        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>사출시간</b></div>
+            </div>
+    </div>
+    <!-- 금형온도 -->
+    <div class="wrapper" style="position: absolute; top: 45vh; left:30.35vw; color:white; font-weight: 1000;">
+        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>금형온도</b></div>
+            </div>
+    </div>
+    <!-- 보압시간 -->
+    <div class="wrapper" style="position: absolute; top: 72vh; left:30.35vw; color:white; font-weight: 1000;">
+        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>보압시간</b></div>
+            </div>
+    </div>
+    <!-- 사출속도 -->
+    <div class="wrapper" style="position: absolute; top: 45vh; left:53.35vw; color:white; font-weight: 1000;">
+        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>사출속도</b></div>
+            </div>
+    </div>
+    <!-- 배압시간 -->
+    <div class="wrapper" style="position: absolute; top: 72vh; left:53.35vw; color:white; font-weight: 1000;">
+        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>배압시간</b></div>
+            </div>
+    </div>
+    <!-- 보압 -->
+    <div class="wrapper" style="position: absolute; top: 45vh; left:76.35vw; color:white; font-weight: 1000;">
+        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>보압</b></div>
+            </div>
+    </div>
+    <!-- 배압 -->
+    <div class="wrapper" style="position: absolute; top: 72vh; left:76.35vw; color:white; font-weight: 1000;">
+        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>배압</b></div>
+            </div>
+    </div>
 
-        <script>
-            $(function(){
-                if ("<%=linkcode%>"==0){
-                    $("#linkcode").text("관리자")
-                }else{
-                    $("#linkcode").text("작업자")
-                }
-            })
-            var set = "";
-            function clicked(c){
-                set = c;
+    <!-- gif -->
+    <div style="position: absolute; top: 18vh; left:30.35vw;">
+        <img src="/img/motion.gif">
+    </div>
+
+    <!-- <script>
+        $(function(){
+            if ("<%=linkcode%>"==0){
+                $("#linkcode").text("관리자")
+            }else{
+                $("#linkcode").text("작업자")
             }
-            function add(char){
-                $(set).append(char)
-            }
-            function reset(){
-                $(set).text("")
-            }
-            function del(){
-                var c = document.getElementById(set.slice(1)).innerText
-                $(set).text(c.slice(0,-1))
-            }
-            $(".display").click(function(e){
-                $("#keyboard").css("left", e.pageX+"px")
-                $("#keyboard").css("top", e.pageY+"px")
-                $("#keyboard").show()
-            })
-            $("#ok").click(function(){
-                $("#keyboard").hide()
-            })
-        </script>
+        })
+        var set = "";
+        function clicked(c){
+            set = c;
+        }
+        function add(char){
+            $(set).append(char)
+        }
+        function reset(){
+            $(set).text("")
+        }
+        function del(){
+            var c = document.getElementById(set.slice(1)).innerText
+            $(set).text(c.slice(0,-1))
+        }
+        $(".display").click(function(e){
+            $("#keyboard").css("left", e.pageX+"px")
+            $("#keyboard").css("top", e.pageY+"px")
+            $("#keyboard").show()
+        })
+        $("#ok").click(function(){
+            $("#keyboard").hide()
+        })
+    </script> -->
+
     </body>
 </html>
