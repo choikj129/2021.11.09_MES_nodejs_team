@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     host : 'localhost',
     port : 3306,
     user : 'root',
-    password : '1111',
+    password : '1234',
     database : 'project'    
 })
 
@@ -185,6 +185,7 @@ app.get("/current", function(req, res){
 
 app.get("/instruct",function(req,res){
     var date = moment().format("YYYY-MM-DD")
+    var lastdate = moment().format("YYYY-MM-DD")
     if(!req.session.logged){
         res.redirect("/")
     }else{
@@ -201,6 +202,7 @@ app.get("/instruct",function(req,res){
                         res.render("instruct",{
                             "ordert" : result,
                             "date" : date,
+                            "lastdate" : lastdate,
                             "linkcode" : req.session.logged.linkcode
                         })
                     }
@@ -214,12 +216,14 @@ app.post("/instruct", function(req, res){
     var name = req.body._manager;
     var quantity = req.body._quantity;
     var id = req.body._id;
-    var date = req.body._date;
+    var date = req.body._date.split(" ~ ");
+    var lastdate = date[1];
+    date = date[0];
     var date_array = date.split("-");
     console.log(quantity, id, date);
     connection.query(
-        `insert into ordert(manager, lego_id, quantity, date) values (?, ?, ?, ?)`,
-        [name, id, quantity, date],
+        `insert into ordert(manager, lego_id, quantity, date, lastdate) values (?, ?, ?, ?, ?)`,
+        [name, id, quantity, date, lastdate],
         function(err, result){
             if(err){
                 console.log(err);
@@ -245,11 +249,8 @@ app.post("/instruct", function(req, res){
                      defect varchar(5) not null,
                      date text not null)`,
                      function(err2, result2){
-                         if(err2){
-                             console.log(err2)
-                         }else{
-                            res.redirect("/instruct")
-                         }
+                        res.redirect("/instruct")
+                         
                      }
                 )
                 

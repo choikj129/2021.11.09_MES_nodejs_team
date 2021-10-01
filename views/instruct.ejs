@@ -2,9 +2,10 @@
 <html>
     <head>
         <%- include("./head.ejs") %>
-        <link rel = "stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-        <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script src = "http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
         <style>
         
           .table{
@@ -61,25 +62,33 @@
           </div>
           <div class="input-group mb-3" style="position: absolute; left:47.5vw; top:13vh">
             <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
-            <input type = "text" id = "testDatepicker" name="_date" value="<%= date %> " style="width: 60.2%;">
+            <input type="text" id="datepicker" name="_date" value="<%= date %> " style="width: 60.2%;">
+            
           </div>
           <div align="center">
             <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vw; right: 14.5vw;" id = "register" disabled>등록</button>
           </div>
+          <div align="center">
+            <button type="submit" class="btn btn-danger " style="position:absolute; bottom: 1vw; right: 10.5vw;" onclick="del">삭제</button>
+          </div>
+          
         </div>
         
       </form>
-      
+
+      <!-- //테이블 목록 -->
       <div style="position: absolute; top:36vh; left:8.5vw; color:white; text-align: center;">
-        <table>
+        <table class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
           <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
             <tr>
               <th scope="col" style="width: 17vw;">작업지시번호</th>
               <th scope="col" style="width: 17vw;">품목명</th>
               <th scope="col" style="width: 10vw;">지시 수량</th>
-              <th scope="col" style="width: 25vw;">작업 날짜</th>
+              <th scope="col" style="width: 25vw;">주문일</th>
+              <th scope="col" style="width: 25vw;">납기일</th>
+              <th scope="col" style="width: 15vw;">담당자</th>
               <th scope="col" style="width: 15vw;">상태</th>
-              <th scope="col" style="width: 5vw;">비고</th>
+              <!-- <th scope="col" style="width: 5vw;">비고</th> -->
             </tr>
           </thead>
           <tbody>
@@ -89,8 +98,11 @@
                 <td><%=ordert[i].lego_id%></td>
                 <td><%=ordert[i].quantity%></td>
                 <td><%=ordert[i].date%></td>
+                <td><%=ordert[i].lastdate%></td>
+                <td><%=ordert[i].manager%></td>
                 <td>진행중</td>
-                <td style="padding: 3px;"><button style="height: 5vh;"type="submit" class="btn btn-danger " onclick="del('<%=ordert[i].order_id%>')">삭제</button></td>
+                
+                <!-- <td><button style="height: 5vh;"type="submit" class="btn btn-danger " onclick="del">삭제</button></td> -->
               </tr>
             <%}%>
           </tbody>
@@ -99,21 +111,27 @@
       
       <script>
         $(function(){
-          $("#testDatepicker").datepicker({
-            showButtonPanel : true,
-            currentText : '오늘 날짜',
-            closeText: '닫기',
-            dateFormat : "yy-mm-dd",
-            monthNames : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-            monthNamesShort : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-            dayNames : ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '이유일'],
-            dayNamesMin : ['월','화','수','목','금','토','일'],
-            changeMonth : true,
-            changeYear : true,
-            nextText : '다음달',
-            prevText : '이전달'
-            
+        //달력
+        $('#datepicker').daterangepicker({ 
+          "locale": { "format": "YYYY-MM-DD", 
+          "separator": " ~ ", 
+          "applyLabel": "확인", 
+          "cancelLabel": "취소", 
+          "fromLabel": "납기일", 
+          "toLabel": "주문일", 
+          "customRangeLabel": "Custom", 
+          "weekLabel": "W", 
+          "daysOfWeek": ["월", "화", "수", "목", "금", "토", "일"], 
+          "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"], 
+          "firstDay": 1 }, 
+          "startDate": new Date(), 
+          "endDate": new Date(), 
+          "drops": "dwon" }, 
+          
+          function (start, end, label) { 
+            console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')'); 
           });
+
           if ("<%=linkcode%>"==0){
               $("#linkcode").text("관리자")
           }else{
@@ -124,7 +142,8 @@
         $("input").keyup(function(){
           var manager = $("#manager").val();
           var quantity = $("#quantity").val();
-          var date = $("#testDatepicker").val();
+          var date = $("#datepicker").val();
+          var lastdate = $("datepicker").val();
           
           if(manager && quantity && date){    
               $("#register").removeAttr("disabled")
@@ -138,6 +157,8 @@
             location.href="/del?_id="+id
           }
         }
+
+        
       </script>
     </body>
 </html>

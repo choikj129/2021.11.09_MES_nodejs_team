@@ -55,7 +55,6 @@ $(function(){
 function now(){
     $.getJSON("/now_update",
     function(result){
-        x="Y"; y="Y"; z="Y"; h="Y"; d="Y"; t="Y";
         $("#now_mold_temp").text(result.monitor.mold_temp)
         $("#now_melt_temp").text(result.monitor.melt_temp)
         $("#now_injection_speed").text(result.monitor.injection_speed)
@@ -64,6 +63,7 @@ function now(){
         $("#now_hold_time").text(result.monitor.hold_time)
         $("#now_filling_time").text(result.monitor.filling_time)
         $("#now_cycle_time").text(result.monitor.cycle_time)
+        $("#title").text("조건값 ("+result.monitor.monitor_id+")")
 
         if (result.monitor.mold_temp<20 || result.monitor.mold_temp>30){
             $("#now_mold_temp").css("background-color", "#F48453")
@@ -99,28 +99,6 @@ function now(){
             $("#now_filling_time").css("background-color", "#F48453")
         }else{
             $("#now_filling_time").css("background-color", "")
-        }
-
-        if (result.monitor.defect == "N"){
-            if(result.monitor.x !=48){
-                x = "N"
-            }
-            if(result.monitor.y !=31.9){
-                y = "N"
-            }
-            if(result.monitor.z !=15.8){
-                z = "N"
-            }
-            if(result.monitor.stud_h !=4.5){
-                h = "N"
-            }
-            if(result.monitor.stud_d !=4.8){
-                d = "N"
-            }
-            if(result.monitor.thick !=1.5){
-                t = "N"
-            }
-            location.href="/defect_update?x="+x+"&y="+y+"&z="+z+"&h="+h+"&d="+d+"&t="+t+"&_id="+result.monitor.monitor_id
         }
     })
     
