@@ -37,6 +37,25 @@
                 width:11.5vw;
                 background-color:white;
                 border: solid 0.1vh white;
+
+            }
+            .box1{
+                width:12vw;
+                height:6vh;
+                border: solid 0.8vh rgb(68, 84, 106);
+                /* color: linear-gradient(to right bottom, gray, navy); */
+        
+            }
+            .box2{
+                width:12vw;
+                height:10vh;
+                border: solid 0.8vh rgb(68, 84, 106);
+                color: linear-gradient(to right bottom, gray, navy);
+            }
+            .sep2{ 
+                width:12vw;
+                background-color:white;
+                border: solid 0.2vh white;
             }
            
             /* 
@@ -63,7 +82,7 @@
         </style>
     </head>
     
-    <body style="background-color: rgb(34, 42, 53);">
+    <body style="background-color: rgb(41, 43, 48);">
         
     <!-- 자판  -->
     <!-- <table class="table table-bordered " id="keyboard">
@@ -94,22 +113,22 @@
     </table> -->       
     
     <!-- 진행단계 -->
-            <div style="position: absolute; right:38.35vw; top:29.5vh; color:white;">
-            <div align="center" style="font-size: 1.5em;">준비</div>
-            </div>
-            <div style="position: absolute; right:31.35vw; top:29.5vh; color:white;">
-                <div align="center" style="font-size: 1.5em;">사출</div>
-            </div>
-            <div style="position: absolute; right:24.35vw; top:29.5vh; color:white;">
-                <div align="center" style="font-size: 1.5em;">배압</div>
-            </div>
-            <div style="position: absolute; right:17.35vw; top:29.5vh; color:white;">
-                <div align="center"  style="font-size: 1.5em;">보압</div>
-            </div>
-            <div style="position: absolute; right:10.35vw; top:29.5vh; color:white;">
-                <div align="center"  style="font-size: 1.5em;">분리</div>
-            </div>
-    
+        
+        <div align="center" class="box1" style="position: absolute; top:21.5vh; left:10.35vw; font-size: 1.2em; color: white; text-align:center; line-height: 5vh;">1</div>
+        <div align="center" class="box2" style="position: absolute; top:27vh; left:10.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Ready</div> 
+
+        <div align="center" class="box1" style="position: absolute; top:21.5vh; left:24.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">2</div>
+        <div align="center" class="box2" style="position: absolute; top:27vh; left:24.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Injecting</div> 
+       
+        <div align="center" class="box1" style="position: absolute; top:21.5vh; left:38.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">3</div>
+        <div align="center" class="box2" style="position: absolute; top:27vh; left:38.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Filling</div> 
+
+        <div align="center" class="box1" style="position: absolute; top:21.5vh; left:52.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">4</div>
+        <div align="center" class="box2" style="position: absolute; top:27vh; left:52.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Holding</div> 
+
+        <div align="center" class="box1" style="position: absolute; top:21.5vh; left:66.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">5</div>
+        <div align="center" class="box2" style="position: absolute; top:27vh; left:66.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Seperating</div> 
+
 
     <!-- wrapper2 상단바 -->
     <div class="wrapper2" style="position: absolute; top: 3vh; left:7.35vw; color:white; text-align:center; font-weight: 1000;">   
@@ -125,10 +144,10 @@
 
 
     <!-- 시작/종료/정지/입력 버튼 -->
-    <button type="button" class="btn btn-light" style="position: absolute; right:35.35vw; top:16vh; font-size:1.2em;" onclick="stop()">
+    <button type="button" class="btn btn-light" style="position: absolute; right:10vw; top:20vh; font-size:1.2em;" onclick="stop()">
         <b>ON/OFF</b>
     </button>
-    <button type="button" class="btn btn-danger" style="position: absolute; right:1.35vw; top:16vh; font-size:1.2em;" onclick="stop()">
+    <button type="button" class="btn btn-danger" style="position: absolute; right:10vw; top:29vh; font-size:1.2em;" onclick="stop()">
         <b>비상정지</b>
     </button>
     <button type="button" class="btn btn-light" style="position: absolute; right:1.35vw; top:35vh; font-size:1.2em;" onclick="stop()">
@@ -283,11 +302,11 @@
     </div>
 
     <!-- gif -->
-    <div style="width:5vw; height:5vh; position: absolute; top: 14.5vh; left:30.35vw;">
+    <!-- <div style="width:5vw; height:5vh; position: absolute; top: 14.5vh; left:30.35vw;">
         <img src="/img/motion.gif">
-    </div>
+    </div> -->
 
-    <!-- <script>
+    <script>
         $(function(){
             if ("<%=linkcode%>"==0){
                 $("#linkcode").text("관리자")
@@ -317,7 +336,7 @@
         $("#ok").click(function(){
             $("#keyboard").hide()
         })
-    </script> -->
+    </script>
 
     </body>
 </html>
