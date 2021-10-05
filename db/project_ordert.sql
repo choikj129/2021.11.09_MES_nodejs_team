@@ -28,8 +28,9 @@ CREATE TABLE `ordert` (
   `lego_id` varchar(45) NOT NULL,
   `quantity` int NOT NULL,
   `date` varchar(45) NOT NULL,
+  `lastdate` varchar(45) NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +39,7 @@ CREATE TABLE `ordert` (
 
 LOCK TABLES `ordert` WRITE;
 /*!40000 ALTER TABLE `ordert` DISABLE KEYS */;
-INSERT INTO `ordert` VALUES (2,'ckj','bricks_rect',1000,'2021-09-15'),(3,'ckj','품목 번호',1000,'2021-09-16');
+INSERT INTO `ordert` VALUES (1,'choi','bricks_rect',1000,'2021-10-02','2021-10-02'),(2,'choi','bricks_rect',1111,'2021-10-03','2021-10-03');
 /*!40000 ALTER TABLE `ordert` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-28 19:41:39
+-- Dump completed on 2021-10-05  9:13:45

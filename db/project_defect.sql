@@ -33,8 +33,9 @@ CREATE TABLE `defect` (
   `thick_defect` varchar(45) NOT NULL,
   `error` text,
   `cause` text,
+  `date` varchar(45) NOT NULL,
   PRIMARY KEY (`defect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,7 @@ CREATE TABLE `defect` (
 
 LOCK TABLES `defect` WRITE;
 /*!40000 ALTER TABLE `defect` DISABLE KEYS */;
-INSERT INTO `defect` VALUES (1,48,'Y','Y','Y','Y','Y','N',NULL,NULL);
+INSERT INTO `defect` VALUES (3,135,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:41:08'),(4,135,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:41:10'),(5,2,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:44:10'),(6,2,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:44:54'),(7,2,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:44:59'),(8,2,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-03 12:05:45'),(9,25,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-03 12:26:11');
 /*!40000 ALTER TABLE `defect` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-28 19:41:39
+-- Dump completed on 2021-10-05  9:13:46
