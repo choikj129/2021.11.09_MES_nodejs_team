@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+      
         <%- include("./head.ejs") %>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <!-- datepicker js&css -->
+        <script src="/js/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="/css/jquery-ui.css">
+        
         <style>
           .table{
             margin : 100px auto;
@@ -15,13 +24,18 @@
               background-color: var(--first-color);
           }
         </style>
+        
     </head>
     <body style="background-color: rgb(70, 79, 99); overflow-y: hidden;">
-      <table class="table table-bordered" style="position:absolute; top:-8vh; width:90vw; text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+      <div class="input-group mb-3" style="position: absolute; top:21vh;">
+        <label class="input-group-text" for="inputGroupSelect01" >작업 날짜</label>
+        <input type="text" id="datepicker" name="_date">
+        <button class="btn btn-secondary" onclick="search()">조회</button>
+      </div>
+      <table class="table table-bordered" style="position:absolute; top:15vh; width:90vw; text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
           <thead style="background-color: rgba(199, 202, 241, 0.308); height:3em;">
             <tr>
-              <th scope="col" style="width: 4em;">번호</th>
-              <th scope="col" style="width: 14empx;">시간</th>
+              <th scope="col" style="width: 10em;">시간</th>
               <th scope="col" style="width: 6em;">금형온도</th>
               <th scope="col" style="width: 6em;">사출온도</th>
               <th scope="col" style="width: 6em;">사출속도</th>
@@ -35,8 +49,7 @@
           <tbody>
             <% for(var i =0; i < defect.length; i++){ %>
               <tr>
-                <td><%=defect[i].monitor_id %></td>
-                <td><%=defect[i].time %></td>
+                <td><%=defect[i].date %></td>
                 <td><%=defect[i].mold_temp %></td>
                 <td><%=defect[i].melt_temp %></td>
                 <td><%=defect[i].injection_speed %></td>
@@ -57,6 +70,42 @@
                 $("#linkcode").text("작업자")
             }
         })
+        
+        $("#datepicker").datepicker({
+          dateFormat : "yy-mm-dd",
+          monthNames : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+          monthNamesShort : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+          dayNamesMin : ['월','화','수','목','금','토','일'],
+          changeMonth : true,
+          changeYear : true,
+          nextText : '다음달',
+          prevText : '이전달',
+          showOtherMonths: true,
+          selectOtherMonths: true,
+          changeMonth: true,
+          changeYear: true
+        });
+        $('#datepicker').datepicker('setDate', 'today');
+
+        function search() {
+          $("tbody").html("");
+          var date = $("#datepicker").val()
+          $.getJSON("/defect_search", {
+            date: date
+          },
+            function (result) {
+              var body;
+              for (var i=0; i<result.defect.length; i++){
+                body += "<tr>"
+                for (key in result.defect[0]){
+                  body += "<td>"+result.defect[i][key]+"</td>"
+                }
+                body += "</tr>"
+              }
+              $("tbody").html(body)
+            })
+        }
+        
     </script> 
     </body>
 </html>
