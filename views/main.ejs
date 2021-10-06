@@ -69,6 +69,62 @@
             #main_icon{
                 background-color: var(--first-color);
             }
+            .blinking{ -webkit-animation:blink 1.5s ease-in-out infinite alternate; 
+                    -moz-animation:blink 1.5s ease-in-out infinite alternate; 
+                    animation:blink 1.5s ease-in-out infinite alternate;
+            }
+            @-webkit-keyframes blink{ 
+                0% {opacity:0;} 
+                100% {opacity:1;} 
+            } 
+            @-moz-keyframes blink{
+                 0% {opacity:0;}
+                  100% {opacity:1;}
+            } 
+            @keyframes blink{
+                 0% {opacity:0;}
+                  100% {opacity:1;}
+            }
+
+            #test {
+                animation: fadein 2s;
+                -moz-animation: fadein 2s; /* Firefox */
+                -webkit-animation: fadein 2s; /* Safari and Chrome */
+                -o-animation: fadein 2s; /* Opera */
+            }
+            @keyframes fadein {
+                from {
+                    opacity:0;
+                }
+                to {
+                    opacity:1;
+                }
+            }
+            @-moz-keyframes fadein { /* Firefox */
+                from {
+                    opacity:0;
+                }
+                to {
+                    opacity:1;
+                }
+            }
+            @-webkit-keyframes fadein { /* Safari and Chrome */
+                from {
+                    opacity:0;
+                }
+                to {
+                    opacity:1;
+                }
+            }
+            @-o-keyframes fadein { /* Opera */
+                from {
+                    opacity:0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
             /* 
             #keyboard{
                 display: none;
@@ -123,6 +179,8 @@
     </table> -->
 
     <!-- 진행단계 -->
+    <img src="/img/siren1.png" class="image test" style="width:6vw; height:10vh; position:absolute; right:3vw; top:32vh;">
+    <img src="/img/siren3.png" class="image blinking" style="width:6vw; height:10vh; position:absolute; right:3vw; top:32vh;">
 
     <div align="center" class="box1"
         style="position: absolute; top:21.3vh; left:9.35vw; font-size: 1.2em; color: white; text-align:center; line-height: 5vh;">
@@ -191,7 +249,7 @@
         <div class="wrapper1"
             style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>금형
                 온도</b></div>
-        <img src="/img/temp.png" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
+        <img src="/img/temp.png" class="blink" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
         <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">최적값</div>
         <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">34.5</div>
         <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>

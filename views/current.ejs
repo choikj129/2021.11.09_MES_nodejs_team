@@ -9,13 +9,13 @@
         .wrapper1{
             width:42vw;
             height:45vh;                
-            background-color: rgba(199, 202, 241, 0.308);
+            background-image: linear-gradient(to right bottom,rgba(159,159,255,1), rgba(98,98,255,0.5), rgba(36,40,0,0.1) );
             /*border:0.1em solid white;*/
         }
         .wrapper2{
             width:3vw;
             height:45vh;
-            background-color:rgba(199, 202, 241, 0.568);
+            background-image: linear-gradient(to right bottom,rgba(159,159,255,1), rgba(98,98,255,0.5), rgba(36,40,0,0.1));
             text-align: center;
             color:white;
             line-height:5vw;
@@ -77,7 +77,7 @@
         // 시간 그래프
 
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart0 = echarts.init(document.getElementById('Chart0'), 'dark');
+        var myChart0 = echarts.init(document.getElementById('Chart0'));
         //chart의 설정을 정합니다.
         var option0 = {
             tooltip: {
