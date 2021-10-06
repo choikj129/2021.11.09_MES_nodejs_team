@@ -163,7 +163,11 @@
     <!-- wrapper2 상단바 -->
     <div class="wrapper2" style="position: absolute; top: 3vh; left:7.35vw; color:white; text-align:center; font-weight: 1000;">
         <div class="wrapper3" style="position: absolute; left:2vw; color:rgb(255, 192, 0); ">생산목표</div>
-        <div class="wrapper3" style="position: absolute; left:13vw; color:red;">1000</div>
+        <div class="wrapper3" style="position: absolute; left:13vw; color:red;">
+            <% if(monitor){%>
+                <%= monitor.total%>
+            <%}%>
+        </div>
         <div class="wrapper3" style="position: absolute; left:24vw; color:rgb(255, 192, 0);">생산실적</div>
         <div class="wrapper3" id = "cnt" style="position: absolute; left:35vw; color:red;">
             <% if(monitor){%>
@@ -171,9 +175,17 @@
             <% } %>
         </div>
         <div class="wrapper3" style="position: absolute; left:46vw; color:rgb(255, 192, 0);">달성율</div>
-        <div class="wrapper3" style="position: absolute; left:57vw; color:red;">25%</div>
+        <div class="wrapper3" id = "qnt" style="position: absolute; left:57vw; color:red;">
+            <% if(monitor) {%>
+                <%= (monitor.cnt/monitor.total).toFixed(2)%>%
+            <%}%>
+        </div>
         <div class="wrapper3" style="position: absolute; left:68vw; color:rgb(255, 192, 0);">불량율</div>
-        <div class="wrapper3" style="position: absolute; left:79vw; color:red;">1%</div>
+        <div class="wrapper3" id = "def" style="position: absolute; left:79vw; color:red;">
+            <% if(monitor) {%>
+                <%= (monitor.def/monitor.cnt).toFixed(2)%>%
+            <%}%>
+        </div>
     </div>
 
     <!-- 시작/종료/정지/입력 버튼 -->
@@ -199,7 +211,7 @@
         <div id="now_mold_temp" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.mold_temp%>
-                    <% } %>
+            <% } %>
         </div>
     </div>
     <!-- 용융온도 -->
@@ -215,7 +227,7 @@
         <div id="now_melt_temp" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.melt_temp%>
-                    <% } %>
+            <% } %>
         </div>
     </div>
     </div>
@@ -232,7 +244,7 @@
         <div id="now_injection_speed" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.injection_speed%>
-                    <% } %>
+            <% } %>
         </div>
     </div>
     </div>
