@@ -68,20 +68,17 @@
           </div>
           <div align="center">
             <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vw; right: 14.5vw;" id = "register" disabled>등록</button>
-          </div>
-          <div align="center">
-            <button type="submit" class="btn btn-danger " style="position:absolute; bottom: 1vw; right: 10.5vw;" onclick="del">삭제</button>
-          </div>
-          
+          </div> 
         </div>
-        
       </form>
-
+        <button class="btn btn-danger " style="position:absolute; top: 27.3vh; right:12vw;" onclick="del()">삭제</button>
+      
       <!-- //테이블 목록 -->
       <div style="position: absolute; top:36vh; left:8.5vw; color:white; text-align: center;">
-        <table class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+        <table id="iTable" class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
           <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
             <tr>
+              <th scope="col" style="width: 5vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
               <th scope="col" style="width: 17vw;">작업지시번호</th>
               <th scope="col" style="width: 17vw;">품목명</th>
               <th scope="col" style="width: 10vw;">지시 수량</th>
@@ -95,6 +92,7 @@
           <tbody>
             <% for(var i=0; i < ordert.length; i++) {%>
               <tr>
+                <td><input type="checkbox" id="del_row" class="chk" name="_selected_" value="<%=ordert[i].order_id%>"></td>
                 <td><%=ordert[i].order_id%></td>
                 <td><%=ordert[i].lego_id%></td>
                 <td><%=ordert[i].quantity%></td>
@@ -154,12 +152,36 @@
           }
         })
 
-        function del(id){
+        function del(){
+          var checkBoxArr = [];
+          $("input:checkbox[name='_selected_']:checked").each(function(){
+            checkBoxArr.push($(this).val()); //체크된 값 뽑아서 push
+          })
+          
           if(confirm("삭제 하시겠습니까?")) {
             alert("삭제되었습니다.");
-            location.href="/del?_id="+id
+            location.href="/del?_id="+checkBoxArr
           }
         }
+
+
+        // 전체선택 버튼 클릭시 체크박스 전체 선택
+        $("#checkAll").click(function(){
+          if($("#checkAll").is(":checked")){
+            $(".chk").prop("checked", true);
+          }else{
+            $(".chk").prop("checked", false);
+          }
+        })
+        // 전체선택 중 한개의 체크박스 선택 해제 시  체크박스 해제
+        $(".chk").click(function(){
+          if($("input[name='_selected_']:checked").length == iTable.rows.length){
+              $("#checkAll").prop("checked", true);
+          }else{
+            $("#checkAll").prop("checked", false);
+          }
+        });
+
       </script>
     </body>
 </html>

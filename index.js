@@ -339,7 +339,8 @@ app.post("/instruct", function(req, res){
 })
 
 app.get("/del", function(req,res){
-    var id=req.query._id;
+    var id = req.query._id;
+    id = id.replace(","," or order_id = ");
     console.log(id)
     if(!req.session.logged){
         res.redirect("/")
