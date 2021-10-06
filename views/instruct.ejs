@@ -72,8 +72,18 @@
         </div>
       </form>
         <button class="btn btn-danger " style="position:absolute; top: 27.3vh; right:12vw;" onclick="del()">삭제</button>
-      
-      <!-- //테이블 목록 -->
+        <div class="input-group mb-3" style="position: absolute; left:33vw; top:30vh">
+          <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목명</label>
+          <select class="form-select" id="product_i" name ="search_i">
+            <option value="bricks_rect">bricks_rect</option>
+            <option value="bricks_square">bricks_square</option>
+            <option value="circle">circle</option>
+            <option value="floor">floor</option>
+          </select>
+          <button class="btn btn-secondary" onclick="search()">조회</button>
+        </div>
+
+      <!-- 테이블 목록 -->
       <div style="position: absolute; top:36vh; left:8.5vw; color:white; text-align: center;">
         <table id="iTable" class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
           <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
@@ -86,7 +96,6 @@
               <th scope="col" style="width: 25vw;">납기일</th>
               <th scope="col" style="width: 15vw;">담당자</th>
               <th scope="col" style="width: 15vw;">상태</th>
-              <!-- <th scope="col" style="width: 5vw;">비고</th> -->
             </tr>
           </thead>
           <tbody>
@@ -100,14 +109,47 @@
                 <td><%=ordert[i].lastdate%></td>
                 <td><%=ordert[i].manager%></td>
                 <td>진행중</td>
-                
-                <!-- <td><button style="height: 5vh;"type="submit" class="btn btn-danger " onclick="del">삭제</button></td> -->
               </tr>
             <%}%>
           </tbody>
         </table>
       </div>
-      
+
+      <!-- 검색 조회 결과 테이블 -->
+      <div style="position: absolute; top:70vh; left:8.5vw; color:white; text-align: center;">
+        <table id="iTable2" class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+          <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
+            <tr>
+              <th scope="col" style="width: 17vw;">작업지시번호</th>
+              <th scope="col" style="width: 17vw;">품목명</th>
+              <th scope="col" style="width: 10vw;">지시 수량</th>
+              <th scope="col" style="width: 25vw;">주문일</th>
+              <th scope="col" style="width: 25vw;">납기일</th>
+              <th scope="col" style="width: 15vw;">담당자</th>
+              <th scope="col" style="width: 15vw;">상태</th>
+            </tr>
+          </thead>
+          <tbody id="tbody2">
+            <% for(var i=0; i < ordert.length; i++) {%>
+              <tr>
+                <td><%=ordert[i].order_id%></td>
+                <td><%=ordert[i].lego_id%></td>
+                <td><%=ordert[i].quantity%></td>
+                <td><%=ordert[i].date%></td>
+                <td><%=ordert[i].lastdate%></td>
+                <td><%=ordert[i].manager%></td>
+                <td>진행중</td>
+              </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+
+
+
+
+
+
       <script>
         //달력
         $('#datepicker').daterangepicker({ 
@@ -152,18 +194,17 @@
           }
         })
 
+        // 작업지시 삭제
         function del(){
           var checkBoxArr = [];
           $("input:checkbox[name='_selected_']:checked").each(function(){
             checkBoxArr.push($(this).val()); //체크된 값 뽑아서 push
           })
-          
           if(confirm("삭제 하시겠습니까?")) {
             alert("삭제되었습니다.");
             location.href="/del?_id="+checkBoxArr
           }
         }
-
 
         // 전체선택 버튼 클릭시 체크박스 전체 선택
         $("#checkAll").click(function(){
@@ -173,7 +214,7 @@
             $(".chk").prop("checked", false);
           }
         })
-        // 전체선택 중 한개의 체크박스 선택 해제 시  체크박스 해제
+        // 전체선택 중 한개의 체크박스 선택 해제 시 체크박스 해제
         $(".chk").click(function(){
           if($("input[name='_selected_']:checked").length == iTable.rows.length){
               $("#checkAll").prop("checked", true);
@@ -181,6 +222,25 @@
             $("#checkAll").prop("checked", false);
           }
         });
+
+        function search(){
+          $("#tbody2").html("");
+          var pd = $("#product_i").val()
+          $.getJSON("/instruct_search", {
+            pd : pd
+          },
+            function(result){
+              var body;
+              for(var i=0; i<result.instruct.length; i++){
+                body += "<tr>"
+                  for (key in result.instruct[0]){
+                    body += "<td>"+result.instruct[i][key]+"</td>"
+                  }
+                  body += "</tr>"
+              }
+              $("#tbody2").html(body)
+            })
+        }
 
       </script>
     </body>
