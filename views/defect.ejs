@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-      
         <%- include("./head.ejs") %>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script> 
+        <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
         <!-- datepicker js&css -->
         <script src="/js/jquery-ui.min.js"></script>
@@ -13,8 +14,10 @@
         
         <style>
           .table{
-            margin : 100px auto;
-            width: 80%;
+            position:absolute;
+            left: 40vw;
+            top:10vh; 
+            width:55vw;
             text-align: center;
           }
           td{
@@ -26,42 +29,75 @@
         </style>
         
     </head>
-    <body style="background-color: rgb(70, 79, 99); overflow-y: hidden;">
-      <div class="input-group mb-3" style="position: absolute; top:21vh;">
+    <body style="background-color: rgb(41, 43, 48); overflow-x:hidden;">
+      
+      <!--결함 차트-->
+      <div style="position:absolute;left:-1vw; top:20vh;">
+        <canvas id="pieChart" style="width:100%;"></canvas>
+      </div>
+      <script>
+        var dataset = { 
+          label: "결함율", 
+          backgroundColor: ['tomato', 'royalblue',],//라벨별 컬러설정 
+          borderColor: 'white', data: [10, 90] 
+        } 
+        var labels=['양품','불량품']; 
+        var datasets={ datasets:[dataset], labels:labels }
+
+        var config = { type: 'pie', data: datasets, //데이터 셋 
+          options: { 
+            responsive: true, 
+            maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
+            legend: { 
+              position: 'top', 
+              fontColor: 'white', 
+              align: 'center', 
+              display: true, 
+              fullWidth: true, 
+              labels: { fontColor: 'white' } 
+            }, 
+            plugins: { 
+              labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
+                render: 'value %', 
+                fontColor: 'white', 
+                fontSize: 12, 
+                precision: 2 
+              } 
+            } 
+          } 
+        }
+
+        var canvas=document.getElementById('pieChart'); 
+        var pieChart = new Chart(canvas,config);
+      </script>
+
+
+      <div class="input-group mb-3" style="position: absolute; left:70vw; top:3vh;">
         <label class="input-group-text" for="inputGroupSelect01" >작업 날짜</label>
         <input type="text" id="datepicker" name="_date">
         <button class="btn btn-secondary" onclick="search()">조회</button>
       </div>
-      <table class="table table-bordered" style="position:absolute; top:15vh; width:90vw; text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
-          <thead style="background-color: rgba(199, 202, 241, 0.308); height:3em;">
-            <tr>
-              <th scope="col" style="width: 10em;">시간</th>
-              <th scope="col" style="width: 6em;">금형온도</th>
-              <th scope="col" style="width: 6em;">사출온도</th>
-              <th scope="col" style="width: 6em;">사출속도</th>
-              <th scope="col" style="width: 6em;">보압</th>
-              <th scope="col" style="width: 6em;">사출시간</th>
-              <th scope="col" style="width: 6em;">보압시간</th>
-              <th scope="col" style="width: 6em;">배압시간</th>
-              <th scope="col" style="width: 20em">결함원인</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(var i =0; i < defect.length; i++){ %>
+      <div class="table">
+        <table style="text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+            <thead style="background-color: rgba(199, 202, 241, 0.308); height:3em;">
               <tr>
-                <td><%=defect[i].date %></td>
-                <td><%=defect[i].mold_temp %></td>
-                <td><%=defect[i].melt_temp %></td>
-                <td><%=defect[i].injection_speed %></td>
-                <td><%=defect[i].hold_pressure %></td>
-                <td><%=defect[i].injection_time %></td>
-                <td><%=defect[i].hold_time %></td>
-                <td><%=defect[i].filling_time %></td>
-                <td><%=defect[i].cause %></td>
+                <th scope="col" style="width: 10vw;">시간</th>
+                <th scope="col" style="width: 30vw;">결함 원인</th>
+                <th scope="col" style="width: 15vw">결함 유형</th>
               </tr>
-            <% } %>
-          </tbody>
-      </table>
+            </thead>
+            <tbody>
+              <% for(var i =0; i < defect.length; i++){ %>
+                <tr>
+                  <td><%=defect[i].date %></td>
+                  <td><%=defect[i].error %></td>
+                  <td><%=defect[i].cause %></td>
+                </tr>
+              <% } %>
+            </tbody>
+        </table>
+      </div>
+
       <script>
         $(function(){
             if ("<%=linkcode%>"==0){

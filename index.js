@@ -97,7 +97,7 @@ app.get("/main", function(req, res){
                     }else{
                         dir = true;
                         connection.query(
-                            `select * from monitoring`+date+` order by monitor_id desc limit 1`,
+                            `select *, (select count(*) from monitoring`+date+`) cnt from monitoring`+date+` order by monitor_id desc limit 1`,
                             function(err, result){
                                 if (err){
                                     console.log(err)
@@ -133,7 +133,7 @@ app.get("/main_update", function(req, res){
         res.redirect("/")
     }else{
         connection.query(
-            `select * from monitoring`+date+` order by monitor_id desc limit 1`,
+            `select *, (select count(*) from monitoring`+date+`) cnt from monitoring`+date+` order by monitor_id desc limit 1`,
             function(err, result){
                 if (err){
                     console.log(err)
