@@ -125,75 +125,66 @@
     <!-- 진행단계 -->
 
     <div align="center" class="box1"
-        style="position: absolute; top:21.3vh; left:10.35vw; font-size: 1.2em; color: white; text-align:center; line-height: 5vh;">
+        style="position: absolute; top:21.3vh; left:9.35vw; font-size: 1.2em; color: white; text-align:center; line-height: 5vh;">
         1</div>
     <div align="center" class="box2"
-        style="position: absolute; top:26.5vh; left:10.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
+        style="position: absolute; top:26.5vh; left:9.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
         Ready</div>
 
     <div align="center" class="box1"
-        style="position: absolute; top:21.3vh; left:24.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">
+        style="position: absolute; top:21.3vh; left:23.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">
         2</div>
     <div align="center" class="box2"
-        style="position: absolute; top:26.5vh; left:24.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
+        style="position: absolute; top:26.5vh; left:23.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
         Injecting</div>
 
     <div align="center" class="box1"
-        style="position: absolute; top:21.3vh; left:38.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">
+        style="position: absolute; top:21.3vh; left:37.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">
         3</div>
     <div align="center" class="box2"
-        style="position: absolute; top:26.5vh; left:38.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
+        style="position: absolute; top:26.5vh; left:37.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
         Filling</div>
 
     <div align="center" class="box1"
-        style="position: absolute; top:21.3vh; left:52.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">
+        style="position: absolute; top:21.3vh; left:51.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">
         4</div>
     <div align="center" class="box2"
-        style="position: absolute; top:26.5vh; left:52.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
+        style="position: absolute; top:26.5vh; left:51.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
         Holding</div>
 
     <div align="center" class="box1"
-        style="position: absolute; top:21.3vh; left:66.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">
+        style="position: absolute; top:21.3vh; left:65.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">
         5</div>
     <div align="center" class="box2"
-        style="position: absolute; top:26.5vh; left:66.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
+        style="position: absolute; top:26.5vh; left:65.35vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">
         Seperating</div>
 
 
     <!-- wrapper2 상단바 -->
     <div class="wrapper2" style="position: absolute; top: 3vh; left:7.35vw; color:white; text-align:center; font-weight: 1000;">
-        <div class="wrapper3" style="position: absolute; left:3vw; color:rgb(255, 192, 0); ">생산목표</div>
-        <div class="wrapper3" style="position: absolute; left:14vw; color:red;">1000</div>
-        <div class="wrapper3" style="position: absolute; left:25vw; color:rgb(255, 192, 0);">생산실적</div>
-        <div class="wrapper3" id = "cnt" style="position: absolute; left:36vw; color:red;">
+        <div class="wrapper3" style="position: absolute; left:2vw; color:rgb(255, 192, 0); ">생산목표</div>
+        <div class="wrapper3" style="position: absolute; left:13vw; color:red;">1000</div>
+        <div class="wrapper3" style="position: absolute; left:24vw; color:rgb(255, 192, 0);">생산실적</div>
+        <div class="wrapper3" style="position: absolute; left:35vw; color:red;">
             <% if(monitor){%>
                 <%= monitor.cnt%>
             <% } %>
         </div>
-        <div class="wrapper3" style="position: absolute; left:47vw; color:rgb(255, 192, 0);">달성율</div>
-        <div class="wrapper3" style="position: absolute; left:58vw; color:red;">25%</div>
-        <div class="wrapper3" style="position: absolute; left:69vw; color:rgb(255, 192, 0);">불량율</div>
-        <div class="wrapper3" style="position: absolute; left:80vw; color:red;">
-            
-        </div>
+        <div class="wrapper3" style="position: absolute; left:46vw; color:rgb(255, 192, 0);">달성율</div>
+        <div class="wrapper3" style="position: absolute; left:57vw; color:red;">25%</div>
+        <div class="wrapper3" style="position: absolute; left:68vw; color:rgb(255, 192, 0);">불량율</div>
+        <div class="wrapper3" style="position: absolute; left:79vw; color:red;">1%</div>
     </div>
 
-
     <!-- 시작/종료/정지/입력 버튼 -->
-    <button type="button" id = "onoff" class="btn btn-light" style="position: absolute; right:10vw; top:20vh; font-size:1.2em;"
+    <button type="button" id = "onoff" class="btn btn-light" style="width:9vw; height:7vh; position: absolute; right:11vw; top:21.5vh; font-size:1.2em;"
         onclick="start()" disabled>
         <b>ON/OFF</b>
     </button>
-    <button type="button" class="btn btn-danger" style="position: absolute; right:10vw; top:29vh; font-size:1.2em;"
+    <button type="button" class="btn btn-danger" style="width:9vw; height:7vh; position: absolute; right:11vw; top:30.5vh; font-size:1.2em;"
         onclick="stop()">
         <b>비상정지</b>
     </button>
-    <button type="button" class="btn btn-light" style="position: absolute; right:1.35vw; top:35vh; font-size:1.2em;"
-        onclick="stop()">
-        <b>입력</b>
-    </button>
-
-
 
     <!-- 금형온도 -->
     <div class="wrapper" style="position: absolute; top: 45vh; left:7.35vw; color:white; font-weight: 1000;">
@@ -201,19 +192,15 @@
             style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>금형
                 온도</b></div>
         <img src="/img/temp.png" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">최적값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
-        <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div id="now_mold_temp" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">
+        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">최적값</div>
+        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">34.5</div>
+        <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
+        <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
+        <div id="now_mold_temp" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.mold_temp%>
                     <% } %>
         </div>
-    </div>
     </div>
     <!-- 용융온도 -->
     <div class="wrapper" style="position: absolute; top: 45vh; left:30.35vw; color:white; font-weight: 1000;">
@@ -221,14 +208,11 @@
             style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>용융
                 온도</b></div>
         <img src="/img/temp.png" style="width:5vw; height:5vw; position:absolute; left:1vw; top:9.5vh;">
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">최적값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
-        <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div id="now_melt_temp" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">
+        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">최적값</div>
+        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">34.5</div>
+        <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
+        <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
+        <div id="now_melt_temp" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.melt_temp%>
                     <% } %>
@@ -241,14 +225,11 @@
             style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;">
             <b>사출속도</b></div>
         <img src="/img/sp.png" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">최적값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
-        <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div id="now_injection_speed" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">
+        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">최적값</div>
+        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">34.5</div>
+        <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
+        <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
+        <div id="now_injection_speed" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.injection_speed%>
                     <% } %>
@@ -261,14 +242,11 @@
             style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;">
             <b>보압</b></div>
         <img src="/img/pr.png" style="width:5.5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">최적값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
-        <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div id="now_hold_pressure" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">
+        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">최적값</div>
+        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">34.5</div>
+        <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
+        <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
+        <div id="now_hold_pressure" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.hold_pressure%>
                     <% } %>
@@ -280,19 +258,16 @@
         <div class="wrapper1"
             style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;">
             <b>사출시간</b></div>
-        <img src="/img/time.png" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">최적값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
-        <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div id="now_injection_time" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">
-            <% if(monitor){%>
-                <%= monitor.injection_time%>
-                    <% } %>
-        </div>
+            <img src="/img/tm.png" style="width:5vw; height:5vw; position:absolute; left:1vw; top:9.5vh;">
+            <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">최적값</div>
+            <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">34.5</div>
+            <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
+            <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
+            <div id="now_injection_time" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
+                <% if(monitor){%>
+                    <%= monitor.injection_time%>
+                        <% } %>
+            </div>
     </div>
     </div>
     <!-- 보압시간 -->
@@ -300,15 +275,12 @@
         <div class="wrapper1"
             style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;">
             <b>보압시간</b></div>
-        <img src="/img/tm.png" style="width:5vw; height:5vw; position:absolute; left:1vw; top:9.5vh;">
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">최적값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
-        <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div id="now_hold_time" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">
+            <img src="/img/tm.png" style="width:5vw; height:5vw; position:absolute; left:1vw; top:9.5vh;">
+            <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">최적값</div>
+            <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">34.5</div>
+            <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
+            <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
+        <div id="now_hold_time" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.hold_time%>
                     <% } %>
@@ -321,14 +293,11 @@
             style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;">
             <b>배압시간</b></div>
         <img src="/img/tm.png" style="width:5vw; height:5vw; position:absolute; left:1vw; top:9.5vh;">
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">최적값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
-        <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div id="now_filling_time" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">
+        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">최적값</div>
+        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">34.5</div>
+        <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
+        <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
+        <div id="now_filling_time" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.filling_time%>
                     <% } %>
@@ -341,14 +310,11 @@
             style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;">
             <b>총시간</b></div>
         <img src="/img/tm.png" style="width:5vw; height:5vw; position:absolute; left:1vw; top:9.5vh;">
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">최적값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
-        <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div id="now_cycle_time" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">
+        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">최적값</div>
+        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">34.5</div>
+        <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
+        <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
+        <div id="now_cycle_time" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.cycle_time%>
                     <% } %>
