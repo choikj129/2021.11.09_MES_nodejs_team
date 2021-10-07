@@ -97,16 +97,22 @@ app.get("/main", function(req, res){
                     }else{
                         dir = true;
                         connection.query(
-                            `select *, (select count(*) from monitoring`+date+`) cnt from monitoring`+date+` order by monitor_id desc limit 1`,
+                            `select *, (select count(*) from monitoring`+date+`) cnt,
+                            (select sum(quantity) from ordert where date(date) =`+date+`) total,
+                            (select count(*) from monitoring`+date+` where defect='N') def
+                            from monitoring`+date+` order by monitor_id desc limit 1`,
                             function(err, result){
                                 if (err){
                                     console.log(err)
                                 }else{
+                                    console.log(result0)
                                     res.render('main', {
                                         'monitor' : result[0],
                                         "run" : run,
                                         "linkcode" : req.session.logged.linkcode,
-                                        "dir" : dir
+                                        "dir" : dir,
+                                        "order" : result0,
+
                                     })
                                 }
                             }
@@ -133,7 +139,8 @@ app.get("/main_update", function(req, res){
         res.redirect("/")
     }else{
         connection.query(
-            `select *, (select count(*) from monitoring`+date+`) cnt from monitoring`+date+` order by monitor_id desc limit 1`,
+            `select *, (select count(*) from monitoring`+date+`) cnt, 
+            (select sum(quantity) from ordert where date(date) =`+date+`) total from monitoring`+date+` order by monitor_id desc limit 1`,
             function(err, result){
                 if (err){
                     console.log(err)

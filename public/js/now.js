@@ -62,6 +62,8 @@ function now(){
         $("#now_filling_time").text(result.monitor.filling_time)
         $("#now_cycle_time").text(result.monitor.cycle_time)
         $("#cnt").text(result.monitor.cnt)
+        $("#qnt").text(result.monitor.cnt/result.monitor.total)
+        $("#def").text(result.monitor.def/result.monitor.cnt)
 
         if (result.monitor.mold_temp<20 || result.monitor.mold_temp>30){
             $("#now_mold_temp").css("background-color", "#F48453")
