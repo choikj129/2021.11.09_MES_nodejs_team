@@ -365,6 +365,24 @@ app.get("/del", function(req,res){
     }
 })
 
+app.get("/instruct_search", function(req, res){
+    var pd = req.query.pd;
+    console.log(pd)
+    connection.query(
+        `select * from ordert where lego_id=?`,
+        [pd],
+        function(err, result){
+            if(err){
+                console.log(err)
+            }else{
+                res.json({
+                    "instruct" : result
+                })
+            }
+        }
+    )
+})
+
 app.get("/alert", function(req, res){
     res.render("alert")
 })
