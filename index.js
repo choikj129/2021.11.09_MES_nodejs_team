@@ -383,6 +383,13 @@ app.get("/instruct_search", function(req, res){
     )
 })
 
+app.get("instruct_update", function(req,res){
+    var ud = req.query.ud;
+    connection.query(
+        `update ordert set `
+    )
+})
+
 app.get("/alert", function(req, res){
     res.render("alert")
 })
