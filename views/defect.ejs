@@ -72,7 +72,6 @@
         var pieChart = new Chart(canvas,config);
       </script>
 
-
       <div class="input-group mb-3" style="position: absolute; left:31vw; top:3vh;">
         <label class="input-group-text" for="inputGroupSelect01" >작업 날짜</label>
         <input type="text" id="datepicker" name="_date">
@@ -82,7 +81,6 @@
         <table style="text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
             <thead style="background-color: rgba(199, 202, 241, 0.308); height:8vh;">
               <tr>
-                <th scope="col" style="width: 8vw;">번호</th>
                 <th scope="col" style="width: 17vw;">시간</th>
                 <th scope="col" style="width: 15vw">결함 유형</th>
                 <th scope="col" style="width: 25vw;">결함 원인</th> 
@@ -91,10 +89,9 @@
             <tbody>
               <% for(var i =0; i < defect.length; i++){ %>
                 <tr>
-                  <td><%=defect[i].no %></td>
                   <td><%=defect[i].date %></td>
-                  <td><%=defect[i].error %></td>
                   <td><%=defect[i].cause %></td>
+                  <td><%=defect[i].error %></td>
                 </tr>
               <% } %>
             </tbody>
@@ -130,7 +127,6 @@
           $("tbody").html("");
           var date = $("#datepicker").val()
           $.getJSON("/defect_search", {
-            no: no,
             date: date
           },
             function (result) {
@@ -144,6 +140,20 @@
               }
               $("tbody").html(body)
             })
+        }
+
+        var interval;
+        function run(){
+            interval = setInterval(function(){
+                $.getJSON("/defect_ajax",
+                  function(result){
+                  }
+                )
+            },2000)
+        }
+
+        function stop(){
+            clearInterval(interval);
         }
         
     </script> 

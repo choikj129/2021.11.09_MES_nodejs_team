@@ -140,7 +140,8 @@ app.get("/main_update", function(req, res){
     }else{
         connection.query(
             `select *, (select count(*) from monitoring`+date+`) cnt, 
-            (select sum(quantity) from ordert where date(date) =`+date+`) total from monitoring`+date+` order by monitor_id desc limit 1`,
+            (select sum(quantity) from ordert where date(date) =`+date+`) total 
+            from monitoring`+date+` order by monitor_id desc limit 1`,
             function(err, result){
                 if (err){
                     console.log(err)
@@ -184,16 +185,15 @@ app.get("/defect", function(req,res){
             })
         }else{
             connection.query(
-                `select B.date, A.mold_temp, A.melt_temp, A.injection_speed, A.hold_pressure, A.injection_time, A.hold_time, A.filling_time, B.cause
-                from monitoring`+date+` A, defect B where A.monitor_id=B.monitor_id and date(B.date) = (select date_format(`+date+`,'%Y%m%d') from dual)
-                order by date desc`,
+                `select date, cause, error from defect where date(date) = `+date,
                 function(err,result){
                     if(err){
                         console.log(err)
                     }else{
                         res.render("defect",{
                             'defect' : result,
-                            "linkcode" : req.session.logged.linkcode
+                            "linkcode" : req.session.logged.linkcode,
+                            "run" : run
                         });
                     }
                 }
@@ -211,11 +211,12 @@ app.get("/defect_update", function(req, res){
     var d = req.query.d
     var t = req.query.t
     var date = req.query.date
-    console.log(_id+x+y+z+h+d+t)
+    var error = req.query.error
+    console.log(error)
     connection.query(
-        `insert into defect(monitor_id, x_defect, y_defect, z_defect, stud_h_defect, stud_d_defect, thick_defect, date)
-        values (?,?,?,?,?,?,?,?)`,
-        [_id,x,y,z,h,d,t,date],
+        `insert into defect(monitor_id, x_defect, y_defect, z_defect, stud_h_defect, stud_d_defect, thick_defect, date, error)
+        values (?,?,?,?,?,?,?,?,?)`,
+        [_id,x,y,z,h,d,t,date,error],
         function(err, result){
             if(err){
                 console.log(err)
@@ -261,14 +262,69 @@ app.get("/defect_search", function(req,res){
     )
 })
 
+app.get("/defect_ajax", function(req, res){
+    var date = moment().format("YYYYMMDD")
+    if (!dir){
+        res.json("defect",{
+            "defect" : []
+        })
+    }else{
+        connection.query(
+            `select B.date, A.mold_temp, A.melt_temp, A.injection_speed, A.hold_pressure, A.injection_time, A.hold_time, A.filling_time, B.cause
+            from monitoring`+date+` A, defect B where A.monitor_id=B.monitor_id and date(B.date) = (select date_format(`+date+`,'%Y%m%d') from dual)
+            order by date desc`,
+            function(err,result){
+                if (err){
+                    console.log(err)
+                }else{
+                    res.json({
+                        "defect" : result
+                    })
+                }
+            }
+        )
+    }
+})
+
+app.get("/cur",function(req, res){
+    var date = moment().format("YYYYMMDD")
+    connection.query(
+        `select * from monitoring`+date+` order by monitor_id desc limit 20`,
+        function(err, result){
+            if(err){
+                console.log(err)
+            }else{
+                res.json({
+                    "cur" : result,
+                    "run" : run
+                })
+            }
+        }
+    )
+})
+
 app.get("/current", function(req, res){
     if(!req.session.logged){
         res.redirect("/")
     }else{
-        res.render("current",{
-            "linkcode" : req.session.logged.linkcode
-        })
+        res.render("current")   
     }
+})
+
+app.get("/current_update", function(req, res){
+    var date = moment().format("YYYYMMDD")
+    connection.query(
+        `select * from monitoring`+date+` order by monitor_id desc limit 1`,
+        function(err, result){
+            if(err){
+                console.log(err)
+            }else{
+                res.json({
+                    "cur" : result[0]
+                })
+            }
+        }
+    )
 })
 
 app.get("/instruct",function(req,res){
@@ -345,26 +401,6 @@ app.post("/instruct", function(req, res){
     )
 })
 
-app.get("/del", function(req,res){
-    var id = req.query._id;
-    id = id.replace(","," or order_id = ");
-    console.log(id)
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        connection.query(
-            `delete from ordert where order_id =`+id,
-        function(err,result){
-            if(err){
-                console.log(err)
-                res.send("instruct SQL delete error")
-            }else{  
-                res.redirect("/instruct")
-            }
-        })
-    }
-})
-
 app.get("/instruct_search", function(req, res){
     var pd = req.query.pd;
     console.log(pd)
@@ -381,6 +417,26 @@ app.get("/instruct_search", function(req, res){
             }
         }
     )
+})
+
+app.get("/instruct_del", function(req,res){
+    var id = req.query._id;
+    id = id.replace(/,/gi," or order_id = ");
+    console.log(id)
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        connection.query(
+            `delete from ordert where order_id =`+id,
+        function(err,result){
+            if(err){
+                console.log(err)
+                res.send("instruct SQL delete error")
+            }else{  
+                res.redirect("/instruct")
+            }
+        })
+    }
 })
 
 app.get("instruct_update", function(req,res){

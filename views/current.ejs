@@ -71,11 +71,39 @@
             </div>
         </div>
     </div>
-
     
     <script>
+        var cur;
+        var run;
+        $.ajax({
+                url : "/cur",
+                method : "get",
+                dataType : "json",
+                async : false,
+                success : function(result){
+                    cur = result.cur
+                    run = result.run
+                }
+        })
+        var injection_time = [];
+        var hold_time = [];
+        var filling_time = [];
+        var injection_speed = []
+        var hold_pressure = []
+        var mold_temp = [];
+        var melt_temp = [];
+        var date = [];
+        for (var i=0; i<cur.length; i++){
+            injection_time.push(cur[i].injection_time)
+            hold_time.push(cur[i].hold_time)
+            filling_time.push(cur[i].filling_time)
+            injection_speed.push(cur[i].injection_speed)
+            hold_pressure.push(cur[i].hold_pressure)
+            mold_temp.push(cur[i].mold_temp)
+            melt_temp.push(cur[i].melt_temp)
+            date.push(cur[i].date.slice(11,19))
+        }
         // 시간 그래프
-
         // DOM을 준비하고 echart 객체를 만듭니다.
         var myChart0 = echarts.init(document.getElementById('Chart0'));
         //chart의 설정을 정합니다.
@@ -101,16 +129,7 @@
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: (function (){
-                        var now = new Date();
-                        var res = [];
-                        var len = 10;
-                        while (len--) {
-                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-                            now = new Date(now - 2000);
-                        }
-                        return res;
-                    })()
+                    data: date
                 },
             ],
             yAxis: [
@@ -134,15 +153,7 @@
                         color:'#2A265C' //line차트 색상 변경
                     },
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: (function (){
-                        var res = [];
-                        var len = 0;
-                        while (len < 10) {
-                            res.push((Math.random() + 1).toFixed(2) - 0); //랜덤 데이터 생성
-                            len++;
-                        }
-                        return res;
-                    })()
+                    data: injection_time
                 },
                 {
                     name: '보압시간',
@@ -151,15 +162,7 @@
                         color:'yellow' //line차트 색상 변경
                     },
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: (function (){
-                        var res = [];
-                        var len = 0;
-                        while (len < 10) {
-                            res.push((Math.random() + 1).toFixed(2) - 0); //랜덤 데이터 생성
-                            len++;
-                        }
-                        return res;
-                    })()
+                    data: hold_time
                 },
                 {
                     name: '배압시간',
@@ -168,15 +171,7 @@
                         color:'orange' //line차트 색상 변경
                     },
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: (function (){
-                        var res = [];
-                        var len = 0;
-                        while (len < 10) {
-                            res.push((Math.random() + 1).toFixed(2) - 0); //랜덤 데이터 생성
-                            len++;
-                        }
-                        return res;
-                    })()
+                    data: filling_time
                 }
             ]
         };
@@ -184,32 +179,7 @@
         // 위에서 설정한 속성을 차트에 반영합니다.
         myChart0.setOption(option0);
 
-        //데이터를 생성하고 삭제합니다.
-        setInterval(function (){
-            //x축에 실시간 데이터 생성
-            var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-
-            var data0 = option0.series[0].data; //순수익 데이터
-            var data1 = option0.series[1].data;
-            var data2 = option0.series[2].data;
-
-            //데이터의 가장 왼쪽 값을 제거
-            data0.shift();
-            data1.shift();
-            data2.shift();
-
-            //데이터의 가장 오른쪽 값을 추가
-            data0.push(Math.round(Math.random() * 100));
-            data1.push(Math.round(Math.random() * 100));
-            data2.push(Math.round(Math.random() * 100));
-
-            //x축에 시간 데이터 추가
-            option0.xAxis[0].data.shift();
-            option0.xAxis[0].data.push(axisData);
-
-            //차트에 반영
-            myChart0.setOption(option0);
-        }, 2100);
+        //데이터를 생성하고 삭제합니다.      
 
 
         //속도 그래프
@@ -240,16 +210,7 @@
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: (function (){
-                        var now = new Date();
-                        var res = [];
-                        var len = 20;
-                        while (len--) {
-                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-                            now = new Date(now - 2000);
-                        }
-                        return res;
-                    })()
+                    data: date
                 },
             ],
             yAxis: [
@@ -273,43 +234,14 @@
                         color:'#2A265C' //line차트 색상 변경
                     },
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: (function (){
-                        var res = [];
-                        var len = 0;
-                        while (len < 20) {
-                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
-                            len++;
-                        }
-                        return res;
-                    })()
+                    data: injection_speed
                 }
             ]
         };
 
         // 위에서 설정한 속성을 차트에 반영합니다.
-        myChart1.setOption(option1);
+        myChart1.setOption(option1);       
 
-        //데이터를 생성하고 삭제합니다.
-        setInterval(function (){
-            //x축에 실시간 데이터 생성
-            var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-
-            var data0 = option1.series[0].data; //순수익 데이터
-
-            //데이터의 가장 왼쪽 값을 제거
-            data0.shift();
-
-            //데이터의 가장 오른쪽 값을 추가
-            data0.push(Math.round(Math.random() * 100));
-
-            //x축에 시간 데이터 추가
-            option1.xAxis[0].data.shift();
-            option1.xAxis[0].data.push(axisData);
-
-            //차트에 반영
-            myChart1.setOption(option1);
-        }, 2100);
-        
 
         // 압력 그래프
 
@@ -339,16 +271,7 @@
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: (function (){
-                        var now = new Date();
-                        var res = [];
-                        var len = 20;
-                        while (len--) {
-                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-                            now = new Date(now - 2000);
-                        }
-                        return res;
-                    })()
+                    data: date
                 },
             ],
             yAxis: [
@@ -372,42 +295,13 @@
                         color:'#2A265C' //line차트 색상 변경
                     },
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: (function (){
-                        var res = [];
-                        var len = 0;
-                        while (len < 20) {
-                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
-                            len++;
-                        }
-                        return res;
-                    })()
+                    data: hold_pressure
                 }
             ]
         };
 
         // 위에서 설정한 속성을 차트에 반영합니다.
         myChart2.setOption(option2);
-
-        //데이터를 생성하고 삭제합니다.
-        setInterval(function (){
-            //x축에 실시간 데이터 생성
-            var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-
-            var data0 = option2.series[0].data; //순수익 데이터
-
-            //데이터의 가장 왼쪽 값을 제거
-            data0.shift();
-
-            //데이터의 가장 오른쪽 값을 추가
-            data0.push(Math.round(Math.random() * 100));
-
-            //x축에 시간 데이터 추가
-            option2.xAxis[0].data.shift();
-            option2.xAxis[0].data.push(axisData);
-
-            //차트에 반영
-            myChart2.setOption(option2);
-        }, 2100);
 
 
         //온도 그래프
@@ -438,16 +332,7 @@
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: (function (){
-                        var now = new Date();
-                        var res = [];
-                        var len = 20;
-                        while (len--) {
-                            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-                            now = new Date(now - 2000);
-                        }
-                        return res;
-                    })()
+                    data: date
                 },
             ],
             yAxis: [
@@ -482,15 +367,7 @@
                         color:'#2A265C' //line차트 색상 변경
                     },
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: (function (){
-                        var res = [];
-                        var len = 0;
-                        while (len < 20) {
-                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
-                            len++;
-                        }
-                        return res;
-                    })()
+                    data: mold_temp
                 },
                 {
                     name: '용융온도',
@@ -499,15 +376,7 @@
                         color:'yellow' //line차트 색상 변경
                     },
                     yAxisIndex: 1, //yAxis 1번째 사용
-                    data: (function (){
-                        var res = [];
-                        var len = 0;
-                        while (len < 20) {
-                            res.push((Math.random()*2 + 1).toFixed(1) - 0); //랜덤 데이터 생성
-                            len++;
-                        }
-                        return res;
-                    })()
+                    data: melt_temp
                 }
             ]
         };
@@ -515,30 +384,93 @@
         // 위에서 설정한 속성을 차트에 반영합니다.
         myChart3.setOption(option3);
 
-        //데이터를 생성하고 삭제합니다.
-        setInterval(function (){
-            //x축에 실시간 데이터 생성
-            var axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-            var data0 = option3.series[0].data; //순수익 데이터
-            var data1 = option3.series[1].data;
+        if(run){
+            setInterval(function (){
+            //시간 
+            $.getJSON("/current_update",
+            function(result){
+                //x축에 실시간 데이터 생성
+                var axisData = result.cur.date.slice(11,19);
 
-            //데이터의 가장 왼쪽 값을 제거
-            data0.shift();
-            data1.shift();
+                var data00 = option0.series[0].data; //순수익 데이터
+                var data01 = option0.series[1].data;
+                var data02 = option0.series[2].data;
 
-            //데이터의 가장 오른쪽 값을 추가
-            data0.push(Math.round(Math.random() * 100));
-            data1.push(Math.round(Math.random() * 100));
+                //데이터의 가장 왼쪽 값을 제거
+                data00.shift();
+                data01.shift();
+                data02.shift();
 
-            //x축에 시간 데이터 추가
-            option3.xAxis[0].data.shift();
-            option3.xAxis[0].data.push(axisData);
+                //데이터의 가장 오른쪽 값을 추가
+                data00.push(result.cur.injection_time);
+                data01.push(result.cur.hold_time);
+                data02.push(result.cur.filling_time);
 
-            //차트에 반영
-            myChart3.setOption(option3);
-        }, 2100);
+                //x축에 시간 데이터 추가
+                option0.xAxis[0].data.shift();
+                option0.xAxis[0].data.push(axisData);
 
+                //차트에 반영
+                myChart0.setOption(option0);
+
+
+                // 속도
+                //x축에 실시간 데이터 생성
+                var data10 = option1.series[0].data; //순수익 데이터
+
+                //데이터의 가장 왼쪽 값을 제거
+                data10.shift();
+
+                //데이터의 가장 오른쪽 값을 추가
+                data10.push(result.cur.injection_speed);
+
+                //x축에 시간 데이터 추가
+                option1.xAxis[0].data.shift();
+                option1.xAxis[0].data.push(axisData);
+
+                //차트에 반영
+                myChart1.setOption(option1);
+
+
+                // 압력
+                var data20 = option2.series[0].data; //순수익 데이터
+
+                //데이터의 가장 왼쪽 값을 제거
+                data20.shift();
+
+                //데이터의 가장 오른쪽 값을 추가
+                data20.push(result.cur.hold_pressure);
+
+                //x축에 시간 데이터 추가
+                option2.xAxis[0].data.shift();
+                option2.xAxis[0].data.push(axisData);
+
+                //차트에 반영
+                myChart2.setOption(option2);
+
+
+                //온도
+                var data30 = option3.series[0].data; //순수익 데이터
+                var data31 = option3.series[1].data;
+
+                //데이터의 가장 왼쪽 값을 제거
+                data30.shift();
+                data31.shift();
+
+                //데이터의 가장 오른쪽 값을 추가
+                data30.push(result.cur.mold_temp);
+                data31.push(result.cur.melt_temp);
+
+                //x축에 시간 데이터 추가
+                option3.xAxis[0].data.shift();
+                option3.xAxis[0].data.push(axisData);
+
+                //차트에 반영
+                myChart3.setOption(option3);
+                })
+            }, 2100);
+        }
     </script>
 
 </body>
