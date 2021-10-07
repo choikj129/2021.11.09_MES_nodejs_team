@@ -222,8 +222,8 @@
     <div class="wrapper2" style="position: absolute; top: 3vh; left:7.35vw; color:white; text-align:center; font-weight: 1000;">
         <div class="wrapper3" style="position: absolute; left:2vw; color:rgb(255, 192, 0); ">생산목표</div>
         <div class="wrapper3" style="position: absolute; left:13vw; color:red;">
-            <% if(monitor){%>
-                <%= monitor.total%>
+            <% if(dir){%>
+                <%= order[0].total%>
             <%}%>
         </div>
         <div class="wrapper3" style="position: absolute; left:24vw; color:rgb(255, 192, 0);">생산실적</div>

@@ -82,7 +82,9 @@ app.get("/main", function(req, res){
         res.redirect("/")
     }else{
         connection.query(
-            `select * from ordert where date(date)=(select date_format(now(),'%Y-%m-%d') from dual)`,
+            `select *,
+            (select sum(quantity) from ordert where date(date) =`+date+`) total
+             from ordert where date(date)=(select date_format(now(),'%Y-%m-%d') from dual)`,
             function(err0, result0){
                 if (err0){
                     console.log(err0)
@@ -98,7 +100,6 @@ app.get("/main", function(req, res){
                         dir = true;
                         connection.query(
                             `select *, (select count(*) from monitoring`+date+`) cnt,
-                            (select sum(quantity) from ordert where date(date) =`+date+`) total,
                             (select count(*) from monitoring`+date+` where defect='N') def
                             from monitoring`+date+` order by monitor_id desc limit 1`,
                             function(err, result){
@@ -111,8 +112,7 @@ app.get("/main", function(req, res){
                                         "run" : run,
                                         "linkcode" : req.session.logged.linkcode,
                                         "dir" : dir,
-                                        "order" : result0,
-
+                                        "order" : result0
                                     })
                                 }
                             }
