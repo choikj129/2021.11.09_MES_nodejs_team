@@ -367,7 +367,7 @@ app.post("/instruct", function(req, res){
     console.log(quantity, id, date);
     connection.query(
         `insert into ordert(manager, lego_id, quantity, date, lastdate) values (?, ?, ?, ?, ?)`,
-        [name, id, quantity, date, lastdate],
+        [name, id, quantity, date, "2021"],
         function(err, result){
             if(err){
                 console.log(err);
