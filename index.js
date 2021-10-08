@@ -288,19 +288,27 @@ app.get("/defect_ajax", function(req, res){
 
 app.get("/cur",function(req, res){
     var date = moment().format("YYYYMMDD")
-    connection.query(
-        `select * from monitoring`+date+` order by monitor_id desc limit 20`,
-        function(err, result){
-            if(err){
-                console.log(err)
-            }else{
-                res.json({
-                    "cur" : result,
-                    "run" : run
-                })
+    if(dir){
+        connection.query(
+            `select * from monitoring`+date+` order by monitor_id desc limit 20`,
+            function(err, result){
+                if(err){
+                    console.log(err)
+                }else{
+                    res.json({
+                        "cur" : result,
+                        "run" : run
+                    })
+                }
             }
-        }
-    )
+        )
+    }else{
+        res.json({
+            "cur" : [],
+            "run" : run
+        })
+    }
+    
 })
 
 app.get("/current", function(req, res){
