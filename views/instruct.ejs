@@ -5,8 +5,10 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /
-        >
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <script src="/js/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="/css/jquery-ui.css">
+
         <script src="/js/jquery-ui.min.js"></script>
         <link rel="stylesheet" href="/css/jquery-ui.css">
         <style>
@@ -105,7 +107,7 @@
           </div>
           <div class="input-group mb-3" style="position: absolute; left:47.5vw; top:13vh">
             <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
-            <input type="text" id="datepicker" name="_date" value="<%= date %> " style="width: 60.2%;">
+            <input type="text" class="datepicker wdate" name="_date" value="<%= date %> " style="width: 60.2%;">
           </div>
           <div align="center">
             <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vw; right: 14.5vw;" id = "register" disabled>등록</button>
@@ -148,41 +150,38 @@
                 <td><%=ordert[i].lego_id%></td>
                 <td><%=ordert[i].quantity%></td>
                 <td><%=ordert[i].date%></td>
-                <td><%=ordert[i].lastdate%></td>
                 <td><%=ordert[i].manager%></td>
                 <td>진행중</td>
-                <td><button class="btn btn-danger modal_btn" style="top: 27.3vh; right:12vw;" type='button'>수정</button>
-                  <div class="black_bg"></div>
+                <td><button class="btn btn-danger modal_btn" style="top: 27.3vh; right:12vw;" type='button' >수정</button>
                   <div class="modal_wrap">
-                    <div class="modal_close"><a href="#">close</a></div>
-                    <div>
-                      <div class="input-group mb-3" style="position: absolute; left:5.5vw; top:5vh">
-                        <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">담당자</span>
-                        <input type="text" class="form-control" placeholder="담당자" id="manager" name="_manager">
+                      <div class="modal_close"><a href="#">close</a></div>
+                      <div>
+                        <div class="input-group mb-3" style="position: absolute; left:5.5vw; top:5vh">
+                          <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">담당자</span>
+                          <input type="text" class="form-control" placeholder="담당자" id = "manager" name="_manager">
+                        </div>
+                        <div class="input-group mb-3" style="position: absolute; left:5.5vw; top:12vh">
+                          <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">지시 수량</span>
+                          <input type="text" class="form-control" placeholder="지시 수량" id = "quantity" name="_quantity">
+                        </div>
+                        <div class="input-group mb-3" style="position: absolute; left:5.5vw; top:19vh">
+                          <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목 번호</label>
+                          <select class="form-select" id="inputGroupSelect01" name ="_id">
+                            <option value="bricks_rect">bricks_rect</option>
+                            <option value="bricks_square">bricks_square</option>
+                            <option value="circle">circle</option>
+                            <option value="floor">floor</option>
+                          </select>
+                        </div>
+                        <div class="input-group mb-3" style="position: absolute; left:5.5vw; top:26vh">
+                          <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">납기일</label>
+                          <input type="text" class="datepicker" name="_date">
+                        </div>
+                        
                       </div>
-                      <div class="input-group mb-3" style="position: absolute; left:5.5vw; top:12vh">
-                        <span class="input-group-text" id="inputGroup-sizing-default" style="width:10vw">지시 수량</span>
-                        <input type="text" class="form-control" placeholder="지시 수량" id="quantity" name="_quantity">
+                      <div align="center">
+                        <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vw; right: 14.5vw;" id = "register" disabled>확인</button>
                       </div>
-                      <div class="input-group mb-3" style="position: absolute; left:5.5vw; top:19vh">
-                        <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목 번호</label>
-                        <select class="form-select" id="inputGroupSelect01" name="_id">
-                          <option value="bricks_rect">bricks_rect</option>
-                          <option value="bricks_square">bricks_square</option>
-                          <option value="circle">circle</option>
-                          <option value="floor">floor</option>
-                        </select>
-                      </div>
-                      <div class="input-group mb-3" style="position: absolute; left:5.5vw; top:26vh">
-                        <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">납기일</label>
-                        <input type="text" id="datepicker" name="single" value="<%= date %> " style="width: 60.2%;">
-                      </div>
-                  
-                    </div>
-                    <div align="center">
-                      <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vw; right: 14.5vw;" id="register"
-                        disabled>확인</button>
-                    </div>
                   
                 </td>
               </tr>
@@ -200,7 +199,6 @@
               <th scope="col" style="width: 17vw;">품목명</th>
               <th scope="col" style="width: 10vw;">지시 수량</th>
               <th scope="col" style="width: 25vw;">주문일</th>
-              <th scope="col" style="width: 25vw;">납기일</th>
               <th scope="col" style="width: 15vw;">담당자</th>
               <th scope="col" style="width: 15vw;">상태</th>
             </tr>
@@ -212,7 +210,6 @@
                 <td><%=ordert[i].lego_id%></td>
                 <td><%=ordert[i].quantity%></td>
                 <td><%=ordert[i].date%></td>
-                <td><%=ordert[i].lastdate%></td>
                 <td><%=ordert[i].manager%></td>
                 <td>진행중</td>
               </tr>
@@ -227,23 +224,7 @@
 
 
       <script>
-        //달력
-        $("#datepicker").datepicker({
-          dateFormat : "yy-mm-dd",
-          monthNames : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-          monthNamesShort : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-          dayNamesMin : ['월','화','수','목','금','토','일'],
-          changeMonth : true,
-          changeYear : true,
-          nextText : '다음달',
-          prevText : '이전달',
-          showOtherMonths: true,
-          selectOtherMonths: true,
-          changeMonth: true,
-          changeYear: true
-        });
-        $('#datepicker').datepicker('setDate', 'today');
-
+        //달력(날짜 선택 2개)
         // $('#datepicker').daterangepicker({ 
         //   "locale": { "format": "YYYY-MM-DD", 
         //   "separator": " ~ ", 
@@ -264,17 +245,6 @@
         //     console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')'); 
         //   }
         // );
-        $(function() {
-          $('input[name="single"]').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            minYear: 1901,
-            maxYear: parseInt(moment().format('YYYY'),10)
-          }, function(start, end, label) {
-            var years = moment().diff(start, 'years');
-          });
-        });
-
 
         $(function(){
           if ("<%=linkcode%>"==0){
@@ -287,8 +257,8 @@
         $("input").keyup(function(){
           var manager = $("#manager").val();
           var quantity = $("#quantity").val();
-          var date = $("#datepicker").val();
-          var lastdate = $("datepicker").val();
+          var date = $(".wdate").val();
+          
           
           if(manager && quantity && date){    
               $("#register").removeAttr("disabled")
@@ -344,17 +314,51 @@
               $("#tbody2").html(body)
             })
         }
+
         $(".modal_btn").click(function(){
-          $(".modal_wrap").css("display", "block")
-          $(".black_bg").css("display", "block")
+          $(".modal_wrap").css("display","block")
+          $(".black_bg").css("display","block")
         })
 
         $(".modal_close").click(function(){
-          $(".modal_wrap").css("display", "none")
-          $(".black_bg").css("display", "none")
+          $(".modal_wrap").css("display","none")
+          $(".black_bg").css("display","none")
         })
+//달력(날짜 1개 선택)
+        $(".datepicker").datepicker({
+          dateFormat : "yy-mm-dd",
+          monthNames : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+          monthNamesShort : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+          dayNamesMin : ['월','화','수','목','금','토','일'],
+          changeMonth : true,
+          changeYear : true,
+          nextText : '다음달',
+          prevText : '이전달',
+          showOtherMonths: true,
+          selectOtherMonths: true,
+          changeMonth: true,
+          changeYear: true
+        });
+        $('.datepicker').datepicker('setDate', 'today');
 
-    
+        function search() {
+          $("tbody").html("");
+          var date = $(".datepicker").val()
+          $.getJSON("/defect_search", {
+            date: date
+          },
+            function (result) {
+              var body;
+              for (var i=1; i<result.defect.length; i++){
+                body += "<tr>"
+                for (key in result.defect[0]){
+                  body += "<td>"+result.defect[i][key]+"</td>"
+                }
+                body += "</tr>"
+              }
+              $("tbody").html(body)
+            })
+        }
 
 
 
