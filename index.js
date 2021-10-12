@@ -454,6 +454,10 @@ app.get("instruct_update", function(req,res){
     )
 })
 
+app.get("/product", function(req, res){
+    res.render("product")
+})
+
 app.get("/alert", function(req, res){
     res.render("alert")
 })

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("./head.ejs") %>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <style>
+            .table{
+                width:92.5vw;
+                text-align: center;
+                background-color: rgb(173, 185, 202);
+            }
+            .wrapper{
+                height:10vh;
+                width:92.5vw;
+                background-color: rgba(199, 202, 241, 0.308);
+            }
+            .input-group{
+                width: 25vw;
+                text-align: center;
+                background-color: rgb(173, 185, 202);
+            } 
+        </style>
+    </head>
+    <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
+        <div class="wrapper" style="position: absolute; top:3vh; left:6vw">
+            <div class="input-group mb-3" style="position: absolute; left:10vw; top:2vh">
+                <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목명</label>
+                <select class="form-select" id="product_i" name ="search_i">
+                  <option value="bricks_rect">bricks_rect</option>
+                  <option value="bricks_square">bricks_square</option>
+                  <option value="circle">circle</option>
+                  <option value="floor">floor</option>
+                </select>
+            </div>
+            <div class="input-group mb-3" style="position: absolute; left:50vw; top:2vh">
+                <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
+                <input type="text" class="datepicker wdate" style="width: 60.2%;">
+            </div>
+            <button class="btn btn-secondary" onclick="search()" style="position:absolute; bottom:2vh; right:2vw">조회</button>
+        </div>
+
+        <div style="position: absolute; top:15vh; left:6vw; color:white; text-align: center;">
+            <table class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+                <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
+                    <tr>
+                        <th scope="col" style="width: 10vw;">생산실적번호</th>
+                        <th scope="col" style="width: 10vw;">작업지시번호</th>
+                        <th scope="col" style="width: 10vw;">생산일</th>
+                        <th scope="col" style="width: 7vw;">품목 ID</th>
+                        <th scope="col" style="width: 10vw;">생산수량</th>
+                        <th scope="col" style="width: 10vw;">양품수량</th>
+                        <th scope="col" style="width: 8vw;">불량품수량</th>
+                        <th scope="col" style="width: 10vw;">작업자 ID</th>
+                        <th scope="col" style="width: 5.5vw;">생성자</th>
+                        <th scope="col" style="width: 10vw;">생성일</th>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+    </body>
+</html>
