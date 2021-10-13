@@ -16,34 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `orders`
+-- Table structure for table `performance`
 --
 
-DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `performance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `orders` (
-  `orders_id` int NOT NULL AUTO_INCREMENT,
-  `cust_name` varchar(20) DEFAULT NULL,
-  `lego_name` varchar(45) DEFAULT NULL,
-  `orders_qty` varchar(45) DEFAULT NULL,
-  `orders_date` varchar(45) DEFAULT NULL,
-  `delivery_date` text,
-  `cid` varchar(10) DEFAULT NULL,
-  `date_c` text,
-  `mid` varchar(10) DEFAULT NULL,
-  `date_m` text,
-  PRIMARY KEY (`orders_id`)
+CREATE TABLE `performance` (
+  `pp_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `date` text,
+  `lego_name` int DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `qty_good` int DEFAULT NULL,
+  `qyt_def` int DEFAULT NULL,
+  `manager` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`pp_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orders`
+-- Dumping data for table `performance`
 --
 
-LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+LOCK TABLES `performance` WRITE;
+/*!40000 ALTER TABLE `performance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `performance` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
