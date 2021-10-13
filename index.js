@@ -455,9 +455,44 @@ app.get("instruct_update", function(req,res){
 })
 
 app.get("/product", function(req, res){
-    res.render("product")
+    date = moment().format
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        connection.query(
+            `select * from performance order by date desc`,
+            function(err,result){
+                if(err){
+                    console.log(err)
+                }else{
+                    res.render("product",{
+                        "date" : date,
+                        "performance" : result,
+                        "linkcode" : req.session.logged.linkcode
+                    })
+                }
+
+            }
+        )
+    } 
 })
 
+
+app.get("product_reset", function(req,res){
+    connection.query(
+        `select * from performance order by date desc`,
+        function(err,result){
+            if(err){
+                console.log(err)
+            }else{
+                res.json({
+                    "performance" : result
+                })
+            }
+
+        }
+    )
+})
 app.get("/alert", function(req, res){
     res.render("alert")
 })

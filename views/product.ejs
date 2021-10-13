@@ -6,6 +6,8 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <script src="/js/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="/css/jquery-ui.css">
         <style>
             .table{
                 width:92.5vw;
@@ -35,44 +37,130 @@
                   <option value="floor">floor</option>
                 </select>
             </div>
-            <div class="input-group mb-3" style="position: absolute; left:50vw; top:2vh">
+            <div class="input-group mb-3" style="position: absolute; left:45vw; top:2vh">
                 <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
-                <input type="text" class="datepicker wdate" style="width: 60.2%;">
+                <input type="text" class="datepicker wdate" name="_date" value="<%= date %> " style="width: 60.2%;">
             </div>
-            <button class="btn btn-secondary" onclick="search()" style="position:absolute; bottom:2vh; right:2vw">조회</button>
+            <button class="btn btn-secondary" onclick="search()" style="position:absolute; bottom:2vh; right:10vw">조회</button>
+            <button class="btn btn-light" onclick="reset()" style="position:absolute; bottom:2vh; right:2vw">검색 초기화</button>
         </div>
 
         <div style="position: absolute; top:15vh; left:6vw; color:white; text-align: center;">
             <table class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
                 <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
                     <tr>
-                        <th scope="col" style="width: 10vw;">생산실적번호</th>
-                        <th scope="col" style="width: 10vw;">작업지시번호</th>
-                        <th scope="col" style="width: 10vw;">생산일</th>
-                        <th scope="col" style="width: 7vw;">품목 ID</th>
-                        <th scope="col" style="width: 10vw;">생산수량</th>
-                        <th scope="col" style="width: 10vw;">양품수량</th>
-                        <th scope="col" style="width: 8vw;">불량품수량</th>
-                        <th scope="col" style="width: 10vw;">작업자 ID</th>
-                        <th scope="col" style="width: 5.5vw;">생성자</th>
-                        <th scope="col" style="width: 10vw;">생성일</th>
+                        <th scope="col" style="width: 12vw;">작업지시번호</th>
+                        <th scope="col" style="width: 17.5vw;">작업일</th>
+                        <th scope="col" style="width: 13vw;">품목명</th>
+                        <th scope="col" style="width: 13vw;">생산수량</th>
+                        <th scope="col" style="width: 12vw;">양품수량</th>
+                        <th scope="col" style="width: 12vw;">불량품수량</th>
+                        <th scope="col" style="width: 13vw;">담당자</th>
                     </tr>                    
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                        <td>10</td>
-                    </tr>
+                <tbody id="tbody2">
+                    <% for(var i=0; i < performance.length; i++) {%>
+                        <tr>
+                          <td><%=performance[i].order_id%></td>
+                          <td><%=performance[i].date%></td>
+                          <td><%=performance[i].lego_name%></td>
+                          <td><%=performance[i].quantity%></td>
+                          <td><%=performance[i].qty_good%></td>
+                          <td><%=performance[i].qty_def%></td>
+                          <td><%=performance[i].manager%></td>
+                        </tr>
+                      <%}%>
                   </tbody>
             </table>
         </div>
+
+        <script>
+            //달력
+            $("input").keyup(function(){
+                var manager = $("#manager").val();
+                var quantity = $("#quantity").val();
+                var date = $(".wdate").val();
+                
+                
+                if(manager && quantity && date){    
+                    $("#register").removeAttr("disabled")
+                }else{
+                    $("#register").attr("disabled", "disabled")
+                }
+            })
+            $(".datepicker").datepicker({
+                dateFormat : "yy-mm-dd",
+                monthNames : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                monthNamesShort : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+                dayNamesMin : ['월','화','수','목','금','토','일'],
+                changeMonth : true,
+                changeYear : true,
+                nextText : '다음달',
+                prevText : '이전달',
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                changeMonth: true,
+                changeYear: true
+            });
+            $('.datepicker').datepicker('setDate', 'today');
+            //조회
+            // function search() {
+            //     $("tbody").html("");
+            //     var date = $(".datepicker").val()
+            //     $.getJSON("/defect_search", {
+            //         date: date
+            //     },
+            //     function (result) {
+            //     var body;
+            //     for (var i=1; i<result.defect.length; i++){
+            //         body += "<tr>"
+            //         for (key in result.defect[0]){
+            //         body += "<td>"+result.defect[i][key]+"</td>"
+            //         }
+            //         body += "</tr>"
+            //     }
+            //     $("tbody").html(body)
+            //     })
+            // }
+
+            function search(){
+                $("#tbody2").html("");
+                var pp = $("#product_i").val()
+                $.getJSON("/product_search", {
+                    pp : pp
+                },
+                function(result){
+                var body;
+                for(var i=0; i<result.performance.length; i++){
+                    body += "<tr>"
+                    for (key in result.performance[0]){
+                        if(key=="pp_id"){
+                            continue
+                        }
+                        body += "<td>"+result.performance[i][key]+"</td>"
+                    }
+                    body += "</tr>"
+                }
+                $("#tbody2").html(body)
+            })
+        }
+
+        function reset(){
+            $.getJSON("/product_reset",
+            function(result){
+              $("#tbody2").html("")  
+              var body;
+              for(var i=0; i<result.performance.length; i++){
+                body += "<tr>"
+                  for (key in result.performance[0]){
+                    body += "<td>"+result.performance[i][key]+"</td>"
+                  }
+                  body += "</tr>"
+              }
+              $("#tbody2").html(body)
+            }
+            )
+        }
+        </script>
     </body>
 </html>
