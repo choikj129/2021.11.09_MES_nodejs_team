@@ -27,8 +27,10 @@
         </style>
     </head>
     <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
+        <div style="position: absolute; top:6.5vh; left:8vw; font-size: large; font-weight: bold; color:white;">작업실적조회</div>
         <div class="wrapper" style="position: absolute; top:3vh; left:6vw">
-            <div class="input-group mb-3" style="position: absolute; left:10vw; top:2vh">
+
+            <div class="input-group mb-3" style="position: absolute; left:15vw; top:3vh">
                 <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목명</label>
                 <select class="form-select" id="product_i" name="search_i">
                     <option value=""></option>
@@ -38,12 +40,12 @@
                     <option value="floor">floor</option>
                 </select>
             </div>
-            <div class="input-group mb-3" style="position: absolute; left:45vw; top:2vh">
+            <div class="input-group mb-3" style="position: absolute; left:45vw; top:3vh">
                 <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
                 <input type="text" class="datepicker wdate" id="product_d" name="_date" style="width: 60.2%;">
             </div>
-            <button class="btn btn-secondary" onclick="search()" style="position:absolute; bottom:2vh; right:10vw">조회</button>
-            <button class="btn btn-light" style="position:absolute; bottom:2vh; right:2vw">검색 초기화</button>
+            <button class="btn btn-secondary" onclick="search()" style="position:absolute; bottom:3vh; right:10vw">조회</button>
+            <button class="btn btn-light" onclick="reset()" style="position:absolute; bottom:3vh; right:2vw">검색 초기화</button>
         </div>
 
         <div style="position: absolute; top:15vh; left:6vw; color:white; text-align: center;">
@@ -148,13 +150,16 @@
         }
 
         function reset(){
+            $("#tbody2").html("")
             $.getJSON("/product_reset",
-            function(result){
-              $("#tbody2").html("")  
+            function(result){ 
               var body;
               for(var i=0; i<result.performance.length; i++){
                 body += "<tr>"
                   for (key in result.performance[0]){
+                    if(key=="pp_id"){
+                            continue
+                    }
                     body += "<td>"+result.performance[i][key]+"</td>"
                   }
                 body += "</tr>"
