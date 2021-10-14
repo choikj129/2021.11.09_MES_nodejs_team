@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
 -- Host: localhost    Database: project
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,11 +24,12 @@ DROP TABLE IF EXISTS `ordert`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ordert` (
   `order_id` int NOT NULL AUTO_INCREMENT,
-  `manager` varchar(45) NOT NULL,
-  `lego_id` varchar(45) NOT NULL,
+  `orders_id` int DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  `lego_name` varchar(45) NOT NULL,
   `quantity` int NOT NULL,
   `date` varchar(45) NOT NULL,
-  `lastdate` varchar(45) NOT NULL,
+  `manager` varchar(45) NOT NULL,
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,7 +40,7 @@ CREATE TABLE `ordert` (
 
 LOCK TABLES `ordert` WRITE;
 /*!40000 ALTER TABLE `ordert` DISABLE KEYS */;
-INSERT INTO `ordert` VALUES (1,'choi','bricks_rect',1000,'2021-10-02','2021-10-02'),(2,'choi','bricks_rect',1111,'2021-10-03','2021-10-03');
+INSERT INTO `ordert` VALUES (1,NULL,NULL,'bricks_rect',1000,'2021-10-02','choi'),(2,NULL,NULL,'bricks_rect',1111,'2021-10-03','choi');
 /*!40000 ALTER TABLE `ordert` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-05  9:13:45
+-- Dump completed on 2021-10-13 10:04:34

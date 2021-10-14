@@ -454,8 +454,70 @@ app.get("instruct_update", function(req,res){
     )
 })
 
-app.get("/product", function(req, res){
-    res.render("product")
+app.get("/orderS", function(req, res){
+    res.render("orederS")
+})
+
+app.get("/product",function(req,res){
+    var date = moment().format("YYYY-MM-DD")
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        if(req.session.logged.linkcode == 1){
+            res.redirect("/alert")
+        }else{
+            connection.query(
+                `select * from performance order by order_id`,
+                function(err, result){
+                    if(err){
+                        console.log(err);
+                        res.send("search SQL select Error")
+                    }else{
+                        res.render("product",{
+                            "date" : date,
+                            "performance" : result,
+                            "linkcode" : req.session.logged.linkcode
+                        })
+                    }
+                }
+            )
+        }
+    }
+})
+
+app.get("product_reset", function(req,res){
+    connection.query(
+        `select * from performance order by date desc`,
+        function(err,result){
+            if(err){
+                console.log(err)
+            }else{
+                res.json({
+                    "performance" : result
+                })
+            }
+
+        }
+    )
+})
+
+app.get("/product_search", function(req, res){
+    var pp = req.query.pp;
+    var pd = req.query.pd;
+    console.log(pp)
+    connection.query(
+        `select * from performance where lego_name=? and date=?`,
+        [pp, pd],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json({
+                    "performance": result
+                });
+            }
+        }
+    )
 })
 
 app.get("/alert", function(req, res){

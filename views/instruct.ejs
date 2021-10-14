@@ -107,15 +107,6 @@
             <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">거래처</label>
             <input type="text" style="width: 60.2%;">
           </div>
-          <div class="input-group mb-3" style="position: absolute; left:57vw; top:2vh">
-            <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
-            <input type="text" class="datepicker wdate" name="_date" value="<%= date %> " style="width: 60.2%;">
-          </div>
-          <!--
-          <div align="center">
-            <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vh; right: 1.5vw;" id = "register" disabled>등록</button>
-          </div>
-          -->
           <div class="input-group mb-3" style="position: absolute; left:30vw; top:2vh">
             <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목명</label>
             <select class="form-select" id="product_i" name ="search_i">
@@ -125,17 +116,26 @@
               <option value="floor">floor</option>
             </select>
           </div>
+          <div class="input-group mb-3" style="position: absolute; left:57vw; top:2vh">
+            <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
+            <input type="text" class="datepicker wdate" name="_date" style="width: 60.2%;">
+          </div>
+          <!--
+          <div align="center">
+            <button type="submit" class="btn btn-dark" style="position:absolute; bottom: 1vh; right: 1.5vw;" id = "register" disabled>등록</button>
+          </div>
+          -->
+          
           <button class="btn btn-secondary" onclick="search()" style="position:absolute; bottom:2vh; right:1.5vw">조회</button>
         </div>
       </form>
-
       <!-- 수주 조회 테이블 -->
       <div style="position: absolute; top:15vh; left:6vw; color:white; text-align: center;">
         <table id="iTable" class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
           <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
             <tr>
               <th scope="col" style="width: 4vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
-              <th scope="col" style="width: 10vw;">작업지시번호</th>
+              <th scope="col" style="width: 10vw;">수주번호</th>
               <th scope="col" style="width: 16vw;">품목명</th>
               <th scope="col" style="width: 10vw;">지시 수량</th>
               <th scope="col" style="width: 20vw;">주문일</th>
@@ -342,7 +342,6 @@
           changeMonth: true,
           changeYear: true
         });
-        $('.datepicker').datepicker('setDate', 'today');
 
         function search() {
           $("tbody").html("");
