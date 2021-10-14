@@ -474,6 +474,7 @@ app.get("/product",function(req,res){
                         res.send("search SQL select Error")
                     }else{
                         res.render("product",{
+                            "date" : date,
                             "performance" : result,
                             "linkcode" : req.session.logged.linkcode
                         })
@@ -482,6 +483,22 @@ app.get("/product",function(req,res){
             )
         }
     }
+})
+
+app.get("product_reset", function(req,res){
+    connection.query(
+        `select * from performance order by date desc`,
+        function(err,result){
+            if(err){
+                console.log(err)
+            }else{
+                res.json({
+                    "performance" : result
+                })
+            }
+
+        }
+    )
 })
 
 app.get("/product_search", function(req, res){

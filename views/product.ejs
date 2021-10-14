@@ -70,7 +70,7 @@
                           <td><%=performance[i].qty_def%></td>
                           <td><%=performance[i].manager%></td>
                         </tr>
-                      <%}%>
+                    <%}%>
                   </tbody>
             </table>
         </div>
@@ -145,6 +145,23 @@
                 }
                 $("#tbody2").html(body)
             })
+        }
+
+        function reset(){
+            $.getJSON("/product_reset",
+            function(result){
+              $("#tbody2").html("")  
+              var body;
+              for(var i=0; i<result.performance.length; i++){
+                body += "<tr>"
+                  for (key in result.performance[0]){
+                    body += "<td>"+result.performance[i][key]+"</td>"
+                  }
+                body += "</tr>"
+              }
+              $("#tbody2").html(body)
+            }
+            )
         }
         </script>
     </body>
