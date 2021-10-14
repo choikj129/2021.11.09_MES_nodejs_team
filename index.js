@@ -106,7 +106,6 @@ app.get("/main", function(req, res){
                                 if (err){
                                     console.log(err)
                                 }else{
-                                    console.log(result0)
                                     res.render('main', {
                                         'monitor' : result[0],
                                         "run" : run,
@@ -351,9 +350,9 @@ app.get("/instruct",function(req,res){
                     if(err0){
                         console.log(err0)
                     }else{
-                        console.log(result0)
                         connection.query(
-                            `select * from ordert where date(date)=`+date,
+                            `select * from ordert where date(date)=?`,
+                            [date],
                             function(err, result){
                                 if(err){
                                     console.log(err);
@@ -376,50 +375,51 @@ app.get("/instruct",function(req,res){
     }
 })
 
-// app.post("/instruct", function(req, res){
-//     var name = req.body._manager;
-//     var quantity = req.body._quantity;
-//     var id = req.body._id;
-//     var date = req.body._date.split(" ~ ");
-//     var lastdate = date[1];
-//     date = date[0];
-//     var date_array = date.split("-");
-//     console.log(quantity, id, date);
-//     connection.query(
-//         `insert into ordert(manager, lego_id, quantity, date, lastdate) values (?, ?, ?, ?, ?)`,
-//         [name, id, quantity, date, lastdate],
-//         function(err, result){
-//             if(err){
-//                 console.log(err);
-//                 res.send("instruct SQL insert Error")
-//             }else{
-//                 connection.query(
-//                     `create table monitoring` + date_array[0] + date_array[1] + date_array[2] + `
-//                     (monitor_id int auto_increment primary key,
-//                      mold_temp double not null,
-//                      melt_temp double not null,
-//                      injection_speed double not null,
-//                      hold_pressure double not null,
-//                      injection_time double not null,
-//                      hold_time double not null,
-//                      filling_time double not null,
-//                      cycle_time double not null,
-//                      x double not null,
-//                      y double not null,
-//                      z double not null,
-//                      stud_h double not null,
-//                      stud_d double not null,
-//                      thick double not null,
-//                      defect varchar(5) not null,
-//                      date text not null)`,
-//                     function(err2, result2){
-//                         res.redirect("/instruct")
-//                     }
-//                 )
-//             }
-//         }
-//     )
-// })
+app.get("/instruct_register", function(req, res){
+    var id = req.query.id
+    var lego_name = req.query.name
+    var qty = req.query.qty
+    var date = req.query.date
+    var manager = req.query.mg
+    var date_array = date.split("-")
+    connection.query(
+        `insert into ordert(orders_id, lego_name, quantity, date, manager)
+         values (?, ?, ?, ?, ?)`,
+         [id, lego_name, qty, date, manager],
+        function(err, result){
+            if(err){
+                console.log(err)
+            }else{
+                connection.query(
+                    `create table monitoring` + date_array[0] + date_array[1] + date_array[2] + `
+                    (monitor_id int auto_increment primary key,
+                     mold_temp double not null,
+                     melt_temp double not null,
+                     injection_speed double not null,
+                     hold_pressure double not null,
+                     injection_time double not null,
+                     hold_time double not null,
+                     filling_time double not null,
+                     cycle_time double not null,
+                     x double not null,
+                     y double not null,
+                     z double not null,
+                     stud_h double not null,
+                     stud_d double not null,
+                     thick double not null,
+                     defect varchar(5) not null,
+                     date text not null)`,
+                     function(err0){
+                        res.redirect("/instruct")
+                     }
+                    
+                )
+                
+            }
+        }
+    )
+})
+
 app.get("/instruct_search", function(req,res){
     var cust = req.query._cust;
     var lego = req.query._search_i;
@@ -472,94 +472,6 @@ app.get("instruct_update", function(req,res){
     connection.query(
         `update ordert set `
     )
-})
-
-app.get("/orderS", function(req, res){
-    date = moment().format("YYYY-MM-DD")
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        connection.query(
-            `select * from orders`,
-            function(err, result){
-                if(err){
-                    console.log(err)
-                }else{
-                    res.render("orderS",{
-                        "date" : date,
-                        "orders" : result,
-                        "linkcode" : req.session.logged.linkcode
-                    })
-                }
-            }
-        )
-    }
-})
-
-app.get("/product",function(req,res){
-    var date = moment().format("YYYY-MM-DD")
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        if(req.session.logged.linkcode == 1){
-            res.redirect("/alert")
-        }else{
-            connection.query(
-                `select * from performance order by order_id`,
-                function(err, result){
-                    if(err){
-                        console.log(err);
-                        res.send("search SQL select Error")
-                    }else{
-                        res.render("product",{
-                            "date" : date,
-                            "performance" : result,
-                            "linkcode" : req.session.logged.linkcode
-                        })
-                    }
-                }
-            )
-        }
-    }
-})
-
-app.get("product_reset", function(req,res){
-    connection.query(
-        `select * from performance order by date desc`,
-        function(err,result){
-            if(err){
-                console.log(err)
-            }else{
-                res.json({
-                    "performance" : result
-                })
-            }
-
-        }
-    )
-})
-
-app.get("/product_search", function(req, res){
-    var pp = req.query.pp;
-    var pd = req.query.pd;
-    console.log(pp)
-    connection.query(
-        `select * from performance where lego_name=? and date=?`,
-        [pp, pd],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.json({
-                    "performance": result
-                });
-            }
-        }
-    )
-})
-
-app.get("/alert", function(req, res){
-    res.render("alert")
 })
 
 app.get("/orderS",function(req,res){
@@ -629,6 +541,72 @@ app.post("/orderS", function(req, res){
     )
 })
 
+app.get("/product",function(req,res){
+    var date = moment().format("YYYY-MM-DD")
+    if(!req.session.logged){
+        res.redirect("/")
+    }else{
+        if(req.session.logged.linkcode == 1){
+            res.redirect("/alert")
+        }else{
+            connection.query(
+                `select * from performance order by order_id`,
+                function(err, result){
+                    if(err){
+                        console.log(err);
+                        res.send("search SQL select Error")
+                    }else{
+                        res.render("product",{
+                            "date" : date,
+                            "performance" : result,
+                            "linkcode" : req.session.logged.linkcode
+                        })
+                    }
+                }
+            )
+        }
+    }
+})
+
+app.get("/product_reset", function(req,res){
+    connection.query(
+        `select * from performance order by date desc`,
+        function(err,result){
+            if(err){
+                console.log(err)
+            }else{
+                console.log(result)
+                res.json({
+                    "performance" : result
+                })
+            }
+
+        }
+    )
+})
+
+app.get("/product_search", function(req, res){
+    var pp = req.query.pp;
+    var pd = req.query.pd;
+    console.log(pp)
+    connection.query(
+        `select * from performance where lego_name=? and date=?`,
+        [pp, pd],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json({
+                    "performance": result
+                });
+            }
+        }
+    )
+})
+
+app.get("/alert", function(req, res){
+    res.render("alert")
+})
 
 app.listen(3000, function(){
     console.log("monitor server start")
