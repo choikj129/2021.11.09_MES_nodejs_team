@@ -232,13 +232,13 @@
                 <%= monitor.cnt%>
             <% } %>
         </div>
-        <div class="wrapper3" style="position: absolute; left:46vw; color:rgb(255, 192, 0);">달성율</div>
+        <div class="wrapper3" style="position: absolute; left:46vw; color:rgb(255, 192, 0);">달성률</div>
         <div class="wrapper3" id = "qnt" style="position: absolute; left:57vw; color:red;">
             <% if(monitor) {%>
-                <%= (monitor.cnt/monitor.total).toFixed(2)%>%
+                <%= (monitor.cnt/order[0].total).toFixed(2)%>%
             <%}%>
         </div>
-        <div class="wrapper3" style="position: absolute; left:68vw; color:rgb(255, 192, 0);">불량율</div>
+        <div class="wrapper3" style="position: absolute; left:68vw; color:rgb(255, 192, 0);">불량률</div>
         <div class="wrapper3" id = "def" style="position: absolute; left:79vw; color:red;">
             <% if(monitor) {%>
                 <%= (monitor.def/monitor.cnt).toFixed(2)%>%

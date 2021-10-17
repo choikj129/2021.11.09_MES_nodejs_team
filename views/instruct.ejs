@@ -200,7 +200,7 @@
             <td><%=ordert[i].quantity%></td>
             <td><%=ordert[i].date%></td>
             <td><%=ordert[i].state%></td>
-            <td>진행중</td>
+            <td>대기</td>
           </tr>
         <%}%>
       </tbody>
@@ -222,7 +222,7 @@
       var q = $("#quantity").val()
       var n = $("#lego_name").val()
       var d = $("#delivery").val()
-      location.href="/instruct_register?mg="+m+"&qty="+q+"&name="+n+"&date="+d+"&id="+o
+      location.href="/instruct/register?mg="+m+"&qty="+q+"&name="+n+"&date="+d+"&id="+o
     })
 
     // 작업지시 삭제
@@ -233,7 +233,7 @@
       })
       if (confirm("삭제 하시겠습니까?")) {
         alert("삭제되었습니다.");
-        location.href = "/instruct_del?_id=" + checkBoxArr
+        location.href = "/instruct/del?_id=" + checkBoxArr
       }
     }
 
@@ -256,7 +256,7 @@
 
     function search() {
       $("#tbody1").html("");
-      $.getJSON("/instruct_search", {
+      $.getJSON("/instruct/search", {
         _cust : $("#cust").val(),
         _search_i : $("#product_i").val(),
         _date : $("#date").val()

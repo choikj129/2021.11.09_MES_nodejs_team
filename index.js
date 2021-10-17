@@ -52,6 +52,8 @@ app.post("/login", function(req, res){
             }else{
                 if(result.length>0){
                     req.session.logged = result[0];
+                    req.session.dir = false
+                    req.session.run = false
                     res.redirect("/main")
                 }else{
                     res.redirect("/")
@@ -72,11 +74,12 @@ app.get("/logout", function(req, res){
     })
 })
 
-var run = false;
-var dir = false;
+var interval;
+var id = 46;
+
 app.get("/main", function(req, res){
-    console.log("run : "+run)
-    dir = false
+    console.log("run : "+req.session.run)
+    req.session.dir = false;
     var date = moment().format("YYYYMMDD")
     if(!req.session.logged){
         res.redirect("/")
@@ -92,12 +95,12 @@ app.get("/main", function(req, res){
                     if(result0.length==0){
                         res.render("main",{
                             'monitor' : result0[0],
-                            'run' : run,
+                            'run' : req.session.run,
                             'linkcode' : req.session.logged.linkcode,
-                            "dir" : dir
+                            "dir" : req.session.dir
                         })
                     }else{
-                        dir = true;
+                        req.session.dir = true;
                         connection.query(
                             `select *, (select count(*) from monitoring`+date+`) cnt,
                             (select count(*) from monitoring`+date+` where defect='N') def
@@ -108,9 +111,9 @@ app.get("/main", function(req, res){
                                 }else{
                                     res.render('main', {
                                         'monitor' : result[0],
-                                        "run" : run,
+                                        "run" : req.session.run,
                                         "linkcode" : req.session.logged.linkcode,
-                                        "dir" : dir,
+                                        "dir" : req.session.dir,
                                         "order" : result0
                                     })
                                 }
@@ -123,15 +126,6 @@ app.get("/main", function(req, res){
     }
 })
 
-var interval;
-var id = 46;
-
-app.get("/stop", function(req, res){
-    run = false;
-    clearInterval(interval);
-    res.redirect("/")
-})
-
 app.get("/main_update", function(req, res){
     date = moment().format("YYYYMMDD")
     if(!req.session.logged){
@@ -139,14 +133,15 @@ app.get("/main_update", function(req, res){
     }else{
         connection.query(
             `select *, (select count(*) from monitoring`+date+`) cnt, 
-            (select sum(quantity) from ordert where date(date) =`+date+`) total 
+            (select sum(quantity) from ordert where date(date) =`+date+`) total,
+            (select count(*) from monitoring`+date+` where defect='N') def  
             from monitoring`+date+` order by monitor_id desc limit 1`,
             function(err, result){
                 if (err){
                     console.log(err)
                 }else{
-                    if (run == false){
-                        run = true;
+                    if (req.session.run == false){
+                        req.session.run = true;
                         interval = setInterval(function () {
                             id += 1
                             console.log(id)
@@ -163,446 +158,39 @@ app.get("/main_update", function(req, res){
                             )
                         }, 2000)
                     }
-                    res.json({
-                        "monitor" : result[0]
-                    })
-                }
-            }
-        )
-    }
-})
-
-app.get("/defect", function(req,res){
-    var date = moment().format("YYYYMMDD")
-    if(!req.session.logged){
-       res.redirect("/")
-    }else{
-        if (!dir){
-            res.render("defect",{
-                "defect" : [],
-                "linkcode" : req.session.logged.linkcode
-            })
-        }else{
-            connection.query(
-                `select date, cause, error from defect where date(date) = `+date,
-                function(err,result){
-                    if(err){
-                        console.log(err)
+                    if (result[0]!=undefined && result[0].total==result[0].cnt){
+                        res.redirect("/stop")
                     }else{
-                        res.render("defect",{
-                            'defect' : result,
-                            "linkcode" : req.session.logged.linkcode,
-                            "run" : run
-                        });
-                    }
-                }
-            )
-        }
-    }
-})
-
-app.get("/defect_update", function(req, res){
-    var _id = req.query._id
-    var x = req.query.x
-    var y = req.query.y
-    var z = req.query.z
-    var h = req.query.h
-    var d = req.query.d
-    var t = req.query.t
-    var date = req.query.date
-    var error = req.query.error
-    console.log(error)
-    connection.query(
-        `insert into defect(monitor_id, x_defect, y_defect, z_defect, stud_h_defect, stud_d_defect, thick_defect, date, error)
-        values (?,?,?,?,?,?,?,?,?)`,
-        [_id,x,y,z,h,d,t,date,error],
-        function(err, result){
-            if(err){
-                console.log(err)
-            }
-        }
-    )
-})
-
-app.get("/defect_search", function(req,res){
-    var date = req.query.date;
-    date = date.split("-")
-    date = date[0]+date[1]+date[2]
-    console.log(date)
-    connection.query(
-        `select * from defect where date(date)=`+date,
-        function(err, result){
-            if(err){
-                console.log(err)
-            }else{
-                if(result.length==0){
-                    console.log("no list")
-                    res.json({
-                        "defect" : result
-                    })
-                }else{
-                    connection.query(
-                        `select B.date, A.mold_temp, A.melt_temp, A.injection_speed, A.hold_pressure, A.injection_time, A.hold_time, A.filling_time, B.cause
-                        from monitoring`+date+` A, defect B where A.monitor_id=B.monitor_id and date(B.date) = `+date+`
-                        order by date desc`,
-                        function(err1, result1){
-                            if (err1){
-                                console.log(err1)
-                            }else{
-                                res.json({
-                                    "defect" : result1
-                                })
-                            }
-                        }
-                    )
-                }
-            }
-        }
-    )
-})
-
-app.get("/defect_ajax", function(req, res){
-    var date = moment().format("YYYYMMDD")
-    if (!dir){
-        res.json("defect",{
-            "defect" : []
-        })
-    }else{
-        connection.query(
-            `select B.date, A.mold_temp, A.melt_temp, A.injection_speed, A.hold_pressure, A.injection_time, A.hold_time, A.filling_time, B.cause
-            from monitoring`+date+` A, defect B where A.monitor_id=B.monitor_id and date(B.date) = (select date_format(`+date+`,'%Y%m%d') from dual)
-            order by date desc`,
-            function(err,result){
-                if (err){
-                    console.log(err)
-                }else{
-                    res.json({
-                        "defect" : result
-                    })
-                }
-            }
-        )
-    }
-})
-
-app.get("/cur",function(req, res){
-    var date = moment().format("YYYYMMDD")
-    if(dir){
-        connection.query(
-            `select * from monitoring`+date+` order by monitor_id desc limit 20`,
-            function(err, result){
-                if(err){
-                    console.log(err)
-                }else{
-                    res.json({
-                        "cur" : result,
-                        "run" : run
-                    })
-                }
-            }
-        )
-    }else{
-        res.json({
-            "cur" : [],
-            "run" : run
-        })
-    }
-    
-})
-
-app.get("/current", function(req, res){
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        res.render("current")   
-    }
-})
-
-app.get("/current_update", function(req, res){
-    var date = moment().format("YYYYMMDD")
-    connection.query(
-        `select * from monitoring`+date+` order by monitor_id desc limit 1`,
-        function(err, result){
-            if(err){
-                console.log(err)
-            }else{
-                res.json({
-                    "cur" : result[0]
-                })
-            }
-        }
-    )
-})
-
-app.get("/instruct",function(req,res){
-    var date = moment().format("YYYY-MM-DD")
-    var lastdate = moment().format("YYYY-MM-DD")
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        if(req.session.logged.linkcode == 1){
-            res.redirect("/alert")
-        }else{
-            connection.query(
-                `select * from orders where date(orders_date) <= ? and date(delivery_date) >= ?`,
-                [date, date],
-                function(err0,result0){
-                    if(err0){
-                        console.log(err0)
-                    }else{
-                        connection.query(
-                            `select * from ordert where date(date)=?`,
-                            [date],
-                            function(err, result){
-                                if(err){
-                                    console.log(err);
-                                    res.send("search SQL select Error")
-                                }else{
-                                    res.render("instruct",{
-                                        "ordert" : result,
-                                        "orders" : result0,
-                                        "date" : date,
-                                        "lastdate" : lastdate,
-                                        "linkcode" : req.session.logged.linkcode
-                                    })
-                                }
-                            }
-                        )
-                    }
-                }
-            )
-        }
-    }
-})
-
-app.get("/instruct_register", function(req, res){
-    var id = req.query.id
-    var lego_name = req.query.name
-    var qty = req.query.qty
-    var date = req.query.date
-    var manager = req.query.mg
-    var date_array = date.split("-")
-    connection.query(
-        `insert into ordert(orders_id, lego_name, quantity, date, manager)
-         values (?, ?, ?, ?, ?)`,
-         [id, lego_name, qty, date, manager],
-        function(err, result){
-            if(err){
-                console.log(err)
-            }else{
-                connection.query(
-                    `create table monitoring` + date_array[0] + date_array[1] + date_array[2] + `
-                    (monitor_id int auto_increment primary key,
-                     mold_temp double not null,
-                     melt_temp double not null,
-                     injection_speed double not null,
-                     hold_pressure double not null,
-                     injection_time double not null,
-                     hold_time double not null,
-                     filling_time double not null,
-                     cycle_time double not null,
-                     x double not null,
-                     y double not null,
-                     z double not null,
-                     stud_h double not null,
-                     stud_d double not null,
-                     thick double not null,
-                     defect varchar(5) not null,
-                     date text not null)`,
-                     function(err0){
-                        res.redirect("/instruct")
-                     }
-                    
-                )
-                
-            }
-        }
-    )
-})
-
-app.get("/instruct_search", function(req,res){
-    var cust = req.query._cust;
-    var lego = req.query._search_i;
-    var date = req.query._date;
-    sql = `select orders_id, cust_name, lego_name, orders_qty, orders_date, delivery_date, cid 
-    from orders where date(orders_date) <= ? and date(delivery_date) >= ?`
-    if(cust!=""){
-        sql += " and cust_name='"+cust+"'"
-    }
-    if(lego!=""){
-        sql += " and lego_name='"+lego+"'"
-    }
-    connection.query(
-        sql,
-        [date, date],
-        function(err, result){
-            if(err){
-                console.log(err)
-            }else{
-                res.json({
-                    "instruct" : result
-                })
-            }
-        }
-    )
-})
-
-app.get("/instruct_del", function(req,res){
-    var id = req.query._id;
-    id = id.replace(/,/gi," or order_id = ");
-    console.log(id)
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        connection.query(
-            `delete from ordert where order_id =`+id,
-        function(err,result){
-            if(err){
-                console.log(err)
-                res.send("instruct SQL delete error")
-            }else{  
-                res.redirect("/instruct")
-            }
-        })
-    }
-})
-
-app.get("instruct_update", function(req,res){
-    var ud = req.query.ud;
-    connection.query(
-        `update ordert set `
-    )
-})
-
-app.get("/orderS",function(req,res){
-    var date = moment().format("YYYY-MM-DD")
-    var lastdate = moment().format("YYYY-MM-DD")
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        if(req.session.logged.linkcode == 1){
-            res.redirect("/alert")
-        }else{
-            connection.query(
-                `select * from orders order by orders_id desc`,
-                function(err, result){
-                    if(err){
-                        console.log(err);
-                        res.send("search SQL select Error")
-                    }else{
-                        res.render("orderS",{
-                            "orders" : result,
-                            "date" : date,
-                            "date_m" : lastdate,
-                            "linkcode" : req.session.logged.linkcode
+                        res.json({
+                            "monitor" : result[0]
                         })
                     }
                 }
-            )
-        }
-    }
-})
-
-app.get("/orderS_del", function(req, res){
-    var id = req.query._id;
-    id = id.replace(/,/gi," or orders_id = ");
-    console.log(id)
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        connection.query(
-            `delete from orders where orders_id =`+id,
-            function(err, result){
-                if(err){
-                    console.log(err)
-                    res.send("orders SQL delete Error")
-                }else{
-                    res.redirect("/orderS")
-                }
             }
         )
     }
 })
 
-app.post("/orderS", function(req, res){
-    var name = req.body._custname;
-    var product = req.body._legoname;
-    var quantity = req.body._quantity;
-    var date_o = req.body._date_o;
-    var date_d = req.body._date_d;
-    var cid = req.body._cid;
-    console.log(name, date_o, date_d);
-    connection.query(
-        `insert into orders(cust_name, lego_name, orders_qty, orders_date, delivery_date, cid) values (?, ?, ?, ?, ?, ?)`,
-        [name, product, quantity, date_o, date_d, cid],
-        function(err, result){
-            
-        }
-    )
+app.get("/stop", function(req, res){
+    req.session.run = false;
+    clearInterval(interval);
+    res.redirect("/")
 })
 
-app.get("/product",function(req,res){
-    var date = moment().format("YYYY-MM-DD")
-    if(!req.session.logged){
-        res.redirect("/")
-    }else{
-        if(req.session.logged.linkcode == 1){
-            res.redirect("/alert")
-        }else{
-            connection.query(
-                `select * from performance order by order_id`,
-                function(err, result){
-                    if(err){
-                        console.log(err);
-                        res.send("search SQL select Error")
-                    }else{
-                        res.render("product",{
-                            "date" : date,
-                            "performance" : result,
-                            "linkcode" : req.session.logged.linkcode
-                        })
-                    }
-                }
-            )
-        }
-    }
-})
+const defect = require("./def");
+app.use("/defect", defect);
 
-app.get("/product_reset", function(req,res){
-    connection.query(
-        `select * from performance order by date desc`,
-        function(err,result){
-            if(err){
-                console.log(err)
-            }else{
-                console.log(result)
-                res.json({
-                    "performance" : result
-                })
-            }
+const current = require("./cur");
+app.use("/current", current);
 
-        }
-    )
-})
+const orderS = require("./ord");
+app.use("/orderS", orderS);
 
-app.get("/product_search", function(req, res){
-    var pp = req.query.pp;
-    var pd = req.query.pd;
-    console.log(pp)
-    connection.query(
-        `select * from performance where lego_name=? and date=?`,
-        [pp, pd],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.json({
-                    "performance": result
-                });
-            }
-        }
-    )
-})
+const instruct = require("./ins");
+app.use("/instruct", instruct)
+
+const product = require("./pro");
+app.use("/product", product)
 
 app.get("/alert", function(req, res){
     res.render("alert")

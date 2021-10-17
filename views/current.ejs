@@ -76,7 +76,7 @@
         var cur;
         var run;
         $.ajax({
-                url : "/cur",
+                url : "/current/cur",
                 method : "get",
                 dataType : "json",
                 async : false,
@@ -93,7 +93,25 @@
         var mold_temp = [];
         var melt_temp = [];
         var date = [];
+        for (var i=0; i<20; i++){
+            injection_time.push(null)
+            hold_time.push(null)
+            filling_time.push(null)
+            injection_speed.push(null)
+            hold_pressure.push(null)
+            mold_temp.push(null)
+            melt_temp.push(null)
+            date.push(null)
+        }
         for (var i=0; i<cur.length; i++){
+            injection_time.shift()
+            hold_time.shift()
+            filling_time.shift()
+            injection_speed.shift()
+            hold_pressure.shift()
+            mold_temp.shift()
+            melt_temp.shift()
+            date.shift()
             injection_time.push(cur[i].injection_time)
             hold_time.push(cur[i].hold_time)
             filling_time.push(cur[i].filling_time)
@@ -388,7 +406,7 @@
         if(run){
             setInterval(function (){
             //시간 
-            $.getJSON("/current_update",
+            $.getJSON("/current/update",
             function(result){
                 //x축에 실시간 데이터 생성
                 var axisData = result.cur.date.slice(11,19);
@@ -398,9 +416,15 @@
                 var data02 = option0.series[2].data;
 
                 //데이터의 가장 왼쪽 값을 제거
-                data00.shift();
-                data01.shift();
-                data02.shift();
+                if(date.length==20){
+                    data00.shift();
+                    data01.shift();
+                    data02.shift();
+                    option0.xAxis[0].data.shift();
+                }
+                
+            
+                
 
                 //데이터의 가장 오른쪽 값을 추가
                 data00.push(result.cur.injection_time);
@@ -408,7 +432,6 @@
                 data02.push(result.cur.filling_time);
 
                 //x축에 시간 데이터 추가
-                option0.xAxis[0].data.shift();
                 option0.xAxis[0].data.push(axisData);
 
                 //차트에 반영
@@ -420,13 +443,16 @@
                 var data10 = option1.series[0].data; //순수익 데이터
 
                 //데이터의 가장 왼쪽 값을 제거
-                data10.shift();
+                if(date.length==20){
+                    data10.shift();
+                    option1.xAxis[0].data.shift();
+                }
 
                 //데이터의 가장 오른쪽 값을 추가
                 data10.push(result.cur.injection_speed);
 
                 //x축에 시간 데이터 추가
-                option1.xAxis[0].data.shift();
+                
                 option1.xAxis[0].data.push(axisData);
 
                 //차트에 반영
@@ -437,13 +463,15 @@
                 var data20 = option2.series[0].data; //순수익 데이터
 
                 //데이터의 가장 왼쪽 값을 제거
-                data20.shift();
+                if(date.length==20){
+                    data20.shift();
+                    option2.xAxis[0].data.shift();
+                }
 
                 //데이터의 가장 오른쪽 값을 추가
                 data20.push(result.cur.hold_pressure);
 
                 //x축에 시간 데이터 추가
-                option2.xAxis[0].data.shift();
                 option2.xAxis[0].data.push(axisData);
 
                 //차트에 반영
@@ -455,15 +483,18 @@
                 var data31 = option3.series[1].data;
 
                 //데이터의 가장 왼쪽 값을 제거
-                data30.shift();
-                data31.shift();
+                if(date.length==20){
+                    data30.shift();
+                    data31.shift();
+                    option3.xAxis[0].data.shift();
+                }
+                
 
                 //데이터의 가장 오른쪽 값을 추가
                 data30.push(result.cur.mold_temp);
                 data31.push(result.cur.melt_temp);
 
                 //x축에 시간 데이터 추가
-                option3.xAxis[0].data.shift();
                 option3.xAxis[0].data.push(axisData);
 
                 //차트에 반영

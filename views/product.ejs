@@ -129,7 +129,7 @@
                 $("#tbody2").html("");
                 var pp = $("#product_i").val()
                 var pd = $("#product_d").val()
-                $.getJSON("/product_search", {
+                $.getJSON("/product/search", {
                     pp : pp,
                     pd : pd
                 },
@@ -151,7 +151,7 @@
 
         function reset(){
             $("#tbody2").html("")
-            $.getJSON("/product_reset",
+            $.getJSON("/product/reset",
             function(result){ 
               var body;
               for(var i=0; i<result.performance.length; i++){

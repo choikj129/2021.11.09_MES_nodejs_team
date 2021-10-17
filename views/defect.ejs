@@ -126,12 +126,12 @@
         function search() {
           $("tbody").html("");
           var date = $("#datepicker").val()
-          $.getJSON("/defect_search", {
+          $.getJSON("/defect/search", {
             date: date
           },
             function (result) {
               var body;
-              for (var i=1; i<result.defect.length; i++){
+              for (var i=0; i<result.defect.length; i++){
                 body += "<tr>"
                 for (key in result.defect[0]){
                   body += "<td>"+result.defect[i][key]+"</td>"
@@ -145,7 +145,7 @@
         var interval;
         function run(){
             interval = setInterval(function(){
-                $.getJSON("/defect_ajax",
+                $.getJSON("/defect/ajax",
                   function(result){
                   }
                 )
