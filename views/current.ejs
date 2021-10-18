@@ -34,7 +34,7 @@
         </div>
         <div class="wrapper2" style="position: absolute; top:4.5vh; left:7.5vw;">
             <div style="font-size:2.8vh">
-                <b>시<br>간<br>현<br>황</b>
+                <b>용<br>융<br>온<br>도</b>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="wrapper2" style="position: absolute; top:4.5vh; right:43.3vw;">
             <div style="font-size:2.8vh">
-                <b>속<br>도<br>현<br>황</b>
+                <b>금<br>형<br>온<br>도</b>
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
         </div>
         <div class="wrapper2" style="position: absolute; top:50.5vh; right:43.3vw;">
             <div style="font-size:2.8vh">
-                <b>온<br>도<br>현<br>황</b>
+                <b>사<br>출<br>속<br>도</b>
             </div>
         </div>
     </div>
@@ -85,48 +85,63 @@
                     run = result.run
                 }
         })
-        var injection_time = [];
-        var hold_time = [];
-        var filling_time = [];
+        var melt_temp = [];
+        var mold_temp = [];
         var injection_speed = []
         var hold_pressure = []
-        var mold_temp = [];
-        var melt_temp = [];
         var date = [];
         for (var i=0; i<20; i++){
-            injection_time.push(null)
-            hold_time.push(null)
-            filling_time.push(null)
+            melt_temp.push(null)
+            mold_temp.push(null)
             injection_speed.push(null)
             hold_pressure.push(null)
-            mold_temp.push(null)
-            melt_temp.push(null)
             date.push(null)
         }
         for (var i=0; i<cur.length; i++){
-            injection_time.shift()
-            hold_time.shift()
-            filling_time.shift()
+            melt_temp.shift()
+            mold_temp.shift()
             injection_speed.shift()
             hold_pressure.shift()
-            mold_temp.shift()
-            melt_temp.shift()
             date.shift()
-            injection_time.push(cur[i].injection_time)
-            hold_time.push(cur[i].hold_time)
-            filling_time.push(cur[i].filling_time)
+            melt_temp.push(cur[i].melt_temp)
+            mold_temp.push(cur[i].mold_temp)
             injection_speed.push(cur[i].injection_speed)
             hold_pressure.push(cur[i].hold_pressure)
-            mold_temp.push(cur[i].mold_temp)
-            melt_temp.push(cur[i].melt_temp)
             date.push(cur[i].date.slice(11,19))
         }
-        // 시간 그래프
+        // 용융온도 그래프
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart0 = echarts.init(document.getElementById('Chart0'));
+        var myChart0 = echarts.init(document.getElementById('Chart0'), 'dark');
+        //UCL, LCL
+        const markLine0 = [];
+        for (var i = 0; i < 3; i++) {
+            markLine0.push(
+                {
+                    name: 'UCL'+i,
+                    yAxis: 330,
+                    symbol : 'none'
+                }
+            );
+            markLine0.push(
+                {
+                    name: 'LCL'+i,
+                    yAxis: 230,
+                    symbol: 'none'
+                }
+            );
+            markLine0.push(
+                {
+                    name: 'Setting'+i,
+                    yAxis: 280,
+                    symbol: 'none'
+                }
+            );
+        }
+
         //chart의 설정을 정합니다.
         var option0 = {
             tooltip: {
+                symbol:'none',
                 trigger: 'axis',
                 axisPointer: {
                     label: {
@@ -135,7 +150,7 @@
                 }
             },
             legend: {
-                data:['사출시간', '보압시간', '배압시간'],
+                data:['용융온도'],
                 y:'bottom'
             },
             dataZoom: {
@@ -154,9 +169,9 @@
                 {
                     type: 'value',
                     scale: true,
-                    name: '시간(sec)',
-                    max: 25,
-                    min: 0,
+                    name: '용융온도(℃)',
+                    max: 400,
+                    min: 200,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
                         formatter: '{value}'
@@ -165,45 +180,49 @@
             ],
             series: [
                 {
-                    name: '사출시간',
-                    type: 'line',
-                    lineStyle:{
-                        color:'#2A265C' //line차트 색상 변경
-                    },
+                    name: '용융온도',
+                    type: 'scatter',
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: injection_time
-                },
-                {
-                    name: '보압시간',
-                    type: 'line',
-                    lineStyle:{
-                        color:'yellow' //line차트 색상 변경
-                    },
-                    yAxisIndex: 0, //yAxis 1번째 사용
-                    data: hold_time
-                },
-                {
-                    name: '배압시간',
-                    type: 'line',
-                    lineStyle:{
-                        color:'orange' //line차트 색상 변경
-                    },
-                    yAxisIndex: 0, //yAxis 1번째 사용
-                    data: filling_time
+                    data: melt_temp,
+                    markLine: {
+                        data: markLine0,
+                        symbol: 'none'
+                    }
                 }
             ]
         };
 
         // 위에서 설정한 속성을 차트에 반영합니다.
-        myChart0.setOption(option0);
+        myChart0.setOption(option0); 
+        //UCL, LCL
+        const markLine1 = [];
+        for (var i = 0; i < 3; i++) {
+            markLine1.push(
+                {
+                    name: 'UCL'+i,
+                    yAxis: 40,
+                    symbol : 'none'
+                }
+            );
+            markLine1.push(
+                {
+                    name: 'LCL'+i,
+                    yAxis: 30,
+                    symbol: 'none'
+                }
+            );
+            markLine1.push(
+                {
+                    name: 'Setting'+i,
+                    yAxis: 20,
+                    symbol: 'none'
+                }
+            );
+        }  
 
-        //데이터를 생성하고 삭제합니다.      
-
-
-        //속도 그래프
-
+        //금형온도 그래프
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart1 = echarts.init(document.getElementById('Chart1'));
+        var myChart1 = echarts.init(document.getElementById('Chart1'), 'dark');
 
         //chart의 설정을 정합니다.
         var option1 = {
@@ -216,7 +235,7 @@
                 }
             },
             legend: {
-                data:['사출속도'],
+                data:['금형온도'],
                 y:'bottom'
             },
             dataZoom: {
@@ -235,8 +254,8 @@
                 {
                     type: 'value',
                     scale: true,
-                    name: '속도(mm/s)',
-                    max: 70,
+                    name: '금형온도(℃)',
+                    max: 50,
                     min: 0,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
@@ -246,25 +265,53 @@
             ],
             series: [
                 {
-                    name: '사출속도',
-                    type: 'line',
+                    name: '금형온도',
+                    type: 'scatter',
                     lineStyle:{
                         color:'#2A265C' //line차트 색상 변경
                     },
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: injection_speed
+                    data: mold_temp,
+                    markLine: {
+                        data: markLine1,
+                        symbol: 'none'
+                    }
                 }
             ]
         };
 
         // 위에서 설정한 속성을 차트에 반영합니다.
-        myChart1.setOption(option1);       
+        myChart1.setOption(option1);     
+        //UCL, LCL
+        const markLine2 = [];
+        for (var i = 0; i < 3; i++) {
+            markLine2.push(
+                {
+                    name: 'UCL'+i,
+                    yAxis: 150,
+                    symbol : 'none'
+                }
+            );
+            markLine2.push(
+                {
+                    name: 'LCL'+i,
+                    yAxis: 140,
+                    symbol: 'none'
+                }
+            );
+            markLine2.push(
+                {
+                    name: 'Setting'+i,
+                    yAxis: 120,
+                    symbol: 'none'
+                }
+            );
+        }  
 
-
-        // 압력 그래프
+        // 보압 그래프
 
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart2 = echarts.init(document.getElementById('Chart2'));
+        var myChart2 = echarts.init(document.getElementById('Chart2'), 'dark');
 
         //chart의 설정을 정합니다.
         var option2 = {
@@ -308,24 +355,52 @@
             series: [
                 {
                     name: '보압',
-                    type: 'line',
+                    type: 'scatter',
                     lineStyle:{
                         color:'#2A265C' //line차트 색상 변경
                     },
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: hold_pressure
+                    data: hold_pressure,
+                    markLine: {
+                        data: markLine2,
+                        symbol: 'none'
+                    }
                 }
             ]
         };
 
         // 위에서 설정한 속성을 차트에 반영합니다.
         myChart2.setOption(option2);
+        //UCL, LCL
+        const markLine3 = [];
+        for (var i = 0; i < 3; i++) {
+            markLine3.push(
+                {
+                    name: 'UCL'+i,
+                    yAxis: 50,
+                    symbol : 'none'
+                }
+            );
+            markLine3.push(
+                {
+                    name: 'LCL'+i,
+                    yAxis: 55,
+                    symbol: 'none'
+                }
+            );
+            markLine3.push(
+                {
+                    name: 'Setting'+i,
+                    yAxis: 60,
+                    symbol: 'none'
+                }
+            );
+        }
 
-
-        //온도 그래프
+        //사출속도 그래프
 
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart3 = echarts.init(document.getElementById('Chart3'));
+        var myChart3 = echarts.init(document.getElementById('Chart3'), 'dark');
 
         //chart의 설정을 정합니다.
         var option3 = {
@@ -338,7 +413,7 @@
                 }
             },
             legend: {
-                data:['금형온도', '용융온도'],
+                data:['사출속도'],
                 y:'bottom'
             },
             dataZoom: {
@@ -357,20 +432,9 @@
                 {
                     type: 'value',
                     scale: true,
-                    name: '금형온도(℃)',
-                    max: 50,
+                    name: '사출속도(mm/s)',
+                    max: 70,
                     min: 0,
-                    boundaryGap: [0.2, 0.2],
-                    axisLabel: {
-                        formatter: '{value}'
-                    },
-                },
-                {
-                    type: 'value',
-                    scale: true,
-                    name: '용융온도(℃)',
-                    max: 300,
-                    min: 50,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
                         formatter: '{value}'
@@ -379,22 +443,17 @@
             ],
             series: [
                 {
-                    name: '금형온도',
-                    type: 'line',
+                    name: '사출속도',
+                    type: 'scatter',
                     lineStyle:{
                         color:'#2A265C' //line차트 색상 변경
                     },
                     yAxisIndex: 0, //yAxis 1번째 사용
-                    data: mold_temp
-                },
-                {
-                    name: '용융온도',
-                    type: 'line',
-                    lineStyle:{
-                        color:'yellow' //line차트 색상 변경
-                    },
-                    yAxisIndex: 1, //yAxis 1번째 사용
-                    data: melt_temp
+                    data: injection_speed,
+                    markLine: {
+                        data: markLine3,
+                        symbol: 'none'
+                    }
                 }
             ]
         };
