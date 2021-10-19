@@ -44,6 +44,7 @@
       .input-group-text {
         border-radius: 0;
         width: 4vw;
+        /* height: 6vh; */
       }
 
       .form-control {
@@ -56,12 +57,10 @@
 
       .modal_wrap {
         display: none;
+        /* width: 34vw;
+        height: 60vh; */
         width: 500px;
         height: 500px;
-        /* position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -250px 0 0 -250px; */
         background: #eee;
         z-index: 2;
       }
@@ -88,9 +87,12 @@
 
       .modal_close>a {
         display: block;
+        /* width: 5vw;
+        height: 5vh; */
         width: 100%;
         height: 100%;
         background: url(https://img.icons8.com/metro/26/000000/close-window.png);
+        /* text-indent: 2.5vw; */
         text-indent: -9999px;
       }
       form {
@@ -137,10 +139,10 @@
           <label class="input-group-text" for="inputGroupSelect01" style="width:6vw">거래처</label>
           <select class="form-select" id="search_c">
             <option value=""></option>
-            <option value="삼성전자">삼성전자</option>
-            <option value="LG전자">LG전자</option>
-            <option value="카카오">카카오</option>
-            <option value="네이버">네이버</option>
+            <option value="SAMSUNG">삼성전자</option>
+            <option value="LG">LG전자</option>
+            <option value="KAKAO">카카오</option>
+            <option value="NAVER">네이버</option>
           </select>
         </div>
       
@@ -208,7 +210,7 @@
               <td><%=orders[i].orders_qty%></td>
               <td><%=orders[i].orders_date%></td>
               <td><%=orders[i].delivery_date%></td>
-              <td><%=orders[i].date_c%></td>
+              <td><%=orders[i].cid%></td>
               <td><%=orders[i].mid%></td>
               <td><%=orders[i].date_m%></td>             
             </tr>
@@ -223,13 +225,26 @@
       <div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:5vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">거래처</span>
-          <input type="text" class="form-control" placeholder="거래처" id="_custname_M"
-            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
+          <!-- <input type="text" class="form-control" placeholder="거래처" id="_custname_M"
+            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh"> -->
+            <select class="form-select" id="search_c">
+              <option value="SAMSUNG">삼성전자</option>
+              <option value="LG">LG전자</option>
+              <option value="KAKAO">카카오</option>
+              <option value="NAVER">네이버</option>
+            </select>  
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:13vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">품목ID</span>
-          <input type="text" class="form-control" placeholder="품목ID" id="_legoname_M"
-            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
+          <!-- <input type="text" class="form-control" placeholder="품목ID" id="_legoname_M"
+            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh"> -->
+            <select class="form-select" id="search_i">
+              <option value=""></option>
+              <option value="bricks_rect">bricks_rect</option>
+              <option value="bricks_square">bricks_square</option>
+              <option value="circle">circle</option>
+              <option value="floor">floor</option>
+            </select>  
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:21vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">주문수량</span>
@@ -271,17 +286,30 @@
 
     <!---- 등록모달창 ---->
     <div class="modal_wrap" style="position: absolute; left:35vw; top:20vh">
-      <div class="modal_close"><a href="#">close</a></div>
+      <!-- <div class="modal_close"><a href="#">close</a></div> -->
       <div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:5vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">거래처</span>
-          <input type="text" class="form-control" placeholder="거래처" id="_custname_S"
-            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
+          <!-- <input type="text" class="form-control" placeholder="거래처" id="_custname_S"
+            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh"> -->
+            <select class="form-select" id="search_c">
+              <option value="SAMSUNG">삼성전자</option>
+              <option value="LG">LG전자</option>
+              <option value="KAKAO">카카오</option>
+              <option value="NAVER">네이버</option>
+            </select>  
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:13vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">품목ID</span>
-          <input type="text" class="form-control" placeholder="품목ID" id="_legoname_S"
-            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
+          <!-- <input type="text" class="form-control" placeholder="품목ID" id="_legoname_S"
+            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh"> -->
+            <select class="form-select" id="search_i">
+              <option value=""></option>
+              <option value="bricks_rect">bricks_rect</option>
+              <option value="bricks_square">bricks_square</option>
+              <option value="circle">circle</option>
+              <option value="floor">floor</option>
+            </select>  
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:21vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">주문수량</span>
@@ -411,12 +439,16 @@
       // 수주관리 삭제
       function del() {
         var checkBoxArr = [];
-        $("input:checkbox[name='_selected_']:checked").each(function () {
+        if($("input[name='_selected_all_']:checked").length == 1){
+          alert("삭제불가능");
+        }else{
+          $("input:checkbox[name='_selected_']:checked").each(function () {
           checkBoxArr.push($(this).val()); //체크된 값 뽑아서 push
         })
-        if (confirm("삭제 하시겠습니까?")) {
-          alert("삭제되었습니다.");
-          location.href = "/orderS/del?_id=" + checkBoxArr
+          if (confirm("삭제 하시겠습니까?")) {
+            alert("삭제되었습니다.");
+            location.href = "/orderS/del?_id=" + checkBoxArr
+          }
         }
       }
 
@@ -429,7 +461,7 @@
         var d = $("#_date_d_S").val();
         var ci = $("#_cid_S").val();
 
-        location.href = "/orderS/submit?_custname="+c+"&_legoname"+l+"$_quantity"+q+"$_date_o"+o+"$_date_d"+d+"$_cid"+ci
+        location.href = "/orderS/submit?_custname="+c+"&_legoname="+l+"&_quantity="+q+"&_date_o="+o+"&_date_d="+d+"&_cid="+ci
       }
 
       // 전체선택 버튼 클릭시 체크박스 전체 선택
