@@ -145,6 +145,10 @@
             }
             
              */
+
+             .alertI{
+                display : none;
+             }
         </style>
 </head>
 
@@ -178,9 +182,11 @@
         </tr>
     </table> -->
 
-    <!-- 진행단계 -->
-    <img src="/img/siren1.png" class="image test" style="width:6vw; height:10vh; position:absolute; right:3vw; top:32vh;">
-    <img src="/img/siren3.png" class="image blinking" style="width:6vw; height:10vh; position:absolute; right:3vw; top:32vh;">
+    <!--결함발생 alert -->
+    <div class="alertI">
+        <img src="/img/alert.WEBP" style="width:6vw; height:10vh; position:absolute; right:3vw; top:32vh;">
+    </div>
+
 
     <div align="center" class="box1"
         style="position: absolute; top:21.3vh; left:9.35vw; font-size: 1.2em; color: white; text-align:center; line-height: 5vh;">
@@ -431,6 +437,18 @@
         $("#ok").click(function () {
             $("#keyboard").hide()
         })
+
+        //alert 보여주기
+        // if($("alertI").css("display")=="none"){
+        //     if("#defect" > 0){
+        //         $("alertI").show(); //none 일 때
+        //     }
+        // }else{
+        //     $("alertI").hide(); //block 일 때
+        // }
+
+
+
     </script>
 
 </body>

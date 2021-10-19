@@ -169,6 +169,7 @@ function now(){
             if(result.monitor.thick !=1.5){
                 t = "N"
             }
+            $(".alertI").css("display","block")
             location.href="/defect/update?x="+x+"&y="+y+"&z="+z+"&h="+h+"&d="+d+"&t="+t+"&_id="+result.monitor.monitor_id+"&date="+result.monitor.date+"&error="+error
         }
     })
