@@ -25,7 +25,10 @@ router.get("/", function(req,res){
             })
         }else{
             connection.query(
-                `select date, cause, error from defect where date(date) = ?`,
+                `select date, cause, error,
+                (select count(*) from monitoring`+date+` where defect='N') nn,
+                (select count(*) from monitoring`+date+` where defect='Y') yy
+                from defect where date(date) = ?`,
                 [date],
                 function(err,result){
                     if(err){
@@ -34,7 +37,9 @@ router.get("/", function(req,res){
                         res.render("defect",{
                             'defect' : result,
                             "linkcode" : req.session.logged.linkcode,
-                            "run" : req.session.run
+                            "run" : req.session.run,
+                            "Y" : result[0].yy,
+                            "N" : result[0].nn
                         });
                     }
                 }
