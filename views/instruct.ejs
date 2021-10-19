@@ -228,12 +228,16 @@
     // 작업지시 삭제
     function del() {
       var checkBoxArr = [];
-      $("input:checkbox[name='_selected_']:checked").each(function () {
+      if($("input[name='_selected_all_']:checked").length == 1){
+          alert("삭제불가능");
+      }else{
+        $("input:checkbox[name='_selected_']:checked").each(function () {
         checkBoxArr.push($(this).val()); //체크된 값 뽑아서 push
       })
-      if (confirm("삭제 하시겠습니까?")) {
-        alert("삭제되었습니다.");
-        location.href = "/instruct/del?_id=" + checkBoxArr
+        if (confirm("삭제 하시겠습니까?")) {
+          alert("삭제되었습니다.");
+          location.href = "/instruct/del?_id=" + checkBoxArr
+        }
       }
     }
 
