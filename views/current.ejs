@@ -470,25 +470,17 @@
                 //x축에 실시간 데이터 생성
                 var axisData = result.cur.date.slice(11,19);
 
-                var data00 = option0.series[0].data; //순수익 데이터
-                var data01 = option0.series[1].data;
-                var data02 = option0.series[2].data;
+                var data0 = option0.series[0].data
 
                 //데이터의 가장 왼쪽 값을 제거
                 if(date.length==20){
-                    data00.shift();
-                    data01.shift();
-                    data02.shift();
+                    data0.shift();
                     option0.xAxis[0].data.shift();
                 }
                 
-            
-                
 
                 //데이터의 가장 오른쪽 값을 추가
-                data00.push(result.cur.injection_time);
-                data01.push(result.cur.hold_time);
-                data02.push(result.cur.filling_time);
+                data0.push(result.cur.melt_temp)
 
                 //x축에 시간 데이터 추가
                 option0.xAxis[0].data.push(axisData);
@@ -499,16 +491,16 @@
 
                 // 속도
                 //x축에 실시간 데이터 생성
-                var data10 = option1.series[0].data; //순수익 데이터
+                var data1 = option1.series[0].data; //순수익 데이터
 
                 //데이터의 가장 왼쪽 값을 제거
                 if(date.length==20){
-                    data10.shift();
+                    data1.shift();
                     option1.xAxis[0].data.shift();
                 }
 
                 //데이터의 가장 오른쪽 값을 추가
-                data10.push(result.cur.injection_speed);
+                data1.push(result.cur.mold_temp);
 
                 //x축에 시간 데이터 추가
                 
@@ -519,16 +511,16 @@
 
 
                 // 압력
-                var data20 = option2.series[0].data; //순수익 데이터
+                var data2 = option2.series[0].data; //순수익 데이터
 
                 //데이터의 가장 왼쪽 값을 제거
                 if(date.length==20){
-                    data20.shift();
+                    data2.shift();
                     option2.xAxis[0].data.shift();
                 }
 
                 //데이터의 가장 오른쪽 값을 추가
-                data20.push(result.cur.hold_pressure);
+                data2.push(result.cur.hold_pressure);
 
                 //x축에 시간 데이터 추가
                 option2.xAxis[0].data.push(axisData);
@@ -538,20 +530,17 @@
 
 
                 //온도
-                var data30 = option3.series[0].data; //순수익 데이터
-                var data31 = option3.series[1].data;
+                var data3 = option3.series[0].data;
 
                 //데이터의 가장 왼쪽 값을 제거
                 if(date.length==20){
-                    data30.shift();
-                    data31.shift();
+                    data3.shift();
                     option3.xAxis[0].data.shift();
                 }
                 
 
                 //데이터의 가장 오른쪽 값을 추가
-                data30.push(result.cur.mold_temp);
-                data31.push(result.cur.melt_temp);
+                data3.push(result.cur.injection_speed);
 
                 //x축에 시간 데이터 추가
                 option3.xAxis[0].data.push(axisData);
