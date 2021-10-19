@@ -127,30 +127,33 @@
 
             function search(){
                 $("#tbody2").html("");
-                var pp = $("#product_i").val()
-                var pd = $("#product_d").val()
+                // var pp = $("#product_i").val()
+                // var pd = $("#product_d").val()
                 $.getJSON("/product/search", {
-                    pp : pp,
-                    pd : pd
+                    product_i : $("#product_i").val(),
+                    product_d : $("#product_d").val()
                 },
                 function(result){
-                var body;
-                for(var i=0; i<result.performance.length; i++){
-                    body += "<tr>"
-                    for (key in result.performance[0]){
-                        if(key=="pp_id"){
-                            continue
+                    var body;
+                    for(var i=0; i<result.performance.length; i++){
+                        body += "<tr>"
+                        for (key in result.performance[0]){
+                            if(key=="pp_id"){
+                                continue
+                            }
+                            body += "<td>"+result.performance[i][key]+"</td>"
+                            
                         }
-                        body += "<td>"+result.performance[i][key]+"</td>"
+                        body += "</tr>"
                     }
-                    body += "</tr>"
-                }
-                $("#tbody2").html(body)
-            })
-        }
+                    $("#tbody2").html(body)
+                })
+            }
 
         function reset(){
             $("#tbody2").html("")
+            $("#product_d").val("")
+            $("#product_i option:eq(0)").prop("selected", true)
             $.getJSON("/product/reset",
             function(result){ 
               var body;
