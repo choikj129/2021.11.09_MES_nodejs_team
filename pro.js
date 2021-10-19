@@ -58,22 +58,56 @@ router.get("/reset", function(req,res){
 })
 
 router.get("/search", function(req, res){
-    var pp = req.query.pp;
-    var pd = req.query.pd;
-    console.log(pp)
+    var pp = req.query.product_i;
+    var pd = req.query.product_d;
+    var where = "";
+    var li = [];
+    var data = []
+    sql = `select*from performance `
+    if(pp!=""){
+        li.push("lego_name = ?")
+        data.push(pp)
+    }
+    if(pd!=""){
+        li.push("date = ?")
+        data.push(pd)
+    }
+    if(li.length>0){
+        where += "where "
+    }
+    for (var i=0; i<li.length; i++){
+        where += li[i]+" and "
+    }
+    sql2 = (sql+where)
+    if(where!=""){
+        sql2 = (sql2).slice(0,sql2.length-4)
+    }
     connection.query(
-        `select * from performance where lego_name=? and date(date)=?`,
-        [pp, pd],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
+        sql2,
+        data,
+        function(err,result){
+            if(err){
+                console.log(err)
+            }else{
                 res.json({
-                    "performance": result
-                });
+                    "performance" : result
+                })
             }
         }
     )
+    // connection.query(
+    //     `select * from performance where lego_name=? and date(date)=?`,
+    //     [pp, pd],
+    //     (err, result) => {
+    //         if (err) {
+    //             console.log(err);
+    //         } else {
+    //             res.json({
+    //                 "performance": result
+    //             });
+    //         }
+    //     }
+    // )
 })
 
 module.exports = router
