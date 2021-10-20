@@ -163,10 +163,19 @@
             }
             .modal_wrap {
                 display: none;
+                width: 400px;
+                height: 320px;
                 position: absolute;
-                width: 34px;
-                height: 40px;
-                background-color: white;
+                margin: -200px 0 0 -200px;
+                background: rgb(210, 215, 221);
+                z-index: 2;
+            }
+            .black_bg{
+                display: none;
+                position: fixed;
+                top:0; left: 0; bottom: 0; right: 0;
+                background: rgba(0, 0, 0, 0.8);
+                z-index : 1;
             }
             .modal_close {
                 color: white;
@@ -401,7 +410,7 @@
     </button>
 
     <!-- 용융온도 -->
-    <div class="wrapper modal_btn" style="position: absolute; top: 45vh; left:7.35vw; color:white; font-weight: 1000;">
+    <div class="wrapper" id="modal_btn" style="position: absolute; top: 45vh; left:7.35vw; color:white; font-weight: 1000;">
         <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>용융 온도</b></div>
         <img src="/img/temp.png" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
         <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">기준값</div>
