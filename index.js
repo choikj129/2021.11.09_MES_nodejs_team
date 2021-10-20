@@ -54,7 +54,23 @@ app.post("/login", function(req, res){
                     req.session.logged = result[0];
                     req.session.dir = false
                     req.session.run = false
-                    res.redirect("/main")
+                    connection.query(
+                        `select avg(mold_m) mold_m, avg(melt_m) melt_m, avg(hold_m) hold_m, avg(injection_m) inj_m,
+                        avg(mold_s) mold_s, avg(melt_s) melt_s, avg(hold_s) hold_s, avg(injection_s) inj_s
+                         from optimum`,
+                        function(err, result){
+                            if(err){
+                                console.log(err)
+                            }else{
+                                req.session.mold = [result[0].mold_m, result[0].mold_s]
+                                req.session.melt = [result[0].melt_m, result[0].melt_s]
+                                req.session.hold = [result[0].hold_m, result[0].hold_s]
+                                req.session.inj = [result[0].inj_m, result[0].inj_s]
+                                res.redirect("/main")
+                            }
+                        }
+                    )
+                    
                 }else{
                     res.redirect("/")
                 }
@@ -77,6 +93,7 @@ app.get("/logout", function(req, res){
 var interval;
 var id = 46;
 
+
 app.get("/main", function(req, res){
     console.log("run : "+req.session.run)
     req.session.dir = false;
@@ -97,7 +114,8 @@ app.get("/main", function(req, res){
                             'monitor' : result0[0],
                             'run' : req.session.run,
                             'linkcode' : req.session.logged.linkcode,
-                            "dir" : req.session.dir
+                            "dir" : req.session.dir,
+                            
                         })
                     }else{
                         req.session.dir = true;
@@ -126,13 +144,20 @@ app.get("/main", function(req, res){
     }
 })
 
+
 app.get("/main_update", function(req, res){
+    var mold = req.session.mold;
+    var melt = req.session.melt;
+    var hold = req.session.hold;
+    var inj = req.session.inj;
+    console.log(mold)
     date = moment().format("YYYYMMDD")
     if(!req.session.logged){
         res.redirect("/")
     }else{
         connection.query(
-            `select *, (select count(*) from monitoring`+date+`) cnt, 
+            `select *,
+            (select count(*) from monitoring`+date+`) cnt, 
             (select sum(quantity) from ordert where date(date) =`+date+`) total,
             (select count(*) from monitoring`+date+` where defect='N') def  
             from monitoring`+date+` order by monitor_id desc limit 1`,
@@ -143,13 +168,22 @@ app.get("/main_update", function(req, res){
                     if (req.session.run == false){
                         req.session.run = true;
                         interval = setInterval(function () {
-                            id += 1
-                            console.log(id)
+                            moldt = (Math.random()*5 + parseInt(mold[0])).toFixed(2)
+                            meltt = (Math.random()*5 + parseInt(melt[0])).toFixed(2)
+                            holdp = (Math.random()*3 + parseInt(hold[0])).toFixed(2)
+                            injs = (Math.random()*3 + parseInt(inj[0])).toFixed(2)
+                            var defect = "Y"
+                            if(moldt<mold[0]-2*mold[1] || moldt>mold[0]+2*mold[1]
+                            || meltt<melt[0]-2*melt[1] || meltt>melt[0]+2*melt[1]
+                            || holdp<hold[0]-2*hold[1] || holdp>hold[0]+2*hold[1]
+                            || injs<inj[0]-2*inj[1] || injs>inj[0]+2*inj[1]){
+                                defect = "N"
+                            }
                             connection.query(
                                 `insert into monitoring` + date + `
-                                 (mold_temp, melt_temp, injection_speed, hold_pressure, injection_time, hold_time, filling_time, cycle_time, x, y, z, stud_h, stud_d, thick, defect, date)
-                                select mold_temp, melt_temp, injection_speed, hold_pressure, injection_time, hold_time, filling_time, cycle_time, x, y, z, stud_h, stud_d, thick, defect, now() 
-                                    from data where monitor_id = ` + id,
+                                 (mold_temp, melt_temp, injection_speed, hold_pressure, injection_time, hold_time, filling_time, cycle_time, defect, date)
+                                 values(?, ?, ?, ?, 9.58, 7.13, 4.47, 59.52, ?, now())`,
+                                [moldt, meltt, holdp, injs, defect],
                                 function (err) {
                                     if (err) {
                                         console.log(err)

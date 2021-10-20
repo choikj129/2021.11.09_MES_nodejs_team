@@ -80,12 +80,6 @@ router.get("/register", function(req, res){
                      hold_time double not null,
                      filling_time double not null,
                      cycle_time double not null,
-                     x double not null,
-                     y double not null,
-                     z double not null,
-                     stud_h double not null,
-                     stud_d double not null,
-                     thick double not null,
                      defect varchar(5) not null,
                      date text not null)`,
                     function(err0){
