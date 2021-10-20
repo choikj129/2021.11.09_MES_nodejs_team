@@ -23,18 +23,19 @@ DROP TABLE IF EXISTS `optimum`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `optimum` (
-  `optimum_id` int NOT NULL,
-  `mold_temp` decimal(18,2) NOT NULL,
-  `melt_temp` decimal(18,2) NOT NULL,
-  `injection_speed` decimal(18,2) NOT NULL,
-  `hold_pressure` decimal(18,2) NOT NULL,
-  `injection_time` varchar(45) NOT NULL,
-  `hold_time` varchar(45) NOT NULL,
-  `filling_time` varchar(45) NOT NULL,
-  `date` varchar(45) NOT NULL,
-  `time` varchar(45) NOT NULL,
+  `optimum_id` int NOT NULL AUTO_INCREMENT,
+  `setup_id` int NOT NULL,
+  `mold_m` decimal(18,2) NOT NULL,
+  `melt_m` decimal(18,2) NOT NULL,
+  `hold_m` decimal(18,2) NOT NULL,
+  `injection_m` decimal(18,2) NOT NULL,
+  `mold_s` decimal(18,2) NOT NULL,
+  `melt_s` decimal(18,2) NOT NULL,
+  `hold_s` decimal(18,2) NOT NULL,
+  `injection_s` decimal(18,2) NOT NULL,
+  `date` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`optimum_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,7 @@ CREATE TABLE `optimum` (
 
 LOCK TABLES `optimum` WRITE;
 /*!40000 ALTER TABLE `optimum` DISABLE KEYS */;
-INSERT INTO `optimum` VALUES (1,24.78,259.80,55.40,141.50,'00:10:58','00:15:32','','2021-08-03','10:24:32'),(2,25.30,263.10,55.50,141.80,'00:11:00','00:16:12','','2021-08-03','14:11:00');
+INSERT INTO `optimum` VALUES (1,1,25.11,275.96,55.14,134.67,2.80,2.91,1.75,1.72,'2021-10-18'),(2,2,25.97,274.68,56.05,134.92,2.84,2.99,1.73,1.76,'2021-10-19'),(3,3,24.55,275.41,55.51,136.30,2.81,3.00,1.78,1.82,'2021-10-20'),(4,4,25.58,276.99,54.76,135.69,2.92,2.88,1.67,1.74,'2021-10-21');
 /*!40000 ALTER TABLE `optimum` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-05  9:13:45
+-- Dump completed on 2021-10-20 10:51:07

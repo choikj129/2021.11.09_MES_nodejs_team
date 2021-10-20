@@ -23,18 +23,15 @@ DROP TABLE IF EXISTS `setup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `setup` (
-  `setup_id` int NOT NULL,
+  `setup_id` int NOT NULL AUTO_INCREMENT,
   `mold_temp` decimal(18,2) NOT NULL,
   `melt_temp` decimal(18,2) NOT NULL,
   `injection_speed` decimal(18,2) NOT NULL,
   `hold_pressure` decimal(18,2) NOT NULL,
-  `injection_time` varchar(45) NOT NULL,
-  `hold_time` varchar(45) NOT NULL,
-  `filling_time` varchar(45) NOT NULL,
   `date` varchar(45) NOT NULL,
-  `time` varchar(45) NOT NULL,
+  `quantity` int NOT NULL,
   PRIMARY KEY (`setup_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +40,7 @@ CREATE TABLE `setup` (
 
 LOCK TABLES `setup` WRITE;
 /*!40000 ALTER TABLE `setup` DISABLE KEYS */;
-INSERT INTO `setup` VALUES (1,10.00,10.00,101.00,10.00,'10','10','1','1','1');
+INSERT INTO `setup` VALUES (1,25.00,276.00,55.00,135.00,'2021-10-18',500),(2,26.32,274.58,56.12,134.96,'2021-10-19',300),(3,24.58,275.55,55.43,136.22,'2021-10-20',200),(4,25.56,277.16,54.88,135.64,'2021-10-21',500);
 /*!40000 ALTER TABLE `setup` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-05  9:13:45
+-- Dump completed on 2021-10-20 10:51:07
