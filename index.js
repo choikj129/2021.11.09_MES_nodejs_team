@@ -90,6 +90,13 @@ app.get("/logout", function(req, res){
     })
 })
 
+app.get("/time", function(req, res){
+    res.json({
+        "date" : moment().format("YYYY-MM-DD"),
+        "time" : moment().format("HH:mm:ss")
+    })
+})
+
 var interval;
 var id = 46;
 
