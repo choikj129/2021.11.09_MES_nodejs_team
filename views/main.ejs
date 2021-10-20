@@ -414,13 +414,13 @@
     <div class="modal_wrap" style="position: absolute; left:53vw; top:50vh; z-index:10;">
         <div style="position: absolute; width:11.9vw; top:5vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
         font-size: x-large; background-color: rgb(123, 179, 212);"><b>상한값</b></div>
-        <div style="position: absolute; width: 7.8vw; height:7vh; top:5vh; left:16.1vw; background-color: white;"></div>
+        <div style="position: absolute; width: 7.8vw; height:7vh; top:5vh; left:16.1vw; background-color: white;" id="ucl"></div>
         <div style="position: absolute; width:11.9vw; top:13vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
         font-size: x-large; background-color: sandybrown;"><b>추천최적값</b></div>
-        <div style="position: absolute; width: 7.8vw; height:7vh; top:13vh; left:16.1vw; background-color: white;"></div>
+        <div style="position: absolute; width: 7.8vw; height:7vh; top:13vh; left:16.1vw; background-color: white;" id="cl"></div>
         <div style="position: absolute; width:11.9vw; top:21vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
-        font-size: x-large; background-color: rgb(123, 179, 212);"><b>하한값</b></div>
-        <div style="position: absolute; width: 7.8vw; height:7vh; top:21vh; left:16.1vw; background-color: white;"></div>
+        font-size: x-large; background-color: rgb(123, 179, 212);" ><b>하한값</b></div>
+        <div style="position: absolute; width: 7.8vw; height:7vh; top:21vh; left:16.1vw; background-color: white;" id="lcl"></div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:4vw; top:29vh; background-color: rgb(210, 215, 221);">
             <span class="input-group-text" id="inputGroup-sizing-default" style="width:12vw; height:7vh; display: table-cell; 
             text-align: center; line-height: 5vh; font-size: x-large; background-color: rgb(255, 208, 0);"><b>입력값</b></span>            
@@ -434,26 +434,9 @@
             width:5vw; height:6vh; display:inline-block; text-indent: 0px; line-height: 4.3vh; font-size:large" id="register"><b>취소</b></div><a href="#"></a></button>
         </div>
     </div>
-    <script>
-        window.onload = function() {
-     
-            function onClick() {
-                document.querySelector('.modal_wrap').style.display ='block';
-                document.querySelector('.black_bg').style.display ='block';
-            }   
-            function offClick() {
-                document.querySelector('.modal_wrap').style.display ='none';
-                document.querySelector('.black_bg').style.display ='none';
-            }
-        
-            document.getElementById('modal_btn').addEventListener('click', onClick);
-            document.querySelector('.modal_close').addEventListener('click', offClick);
-        
-        };
-    </script>
 
     <!-- 용융온도 -->
-    <div class="wrapper" id="modal_btn" style="position: absolute; top: 45vh; left:7.35vw; color:white; font-weight: 1000;">
+    <div class="wrapper modal_btn" onclick="modal('melt')" style="position: absolute; top: 45vh; left:7.35vw; color:white; font-weight: 1000;">
         <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>용융 온도</b></div>
         <img src="/img/temp.png" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
         <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">기준값</div>
@@ -470,7 +453,7 @@
         </div>
     </div>
     <!-- 금형온도 -->
-    <div class="wrapper" style="position: absolute; top: 45vh; left:30.35vw; color:white; font-weight: 1000;">   
+    <div class="wrapper modal_btn" onclick="modal('mold')" style="position: absolute; top: 45vh; left:30.35vw; color:white; font-weight: 1000;">   
         <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>금형 온도</b></div>
         <img src="/img/temp.png" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">    
         <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">기준값</div>
@@ -488,7 +471,7 @@
     </div>
 
     <!-- 사출속도 -->
-    <div class="wrapper" style="position: absolute; top: 45vh; left:53.35vw; color:white; font-weight: 1000;">
+    <div class="wrapper modal_btn" onclick="modal('inj')" style="position: absolute; top: 45vh; left:53.35vw; color:white; font-weight: 1000;">
         <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>사출속도</b></div>
         <img src="/img/sp.png" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
         <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">기준값</div>
@@ -506,7 +489,7 @@
     </div>
     </div>
     <!-- 보압 -->
-    <div class="wrapper" style="position: absolute; top: 45vh; left:76.35vw; color:white; font-weight: 1000;">
+    <div class="wrapper modal_btn" onclick="modal('hold')" style="position: absolute; top: 45vh; left:76.35vw; color:white; font-weight: 1000;">
         <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;">
             <b>보압</b></div>
         <img src="/img/pr.png" style="width:5.5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
@@ -642,7 +625,34 @@
         //     $("alertI").hide(); //block 일 때
         // }
 
+        $(".modal_btn").click(function () {
+            $(".modal_wrap").css("display", "block")
+            $(".black_bg").css("display", "block")
+        })
 
+        $(".modal_close").click(function () {
+            $(".modal_wrap").css("display", "none")
+            $(".black_bg").css("display", "none")
+        })
+        function modal(name){
+            if (name == "melt"){
+                $("#ucl").text((parseFloat("<%=melt[0]%>")+2*parseFloat("<%=melt[1]%>")).toFixed(2))
+                $("#cl").text(parseFloat("<%=melt[0]%>").toFixed(2))
+                $("#lcl").text((parseFloat("<%=melt[0]%>")-2*parseFloat("<%=melt[1]%>")).toFixed(2))
+            }else if (name == "mold"){
+                $("#ucl").text((parseFloat("<%=mold[0]%>")+2*parseFloat("<%=mold[1]%>")).toFixed(2))
+                $("#cl").text(parseFloat("<%=mold[0]%>").toFixed(2))
+                $("#lcl").text((parseFloat("<%=mold[0]%>")-2*parseFloat("<%=mold[1]%>")).toFixed(2))
+            }else if (name == "hold"){
+                $("#ucl").text((parseFloat("<%=hold[0]%>")+2*parseFloat("<%=hold[1]%>")).toFixed(2))
+                $("#cl").text(parseFloat("<%=hold[0]%>").toFixed(2))
+                $("#lcl").text((parseFloat("<%=hold[0]%>")-2*parseFloat("<%=hold[1]%>")).toFixed(2))
+            }else{
+                $("#ucl").text((parseFloat("<%=inj[0]%>")+2*parseFloat("<%=inj[1]%>")).toFixed(2))
+                $("#cl").text(parseFloat("<%=inj[0]%>").toFixed(2))
+                $("#lcl").text((parseFloat("<%=inj[0]%>")-2*parseFloat("<%=inj[1]%>")).toFixed(2))
+            }
+        }
 
     </script>
 

@@ -62,10 +62,10 @@ app.post("/login", function(req, res){
                             if(err){
                                 console.log(err)
                             }else{
-                                req.session.mold = [result[0].mold_m, result[0].mold_s]
-                                req.session.melt = [result[0].melt_m, result[0].melt_s]
-                                req.session.hold = [result[0].hold_m, result[0].hold_s]
-                                req.session.inj = [result[0].inj_m, result[0].inj_s]
+                                req.session.mold = [parseFloat(result[0].mold_m), parseFloat(result[0].mold_s)]
+                                req.session.melt = [parseFloat(result[0].melt_m), parseFloat(result[0].melt_s)]
+                                req.session.hold = [parseFloat(result[0].hold_m), parseFloat(result[0].hold_s)]
+                                req.session.inj = [parseFloat(result[0].inj_m), parseFloat(result[0].inj_s)]
                                 res.redirect("/main")
                             }
                         }
@@ -122,7 +122,10 @@ app.get("/main", function(req, res){
                             'run' : req.session.run,
                             'linkcode' : req.session.logged.linkcode,
                             "dir" : req.session.dir,
-                            
+                            "melt" : req.session.melt,
+                            "mold" : req.session.mold,
+                            "hold" : req.session.hold,
+                            "inj" : req.session.inj
                         })
                     }else{
                         req.session.dir = true;
@@ -139,7 +142,11 @@ app.get("/main", function(req, res){
                                         "run" : req.session.run,
                                         "linkcode" : req.session.logged.linkcode,
                                         "dir" : req.session.dir,
-                                        "order" : result0
+                                        "order" : result0,
+                                        "melt" : req.session.melt,
+                                        "mold" : req.session.mold,
+                                        "hold" : req.session.hold,
+                                        "inj" : req.session.inj
                                     })
                                 }
                             }
@@ -190,7 +197,7 @@ app.get("/main_update", function(req, res){
                                 `insert into monitoring` + date + `
                                  (mold_temp, melt_temp, injection_speed, hold_pressure, injection_time, hold_time, filling_time, cycle_time, defect, date)
                                  values(?, ?, ?, ?, 9.58, 7.13, 4.47, 59.52, ?, now())`,
-                                [moldt, meltt, holdp, injs, defect],
+                                [moldt, meltt, injs, holdp, defect],
                                 function (err) {
                                     if (err) {
                                         console.log(err)
@@ -203,7 +210,11 @@ app.get("/main_update", function(req, res){
                         res.redirect("/stop")
                     }else{
                         res.json({
-                            "monitor" : result[0]
+                            "monitor" : result[0],
+                            "melt" : req.session.melt,
+                            "mold" : req.session.mold,
+                            "hold" : req.session.hold,
+                            "inj" : req.session.inj
                         })
                     }
                 }
