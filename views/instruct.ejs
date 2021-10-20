@@ -228,7 +228,8 @@
     // 작업지시 삭제
     function del() {
       var checkBoxArr = [];
-      if($("input[name='_selected_all_']:checked").length == 1){
+      if($("input[name='_selected_all_']:checked").length == 1
+      && $("input:checkbox[name='_selected_']:checked").length == 0){
           alert("삭제불가능");
       }else{
         $("input:checkbox[name='_selected_']:checked").each(function () {

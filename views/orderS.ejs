@@ -212,33 +212,43 @@
               <td><%=orders[i].delivery_date%></td>
               <td><%=orders[i].cid%></td>
               <td><%=orders[i].mid%></td>
-              <td><%=orders[i].date_m%></td>             
+              <td><%=orders[i].date_m%></td>    
             </tr>
             <%}%>
         </tbody>
       </table>
     </div>
+    
+    <!-- 수정 버튼 -->
+    <div>
+      <% for(var i=0; i < orders.length; i++) {%>
+        <% var aa = 35.7 + i*6 %>
+        <button type='button' class="btn btn-secondary modal_btn btn-sm" style="position:absolute; top: <%= aa %>vh; right:2.5vw;">수정</button>
+      <%}%>
 
-    <!-- 수정 모달창 -->
+    </div>
+    
+
+    <!---- 수정 모달창 ---->
     <div class="modal_wrap" style="position: absolute; left:35vw; top:20vh">
       <div class="modal_close"><a href="#">close</a></div>
       <div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:5vh">
-          <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">거래처</span>
-          <!-- <input type="text" class="form-control" placeholder="거래처" id="_custname_M"
-            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh"> -->
-            <select class="form-select" id="search_c">
+          <!-- <span class="input-group-text" id="inputGroup-sizing-default" id="_custname_M" style="width:8vw">거래처</span> -->
+          <input type="text" class="form-control" placeholder="거래처" id="_custname_M"
+            style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh" disabled>
+            <!-- <select class="form-select">
               <option value="SAMSUNG">삼성전자</option>
               <option value="LG">LG전자</option>
               <option value="KAKAO">카카오</option>
               <option value="NAVER">네이버</option>
-            </select>  
+            </select>   -->
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:13vh">
-          <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">품목ID</span>
+          <span class="input-group-text" id="inputGroup-sizing-default" id="_legoname_M" style="width:8vw">품목ID</span>
           <!-- <input type="text" class="form-control" placeholder="품목ID" id="_legoname_M"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh"> -->
-            <select class="form-select" id="search_i">
+            <select class="form-select">
               <option value=""></option>
               <option value="bricks_rect">bricks_rect</option>
               <option value="bricks_square">bricks_square</option>
@@ -252,7 +262,7 @@
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:29vh">
-          <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">수주일자</span>
+          <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw" >수주일자</span>
           <input type="text" class="datepicker" name="_date" id="_date_o_M"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
           <!-- <input type="text" class="form-control" placeholder="수주일자" id = "manager" name="_manager"> -->
@@ -277,33 +287,29 @@
       </div>
     </div>
     </div>
-    <button type='button' class="btn btn-secondary modal_btn btn-sm"
-      style="position:absolute; top: 37.5vh; right:2vw;">수정</button>
-    <button type='button' class="btn btn-secondary modal_btn btn-sm"
-      style="position:absolute; top: 44.5vh; right:2vw;">수정</button>
-    <button type='button' class="btn btn-secondary modal_btn btn-sm"
-      style="position:absolute; top: 51.5vh; right:2vw;">수정</button>
+    
+    
 
     <!---- 등록모달창 ---->
     <div class="modal_wrap" style="position: absolute; left:35vw; top:20vh">
       <!-- <div class="modal_close"><a href="#">close</a></div> -->
       <div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:5vh">
-          <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">거래처</span>
+          <span class="input-group-text" style="width:8vw">거래처</span>
           <!-- <input type="text" class="form-control" placeholder="거래처" id="_custname_S"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh"> -->
-            <select class="form-select" id="search_c">
-              <option value="SAMSUNG">삼성전자</option>
-              <option value="LG">LG전자</option>
-              <option value="KAKAO">카카오</option>
-              <option value="NAVER">네이버</option>
+            <select class="form-select" id="_custname_S" >
+              <option value="삼성전자">삼성전자</option>
+              <option value="LG전자">LG전자</option>
+              <option value="카카오">카카오</option>
+              <option value="네이버">네이버</option>
             </select>  
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:13vh">
-          <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">품목ID</span>
+          <span class="input-group-text" style="width:8vw">품목ID</span>
           <!-- <input type="text" class="form-control" placeholder="품목ID" id="_legoname_S"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh"> -->
-            <select class="form-select" id="search_i">
+            <select class="form-select"  id="_legoname_S" >
               <option value=""></option>
               <option value="bricks_rect">bricks_rect</option>
               <option value="bricks_square">bricks_square</option>
@@ -439,7 +445,8 @@
       // 수주관리 삭제
       function del() {
         var checkBoxArr = [];
-        if($("input[name='_selected_all_']:checked").length == 1){
+        if($("input[name='_selected_all_']:checked").length == 1 
+        && $("input:checkbox[name='_selected_']:checked").length == 0){
           alert("삭제불가능");
         }else{
           $("input:checkbox[name='_selected_']:checked").each(function () {
@@ -462,6 +469,12 @@
         var ci = $("#_cid_S").val();
 
         location.href = "/orderS/submit?_custname="+c+"&_legoname="+l+"&_quantity="+q+"&_date_o="+o+"&_date_d="+d+"&_cid="+ci
+      }
+
+      // 수주관리 수정
+      function orders_modify(){
+        var a = $("#_custname_M").val();
+
       }
 
       // 전체선택 버튼 클릭시 체크박스 전체 선택
