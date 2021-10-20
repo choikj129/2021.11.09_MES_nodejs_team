@@ -163,10 +163,19 @@
             }
             .modal_wrap {
                 display: none;
+                width: 400px;
+                height: 320px;
                 position: absolute;
-                width: 34px;
-                height: 40px;
-                background-color: white;
+                margin: -200px 0 0 -200px;
+                background: rgb(210, 215, 221);
+                z-index: 2;
+            }
+            .black_bg{
+                display: none;
+                position: fixed;
+                top:0; left: 0; bottom: 0; right: 0;
+                background: rgba(0, 0, 0, 0.8);
+                z-index : 1;
             }
             .modal_close {
                 color: white;
@@ -401,7 +410,7 @@
     </button>
 
     <!-- 용융온도 -->
-    <div class="wrapper modal_btn" style="position: absolute; top: 45vh; left:7.35vw; color:white; font-weight: 1000;">
+    <div class="wrapper" id="modal_btn" style="position: absolute; top: 45vh; left:7.35vw; color:white; font-weight: 1000;">
         <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>용융 온도</b></div>
         <img src="/img/temp.png" style="width:5vw; height:11vh; position:absolute; left:1vw; top:9.5vh;">
         <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">기준값</div>
@@ -411,73 +420,54 @@
         <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">34.8</div>
         <div id="now_mold_temp" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">            
             <% if(monitor){%>
                 <%= monitor.mold_temp%>
             <% } %>            
         </div>
-        <div class="modal_wrap" style="position: absolute; left:35vw; top:20vh">
-            <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:5vh">
-              <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">거래처</span>
-              <input type="text" class="form-control" placeholder="거래처" id="manager" name="_manager"
-                style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
-              <select class="form-select" id="product_i" name="search_i">
-                <option value="SAMSUNG">삼성전자</option>
-                <option value="LG">LG전자</option>
-                <option value="kakao">카카오</option>
-                <option value="naver">네이버</option>
-              </select>
-            </div>
-            <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:13vh">
-              <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">품목ID</span>
-              <input type="text" class="form-control" placeholder="품목ID" id="quantity" name="_quantity"
-                style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
-              <select class="form-select" id="product_i" name="search_i">
-                <option value="bricks_rect">bricks_rect</option>
-                <option value="bricks_square">bricks_square</option>
-                <option value="circle">circle</option>
-                <option value="floor">floor</option>
-              </select>
-            </div>
-            <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:21vh">
-              <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">주문수량</span>
-              <input type="text" class="form-control" placeholder="주문수량" id="manager" name="_manager"
-                style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
-            </div>
-            <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:29vh">
-              <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">수주일자</span>
-              <input type="text" class="datepicker" name="_date"
-                style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
-              <!-- <input type="text" class="form-control" placeholder="수주일자" id = "manager" name="_manager"> -->
-            </div>
-            <div class="input-group mb-3" style="position:absolute; width:10vw; left:6.5vw; top:37vh">
-              <label class="input-group-text" for="inputGroupSelect01" style="width:8vw">납기일자</label>
-              <input type="text" class="datepicker" name="_date"
-                style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
-            </div>
-            <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:45vh">
-              <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">생성자</span>
-              <input type="text" class="form-control" placeholder="생성자" id="manager" name="_manager"
-                style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
-            </div>
-            <!-- <div class="input-group mb-3" style="position: absolute; left:5.5vw; top:20vh">
-                <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">생성자</label>
-                <select class="form-select" id="inputGroupSelect01" name ="_id">
-                  <option value="bricks_rect">bricks_rect</option>
-                  <option value="bricks_square">bricks_square</option>
-                  <option value="circle">circle</option>
-                  <option value="floor">floor</option>
-                </select>
-              </div> -->
-            <div align="center">
-              <button type="submit" class="btn btn-secondary" style="position:absolute; bottom: 2.5vw; right: 19vw;"
-                id="register">등록</button>
-              <button type="submit" class="modal_close btn btn-secondary" style="position:absolute; bottom: 2.5vw; right: 8vw;"
-                id="register"><a href="#">취소</a></button>
-            </div>
-          </div>
     </div>
+    <div class="black_bg"></div>
+    <div class="modal_wrap" style="position: absolute; left:53vw; top:50vh; z-index:10;">
+        <div style="position: absolute; width:11.9vw; top:5vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
+        font-size: x-large; background-color: rgb(123, 179, 212);"><b>상한값</b></div>
+        <div style="position: absolute; width: 7.8vw; height:7vh; top:5vh; left:16.1vw; background-color: white;"></div>
+        <div style="position: absolute; width:11.9vw; top:13vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
+        font-size: x-large; background-color: sandybrown;"><b>추천최적값</b></div>
+        <div style="position: absolute; width: 7.8vw; height:7vh; top:13vh; left:16.1vw; background-color: white;"></div>
+        <div style="position: absolute; width:11.9vw; top:21vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
+        font-size: x-large; background-color: rgb(123, 179, 212);"><b>하한값</b></div>
+        <div style="position: absolute; width: 7.8vw; height:7vh; top:21vh; left:16.1vw; background-color: white;"></div>
+        <div class="input-group mb-3" style="position:absolute; width:20vw; left:4vw; top:29vh; background-color: rgb(210, 215, 221);">
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width:12vw; height:7vh; display: table-cell; 
+            text-align: center; line-height: 5vh; font-size: x-large; background-color: rgb(255, 208, 0);"><b>입력값</b></span>            
+            <input type="text" class="form-control" id="manager" name="_manager"
+            style="position: absolute; width: 8vw; height:7vh; left:12.1vw; border-radius: 0;">
+        </div>
+        <div align="center">
+            <button type="submit" class="btn btn-secondary" style="position:absolute; bottom: 1.5vh; right: 15vw; 
+            width:5vw; height:6vh; font-size:large; line-height: 4.3vh;" id="register"><b>등록</b></button>
+            <button type="submit" class="modal_close btn btn-secondary" style="position:absolute; bottom: 1.5vh; right: 8vw;
+            width:5vw; height:6vh; display:inline-block; text-indent: 0px; line-height: 4.3vh; font-size:large" id="register"><b>취소</b></div><a href="#"></a></button>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+     
+            function onClick() {
+                document.querySelector('.modal_wrap').style.display ='block';
+                document.querySelector('.black_bg').style.display ='block';
+            }   
+            function offClick() {
+                document.querySelector('.modal_wrap').style.display ='none';
+                document.querySelector('.black_bg').style.display ='none';
+            }
+        
+            document.getElementById('modal_btn').addEventListener('click', onClick);
+            document.querySelector('.modal_close').addEventListener('click', offClick);
+        
+        };
+    </script>
+    
     <!-- 금형온도 -->
     <div class="wrapper" style="position: absolute; top: 45vh; left:30.35vw; color:white; font-weight: 1000;">   
         <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>금형 온도</b></div>
@@ -489,7 +479,6 @@
         <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">34.8</div>
         <div id="now_melt_temp" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">            
             <% if(monitor){%>
                 <%= monitor.mold_temp%>
@@ -508,7 +497,6 @@
         <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">34.8</div>
         <div id="now_injection_speed" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">            
             <% if(monitor){%>
                 <%= monitor.injection_speed%>
@@ -528,7 +516,6 @@
         <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">34.8</div>
         <div id="now_hold_pressure" style="position: absolute; top:20vh; left:16vw; font-size: large; color:white;">            
             <% if(monitor){%>
                 <%= monitor.hold_pressure%>
@@ -546,7 +533,6 @@
             <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">9.5</div>
             <div class="sep" style="position: absolute; top:15vh; left:8vw;"></div>
             <div style="position: absolute; top:18vh; left:9vw; font-size: large; color:white;">현재값</div>
-            <div style="position: absolute; top:18vh; left:15vw; font-size: large; color:white;">34.8</div>
             <div id="now_injection_time" style="position: absolute; top:18vh; left:15vw; font-size: large; color:white;">
                 <% if(monitor){%>
                     <%= monitor.injection_time%>
@@ -564,7 +550,6 @@
             <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">8.5</div>
             <div class="sep" style="position: absolute; top:15vh; left:8vw;"></div>
             <div style="position: absolute; top:18vh; left:9vw; font-size: large; color:white;">현재값</div>
-            <div style="position: absolute; top:18vh; left:15vw; font-size: large; color:white;">34.8</div>
         <div id="now_hold_time" style="position: absolute; top:18vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.hold_time%>
@@ -582,7 +567,6 @@
         <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">4.5</div>
         <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
         <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">34.8</div>
         <div id="now_filling_time" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.filling_time%>
@@ -600,7 +584,6 @@
         <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">60</div>
         <div class="sep" style="position: absolute; top:14.5vh; left:8vw;"></div>
         <div style="position: absolute; top:17.5vh; left:9vw; font-size: large; color:white;">현재값</div>
-        <div style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">34.8</div>
         <div id="now_cycle_time" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.cycle_time%>
