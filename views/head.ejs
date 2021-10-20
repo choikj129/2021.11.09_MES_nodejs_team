@@ -7,8 +7,6 @@
 
 <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
-
-
 <!-- Bootstrap core CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <!-- 부트스트랩 링크 복사 -->
@@ -100,11 +98,30 @@
       </nav>
   </div>
 
+  <!-- 현재시간 -->
+  <div id="date" style="color:white; position: absolute; top:15vh; left:30vw; width:65vw; height:15vh;">
+  </div>
+  <div id="time" style="color:white; position: absolute; top:15vh; left:40vw; width:65vw; height:15vh;">
+  </div>
+
   <!-- IONICONS -->
   <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
   <!-- JS -->
   <script src="/js/sidebar.js"></script>
+  <script>
+    
+    // 현재시간
+    
+    setInterval(function() {
+      $.getJSON("/time",
+        function(result) {
+          $("#date").text(result.date)
+          $("#time").text(result.time)
+      })
+    }, 1000);
+</script>
 
+ 
 </body>
 
      <!--           -->
