@@ -161,22 +161,6 @@
                 background-color: white;
                 border: solid 0.2vh white;
             }
-            .modal_wrap {
-                display: none;
-                width: 400px;
-                height: 320px;
-                position: absolute;
-                margin: -200px 0 0 -200px;
-                background: rgb(210, 215, 221);
-                z-index: 2;
-            }
-            .black_bg{
-                display: none;
-                position: fixed;
-                top:0; left: 0; bottom: 0; right: 0;
-                background: rgba(0, 0, 0, 0.8);
-                z-index : 1;
-            }
             .modal_close {
                 color: white;
                 width: 4.5vw;
@@ -185,7 +169,6 @@
                 bottom: 2.5vw;
                 right: 8.5vw;
                 text-indent: -2.5vw;
-
             }
             .modal_close>a {
                 display: block;
@@ -298,7 +281,7 @@
         </style>
 </head>
 
-<body style="background-color: rgb(41, 43, 48);">
+<body style="background-color: rgb(41, 43, 48); overflow-x: hidden; overflow-y:hidden;">
 
     <!-- 자판  -->
     <!-- <table class="table table-bordered " id="keyboard">
@@ -411,22 +394,17 @@
 
     <!-- 모달 -->
     <div class="black_bg"></div>
-    <div class="modal_wrap" style="position: absolute; left:53vw; top:50vh; z-index:10;">
-        <div style="position: absolute; width:11.9vw; top:5vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
-        font-size: x-large; background-color: rgb(123, 179, 212);"><b>상한값</b></div>
+    <div class="modal_wrap" style="height:5vh; top: 15vh; background-color: rgb(150, 153, 156);">용융온도</div>
+    <div class="modal_wrap">
+        <div class="modal_box1" style="top:5vh; background-color: rgb(123, 179, 212);"><b>상한값</b></div>
         <div style="position: absolute; width: 7.8vw; height:7vh; top:5vh; left:16.1vw; background-color: white;" id="ucl"></div>
-        <div style="position: absolute; width:11.9vw; top:13vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
-        font-size: x-large; background-color: sandybrown;"><b>추천최적값</b></div>
+        <div class="modal_box1" style="top:13vh; background-color: sandybrown;"><b>추천최적값</b></div>
         <div style="position: absolute; width: 7.8vw; height:7vh; top:13vh; left:16.1vw; background-color: white;" id="cl"></div>
-        <div style="position: absolute; width:11.9vw; top:21vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
-        font-size: x-large; background-color: rgb(123, 179, 212);" ><b>하한값</b></div>
+        <div class="modal_box1" style="top:21vh; background-color: rgb(123, 179, 212);"><b>하한값</b></div>
         <div style="position: absolute; width: 7.8vw; height:7vh; top:21vh; left:16.1vw; background-color: white;" id="lcl"></div>
-        <div class="input-group mb-3" style="position:absolute; width:20vw; left:4vw; top:29vh; background-color: rgb(210, 215, 221);">
-            <span class="input-group-text" id="inputGroup-sizing-default" style="width:12vw; height:7vh; display: table-cell; 
-            text-align: center; line-height: 5vh; font-size: x-large; background-color: rgb(255, 208, 0);"><b>입력값</b></span>            
-            <input type="text" class="form-control" id="manager" name="_manager"
-            style="position: absolute; width: 8vw; height:7vh; left:12.1vw; border-radius: 0;">
-        </div>
+        <div class="modal_box1" style="top:29vh; background-color: rgb(255, 208, 0);"><b>입력값</b></div>
+        <input type="text" class="form-control" id="manager" name="_manager"
+        style="position: absolute; top:28.8vh; width: 7.8vw; height:7.2vh; left:16.1vw; border-radius: 0;">
         <div align="center">
             <button type="submit" class="btn btn-secondary" style="position:absolute; bottom: 1.5vh; right: 15vw; 
             width:5vw; height:6vh; font-size:large; line-height: 4.3vh;" id="register"><b>등록</b></button>

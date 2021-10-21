@@ -29,7 +29,35 @@
   .first_color{
     background-color: var(--first-color);
   }
-  
+  /*Modal*/
+  .black_bg{
+    display: none;
+    position: fixed;
+    top:0; left: 0; bottom: 0; right: 0;
+    background: rgba(0, 0, 0, 0.541);
+    z-index : 1;
+  }
+  .modal_wrap {
+    display:none;
+    position: absolute;
+    top:20vh;
+    left : 40%;
+    width: 440px;
+    height: 320px;
+    position: absolute;
+    background: rgb(210, 215, 221);
+    z-index: 10;
+  }
+
+  .modal_box1 {
+    position: absolute;
+    width:11.9vw;
+    left:4vw;
+    height:7vh;
+    text-align: center;
+    line-height: 7.5vh;
+    font-size: 21px;
+  }
   
 </style>
 <link rel="stylesheet" href="/css/style.css">
@@ -119,6 +147,16 @@
           $("#time").text(result.time)
       })
     }, 1000);
+
+    $(".modal_btn").click(function () {
+            $(".modal_wrap").css("display", "block")
+            $(".black_bg").css("display", "block")
+        })
+
+        $(".modal_close").click(function () {
+            $(".modal_wrap").css("display", "none")
+            $(".black_bg").css("display", "none")
+        })
 </script>
 
  
