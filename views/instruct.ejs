@@ -16,34 +16,23 @@
         text-align: center;
         background-color: rgb(173, 185, 202);
       }
-
-      .input-group {
+      /* .input-group {
         width: 25vw;
         text-align: center;
         background-color: rgb(173, 185, 202);
-      }
-
-      .wrapper {
-        height: 10vh;
-        width: 92.5vw;
-        background-color: rgba(199, 202, 241, 0.308);
-        ;
-      }
-
+      } */
       #instruct_icon {
         background-color: var(--first-color);
       }
-
-      .input-group-text {
+      /* .input-group-text {
         border-radius: 0;
         width: 20vw;
       }
 
       .form-control {
         border-radius: 0;
-      }
-
-      .modal_wrap {
+      } */
+      /* .modal_wrap {
         display: none;
         width: 500px;
         height: 500px;
@@ -65,12 +54,14 @@
         top: 0;
         left: 0;
         z-index: 1;
-      }
+      } */
 
     </style>
 </head>
 
 <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
+  <!-- <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+    <div div class="font_nav">작업지시관리</div> -->
   <div style="position: absolute; top:6.5vh; left:8vw; font-size: large; font-weight: bold; color:white;">작업지시관리</div>
   <div class="wrapper" style="position: absolute; top:3vh; left:6vw;">
     
@@ -100,7 +91,7 @@
  
 
   <!-- 수주 조회 테이블 -->
-  <div style="position: absolute; top:15vh; left:6vw; color:white; text-align: center;">
+  <div style="position: absolute; top:17vh; left:6vw; color:white; text-align: center;">
     <table id="iTable" class="table table-bordered"
       style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
       <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
@@ -139,7 +130,8 @@
   <button class="btn btn-danger " style="position:absolute; top: 50vh; right:3vw;" onclick="del()">삭제</button>
 
   <!--모달-->
-  <div class="modal_wrap" style="position: absolute; top : 70vh">
+  <div class="black_bg"></div>
+  <div class="modal_wrap" style="height:384px;">
     <div class="input-group mb-3" style="position: absolute; left:0.5vw; top:3vh">
       <span class="input-group-text" style="width:10vw">수주 번호</span>
       <input type="text" class="form-control modal_input" placeholder="수주번호" id="orders_id">
@@ -174,7 +166,7 @@
 
 
   <!-- 작업지시 테이블 -->
-  <div style="position: absolute; top:57vh; left:6vw; color:white; text-align: center;">
+  <div style="position: absolute; top:59vh; left:6vw; color:white; text-align: center;">
     <table class="table table-bordered"
       style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
       <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">

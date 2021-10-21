@@ -109,56 +109,65 @@ app.get("/main", function(req, res){
         res.redirect("/")
     }else{
         connection.query(
-            `select *,
-            (select sum(quantity) from ordert where date(date) =`+date+`) total,
-            (select mold_temp from setup where date(date)=`+date+`) mold_set,
-            (select melt_temp from setup where date(date)=`+date+`) melt_set,
-            (select hold_pressure from setup where date(date)=`+date+`) hold_set,
-            (select injection_speed from setup where date(date)=`+date+`) inj_set
-             from ordert where date(date)=(select date_format(now(),'%Y-%m-%d') from dual)`,
-            function(err0, result0){
-                if (err0){
-                    console.log(err0)
+            `select * from setup where date(date)=?`,
+            [date],
+            function(err, result1){
+                if(err){
+                    console.log(err)
                 }else{
-                    if(result0.length==0){
-                        res.render("main",{
-                            'monitor' : result0[0],
-                            'run' : req.session.run,
-                            'linkcode' : req.session.logged.linkcode,
-                            "dir" : req.session.dir,
-                            "melt" : req.session.melt,
-                            "mold" : req.session.mold,
-                            "hold" : req.session.hold,
-                            "inj" : req.session.inj
-                        })
-                    }else{
-                        req.session.dir = true;
-                        connection.query(
-                            `select *, (select count(*) from monitoring`+date+`) cnt,
-                            (select count(*) from monitoring`+date+` where defect='N') def
-                            from monitoring`+date+` order by monitor_id desc limit 1`,
-                            function(err, result){
-                                if (err){
-                                    console.log(err)
-                                }else{
-                                    res.render('main', {
-                                        'monitor' : result[0],
-                                        "run" : req.session.run,
-                                        "linkcode" : req.session.logged.linkcode,
+                    connection.query(
+                        `select *,
+                        (select sum(quantity) from ordert where date(date) =`+date+`) total
+                         from ordert where date(date)=(select date_format(now(),'%Y-%m-%d') from dual)`,
+                        function(err0, result0){
+                            if (err0){
+                                console.log(err0)
+                            }else{
+                                if(result0.length==0){
+                                    res.render("main",{
+                                        'monitor' : result0[0],
+                                        'run' : req.session.run,
+                                        'linkcode' : req.session.logged.linkcode,
                                         "dir" : req.session.dir,
-                                        "order" : result0,
                                         "melt" : req.session.melt,
                                         "mold" : req.session.mold,
                                         "hold" : req.session.hold,
-                                        "inj" : req.session.inj
+                                        "inj" : req.session.inj,
+                                        "setup" : result1[0]
                                     })
+                                }else{
+                                    req.session.dir = true;
+                                    connection.query(
+                                        `select *, (select count(*) from monitoring`+date+`) cnt,
+                                        (select count(*) from monitoring`+date+` where defect='N') def
+                                        from monitoring`+date+` order by monitor_id desc limit 1`,
+                                        function(err, result){
+                                            if (err){
+                                                console.log(err)
+                                            }else{
+                                                res.render('main', {
+                                                    'monitor' : result[0],
+                                                    "run" : req.session.run,
+                                                    "linkcode" : req.session.logged.linkcode,
+                                                    "dir" : req.session.dir,
+                                                    "order" : result0,
+                                                    "melt" : req.session.melt,
+                                                    "mold" : req.session.mold,
+                                                    "hold" : req.session.hold,
+                                                    "inj" : req.session.inj,
+                                                    "setup" : result1[0]
+                                                })
+                                            }
+                                        }
+                                    )        
                                 }
                             }
-                        )        
-                    }
+                        }
+                    )
                 }
             }
         )
+        
     }
 })
 

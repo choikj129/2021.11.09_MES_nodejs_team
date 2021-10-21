@@ -27,27 +27,27 @@
         text-align: center;
         background-color: rgb(173, 185, 202);
       }
-
+/* 
       .wrapper {
         height: 15vh;
         width: 90vw;
         background-color: rgba(199, 202, 241, 0.308);
         ;
-      }
+      } */
 
       #instruct_icon {
         background-color: var(--first-color);
       }
 
-      .input-group-text {
+      /* .input-group-text {
         border-radius: 0;
-        width: 4vw;
-        /* height: 6vh; */
+        width: 20vw;
+        height: 6vh;
       }
 
       .form-control {
         border-radius: 0;
-      }
+      } */
 
       #instruct_icon {
         background-color: var(--first-color);
@@ -101,9 +101,6 @@
         border-collapse:collapse;
         margin-bottom: 10px;
       }
-      /* th, td {
-        padding: 3px 10px;
-      } */
       .off-screen {
         display: none;
       }
@@ -130,9 +127,8 @@
   <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
     
       <!-- 상단바 -->
-      <div class="wrapper" style="position: absolute; left:7.25vw; top:6vh">
-      
-        <div style="position: absolute; top:6vh; left:3vw; font-size: large; font-weight: bold; color:white;">수주조회</div>
+      <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+        <div div class="font_nav">수주조회</div>
       
         <div class="input-group mb-3" style="position: absolute; left:13vw; top:5vh">
           <label class="input-group-text" for="inputGroupSelect01" style="width:6vw">거래처</label>
@@ -202,7 +198,6 @@
         </thead>
         <tbody>
           <% for(var i=0; i < orders.length; i++) {%>
-            <% var aa = 35.7 + i*6 %>
             <tr>
               <td><input type="checkbox" id="del_row" class="chk" name="_selected_" value="<%=orders[i].orders_id%>"></td>
               <td><%=orders[i].orders_id%></td>
@@ -223,36 +218,29 @@
      
 
     <!---- 수정 모달창 ---->
+    <div class="black_bg"></div>
     <div class="modal_wrap2" style="position: absolute; left:35vw; top:20vh; display: none ;">
-      <!-- <div class="modal_close2"><a href="#">close</a></div> -->
       <div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:5vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">거래처</span>
-          <input type="text" class="form-control" placeholder="d" id="_custname_M"
+          <input type="text" class="form-control" id="_custname_M"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh" disabled>
-            <!-- <select class="form-select">
-              <option value="SAMSUNG">삼성전자</option>
-              <option value="LG">LG전자</option>
-              <option value="KAKAO">카카오</option>
-              <option value="NAVER">네이버</option>
-            </select>   -->
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:13vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">품목ID</span>
-          <input type="text" class="form-control" placeholder="품목ID" id="_legoname_M"
+          <input type="text" class="form-control" id="_legoname_M"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh" disabled>
             
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:21vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">주문수량</span>
-          <input type="text" class="form-control" placeholder="주문수량" id="_quantity_M"
+          <input type="text" class="form-control" id="_quantity_M"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:29vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw" >수주일자</span>
           <input type="text" class="datepicker" name="_date" id="_date_o_M"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh" disabled>
-          <!-- <input type="text" class="form-control" placeholder="수주일자" id = "manager" name="_manager"> -->
         </div>
         <div class="input-group mb-3" style="position:absolute; width:10vw; left:6.5vw; top:37vh">
           <label class="input-group-text" for="inputGroupSelect01" style="width:8vw">납기일자</label>
@@ -261,23 +249,21 @@
         </div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:45vh">
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">수정자</span>
-          <input type="text" class="form-control" placeholder="수정자" id="_cid_M"
+          <input type="text" class="form-control" id="_cid_M"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
         </div>
       </div>
 
       <div align="center">
-        <button class="btn btn-dark" style="position:absolute; bottom: 2.5vw; right: 18.5vw;" onclick=orders_modify()
-        >수정</button>
-        <button class="btn btn-dark modal_close2"  style="position:absolute; bottom: 2.5vw; right: 8.5vw;"
-        >취소</button>
+        <button class="btn btn-dark" style="position:absolute; bottom: 2.5vw; right: 18.5vw;" onclick=orders_modify()>수정</button>
+        <button class="btn btn-dark modal_close2"  style="position:absolute; bottom: 2.5vw; right: 8.5vw;">취소</button>
       </div>
-    </div>
     </div>
     
     
 
     <!---- 등록모달창 ---->
+    <div class="black_bg"></div>
     <div class="modal_wrap" style="position: absolute; left:35vw; top:20vh">
       <div>
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:6.5vw; top:5vh">
@@ -308,7 +294,6 @@
           <span class="input-group-text" id="inputGroup-sizing-default" style="width:8vw">수주일자</span>
           <input type="text" class="datepicker" name="_date" id="_date_o_S"
             style="position: absolute; width: 12vw; height:6vh; left:8vw; top:0.2vh">
-          <!-- <input type="text" class="form-control" placeholder="수주일자" id = "manager" name="_manager"> -->
         </div>
         <div class="input-group mb-3" style="position:absolute; width:10vw; left:6.5vw; top:37vh">
           <label class="input-group-text" for="inputGroupSelect01" style="width:8vw">납기일자</label>
@@ -323,10 +308,8 @@
       </div>
 
       <div align="center">
-        <button  class="btn btn-dark" style="position:absolute; bottom: 2.5vw; right: 18.5vw;" onclick=orders_submit()
-        >등록</button>
-        <button  class="btn btn-dark modal_close" style="position:absolute; bottom: 2.5vw; right: 8.5vw;"
-        >취소</button>
+        <button  class="btn btn-dark" style="position:absolute; bottom: 2.5vw; right: 18.5vw;" onclick=orders_submit()>등록</button>
+        <button  class="btn btn-dark modal_close" style="position:absolute; bottom: 2.5vw; right: 8.5vw;">취소</button>
       </div>
     </div>
     </div>
@@ -398,10 +381,7 @@
       });
       $setRows.submit();
     </script>
-    
-
-
-
+  
     <script>
       $(function () {
         if ("<%=linkcode%>" == 0) {
@@ -415,7 +395,6 @@
         var manager = $("#manager").val();
         var quantity = $("#quantity").val();
         var date = $(".wdate").val();
-
 
         if (manager && quantity && date) {
           $("#register").removeAttr("disabled")
@@ -452,7 +431,7 @@
 
         location.href = "/orderS/submit?_custname="+c+"&_legoname="+l+"&_quantity="+q+"&_date_o="+o+"&_date_d="+d+"&_cid="+ci
       }
-
+      // 수주 수정
       function orders_modify(){
         var tr = $(this).parent().parent()
         var td = tr.children()
