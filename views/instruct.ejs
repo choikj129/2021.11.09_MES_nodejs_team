@@ -43,10 +43,6 @@
         border-radius: 0;
       }
 
-      #instruct_icon {
-        background-color: var(--first-color);
-      }
-
       .modal_wrap {
         display: none;
         width: 500px;
@@ -109,7 +105,7 @@
       style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
       <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
         <tr>
-          
+          <th scope="col" style="width: 4vw;"></th>
           <th scope="col" style="width: 10vw;">수주번호</th>
           <th scope="col" style="width: 16vw;">거래처</th>
           <th scope="col" style="width: 16vw;">품목명</th>
@@ -122,6 +118,7 @@
       <tbody id="tbody1">
         <% for(var i=0; i < orders.length; i++) {%>
           <tr>
+            <td><input type="radio" class="rad form-check-input"  name="select_radio" value="<%=orders[i].orders_id%>"></td>
             <td><%=orders[i].orders_id%></td>
             <td><%=orders[i].cust_name%></td>
             <td><%=orders[i].lego_name%></td>
@@ -133,10 +130,12 @@
         <%}%>
       </tbody>
     </table>
+    <div class="col-lg-12" id="ex3_Result1"></div>
+    <div class="col-lg-12" id="ex3_Result2"></div>
   </div>
 
   
-  <button class="btn btn-light modal_btn" style="position:absolute; top: 50vh; right: 7vw;">등록</button>
+  <button class="btn btn-light modal_btn" id="selectBtn" style="position:absolute; top: 50vh; right: 7vw;">등록</button>
   <button class="btn btn-danger " style="position:absolute; top: 50vh; right:3vw;" onclick="del()">삭제</button>
 
   <!--모달-->
@@ -167,7 +166,7 @@
       <input type="text" class="form-control modal_input" placeholder="담당자" id="manager">
     </div>
     <div align="center">
-      <button class="btn btn-dark" id="modal_register"style="position:absolute; bottom: 2.5vw; right: 18.5vw;" disabled>등록</button>
+      <button class="btn btn-dark" id="modal_register"style="position:absolute; bottom: 2.5vw; right: 18.5vw;">등록</button>
       <button class="btn btn-dark modal_close" style="position:absolute; bottom: 2.5vw; right: 8.5vw;">취소</button>
     </div>
   </div>
@@ -228,8 +227,7 @@
     // 작업지시 삭제
     function del() {
       var checkBoxArr = [];
-      if($("input[name='_selected_all_']:checked").length == 1
-      && $("input:checkbox[name='_selected_']:checked").length == 0){
+      if($("input[name='_selected_all_']:checked").length == 1){
           alert("삭제불가능");
       }else{
         $("input:checkbox[name='_selected_']:checked").each(function () {
@@ -305,15 +303,36 @@
     });
     $('.datepicker').datepicker('setDate', 'today');
 
-    $(".modal_input").keyup(function () {
-      var manager = $("#manager").val();
-      var quantity = $("#quantity").val();
-      var cust = $("#orders_id").val()
-      if (manager && quantity && cust) {
-        $("#modal_register").removeAttr("disabled")
-      } else {
-        $("#modal_register").attr("disabled", "disabled")
-      }
+    // $(".modal_input").keyup(function () {
+    //   var manager = $("#manager").val();
+    //   var quantity = $("#quantity").val();
+    //   var cust = $("#orders_id").val()
+    //   if (manager && quantity && cust) {
+    //     $("#modal_register").removeAttr("disabled")
+    //   } else {
+    //     $("#modal_register").attr("disabled", "disabled")
+    //   }
+    // })
+
+    $("#selectBtn").click(function(){
+
+      var radio = $("input[name= select_radio]:checked");
+ 
+      var tr = radio.parent().parent().eq(0);
+      var td = tr.children();
+
+
+      var orders_id = td.eq(1).text()
+      var lego_name = td.eq(3).text();
+      var orders_qty = td.eq(4).text();
+      var cid = td.eq(7).text();
+
+      $("#orders_id").val(orders_id)
+      $("#lego_name").val(lego_name).prop("selected",true)
+      // $("#lego_name").val(lego_name.options[lego_name.selectedindex].text)
+      $("#quantity").val(orders_qty)
+      $("#manager").val(cid)
+        
     })
   </script>
 </body>
