@@ -21,7 +21,10 @@ router.get("/", function(req,res){
         if (!req.session.dir){
             res.render("defect",{
                 "defect" : [],
-                "linkcode" : req.session.logged.linkcode
+                "linkcode" : req.session.logged.linkcode,
+                "run" : req.session.run,
+                "Y" : null,
+                "N" : null
             })
         }else{
             connection.query(
