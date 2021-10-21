@@ -98,6 +98,7 @@ router.get("/search", function(req, res){
     if(where!=""){
         sql2 = (sql2).slice(0,sql2.length-4)
     }
+    console.log(data)
     connection.query(
         sql2,
         data,
@@ -105,6 +106,7 @@ router.get("/search", function(req, res){
             if(err){
                 console.log(err)
             }else{
+                console.log(result)
                 res.json({
                     "orders" : result
                 })
@@ -128,6 +130,24 @@ router.get("/submit", function(req, res){
             if(err){
                 console.log(err)
                 res.send("orderS insert SQL ERROR")
+            }else{
+                res.redirect("/orderS")
+            }
+        }
+    )
+})
+
+router.get("/modify", function(req, res){
+    var quantity = req.query._quantity;
+    var date_d = req.query._date_d;
+    var mid = req.query._mid;
+    connection.query(
+        `update orders set(orders_qty, delivery_date, mid) = (?, ?, ?)`,
+        [quantity, date_d, mid],
+        function(err, result){
+            if(err){
+                console.log(err)
+                res.send("orderS update SQL ERROR")
             }else{
                 res.redirect("/orderS")
             }
