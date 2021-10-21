@@ -23,25 +23,10 @@
         background-color: rgb(173, 185, 202);
       }
 
-      .wrapper {
-        height: 10vh;
-        width: 92.5vw;
-        background-color: rgba(199, 202, 241, 0.308);
-        ;
-      }
-
       #instruct_icon {
         background-color: var(--first-color);
       }
 
-      .input-group-text {
-        border-radius: 0;
-        width: 20vw;
-      }
-
-      .form-control {
-        border-radius: 0;
-      }
 
       #instruct_icon {
         background-color: var(--first-color);
@@ -75,9 +60,9 @@
 </head>
 
 <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
-  <div style="position: absolute; top:6.5vh; left:8vw; font-size: large; font-weight: bold; color:white;">작업지시관리</div>
-  <div class="wrapper" style="position: absolute; top:3vh; left:6vw;">
-    
+  <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+    <div div class="font_nav">작업지시관리</div>
+
     <div class="input-group mb-3" style="position: absolute; left:10vw; top:3vh">
       <label class="input-group-text" for="inputGroupSelect01" style="width:5vw">작업일</label>
       <input type="text" id="date" class="datepicker wdate" style="width: 60%;">
@@ -104,7 +89,7 @@
  
 
   <!-- 수주 조회 테이블 -->
-  <div style="position: absolute; top:15vh; left:6vw; color:white; text-align: center;">
+  <div style="position: absolute; top:17vh; left:6vw; color:white; text-align: center;">
     <table id="iTable" class="table table-bordered"
       style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
       <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
@@ -175,7 +160,7 @@
 
 
   <!-- 작업지시 테이블 -->
-  <div style="position: absolute; top:57vh; left:6vw; color:white; text-align: center;">
+  <div style="position: absolute; top:59vh; left:6vw; color:white; text-align: center;">
     <table class="table table-bordered"
       style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
       <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">

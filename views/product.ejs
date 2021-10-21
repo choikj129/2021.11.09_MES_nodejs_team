@@ -14,11 +14,11 @@
                 text-align: center;
                 background-color: rgb(173, 185, 202);
             }
-            .wrapper{
+            /* .wrapper_nav{
                 height:10vh;
                 width:92.5vw;
                 background-color: rgba(199, 202, 241, 0.308);
-            }
+            } */
             .input-group{
                 width: 25vw;
                 text-align: center;
@@ -27,11 +27,12 @@
         </style>
     </head>
     <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
-        <div style="position: absolute; top:6.5vh; left:8vw; font-size: large; font-weight: bold; color:white;">작업실적조회</div>
-        <div class="wrapper" style="position: absolute; top:3vh; left:6vw">
+        <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw">
+            <div class="font_nav">작업실적조회</div>
+
 
             <div class="input-group mb-3" style="position: absolute; left:15vw; top:3vh">
-                <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">품목명</label>
+                <label class="input-group-text" for="inputGroupSelect01">품목명</label>
                 <select class="form-select" id="product_i" name="search_i">
                     <option value=""></option>
                     <option value="bricks_rect">bricks_rect</option>
@@ -48,7 +49,7 @@
             <button class="btn btn-light" onclick="reset()" style="position:absolute; bottom:3vh; right:2vw">검색 초기화</button>
         </div>
 
-        <div style="position: absolute; top:15vh; left:6vw; color:white; text-align: center;">
+        <div style="position: absolute; top:17vh; left:6vw; color:white; text-align: center;">
             <table class = "table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
                 <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
                     <tr>
