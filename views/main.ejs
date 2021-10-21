@@ -298,7 +298,7 @@
         </style>
 </head>
 
-<body style="background-color: rgb(41, 43, 48);">
+<body style="background-color: rgb(41, 43, 48); overflow-x: hidden; overflow-y:hidden;">
 
     <!-- 자판  -->
     <!-- <table class="table table-bordered " id="keyboard">
@@ -411,6 +411,7 @@
 
     <!-- 모달 -->
     <div class="black_bg"></div>
+    <div class="modal_wrap modal_name" style="height:5vh; position:absolute; left:53vw; top:45vh; z-index:10;background-color: rgb(150, 153, 156); color:white">용융온도</div>
     <div class="modal_wrap" style="position: absolute; left:53vw; top:50vh; z-index:10;">
         <div style="position: absolute; width:11.9vw; top:5vh; left:4vw; height:7vh; text-align: center; line-height: 7.5vh; 
         font-size: x-large; background-color: rgb(123, 179, 212);"><b>상한값</b></div>
@@ -424,14 +425,14 @@
         <div class="input-group mb-3" style="position:absolute; width:20vw; left:4vw; top:29vh; background-color: rgb(210, 215, 221);">
             <span class="input-group-text" id="inputGroup-sizing-default" style="width:12vw; height:7vh; display: table-cell; 
             text-align: center; line-height: 5vh; font-size: x-large; background-color: rgb(255, 208, 0);"><b>입력값</b></span>            
-            <input type="text" class="form-control" id="manager" name="_manager"
+            <input type="text" class="form-control" id="set"
             style="position: absolute; width: 8vw; height:7vh; left:12.1vw; border-radius: 0;">
         </div>
         <div align="center">
             <button type="submit" class="btn btn-secondary" style="position:absolute; bottom: 1.5vh; right: 15vw; 
             width:5vw; height:6vh; font-size:large; line-height: 4.3vh;" id="register"><b>등록</b></button>
             <button type="submit" class="modal_close btn btn-secondary" style="position:absolute; bottom: 1.5vh; right: 8vw;
-            width:5vw; height:6vh; display:inline-block; text-indent: 0px; line-height: 4.3vh; font-size:large" id="register"><b>취소</b></div><a href="#"></a></button>
+            width:5vw; height:6vh; display:inline-block; text-indent: 0px; line-height: 4.3vh; font-size:large" ><b>취소</b></button>
         </div>
     </div>
 
@@ -443,7 +444,7 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
+        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;"><%=order[0].melt_set%></div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
         <div id="now_mold_temp" style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">            
@@ -460,7 +461,7 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
+        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;"><%=order[0].mold_set%></div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
         <div id="now_melt_temp" style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">            
@@ -478,7 +479,7 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
+        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;"><%=order[0].inj_set%></div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
         <div id="now_injection_speed" style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">            
@@ -497,7 +498,7 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;">22</div>
+        <div style="position: absolute; top:13.5vh; left:16vw; font-size: large; color:white;"><%=order[0].hold_set%></div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
         <div id="now_hold_pressure" style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">            
@@ -571,7 +572,7 @@
         <div id="now_cycle_time" style="position: absolute; top:17.5vh; left:15vw; font-size: large; color:white;">
             <% if(monitor){%>
                 <%= monitor.cycle_time%>
-                    <% } %>
+            <% } %>
         </div>
     </div>
 
@@ -639,20 +640,30 @@
                 $("#ucl").text((parseFloat("<%=melt[0]%>")+2*parseFloat("<%=melt[1]%>")).toFixed(2))
                 $("#cl").text(parseFloat("<%=melt[0]%>").toFixed(2))
                 $("#lcl").text((parseFloat("<%=melt[0]%>")-2*parseFloat("<%=melt[1]%>")).toFixed(2))
+                $(".modal_name").text("용융온도")
             }else if (name == "mold"){
                 $("#ucl").text((parseFloat("<%=mold[0]%>")+2*parseFloat("<%=mold[1]%>")).toFixed(2))
                 $("#cl").text(parseFloat("<%=mold[0]%>").toFixed(2))
                 $("#lcl").text((parseFloat("<%=mold[0]%>")-2*parseFloat("<%=mold[1]%>")).toFixed(2))
+                $(".modal_name").text("금형온도")
             }else if (name == "hold"){
                 $("#ucl").text((parseFloat("<%=hold[0]%>")+2*parseFloat("<%=hold[1]%>")).toFixed(2))
                 $("#cl").text(parseFloat("<%=hold[0]%>").toFixed(2))
                 $("#lcl").text((parseFloat("<%=hold[0]%>")-2*parseFloat("<%=hold[1]%>")).toFixed(2))
+                $(".modal_name").text("보압")
             }else{
                 $("#ucl").text((parseFloat("<%=inj[0]%>")+2*parseFloat("<%=inj[1]%>")).toFixed(2))
                 $("#cl").text(parseFloat("<%=inj[0]%>").toFixed(2))
                 $("#lcl").text((parseFloat("<%=inj[0]%>")-2*parseFloat("<%=inj[1]%>")).toFixed(2))
+                $(".modal_name").text("사출속도")
             }
         }
+
+        $("#register").click(function(){
+            var name = $(".modal_name").text();
+            var set = $("#set").val();
+            location.href = "/register?name="+name+"&set="+set
+        })
 
     </script>
 

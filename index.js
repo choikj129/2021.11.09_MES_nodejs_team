@@ -110,7 +110,11 @@ app.get("/main", function(req, res){
     }else{
         connection.query(
             `select *,
-            (select sum(quantity) from ordert where date(date) =`+date+`) total
+            (select sum(quantity) from ordert where date(date) =`+date+`) total,
+            (select mold_temp from setup where date(date)=`+date+`) mold_set,
+            (select melt_temp from setup where date(date)=`+date+`) melt_set,
+            (select hold_pressure from setup where date(date)=`+date+`) hold_set,
+            (select injection_speed from setup where date(date)=`+date+`) inj_set
              from ordert where date(date)=(select date_format(now(),'%Y-%m-%d') from dual)`,
             function(err0, result0){
                 if (err0){
@@ -158,13 +162,11 @@ app.get("/main", function(req, res){
     }
 })
 
-
 app.get("/main_update", function(req, res){
     var mold = req.session.mold;
     var melt = req.session.melt;
     var hold = req.session.hold;
     var inj = req.session.inj;
-    console.log(mold)
     date = moment().format("YYYYMMDD")
     if(!req.session.logged){
         res.redirect("/")
@@ -221,6 +223,56 @@ app.get("/main_update", function(req, res){
             }
         )
     }
+})
+
+app.get("/register", function(req, res){
+    console.log(req.query.name)
+    if (req.query.name == "용융온도"){
+        var name = "melt_temp"
+    }else if (req.query.name == "금형온도"){
+        var name = "mold_temp"
+    }else if (req.query.name == "보압"){
+        var name = "hold_pressure"
+    }else{
+        var name = "injection_speed"
+    }
+    var set = req.query.set;
+    var date = moment().format("YYYY-MM-DD")
+    connection.query(
+        `select * from setup where date(date) = ?`,
+        [date],
+        function(err, result){
+            if (err){
+                console.log(err)
+            }else{
+                if(result.length==0){
+                    connection.query(
+                        `insert into setup(`+name+`,date) values (?,?)`,
+                        [set, date],
+                        function(err){
+                            if(err){
+                                console.log(err)
+                            }else{
+                                res.redirect("/")
+                            }
+                        }
+                    )
+                }else{
+                    connection.query(
+                        `update setup set `+name+`=`+set+` where date(date)=?`,
+                        [date],
+                        function(err){
+                            if(err){
+                                console.log(err)
+                            }else{
+                                res.redirect("/")
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    )
 })
 
 app.get("/stop", function(req, res){
