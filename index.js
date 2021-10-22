@@ -39,6 +39,7 @@ app.get("/", function(req, res){
 })
 
 app.post("/login", function(req, res){
+    date = moment().format("YYYYMMDD")
     var id = req.body._id;
     var password = req.body._password;
     console.log(id, password);
@@ -56,16 +57,27 @@ app.post("/login", function(req, res){
                     req.session.run = false
                     connection.query(
                         `select avg(mold_m) mold_m, avg(melt_m) melt_m, avg(hold_m) hold_m, avg(injection_m) inj_m,
-                        avg(mold_s) mold_s, avg(melt_s) melt_s, avg(hold_s) hold_s, avg(injection_s) inj_s
+                        avg(mold_s) mold_s, avg(melt_s) melt_s, avg(hold_s) hold_s, avg(injection_s) inj_s,
+                        (select mold_temp from setup where date(date)=`+date+`) set_mold,
+                        (select melt_temp from setup where date(date)=`+date+`) set_melt,
+                        (select injection_speed from setup where date(date)=`+date+`) set_inj,
+                        (select hold_pressure from setup where date(date)=`+date+`) set_hold,
+                        (select sum(quantity) from ordert where date(date) =`+date+`) total
                          from optimum`,
                         function(err, result){
                             if(err){
                                 console.log(err)
                             }else{
+                                // req.session.total = 
+                                req.session.set_mold = parseFloat(result[0].set_mold)
+                                req.session.set_melt = parseFloat(result[0].set_melt)
+                                req.session.set_inj = parseFloat(result[0].set_inj)
+                                req.session.set_hold = parseFloat(result[0].set_hold)
                                 req.session.mold = [parseFloat(result[0].mold_m), parseFloat(result[0].mold_s)]
                                 req.session.melt = [parseFloat(result[0].melt_m), parseFloat(result[0].melt_s)]
                                 req.session.hold = [parseFloat(result[0].hold_m), parseFloat(result[0].hold_s)]
                                 req.session.inj = [parseFloat(result[0].inj_m), parseFloat(result[0].inj_s)]
+                                req.session.total = result[0].total
                                 res.redirect("/main")
                             }
                         }
@@ -98,8 +110,6 @@ app.get("/time", function(req, res){
 })
 
 var interval;
-var id = 46;
-
 
 app.get("/main", function(req, res){
     console.log("run : "+req.session.run)
@@ -145,6 +155,9 @@ app.get("/main", function(req, res){
                                             if (err){
                                                 console.log(err)
                                             }else{
+                                                if(result.length>0){
+                                                    req.session.cnt = result[0].cnt
+                                                }
                                                 res.render('main', {
                                                     'monitor' : result[0],
                                                     "run" : req.session.run,
@@ -190,13 +203,16 @@ app.get("/main_update", function(req, res){
                 if (err){
                     console.log(err)
                 }else{
+                    if(result.length>0){
+                        req.session.cnt = result[0].cnt
+                    }
                     if (req.session.run == false){
                         req.session.run = true;
                         interval = setInterval(function () {
-                            moldt = (Math.random()*5 + parseInt(mold[0])).toFixed(2)
-                            meltt = (Math.random()*5 + parseInt(melt[0])).toFixed(2)
-                            holdp = (Math.random()*3 + parseInt(hold[0])).toFixed(2)
-                            injs = (Math.random()*3 + parseInt(inj[0])).toFixed(2)
+                            moldt = (Math.random()*5.5 + req.session.set_mold-2.5).toFixed(2)
+                            meltt = (Math.random()*5.5 + req.session.set_melt-2.5).toFixed(2)
+                            holdp = (Math.random()*3.5 + req.session.set_hold-1.5).toFixed(2)
+                            injs = (Math.random()*3.5 + req.session.set_inj-1.5).toFixed(2)
                             var defect = "Y"
                             if(moldt<mold[0]-2*mold[1] || moldt>mold[0]+2*mold[1]
                             || meltt<melt[0]-2*melt[1] || meltt>melt[0]+2*melt[1]
@@ -235,17 +251,20 @@ app.get("/main_update", function(req, res){
 })
 
 app.get("/register", function(req, res){
-    console.log(req.query.name)
+    var set = req.query.set;
     if (req.query.name == "용융온도"){
         var name = "melt_temp"
+        req.session.set_melt = set
     }else if (req.query.name == "금형온도"){
         var name = "mold_temp"
+        req.session.set_mold = set
     }else if (req.query.name == "보압"){
         var name = "hold_pressure"
+        req.session.set_hold = set
     }else{
         var name = "injection_speed"
+        req.session.set_inj = set
     }
-    var set = req.query.set;
     var date = moment().format("YYYY-MM-DD")
     connection.query(
         `select * from setup where date(date) = ?`,

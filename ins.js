@@ -4,6 +4,7 @@ const fs = require("fs");
 const data = JSON.parse(fs.readFileSync(__dirname + '/db.json'));
 const mysql = require("mysql2");
 const moment = require("moment");
+const { reset } = require("nodemon");
 
 const connection = mysql.createConnection({
     host : data.host,
@@ -14,8 +15,7 @@ const connection = mysql.createConnection({
 })
 
 router.get("/",function(req,res){
-    var date = moment().format("YYYY-MM-DD")
-    var lastdate = moment().format("YYYY-MM-DD")
+    var date = moment().format("YYYYMMDD")
     if(!req.session.logged){
         res.redirect("/")
     }else{
@@ -29,20 +29,34 @@ router.get("/",function(req,res){
                     if(err0){
                         console.log(err0)
                     }else{
+                        if(req.session.dir){
+                            var sql = `select *,
+                            (select count(*) from monitoring`+date+`) cnt
+                             from ordert where date(date)=?`
+                        }else{
+                            var sql = `select * from ordert where date(date)=?`
+                        }
                         connection.query(
-                            `select * from ordert where date(date)=?`,
+                            sql,
                             [date],
                             function(err, result){
                                 if(err){
                                     console.log(err);
                                     res.send("search SQL select Error")
                                 }else{
+                                    if(req.session.dir){
+                                        var cnt = result[0].cnt
+                                    }else{
+                                        var cnt = 0
+                                    }
+                                    console.log(req.session.total)
                                     res.render("instruct",{
                                         "ordert" : result,
                                         "orders" : result0,
                                         "date" : date,
-                                        "lastdate" : lastdate,
-                                        "linkcode" : req.session.logged.linkcode
+                                        "linkcode" : req.session.logged.linkcode,
+                                        "run" : req.session.run,
+                                        "cnt" : cnt
                                     })
                                 }
                             }
@@ -138,6 +152,13 @@ router.get("/del", function(req,res){
             }
         })
     }
+})
+
+router.get("/update", function(req, res){
+    res.json({
+        "cnt" : req.session.cnt,
+        "total" : req.session.total
+    })
 })
 
 module.exports = router
