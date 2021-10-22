@@ -37,12 +37,19 @@ router.get("/", function(req,res){
                     if(err){
                         console.log(err)
                     }else{
+                        if(result.length==0){
+                            yy = 100
+                            nn = 0
+                        }else{
+                            yy = result[0].yy
+                            nn = result[0].nn
+                        }
                         res.render("defect",{
                             'defect' : result,
                             "linkcode" : req.session.logged.linkcode,
                             "run" : req.session.run,
-                            "Y" : result[0].yy,
-                            "N" : result[0].nn
+                            "Y" : yy,
+                            "N" : nn
                         });
                     }
                 }
