@@ -190,7 +190,7 @@
             <td><%=ordert[i].lego_name%></td>
             <td><%=ordert[i].quantity%></td>
             <td><%=ordert[i].date%></td>
-            <td><%=ordert[i].state%></td>
+            <td>0</td>
             <td>대기</td>
           </tr>
         <%}%>
@@ -202,9 +202,17 @@
     $(function () {
       if ("<%=linkcode%>" == 0) {
         $("#linkcode").text("관리자")
-      } else {
+      }else {
         $("#linkcode").text("작업자")
       }
+      var Arr = new Array();
+      var len = $("#tbody2 tr").length
+      alert("<%=cnt%>")
+      $("#tbody2 tr:eq(0)>td:eq(4)").html()
+      // for (var i=0; i<len; i++){
+
+      // }
+
     });
     //등록
     $("#modal_register").click(function(){
@@ -313,7 +321,6 @@
       var tr = radio.parent().parent().eq(0);
       var td = tr.children();
 
-
       var orders_id = td.eq(1).text()
       var lego_name = td.eq(3).text();
       var orders_qty = td.eq(4).text();
@@ -324,8 +331,18 @@
       // $("#lego_name").val(lego_name.options[lego_name.selectedindex].text)
       $("#quantity").val(orders_qty)
       $("#manager").val(cid)
-        
     })
+
+    if("<%=run%>"=="true"){
+      setInterval(function(){
+        $.getJSON("/instruct/update",
+        function(result){
+          var cnt = result.cnt
+        })
+      },2000)
+    }
+    
+
   </script>
 </body>
 

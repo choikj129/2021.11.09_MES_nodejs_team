@@ -194,12 +194,11 @@
                 border-radius: 0;
                 width: 4vw;
             }
-            
-
             #main_icon{
                 background-color: var(--first-color);
             }
-            /* .blinking{ -webkit-animation:blink 1.5s ease-in-out infinite alternate; 
+            /*
+            .blinking{ -webkit-animation:blink 1.5s ease-in-out infinite alternate; 
                     -moz-animation:blink 1.5s ease-in-out infinite alternate; 
                     animation:blink 1.5s ease-in-out infinite alternate;
             }
@@ -275,7 +274,6 @@
             }
             
              */
-
              .alertI{
                 display : none;
              }
@@ -372,13 +370,13 @@
         <div class="wrapper3" style="position: absolute; left:46vw; color:rgb(255, 192, 0);">달성률</div>
         <div class="wrapper3" id = "qnt" style="position: absolute; left:57vw; color:red;">
             <% if(monitor) {%>
-                <%= (monitor.cnt/order[0].total).toFixed(2)%>%
+                <%= (monitor.cnt/order[0].total).toFixed(2)*100%>%
             <%}%>
         </div>
         <div class="wrapper3" style="position: absolute; left:68vw; color:rgb(255, 192, 0);">불량률</div>
         <div class="wrapper3" id = "def" style="position: absolute; left:79vw; color:red;">
             <% if(monitor) {%>
-                <%= (monitor.def/monitor.cnt).toFixed(2)%>%
+                <%= (monitor.def/monitor.cnt).toFixed(2)*100%>%
             <%}%>
         </div>
     </div>
@@ -422,7 +420,7 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
+        <div id="set_melt" style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
             <% if(setup){%>
                 <%=setup.melt_temp%>
             <%}%>
@@ -443,7 +441,7 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
+        <div id="set_mold" style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
             <% if(setup){%>
                 <%=setup.mold_temp%>
             <%}%>
@@ -465,7 +463,7 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
+        <div id="set_inj" style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
             <% if(setup){%>
                 <%=setup.injection_speed%>
             <%}%>
@@ -488,7 +486,7 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
+        <div id="set_hold" style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
             <% if(setup){%>
                 <%=setup.hold_pressure%>
             <%}%>
@@ -577,8 +575,9 @@
             } else {
                 $("#linkcode").text("작업자")
             }
-
-            if ("<%=dir%>" == "true") {
+            if (("<%=dir%>" == "true") && $("#set_melt").text().trim()!=""
+            && $("#set_mold").text().trim()!="" && $("#set_inj").text().trim()!=""
+            && $("#set_hold").text().trim()!=""){
                 $("#onoff").removeAttr("disabled")
             }else{
                 $("#onoff").attr("disabled", "disabled")
@@ -610,16 +609,6 @@
         $("#ok").click(function () {
             $("#keyboard").hide()
         })
-
-        //alert 보여주기
-        // if($("alertI").css("display")=="none"){
-        //     if("#defect" > 0){
-        //         $("alertI").show(); //none 일 때
-        //     }
-        // }else{
-        //     $("alertI").hide(); //block 일 때
-        // }
-
         $(".modal_btn").click(function () {
             $(".modal_wrap").css("display", "block")
             $(".black_bg").css("display", "block")

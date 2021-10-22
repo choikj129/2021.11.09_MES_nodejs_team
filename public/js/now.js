@@ -61,8 +61,8 @@ function now(){
         $("#now_filling_time").text(result.monitor.filling_time)
         $("#now_cycle_time").text(result.monitor.cycle_time)
         $("#cnt").text(result.monitor.cnt)
-        $("#qnt").text((result.monitor.cnt/result.monitor.total).toFixed(2)+"%")
-        $("#def").text((result.monitor.def/result.monitor.cnt).toFixed(2)+"%")
+        $("#qnt").text((result.monitor.cnt/result.monitor.total).toFixed(2)*100+"%")
+        $("#def").text((result.monitor.def/result.monitor.cnt).toFixed(2)*100+"%")
 
         if (result.monitor.mold_temp<result.mold[0]-2*result.mold[1]
         || result.monitor.mold_temp>result.mold[0]+2*result.mold[1]){
@@ -115,6 +115,9 @@ function now(){
             error += "hold_pressure : "+result.monitor.hold_pressure+def
         }else{
             $("#now_hold_pressure").css("background-color", "")
+        }
+        if(error!=""){
+            location.href="/defect/update?_id="+result.monitor.monitor_id+"&date="+result.monitor.date+"&error="+error
         }
         
     })

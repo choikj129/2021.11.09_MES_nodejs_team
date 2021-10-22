@@ -73,16 +73,24 @@
     </div>
     
     <script>
-        var cur;
-        var run;
+        var cur, run, set_melt, set_mold, set_inj, set_hold,
+        melt, mold, inj, hold;
         $.ajax({
                 url : "/current/cur",
                 method : "get",
                 dataType : "json",
                 async : false,
                 success : function(result){
-                    cur = result.cur
-                    run = result.run
+                    cur = result.cur,
+                    run = result.run,
+                    set_melt = result.set_melt,
+                    set_mold = result.set_mold,
+                    set_inj = result.set_inj,
+                    set_hold= result.set_hold,
+                    melt = result.melt,
+                    mold = result.mold,
+                    inj = result.inj,
+                    hold = result.hold
                 }
         })
         var melt_temp = [];
@@ -118,21 +126,21 @@
             markLine0.push(
                 {
                     name: 'UCL'+i,
-                    yAxis: 330,
+                    yAxis: melt[0]+2*melt[1],
                     symbol : 'none'
                 }
             );
             markLine0.push(
                 {
                     name: 'LCL'+i,
-                    yAxis: 230,
+                    yAxis: melt[0]-2*melt[1],
                     symbol: 'none'
                 }
             );
             markLine0.push(
                 {
                     name: 'Setting'+i,
-                    yAxis: 280,
+                    yAxis: set_melt,
                     symbol: 'none'
                 }
             );
@@ -170,8 +178,8 @@
                     type: 'value',
                     scale: true,
                     name: '용융온도(℃)',
-                    max: 400,
-                    min: 200,
+                    max: 290,
+                    min: 260,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
                         formatter: '{value}'
@@ -191,7 +199,6 @@
                 }
             ]
         };
-
         // 위에서 설정한 속성을 차트에 반영합니다.
         myChart0.setOption(option0); 
         //UCL, LCL
@@ -200,21 +207,21 @@
             markLine1.push(
                 {
                     name: 'UCL'+i,
-                    yAxis: 40,
+                    yAxis: mold[0]+2*mold[1],
                     symbol : 'none'
                 }
             );
             markLine1.push(
                 {
                     name: 'LCL'+i,
-                    yAxis: 30,
+                    yAxis: mold[0]-2*mold[1],
                     symbol: 'none'
                 }
             );
             markLine1.push(
                 {
                     name: 'Setting'+i,
-                    yAxis: 20,
+                    yAxis: set_mold,
                     symbol: 'none'
                 }
             );
@@ -255,8 +262,8 @@
                     type: 'value',
                     scale: true,
                     name: '금형온도(℃)',
-                    max: 50,
-                    min: 0,
+                    max: 35,
+                    min: 15,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
                         formatter: '{value}'
@@ -288,21 +295,21 @@
             markLine2.push(
                 {
                     name: 'UCL'+i,
-                    yAxis: 150,
+                    yAxis: hold[0]+2*hold[1],
                     symbol : 'none'
                 }
             );
             markLine2.push(
                 {
                     name: 'LCL'+i,
-                    yAxis: 140,
+                    yAxis: hold[0]-2*hold[1],
                     symbol: 'none'
                 }
             );
             markLine2.push(
                 {
                     name: 'Setting'+i,
-                    yAxis: 120,
+                    yAxis: set_hold,
                     symbol: 'none'
                 }
             );
@@ -344,8 +351,8 @@
                     type: 'value',
                     scale: true,
                     name: '압력(kgf/cm^3)',
-                    max: 150,
-                    min: 0,
+                    max: 145,
+                    min: 125,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
                         formatter: '{value}'
@@ -377,21 +384,21 @@
             markLine3.push(
                 {
                     name: 'UCL'+i,
-                    yAxis: 50,
+                    yAxis: inj[0]+2*inj[1],
                     symbol : 'none'
                 }
             );
             markLine3.push(
                 {
                     name: 'LCL'+i,
-                    yAxis: 55,
+                    yAxis: inj[0]-2*inj[1],
                     symbol: 'none'
                 }
             );
             markLine3.push(
                 {
                     name: 'Setting'+i,
-                    yAxis: 60,
+                    yAxis: set_inj,
                     symbol: 'none'
                 }
             );
@@ -433,8 +440,8 @@
                     type: 'value',
                     scale: true,
                     name: '사출속도(mm/s)',
-                    max: 70,
-                    min: 0,
+                    max: 65,
+                    min: 45,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
                         formatter: '{value}'
