@@ -196,10 +196,10 @@
             }
             
 
-            /* #main_icon{
+            #main_icon{
                 background-color: var(--first-color);
             }
-            .blinking{ -webkit-animation:blink 1.5s ease-in-out infinite alternate; 
+            /* .blinking{ -webkit-animation:blink 1.5s ease-in-out infinite alternate; 
                     -moz-animation:blink 1.5s ease-in-out infinite alternate; 
                     animation:blink 1.5s ease-in-out infinite alternate;
             }
@@ -395,7 +395,7 @@
 
     <!-- 모달 -->
     <div class="black_bg"></div>
-    <div class="modal_wrap modal_name" style="height:5vh; top: 15vh; background-color: rgb(150, 153, 156);">용융온도</div>
+    <div class="modal_wrap modal_name" style="height:5vh; top: 15vh; background-color: rgb(150, 153, 156);"></div>
     <div class="modal_wrap">
         <div class="modal_box1" style="top:5vh; background-color :rgb(123, 179, 212);"><b>상한값</b></div>
         <div style="position: absolute; width: 7.8vw; height:7vh; top:5vh; left:16.1vw; background-color: white;" id="ucl"></div>
@@ -422,7 +422,11 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;"><%=setup.melt_temp%></div>
+        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
+            <% if(setup){%>
+                <%=setup.melt_temp%>
+            <%}%>
+        </div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
         <div id="now_mold_temp" style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">            
@@ -439,7 +443,11 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;"><%=setup.mold_temp%></div>
+        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
+            <% if(setup){%>
+                <%=setup.mold_temp%>
+            <%}%>
+        </div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
         <div id="now_melt_temp" style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">            
@@ -457,7 +465,11 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;"><%=setup.injection_speed%></div>
+        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
+            <% if(setup){%>
+                <%=setup.injection_speed%>
+            <%}%>
+        </div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
         <div id="now_injection_speed" style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">            
@@ -476,7 +488,11 @@
         <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
         <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
         <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;"><%=setup.hold_pressure%></div>
+        <div style="position: absolute; top:13.5vh; left:15.5vw; font-size: large; color:white;">
+            <% if(setup){%>
+                <%=setup.hold_pressure%>
+            <%}%>
+        </div>
         <div class="sep" style="position: absolute; top:18.75vh; left:8vw;"></div>
         <div style="position: absolute; top:20vh; left:9vw; font-size: large; color:white;">현재값</div>
         <div id="now_hold_pressure" style="position: absolute; top:20vh; left:15vw; font-size: large; color:white;">            
