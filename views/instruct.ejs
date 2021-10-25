@@ -131,35 +131,28 @@
 
   <!--모달-->
   <div class="black_bg"></div>
-  <div class="modal_wrap" style="height:384px;">
-    <div class="input-group mb-3" style="position: absolute; left:0.5vw; top:3vh">
-      <span class="input-group-text" style="width:10vw">수주 번호</span>
-      <input type="text" class="form-control modal_input" placeholder="수주번호" id="orders_id">
-    </div>
-    <div class="input-group mb-3" style="position: absolute; left:0.5vw; top:8vh">
-      <label class="input-group-text" style="width:10vw">품목 명</label>
-      <select class="form-select" id="lego_name">
-        <option value="bricks_rect">bricks_rect</option>
-        <option value="bricks_square">bricks_square</option>
-        <option value="circle">circle</option>
-        <option value="floor">floor</option>
-      </select>
-    </div>
-    <div class="input-group mb-3" style="position: absolute; left:0.5vw; top:13vh">
-      <span class="input-group-text" style="width:10vw">지시 수량</span>
-      <input type="text" class="form-control modal_input" placeholder="지시 수량" id="quantity">
-    </div>
-    <div class="input-group mb-3" style="position: absolute; left:0.5vw; top:18vh">
-      <label class="input-group-text" style="width:10vw">작업일</label>
-      <input type="text" class="datepicker" id="delivery">
-    </div>
-    <div class="input-group mb-3" style="position: absolute; left:0.5vw; top:23vh">
-      <span class="input-group-text" style="width:10vw">담당자</span>
-      <input type="text" class="form-control modal_input" placeholder="담당자" id="manager">
-    </div>
+  <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170);">등록</div>
+  <div class="modal_wrap" style="height:330px;">
+    <div class="modal_box1" style="top:5vh">수주 번호</div>
+    <input type="text" class="modal_box2" style="top:5vh" id="orders_id">
+    <div class="modal_box1" style="top:11.4vh">품목 명</div>
+    <select class="modal_box2" style="top:11.4vh" id="lego_name">
+      <option value="bricks_rect">bricks_rect</option>
+      <option value="bricks_square">bricks_square</option>
+      <option value="circle">circle</option>
+      <option value="floor">floor</option>
+    </select>
+    <div class="modal_box1" style="top:17.8vh">지시 수량</div>
+    <input type="text" class="modal_box2" style="top:17.8vh" id="quantity">
+    <div class="modal_box1" style="top:24.2vh">작업일</div>
+    <input type="text" class="modal_box2 datepicker" style="top:24.2vh" id="delivery">
+    <div class="modal_box1" style="top:30.6vh">담당자</div>
+    <input type="text" class="modal_box2" style="top:30.6vh" id="manager">
     <div align="center">
-      <button class="btn btn-dark" id="modal_register"style="position:absolute; bottom: 2.5vw; right: 18.5vw;">등록</button>
-      <button class="btn btn-dark modal_close" style="position:absolute; bottom: 2.5vw; right: 8.5vw;">취소</button>
+      <button class="btn btn-secondary" id="modal_register" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
+      height:5.6vh; font-size:large; line-height: 4vh;">등록</button>
+      <button class="btn btn-secondary modal_close" style="position:absolute; bottom: 2vh; right: 9vw;
+      width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
     </div>
   </div>
   
