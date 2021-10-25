@@ -182,7 +182,7 @@
 
     <!-- 테이블 목록 -->
     <div style="position: absolute; top:30vh; left:7vw; color:white; text-align: center;">
-      <table id="iTable" class="table table-bordered" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+      <table id="iTable" class="table table-bordered table-hover" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
         <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
           <tr>
             <th scope="col" style="width: 2vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
@@ -216,6 +216,7 @@
             <%}%>
         </tbody>
       </table>
+      <div class="col-lg-12" id="tr_id"></div>
     </div>
      
 
@@ -351,6 +352,7 @@
     </script>
   
     <script>
+      var id;
       $(function () {
         if ("<%=linkcode%>" == 0) {
           $("#linkcode").text("관리자")
@@ -401,16 +403,12 @@
       }
       // 수주 수정
       function orders_modify(){
-        var tr = $(this).parent().parent()
-        var td = tr.children()
-        $("#_custname_M").val(td.eq(0).text())
-
-
+        var _id = id
         var qm = $("#_quantity_M").val();
         var dm = $("#_date_d_M").val();
         var cm = $("#_cid_M").val();
 
-        location.href = "/orderS/modify?_quantity="+qm+"&_date_d="+dm+"&_mid="+cm
+        location.href = "/orderS/modify?_quantity="+qm+"&_date_d="+dm+"&_mid="+cm+"&_id="+_id
       }
 
       // 전체선택 버튼 클릭시 체크박스 전체 선택
@@ -434,14 +432,17 @@
       $(".modal_btn").click(function () {
         $(".modal_wrap").css("display", "block")
         $(".black_bg").css("display", "block")
+        $(".modal_btn2").attr("disabled", true)
       })
 
       $(".modal_close").click(function () {
         $(".modal_wrap").css("display", "none")
         $(".black_bg").css("display", "none")
+        $(".modal_btn2").attr("disabled", false)
       })
 
       $(".modal_btn2").click(function () {
+        $(".modal_btn").attr("disabled", true)
         var tr = $(this).parent().parent()
         var td = tr.children()
 
@@ -459,6 +460,7 @@
       $(".modal_close2").click(function () {
         $(".modal_wrap2").css("display", "none")
         $(".black_bg2").css("display", "none")
+        $(".modal_btn").attr("disabled", false)
       })
       
       //달력(날짜 1개 선택)
@@ -490,14 +492,29 @@
             var body;
             for (var i = 0; i < result.orders.length; i++) {
               body += "<tr>"
+              body += "<td><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
               for (key in result.orders[0]) {
                 body += "<td>" + result.orders[i][key] + "</td>"
               }
+              body += "<td><button type='button' class='btn btn-outline-secondary modal_btn2 btn-sm'>수정</button></td>"
               body += "</tr>"
             }
             $("tbody").html(body)
           })
       }
+      $("#iTable tr").click(function(){
+        var tr = $(this)
+        var td = tr.children()
+        id = td.eq(1).text()
+        $("#_custname_M").val(td.eq(2).text())
+        $("#_legoname_M").val(td.eq(3).text())
+        $("#_quantity_M").val(td.eq(4).text())
+        $("#_date_o_M").val(td.eq(5).text())
+        $("#_date_d_M").val(td.eq(6).text())
+        $("#_cid_M").val(td.eq(7).text())
+        $(".modal_wrap2").css("display", "block")
+        $(".black_bg2").css("display", "block")
+      })
 
 
     </script>

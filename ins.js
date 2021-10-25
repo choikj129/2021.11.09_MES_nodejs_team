@@ -14,8 +14,7 @@ const connection = mysql.createConnection({
 })
 
 router.get("/",function(req,res){
-    var date = moment().format("YYYY-MM-DD")
-    var lastdate = moment().format("YYYY-MM-DD")
+    var date = moment().format("YYYYMMDD")
     if(!req.session.logged){
         res.redirect("/")
     }else{
@@ -29,20 +28,38 @@ router.get("/",function(req,res){
                     if(err0){
                         console.log(err0)
                     }else{
+                        if(req.session.dir){
+                            var sql = `select *,
+                            (select count(*) from monitoring`+date+`) cnt,
+                            (select sum(quantity) from ordert where date(date) =`+date+`) total
+                             from ordert where date(date)=?`
+                        }else{
+                            var sql = `select * from ordert where date(date)=?`
+                        }
                         connection.query(
-                            `select * from ordert where date(date)=?`,
+                            sql,
                             [date],
                             function(err, result){
                                 if(err){
                                     console.log(err);
                                     res.send("search SQL select Error")
                                 }else{
+                                    if(req.session.dir){
+                                        var cnt = result[0].cnt
+                                        var total = result[0].total
+                                    }else{
+                                        var cnt = 0
+                                        var total = 0
+                                    }
+                                    console.log(req.session.total)
                                     res.render("instruct",{
                                         "ordert" : result,
                                         "orders" : result0,
                                         "date" : date,
-                                        "lastdate" : lastdate,
-                                        "linkcode" : req.session.logged.linkcode
+                                        "linkcode" : req.session.logged.linkcode,
+                                        "run" : req.session.run,
+                                        "cnt" : cnt,
+                                        "total" : total
                                     })
                                 }
                             }
@@ -138,6 +155,23 @@ router.get("/del", function(req,res){
             }
         })
     }
+})
+
+router.get("/update", function(req, res){
+    connection.query(
+        `select (select count(*) from monitoring`+date+`) cnt, 
+        (select sum(quantity) from ordert where date(date) =`+date+`) total`,
+        function(err, result){
+            if(err){
+                console.log(err)
+            }else{
+                res.json({
+                    "cnt" : result[0].cnt,
+                    "total" : result[0].total
+                })
+            }
+        }
+    )
 })
 
 module.exports = router

@@ -183,7 +183,7 @@
             <td><%=ordert[i].lego_name%></td>
             <td><%=ordert[i].quantity%></td>
             <td><%=ordert[i].date%></td>
-            <td><%=ordert[i].state%></td>
+            <td>0</td>
             <td>대기</td>
           </tr>
         <%}%>
@@ -192,13 +192,60 @@
   </div>
 
   <script>
-    $(function () {
+     $(function () {
       if ("<%=linkcode%>" == 0) {
         $("#linkcode").text("관리자")
-      } else {
+      }else {
         $("#linkcode").text("작업자")
       }
+      var len = $("#tbody2 tr").length
+      var cnt = parseInt("<%=cnt%>")
+      var total = "<%=total%>"
+      for (var i=0; i<len; i++){
+        qty = parseInt($("#tbody2 tr:eq("+i+")>td:eq(4)").html())
+        if(cnt >= qty){
+          $("#tbody2 tr:eq("+i+")>td:eq(6)").html(qty) 
+          $("#tbody2 tr:eq("+i+")>td:eq(7)").html("완료") 
+          cnt-=qty
+        }else if(cnt==0){
+          $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
+          $("#tbody2 tr:eq("+i+")>td:eq(7)").html("대기")
+        }
+        else{
+          $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
+          $("#tbody2 tr:eq("+i+")>td:eq(7)").html("진행") 
+          cnt = 0
+        }
+      }
     });
+    if("<%=run%>"=="true"){
+      setInterval(function(){
+        $.getJSON("/instruct/update",
+        function(result){
+          var cnt = result.cnt
+          var total = result.total
+          var len = $("#tbody2 tr").length
+          for (var i=0; i<len; i++){
+            qty = parseInt($("#tbody2 tr:eq("+i+")>td:eq(4)").html())
+            if(cnt >= qty){
+              $("#tbody2 tr:eq("+i+")>td:eq(6)").html(qty) 
+              $("#tbody2 tr:eq("+i+")>td:eq(7)").html("완료") 
+              cnt-=qty
+              $.getJSON("/product/register",function(){
+              }) 
+            }else if(cnt==0){
+              $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
+              $("#tbody2 tr:eq("+i+")>td:eq(7)").html("대기")
+            }
+            else{
+              $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
+              $("#tbody2 tr:eq("+i+")>td:eq(7)").html("진행") 
+              cnt = 0
+            }
+          }
+        })
+      },1000)
+    }
     //등록
     $("#modal_register").click(function(){
       var o = $("#orders_id").val()

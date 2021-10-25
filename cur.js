@@ -32,7 +32,15 @@ router.get("/cur",function(req, res){
                 }else{
                     res.json({
                         "cur" : result,
-                        "run" : req.session.run
+                        "run" : req.session.run,
+                        "set_melt" : req.session.set_melt,
+                        "set_mold" : req.session.set_mold,
+                        "set_inj" : req.session.set_inj,
+                        "set_hold" : req.session.set_hold,
+                        "mold" : req.session.mold,
+                        "melt" : req.session.melt,
+                        "inj" : req.session.inj,
+                        "hold" : req.session.hold
                     })
                 }
             }
@@ -40,7 +48,15 @@ router.get("/cur",function(req, res){
     }else{
         res.json({
             "cur" : [],
-            "run" : req.session.run
+            "run" : req.session.run,
+            "set_melt" : req.session.set_melt,
+            "set_mold" : req.session.set_mold,
+            "set_inj" : req.session.set_inj,
+            "set_hold" : req.session.set_hold,
+            "mold" : req.session.mold,
+            "melt" : req.session.melt,
+            "inj" : req.session.inj,
+            "hold" : req.session.hold
         })
     }
     

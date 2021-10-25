@@ -138,12 +138,15 @@ router.get("/submit", function(req, res){
 })
 
 router.get("/modify", function(req, res){
+    var id = req.query._id;
     var quantity = req.query._quantity;
     var date_d = req.query._date_d;
     var mid = req.query._mid;
+    console.log(id);
     connection.query(
-        `update orders set(orders_qty, delivery_date, mid) = (?, ?, ?)`,
-        [quantity, date_d, mid],
+        `update orders set orders_qty=?, delivery_date=?, mid=? 
+         where orders_id = ?`,
+        [quantity, date_d, mid, id],
         function(err, result){
             if(err){
                 console.log(err)

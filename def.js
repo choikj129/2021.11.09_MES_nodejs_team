@@ -38,7 +38,7 @@ router.get("/", function(req,res){
                         console.log(err)
                     }else{
                         if(result.length==0){
-                            yy = 100
+                            yy = req.session.cnt
                             nn = 0
                         }else{
                             yy = result[0].yy
@@ -60,19 +60,13 @@ router.get("/", function(req,res){
 
 router.get("/update", function(req, res){
     var _id = req.query._id
-    var x = req.query.x
-    var y = req.query.y
-    var z = req.query.z
-    var h = req.query.h
-    var d = req.query.d
-    var t = req.query.t
     var date = req.query.date
     var error = req.query.error
     console.log(error)
     connection.query(
-        `insert into defect(monitor_id, x_defect, y_defect, z_defect, stud_h_defect, stud_d_defect, thick_defect, date, error)
-        values (?,?,?,?,?,?,?,?,?)`,
-        [_id,x,y,z,h,d,t,date,error],
+        `insert into defect(monitor_id, date, error)
+        values (?,?,?)`,
+        [_id,date,error],
         function(err, result){
             if(err){
                 console.log(err)
