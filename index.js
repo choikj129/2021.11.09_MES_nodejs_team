@@ -112,6 +112,7 @@ app.get("/time", function(req, res){
 var interval;
 
 app.get("/main", function(req, res){
+    console.log(req.session.set_hold)
     console.log("run : "+req.session.run)
     req.session.dir = false;
     var date = moment().format("YYYYMMDD")
@@ -180,7 +181,6 @@ app.get("/main", function(req, res){
                 }
             }
         )
-        
     }
 })
 
@@ -205,14 +205,15 @@ app.get("/main_update", function(req, res){
                 }else{
                     if(result.length>0){
                         req.session.cnt = result[0].cnt
+                        req.session.total = result[0].total
                     }
                     if (req.session.run == false){
                         req.session.run = true;
                         interval = setInterval(function () {
-                            moldt = (Math.random()*5.5 + req.session.set_mold-2.5).toFixed(2)
-                            meltt = (Math.random()*5.5 + req.session.set_melt-2.5).toFixed(2)
-                            holdp = (Math.random()*3.5 + req.session.set_hold-1.5).toFixed(2)
-                            injs = (Math.random()*3.5 + req.session.set_inj-1.5).toFixed(2)
+                            moldt = (Math.random()*7 + req.session.set_mold-3.5).toFixed(2)
+                            meltt = (Math.random()*7 + req.session.set_melt-3.5).toFixed(2)
+                            holdp = (Math.random()*5 + req.session.set_hold-2.5).toFixed(2)
+                            injs = (Math.random()*5 + req.session.set_inj-2.5).toFixed(2)
                             var defect = "Y"
                             if(moldt<mold[0]-2*mold[1] || moldt>mold[0]+2*mold[1]
                             || meltt<melt[0]-2*melt[1] || meltt>melt[0]+2*melt[1]
@@ -254,16 +255,16 @@ app.get("/register", function(req, res){
     var set = req.query.set;
     if (req.query.name == "용융온도"){
         var name = "melt_temp"
-        req.session.set_melt = set
+        req.session.set_melt = parseFloat(set)
     }else if (req.query.name == "금형온도"){
         var name = "mold_temp"
-        req.session.set_mold = set
+        req.session.set_mold = parseFloat(set)
     }else if (req.query.name == "보압"){
         var name = "hold_pressure"
-        req.session.set_hold = set
+        req.session.set_hold = parseFloat(set)
     }else{
         var name = "injection_speed"
-        req.session.set_inj = set
+        req.session.set_inj = parseFloat(set)
     }
     var date = moment().format("YYYY-MM-DD")
     connection.query(

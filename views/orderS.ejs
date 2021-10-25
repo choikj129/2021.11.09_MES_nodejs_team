@@ -466,14 +466,17 @@
       $(".modal_btn").click(function () {
         $(".modal_wrap").css("display", "block")
         $(".black_bg").css("display", "block")
+        $(".modal_btn2").attr("disabled", true)
       })
 
       $(".modal_close").click(function () {
         $(".modal_wrap").css("display", "none")
         $(".black_bg").css("display", "none")
+        $(".modal_btn2").attr("disabled", false)
       })
 
       $(".modal_btn2").click(function () {
+        $(".modal_btn").attr("disabled", true)
         var tr = $(this).parent().parent()
         var td = tr.children()
 
@@ -491,6 +494,7 @@
       $(".modal_close2").click(function () {
         $(".modal_wrap2").css("display", "none")
         $(".black_bg2").css("display", "none")
+        $(".modal_btn").attr("disabled", false)
       })
       
       //달력(날짜 1개 선택)

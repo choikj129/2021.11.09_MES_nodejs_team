@@ -117,6 +117,7 @@ function now(){
             $("#now_hold_pressure").css("background-color", "")
         }
         if(error!=""){
+            $(".alertI").css("display","block")
             location.href="/defect/update?_id="+result.monitor.monitor_id+"&date="+result.monitor.date+"&error="+error
         }
         
@@ -126,7 +127,7 @@ var interval;
 function start(){
     interval = setInterval(function(){
         now()
-    },2000)
+    },1000)
 }
 
 function stop(){

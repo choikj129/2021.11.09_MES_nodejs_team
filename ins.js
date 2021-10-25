@@ -31,7 +31,8 @@ router.get("/",function(req,res){
                     }else{
                         if(req.session.dir){
                             var sql = `select *,
-                            (select count(*) from monitoring`+date+`) cnt
+                            (select count(*) from monitoring`+date+`) cnt,
+                            (select sum(quantity) from ordert where date(date) =`+date+`) total
                              from ordert where date(date)=?`
                         }else{
                             var sql = `select * from ordert where date(date)=?`
@@ -46,8 +47,10 @@ router.get("/",function(req,res){
                                 }else{
                                     if(req.session.dir){
                                         var cnt = result[0].cnt
+                                        var total = result[0].total
                                     }else{
                                         var cnt = 0
+                                        var total = 0
                                     }
                                     console.log(req.session.total)
                                     res.render("instruct",{
@@ -56,7 +59,8 @@ router.get("/",function(req,res){
                                         "date" : date,
                                         "linkcode" : req.session.logged.linkcode,
                                         "run" : req.session.run,
-                                        "cnt" : cnt
+                                        "cnt" : cnt,
+                                        "total" : total
                                     })
                                 }
                             }
@@ -155,10 +159,20 @@ router.get("/del", function(req,res){
 })
 
 router.get("/update", function(req, res){
-    res.json({
-        "cnt" : req.session.cnt,
-        "total" : req.session.total
-    })
+    connection.query(
+        `select (select count(*) from monitoring`+date+`) cnt, 
+        (select sum(quantity) from ordert where date(date) =`+date+`) total`,
+        function(err, result){
+            if(err){
+                console.log(err)
+            }else{
+                res.json({
+                    "cnt" : result[0].cnt,
+                    "total" : result[0].total
+                })
+            }
+        }
+    )
 })
 
 module.exports = router

@@ -205,15 +205,55 @@
       }else {
         $("#linkcode").text("작업자")
       }
-      var Arr = new Array();
       var len = $("#tbody2 tr").length
-      alert("<%=cnt%>")
-      $("#tbody2 tr:eq(0)>td:eq(4)").html()
-      // for (var i=0; i<len; i++){
-
-      // }
-
+      var cnt = parseInt("<%=cnt%>")
+      var total = "<%=total%>"
+      for (var i=0; i<len; i++){
+        qty = parseInt($("#tbody2 tr:eq("+i+")>td:eq(4)").html())
+        if(cnt >= qty){
+          $("#tbody2 tr:eq("+i+")>td:eq(6)").html(qty) 
+          $("#tbody2 tr:eq("+i+")>td:eq(7)").html("완료") 
+          cnt-=qty
+        }else if(cnt==0){
+          $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
+          $("#tbody2 tr:eq("+i+")>td:eq(7)").html("대기")
+        }
+        else{
+          $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
+          $("#tbody2 tr:eq("+i+")>td:eq(7)").html("진행") 
+          cnt = 0
+        }
+      }
     });
+
+    if("<%=run%>"=="true"){
+      setInterval(function(){
+        $.getJSON("/instruct/update",
+        function(result){
+          var cnt = result.cnt
+          var total = result.total
+          var len = $("#tbody2 tr").length
+          for (var i=0; i<len; i++){
+            qty = parseInt($("#tbody2 tr:eq("+i+")>td:eq(4)").html())
+            if(cnt >= qty){
+              $("#tbody2 tr:eq("+i+")>td:eq(6)").html(qty) 
+              $("#tbody2 tr:eq("+i+")>td:eq(7)").html("완료") 
+              cnt-=qty
+              $.getJSON("/product/register",function(){
+              }) 
+            }else if(cnt==0){
+              $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
+              $("#tbody2 tr:eq("+i+")>td:eq(7)").html("대기")
+            }
+            else{
+              $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
+              $("#tbody2 tr:eq("+i+")>td:eq(7)").html("진행") 
+              cnt = 0
+            }
+          }
+        })
+      },1000)
+    }
     //등록
     $("#modal_register").click(function(){
       var o = $("#orders_id").val()
@@ -332,15 +372,6 @@
       $("#quantity").val(orders_qty)
       $("#manager").val(cid)
     })
-
-    if("<%=run%>"=="true"){
-      setInterval(function(){
-        $.getJSON("/instruct/update",
-        function(result){
-          var cnt = result.cnt
-        })
-      },2000)
-    }
     
 
   </script>

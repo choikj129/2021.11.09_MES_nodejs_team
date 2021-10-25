@@ -108,6 +108,57 @@ router.get("/search", function(req, res){
     //         }
     //     }
     // )
+});
+
+router.get("/register", function(req, res){
+    order_id = req.query.id
+    date = moment().format("YYYYMMDD")
+    time = moment().format("YYYY-MM-DD HH:mm:ss")
+    console.log(order_id)
+    var n = 0
+    var q = 0
+    connection.query(
+        `select * from ordert where date(date)=?`,
+        [date],
+        function(err, result){
+            if(err){
+                console.log(err)
+            }else{
+                for (var i=0; i<result.length; i++){
+                    if (result[i].order_id==order_id){
+                        n = result[i].quantity
+                        var id = i;
+                        break
+                    }else{
+                        q += result[i].quantity
+                    }
+                }
+                connection.query(
+                    `select count(*) count from monitoring`+date+` where monitor_id > ? and monitor_id <= ? and defect='Y'`,
+                    [q,q+n],
+                    function(err,result1){
+                        if(err){
+                            console.log(err)
+                        }else{
+                            connection.query(
+                                `insert into performance(order_id, date, lego_name, quantity, qty_good, qty_def, manager)
+                                 values (?, ?, ?, ?, ?, ?, ?)`,
+                                 [parseInt(order_id), time, result[id].lego_name, result[id].quantity, 
+                                result1[0].count, result[id].quantity-result1[0].count, result[id].manager],
+                                function(err){
+                                    if (err){
+                                        console.log(err)
+                                    }else{
+                                        res.json()
+                                    }
+                                }
+                            )
+                        }
+                    }
+                )
+            }
+        }
+    )
 })
 
 module.exports = router
