@@ -120,7 +120,9 @@ function now(){
             $(".alertI").css("display","block")
             location.href="/defect/update?_id="+result.monitor.monitor_id+"&date="+result.monitor.date+"&error="+error
         }
-        
+        if(result.monitor.cnt==result.monitor.total){
+            stop()
+        }
     })
 }
 var interval;

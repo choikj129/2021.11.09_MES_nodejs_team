@@ -195,13 +195,22 @@
           var cnt = result.cnt
           var total = result.total
           var len = $("#tbody2 tr").length
+          if (cnt == total){
+            location.href="/stop?url=instruct"
+          }
           for (var i=0; i<len; i++){
             qty = parseInt($("#tbody2 tr:eq("+i+")>td:eq(4)").html())
+            if ($("#tbody2 tr:eq("+i+")>td:eq(7)").html()=="완료"){
+              cnt-=qty
+              continue
+            }
             if(cnt >= qty){
               $("#tbody2 tr:eq("+i+")>td:eq(6)").html(qty) 
               $("#tbody2 tr:eq("+i+")>td:eq(7)").html("완료") 
               cnt-=qty
-              $.getJSON("/product/register",function(){
+              $.getJSON("/product/register",{
+                id : parseInt($("#tbody2 tr:eq("+i+")>td:eq(1)").html())
+              },function(){
               }) 
             }else if(cnt==0){
               $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
@@ -213,6 +222,7 @@
               cnt = 0
             }
           }
+          
         })
       },1000)
     }
@@ -328,12 +338,11 @@
       var lego_name = td.eq(3).text();
       var orders_qty = td.eq(4).text();
       var cid = td.eq(7).text();
-
-      $("#orders_id").val(orders_id)
-      $("#lego_name").val(lego_name).prop("selected",true)
+      $("#orders_id").val(orders_id.trim())
+      $("#lego_name").val(lego_name.trim()).prop("selected",true)
       // $("#lego_name").val(lego_name.options[lego_name.selectedindex].text)
-      $("#quantity").val(orders_qty)
-      $("#manager").val(cid)
+      $("#quantity").val(orders_qty.trim())
+      $("#manager").val(cid.trim())
         
     })
   </script>

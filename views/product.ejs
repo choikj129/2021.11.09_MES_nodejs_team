@@ -182,17 +182,17 @@
         }
 
         function pagination(){
-		var req_num_row=10;
-		var $tr=jQuery('tbody tr');
-		var total_num_row=$tr.length;
-		var num_pages=0;
-		if(total_num_row % req_num_row ==0){
-			num_pages=total_num_row / req_num_row;
-		}
-		if(total_num_row % req_num_row >=1){
-			num_pages=total_num_row / req_num_row;
-			num_pages++;
-			num_pages=Math.floor(num_pages++);
+            var req_num_row=10;
+            var $tr=jQuery('tbody tr');
+            var total_num_row=$tr.length;
+            var num_pages=0;
+            if(total_num_row % req_num_row ==0){
+                num_pages=total_num_row / req_num_row;
+            }
+            if(total_num_row % req_num_row >=1){
+                num_pages=total_num_row / req_num_row;
+                num_pages++;
+                num_pages=Math.floor(num_pages++);
 		}
   
     jQuery('.pagination').append("<li class='page-item'><a class='page-link'><<</a></li>");
