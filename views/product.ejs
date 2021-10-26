@@ -37,23 +37,21 @@
     <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
         <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw">
             <div class="font_nav">작업실적조회</div>
-            <div class="input-group mb-3" style="position: absolute; left:15vw; top:3vh">
-                <label class="input-group-text" for="inputGroupSelect01">품목명</label>
-                <select class="form-select" id="product_i" name="search_i">
-                    <option value=""></option>
-                    <option value="bricks_rect">bricks_rect</option>
-                    <option value="bricks_square">bricks_square</option>
-                    <option value="circle">circle</option>
-                    <option value="floor">floor</option>
-                </select>
-            </div>
-            <div class="input-group mb-3" style="position: absolute; left:45vw; top:3vh">
-                <label class="input-group-text" for="inputGroupSelect01" style="width:10vw">작업 날짜</label>
-                <input type="text" class="datepicker wdate" id="product_d" name="_date" style="width: 60.2%;">
-            </div>
-            <button class="btn btn-secondary" onclick="search()"
-                style="position:absolute; bottom:3vh; right:10vw">조회</button>
-            <button class="btn btn-light" onclick="reset()" style="position:absolute; bottom:3vh; right:2vw">검색 초기화</button>
+            <div class="input_nav" style="top:2.5vh; left:17vw;" for="inputGroupSelect01">품목명</div>
+            <select class="form-select text select" id="product_i" name="search_i" style="top:2.5vh; left:24vw;">
+                <option value=""></option>
+                <option value="bricks_rect">bricks_rect</option>
+                <option value="bricks_square">bricks_square</option>
+                <option value="circle">circle</option>
+                <option value="floor">floor</option>
+            </select>
+
+            <div class="input_nav" style="top:2.5vh; left:47vw;" for="inputGroupSelect01">작업 날짜</div>
+            <input type="text" class="datepicker wdate text" id="product_d" name="_date"
+                style="top:2.5vh; left:54vw; width:15vw; height: 5vh;">
+
+            <button class="btn btn-secondary" onclick="search()" style="position:absolute; top:2.5vh; right:10vw">조회</button>
+            <button class="btn btn-light" onclick="reset()" style="position:absolute; top:2.5vh; right:2vw">검색 초기화</button>
         </div>
     
         <div style="position: absolute; top:17vh; left:6vw; color:white; text-align: center;">

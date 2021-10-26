@@ -13,19 +13,19 @@
         <link rel="stylesheet" href="/css/jquery-ui.css">
         
         <style>
-          .table{
-            position:absolute;
-            left:31vw;
-            top:10vh; 
-            width:65vw;
-            height:15vh;
+          .table {
+            position: absolute;
+            left: 31vw;
+            top: 20vh;
+            width: 65vw;
+            height: 15vh;
             text-align: center;
           }
-          td{
+          td {
             height: 1vh;
           }
-          #defect_icon{
-              background-color: var(--first-color);
+          #defect_icon {
+            background-color: var(--first-color);
           }
         </style>
         
@@ -68,35 +68,46 @@
           } 
         }
 
-        var canvas=document.getElementById('pieChart'); 
-        var pieChart = new Chart(canvas,config);
-      </script>
-
-      <div class="input-group mb-3" style="position: absolute; left:31vw; top:3vh;">
-        <label class="input-group-text" for="inputGroupSelect01" >작업 날짜</label>
-        <input type="text" id="datepicker" name="_date">
-        <button class="btn btn-secondary" onclick="search()">조회</button>
-      </div>
-      <div class="table">
-        <table style="text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+        var canvas = document.getElementById('pieChart');
+        var pieChart = new Chart(canvas, config);
+        </script>
+      
+      <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width: 57vw;">
+        <div class="font_nav">결함확인</div>
+    
+        <div class="input_nav" style="top:2.5vh; left:20vw;" for="inputGroupSelect01">작업 날짜</div>
+          <input type="text" class="datepicker wdate text" id="datepicker" name="_date"
+          style="top:2.5vh; left:27.1vw; width:15vw; height:5vh;"> 
+    
+          <button class="btn btn-secondary" onclick="search()" style="position:absolute; top:2.5vh; right:1.5vw">조회</button>
+        </div>
+        <div class="table">
+          <table style="text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
             <thead style="background-color: rgba(199, 202, 241, 0.308); height:8vh;">
               <tr>
                 <th scope="col" style="width: 17vw;">시간</th>
                 <th scope="col" style="width: 15vw">결함 유형</th>
-                <th scope="col" style="width: 25vw;">결함 원인</th> 
+                <th scope="col" style="width: 25vw;">결함 원인</th>
               </tr>
             </thead>
             <tbody>
-              <% for(var i =0; i < defect.length; i++){ %>
+              <% for(var i=0; i < defect.length; i++){ %>
                 <tr>
-                  <td><%=defect[i].date %></td>
-                  <td><%=defect[i].cause %></td>
-                  <td><%=defect[i].error %></td>
+                  <td>
+                    <%=defect[i].date %>
+                  </td>
+                  <td>
+                    <%=defect[i].cause %>
+                  </td>
+                  <td>
+                    <%=defect[i].error %>
+                  </td>
                 </tr>
-              <% } %>
+                <% } %>
             </tbody>
-        </table>
-      </div>
+          </table>
+        </div>
+    
 
       <script>
         $(function(){

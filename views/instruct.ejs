@@ -11,90 +11,48 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
 
     <style>
-      .table {
-        width: 92.5vw;
-        text-align: center;
-        background-color: rgb(173, 185, 202);
-      }
-      /* .input-group {
-        width: 25vw;
-        text-align: center;
-        background-color: rgb(173, 185, 202);
-      } */
       #instruct_icon {
         background-color: var(--first-color);
       }
-      /* .input-group-text {
-        border-radius: 0;
-        width: 20vw;
-      }
-
-      .form-control {
-        border-radius: 0;
-      } */
-      /* .modal_wrap {
-        display: none;
-        width: 500px;
-        height: 500px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -250px 0 0 -250px;
-        background: #eee;
-        z-index: 2;
-      }
-
-      .black_bg {
-        display: none;
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        top: 0;
-        left: 0;
-        z-index: 1;
-      } */
-
     </style>
 </head>
 
 <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
   <!-- <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
     <div div class="font_nav">작업지시관리</div> -->
-  <div style="position: absolute; top:6.5vh; left:8vw; font-size: large; font-weight: bold; color:white;">작업지시관리</div>
-  <div class="wrapper" style="position: absolute; top:3vh; left:6vw;">
-    
-    <div class="input-group mb-3" style="position: absolute; left:10vw; top:3vh">
-      <label class="input-group-text" for="inputGroupSelect01" style="width:5vw">작업일</label>
-      <input type="text" id="date" class="datepicker wdate" style="width: 60%;">
-    </div>
-
-    <div class="input-group mb-3" style="position: absolute; left:37vw; top:3vh;">
-      <label class="input-group-text" for="inputGroupSelect01" style="width:5vw">거래처</label>
-      <input id="cust" type="text" style="width: 60%;">
-    </div>
+    <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+      <div class="font_nav">작업지시·수주관리</div>
   
-    <div class="input-group mb-3" style="position: absolute; left:63vw; top:3vh">
-      <label class="input-group-text" for="inputGroupSelect01" style="width:5vw">품목명</label>
-      <select class="form-select" id="product_i">
+      <div class="input_nav" style="top:2.5vh; left:15vw;" for="inputGroupSelect01">작업일</div>
+      <input type="text" class="datepicker wdate text" id="date"
+        style="top:2.5vh; left:22.1vw; width:15vw; height:5vh;"> 
+  
+  
+      <div class="input_nav" style="top:2.5vh; left:39vw;" for="inputGroupSelect01">거래처</div>
+      <select class="form-select text select" id="cust" style="top:2.5vh; left:46.1vw;">
+        <option value=""></option>
+        <option value="삼성전자">삼성전자</option>
+        <option value="LG전자">LG전자</option>
+        <option value="카카오">카카오</option>
+        <option value="네이버">네이버</option>
+      </select>
+  
+      <div class="input_nav" style="top:2.5vh; left:63vw;" for="inputGroupSelect01">품목명</div>
+      <select class="form-select text select" id="product_i" style="top:2.5vh; left:70.1vw;">
         <option value=""></option>
         <option value="bricks_rect">bricks_rect</option>
         <option value="bricks_square">bricks_square</option>
         <option value="circle">circle</option>
         <option value="floor">floor</option>
       </select>
+      <button class="btn btn-secondary" onclick="search()" style="position:absolute; top:2.5vh; right:1.5vw">조회</button>
     </div>
-  
-    <button class="btn btn-secondary" onclick="search()" style="position:absolute; bottom:3vh; right:1.5vw">조회</button>
-  </div>
  
 
   <!-- 수주 조회 테이블 -->
-  <div style="position: absolute; top:17vh; left:6vw; color:white; text-align: center; overflow: auto; height: 220px;">
-    <table id="iTable" class="table table-bordered"
-      style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
-      <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
+  <div class="tableb" style="top:17vh; left:6vw;">
+    <table id="iTable" class="table table-bordered">
+      <thead class="thead">
         <tr>
           <th scope="col" style="width: 4vw;"></th>
           <th scope="col" style="width: 10vw;">수주번호</th>
@@ -109,23 +67,37 @@
       <tbody id="tbody1">
         <% for(var i=0; i < orders.length; i++) {%>
           <tr>
-            <td><input type="radio" class="rad form-check-input"  name="select_radio" value="<%=orders[i].orders_id%>"></td>
-            <td><%=orders[i].orders_id%></td>
-            <td><%=orders[i].cust_name%></td>
-            <td><%=orders[i].lego_name%></td>
-            <td><%=orders[i].orders_qty%></td>
-            <td><%=orders[i].orders_date%></td>
-            <td><%=orders[i].delivery_date%></td>
-            <td><%=orders[i].cid%></td>
+            <td><input type="radio" class="rad form-check-input" name="select_radio" value="<%=orders[i].orders_id%>">
+            </td>
+            <td>
+              <%=orders[i].orders_id%>
+            </td>
+            <td>
+              <%=orders[i].cust_name%>
+            </td>
+            <td>
+              <%=orders[i].lego_name%>
+            </td>
+            <td>
+              <%=orders[i].orders_qty%>
+            </td>
+            <td>
+              <%=orders[i].orders_date%>
+            </td>
+            <td>
+              <%=orders[i].delivery_date%>
+            </td>
+            <td>
+              <%=orders[i].cid%>
+            </td>
           </tr>
-        <%}%>
+          <%}%>
       </tbody>
     </table>
     <div class="col-lg-12" id="ex3_Result1"></div>
     <div class="col-lg-12" id="ex3_Result2"></div>
   </div>
 
-  
   <button class="btn btn-light modal_btn" id="selectBtn" style="position:absolute; top: 50vh; right: 7vw;">등록</button>
   <button class="btn btn-danger " style="position:absolute; top: 50vh; right:3vw;" onclick="del()">삭제</button>
 
@@ -149,20 +121,18 @@
     <div class="modal_box1" style="top:30.6vh">담당자</div>
     <input type="text" class="modal_box2" style="top:30.6vh" id="manager">
     <div align="center">
-      <button class="btn btn-secondary" id="modal_register" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
-      height:5.6vh; font-size:large; line-height: 4vh;">등록</button>
-      <button class="btn btn-secondary modal_close" style="position:absolute; bottom: 2vh; right: 9vw;
-      width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
+      <button class="btn btn-dark" id="modal_register"
+        style="position:absolute; bottom: 2.5vw; right: 18.5vw;">등록</button>
+      <button class="btn btn-dark modal_close" style="position:absolute; bottom: 2.5vw; right: 8.5vw;">취소</button>
     </div>
   </div>
   
 
 
   <!-- 작업지시 테이블 -->
-  <div style="position: absolute; top:59vh; left:6vw; color:white; text-align: center;overflow: auto; height: 220px;">
-    <table class="table table-bordered"
-      style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
-      <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
+  <div class="tableb"style="top:59vh; left:6vw;">
+    <table class="table table-bordered">
+      <thead class="thead">
         <tr>
           <th scope="col" style="width: 4vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
           <th scope="col" style="width: 10vw;">작업지시번호</th>
@@ -192,7 +162,7 @@
   </div>
 
   <script>
-     $(function () {
+    $(function () {
       if ("<%=linkcode%>" == 0) {
         $("#linkcode").text("관리자")
       }else {
