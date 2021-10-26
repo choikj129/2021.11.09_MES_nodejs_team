@@ -45,23 +45,29 @@
         <option value="circle">circle</option>
         <option value="floor">floor</option>
       </select>
-      <button class="btn btn-secondary" onclick="search()" style="position:absolute; top:2.5vh; right:1.5vw">조회</button>
+      <button class="btn btn-outline-secondary" onclick="search()" style="position:absolute; top:2.5vh; right:1.5vw">조회</button>
     </div>
  
 
   <!-- 수주 조회 테이블 -->
-  <div class="tableb" style="top:17vh; left:6vw;">
-    <table id="iTable" class="table table-bordered">
-      <thead class="thead">
+  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:25vh; left:-37vw;">수</div>
+  <div class="text" style="color:white;font-size:1.5vw; width:88vw; top:32vh; left:-37vw;">주</div>
+  <div class="text" style="color:white;font-size:1.5vw; width:88vw; top:40vh; left:-37vw;">조</div>
+  <div class="text" style="color:white;font-size:1.5vw; width:88vw; top:48vh; left:-37vw;">회</div>
+
+  <div class="tableb" style="top:17vh; left:9.5vw;">
+    <table id="iTable" class="table table-bordered" style="width:88vw;">
+      <thead class="thead" style="width:88vw;">
+
         <tr>
-          <th scope="col" style="width: 4vw;"></th>
-          <th scope="col" style="width: 10vw;">수주번호</th>
-          <th scope="col" style="width: 16vw;">거래처</th>
-          <th scope="col" style="width: 16vw;">품목명</th>
-          <th scope="col" style="width: 10vw;">지시 수량</th>
-          <th scope="col" style="width: 20vw;">주문일</th>
-          <th scope="col" style="width: 20vw;">납기일</th>
-          <th scope="col" style="width: 10vw;">담당자</th>
+          <!-- <th scope="col" style="width: 4vw;"></th> -->
+          <th scope="col" style="width: 8vw;">수주번호</th>
+          <th scope="col" style="width: 14vw;">거래처</th>
+          <th scope="col" style="width: 14vw;">품목명</th>
+          <th scope="col" style="width: 8vw;">지시 수량</th>
+          <th scope="col" style="width: 18vw;">주문일</th>
+          <th scope="col" style="width: 18vw;">납기일</th>
+          <th scope="col" style="width: 8vw;">담당자</th>
         </tr>
       </thead>
       <tbody id="tbody1">
@@ -98,8 +104,8 @@
     <div class="col-lg-12" id="ex3_Result2"></div>
   </div>
 
-  <button class="btn btn-light modal_btn" id="selectBtn" style="position:absolute; top: 50vh; right: 7vw;">등록</button>
-  <button class="btn btn-danger " style="position:absolute; top: 50vh; right:3vw;" onclick="del()">삭제</button>
+  <button class="btn btn-outline-light modal_btn" id="selectBtn" style="position:absolute; top: 50vh; right: 8vw;">등록</button>
+  <button class="btn btn-outline-danger " style="position:absolute; top: 50vh; right:3vw;" onclick="del()">삭제</button>
 
   <!--모달-->
   <div class="black_bg"></div>
@@ -130,17 +136,22 @@
 
 
   <!-- 작업지시 테이블 -->
-  <div class="tableb"style="top:59vh; left:6vw;">
-    <table class="table table-bordered">
-      <thead class="thead">
+  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:65vh; left:-37vw;">작</div>
+  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:72vh; left:-37vw;">업</div>
+  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:80vh; left:-37vw;">지</div>
+  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:88vh; left:-37vw;">시</div>
+
+  <div class="tableb"style="top:57vh; left:9.5vw;" >
+    <table class="table table-bordered" style="width:88vw;">
+      <thead class="thead" style="width:88vw;">
         <tr>
-          <th scope="col" style="width: 4vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
+          <th scope="col" style="width: 2vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
           <th scope="col" style="width: 10vw;">작업지시번호</th>
           <th scope="col" style="width: 10vw;">수주번호</th>
           <th scope="col" style="width: 10vw;">품목명</th>
           <th scope="col" style="width: 10vw;">지시 수량</th>
-          <th scope="col" style="width: 20vw;">주문일</th>
-          <th scope="col" style="width: 20vw;">생산량</th>
+          <th scope="col" style="width: 18vw;">주문일</th>
+          <th scope="col" style="width: 18vw;">생산량</th>
           <th scope="col" style="width: 10vw;">상태</th>
         </tr>
       </thead>
