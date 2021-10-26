@@ -26,13 +26,13 @@ CREATE TABLE `performance` (
   `pp_id` int NOT NULL AUTO_INCREMENT,
   `order_id` int DEFAULT NULL,
   `date` text,
-  `lego_name` int DEFAULT NULL,
+  `lego_name` varchar(45) DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   `qty_good` int DEFAULT NULL,
-  `qyt_def` int DEFAULT NULL,
+  `qty_def` int DEFAULT NULL,
   `manager` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`pp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `performance` (
 
 LOCK TABLES `performance` WRITE;
 /*!40000 ALTER TABLE `performance` DISABLE KEYS */;
+INSERT INTO `performance` VALUES (1,10,'2021-10-25 16:28:06','circle',50,50,0,'ㅊ'),(2,10,'2021-10-25 16:28:11','circle',50,50,0,'ㅊ');
 /*!40000 ALTER TABLE `performance` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-13 10:04:35
+-- Dump completed on 2021-10-26 13:22:22

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
 -- Host: localhost    Database: project
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,17 +25,11 @@ DROP TABLE IF EXISTS `defect`;
 CREATE TABLE `defect` (
   `defect_id` int NOT NULL AUTO_INCREMENT,
   `monitor_id` int NOT NULL,
-  `x_defect` varchar(45) NOT NULL,
-  `y_defect` varchar(45) NOT NULL,
-  `z_defect` varchar(45) NOT NULL,
-  `stud_h_defect` varchar(45) NOT NULL,
-  `stud_d_defect` varchar(45) NOT NULL,
-  `thick_defect` varchar(45) NOT NULL,
   `error` text,
   `cause` text,
   `date` varchar(45) NOT NULL,
   PRIMARY KEY (`defect_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +38,7 @@ CREATE TABLE `defect` (
 
 LOCK TABLES `defect` WRITE;
 /*!40000 ALTER TABLE `defect` DISABLE KEYS */;
-INSERT INTO `defect` VALUES (3,135,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:41:08'),(4,135,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:41:10'),(5,2,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:44:10'),(6,2,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:44:54'),(7,2,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-02 20:44:59'),(8,2,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-03 12:05:45'),(9,25,'Y','Y','Y','Y','Y','N',NULL,NULL,'2021-10-03 12:26:11');
+INSERT INTO `defect` VALUES (21,18,'injection_speed : 59.71( 4.34)',NULL,'2021-10-22 10:48:38'),(24,20,'mold_temp : 31.83( 6.53)',NULL,'2021-10-22 10:48:42'),(30,26,'melt_temp : 282.31( 6.55)',NULL,'2021-10-22 10:48:54'),(33,29,'melt_temp : 281.71( 5.95)',NULL,'2021-10-22 10:49:00'),(34,30,'mold_temp : 31.85( 6.55) injection_speed : 59.64( 4.27)',NULL,'2021-10-22 10:49:02'),(35,31,'injection_speed : 58.98( 3.61)',NULL,'2021-10-22 10:49:04'),(36,36,'injection_speed : 58.92( 3.55)',NULL,'2021-10-22 10:52:56'),(37,38,'mold_temp : 31.23( 5.93) melt_temp : 282.1( 6.34)',NULL,'2021-10-22 10:53:00'),(38,45,'injection_speed : 59.19( 3.82)',NULL,'2021-10-22 10:53:14'),(39,1,'mold_temp : 1.88(-23.42) melt_temp : -1.62(-277.38) injection_speed : 1.96(-53.41) hold_pressure : -0.17(-135.56)',NULL,'2021-10-25 09:44:26'),(40,5,'mold_temp : 1.92(-23.38) melt_temp : -2.02(-277.78) injection_speed : 0.41(-54.96) hold_pressure : -0.71(-136.11)',NULL,'2021-10-25 09:44:34'),(41,6,'mold_temp : 0.35(-24.95) melt_temp : -0.3(-276.06) injection_speed : -1.4(-56.77) hold_pressure : -0.64(-136.03)',NULL,'2021-10-25 09:44:36'),(42,1,'mold_temp : 0.03(-25.27) melt_temp : -0.11(-275.87) injection_speed : 0.54(-54.83) hold_pressure : 0.17(-135.23)',NULL,'2021-10-25 09:53:49'),(43,1,'mold_temp : 0.03(-25.27) melt_temp : -0.11(-275.87) injection_speed : 0.54(-54.83) hold_pressure : 0.17(-135.23)',NULL,'2021-10-25 09:53:49'),(44,2,'mold_temp : 2.73(-22.57) melt_temp : -1.66(-277.42) injection_speed : 0.78(-54.59) hold_pressure : 0.44(-134.96)',NULL,'2021-10-25 09:53:51'),(45,2,'injection_speed : 58.94( 3.57)',NULL,'2021-10-26 13:04:17'),(46,2,'injection_speed : 58.94( 3.57)',NULL,'2021-10-26 13:04:17'),(47,9,'injection_speed : 59.84( 4.48)',NULL,'2021-10-26 13:04:31'),(48,9,'injection_speed : 59.84( 4.48)',NULL,'2021-10-26 13:04:31'),(49,14,'injection_speed : 60.19( 4.82)',NULL,'2021-10-26 13:04:41'),(50,14,'injection_speed : 60.19( 4.82)',NULL,'2021-10-26 13:04:41'),(51,14,'injection_speed : 60.19( 4.82)',NULL,'2021-10-26 13:04:41'),(52,14,'injection_speed : 60.19( 4.82)',NULL,'2021-10-26 13:04:41'),(53,16,'injection_speed : 59.1( 3.73)',NULL,'2021-10-26 13:08:12'),(54,16,'injection_speed : 59.1( 3.73)',NULL,'2021-10-26 13:08:12');
 /*!40000 ALTER TABLE `defect` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-05  9:13:46
+-- Dump completed on 2021-10-26 13:22:24
