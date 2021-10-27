@@ -13,14 +13,6 @@
         <link rel="stylesheet" href="/css/jquery-ui.css">
         
         <style>
-          .table {
-            position: absolute;
-            left: 31vw;
-            top: 20vh;
-            width: 65vw;
-            height: 15vh;
-            text-align: center;
-          }
           td {
             height: 1vh;
           }
@@ -79,19 +71,19 @@
           <input type="text" class="datepicker wdate text" id="datepicker" name="_date"
           style="top:2.5vh; left:27.1vw; width:15vw; height:5vh;"> 
     
-          <button class="btn btn-secondary" onclick="search()" style="position:absolute; top:2.5vh; right:1.5vw">조회</button>
+          <button class="btn btn-outline-secondary" onclick="search()" style="top:2.5vh; right:1.5vw">조회</button>
         </div>
-        <div class="table">
-          <table style="text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
-            <thead style="background-color: rgba(199, 202, 241, 0.308); height:8vh;">
+        <div class="tableb" style="width:57vw; left:31vw; top:16vh;">
+          <table class="table table-bordered" style="width:57vw;"> 
+            <thead class="thead" style="width:57vw;">
               <tr>
                 <th scope="col" style="width: 17vw;">시간</th>
                 <th scope="col" style="width: 15vw">결함 유형</th>
-                <th scope="col" style="width: 25vw;">결함 원인</th>
+                <th scope="col" style="width: 21vw;">결함 원인</th>
               </tr>
             </thead>
             <tbody>
-              <% for(var i=0; i < defect.length; i++){ %>
+                    <% for(var i=0; i < defect.length; i++){ %>
                 <tr>
                   <td>
                     <%=defect[i].date %>
