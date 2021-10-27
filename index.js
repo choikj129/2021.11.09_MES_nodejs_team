@@ -208,10 +208,10 @@ app.get("/main_update", function(req, res){
                     if (req.session.run == false){
                         req.session.run = true;
                         interval = setInterval(function () {
-                            moldt = (Math.random()*7 + req.session.set_mold-3.5).toFixed(2)
-                            meltt = (Math.random()*7 + req.session.set_melt-3.5).toFixed(2)
-                            holdp = (Math.random()*5 + req.session.set_hold-2.5).toFixed(2)
-                            injs = (Math.random()*5 + req.session.set_inj-2.5).toFixed(2)
+                            moldt = (Math.random()*10 + req.session.set_mold-5).toFixed(2)
+                            meltt = (Math.random()*10 + req.session.set_melt-5).toFixed(2)
+                            holdp = (Math.random()*6 + req.session.set_hold-3).toFixed(2)
+                            injs = (Math.random()*6 + req.session.set_inj-3).toFixed(2)
                             var defect = "Y"
                             if(moldt<mold[0]-2*mold[1] || moldt>mold[0]+2*mold[1]
                             || meltt<melt[0]-2*melt[1] || meltt>melt[0]+2*melt[1]
@@ -304,8 +304,10 @@ app.get("/register", function(req, res){
 
 app.get("/stop", function(req, res){
     req.session.run = false;
+    var url = req.query.url
     clearInterval(interval);
-    res.redirect("/")
+    res.redirect("/"+url)
+    
 })
 
 const defect = require("./def");

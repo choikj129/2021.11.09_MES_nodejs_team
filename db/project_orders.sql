@@ -33,8 +33,9 @@ CREATE TABLE `orders` (
   `date_c` text,
   `mid` varchar(10) DEFAULT NULL,
   `date_m` text,
+  `work` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orders_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +44,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,'삼성전자','bricks_rect','100','2021-10-21','2021-10-28','c',NULL,NULL,NULL,'Y'),(2,'LG전자','bricks_rect','100','2021-10-22','2021-10-25','ch',NULL,NULL,NULL,NULL),(4,'삼성전자','bricks_rect','100','2021-10-22','2021-10-28','c',NULL,NULL,NULL,'Y'),(5,'삼성전자','circle','50','2021-10-25','2021-10-29','ㅊ',NULL,NULL,NULL,'Y'),(6,'삼성전자','bricks_square','10','2021-10-26','2021-10-29','c',NULL,NULL,NULL,'Y'),(7,'LG전자','bricks_square','10','2021-10-26','2021-10-28','kj',NULL,NULL,NULL,'Y');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-13 10:04:35
+-- Dump completed on 2021-10-26 13:22:25

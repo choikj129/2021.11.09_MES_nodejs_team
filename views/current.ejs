@@ -476,6 +476,9 @@
             $.getJSON("/current/update",
             function(result){
                 //x축에 실시간 데이터 생성
+                if (result.cur.cnt == result.cur.total){
+                    location.href = "/stop?url=current"
+                }
                 var axisData = result.cur.date.slice(11,19);
 
                 var data0 = option0.series[0].data

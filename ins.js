@@ -22,7 +22,7 @@ router.get("/",function(req,res){
             res.redirect("/alert")
         }else{
             connection.query(
-                `select * from orders where date(orders_date) <= ? and date(delivery_date) >= ?`,
+                `select * from orders where date(orders_date) <= ? and date(delivery_date) >= ? and work is NULL`,
                 [date, date],
                 function(err0,result0){
                     if(err0){
@@ -81,30 +81,37 @@ router.get("/register", function(req, res){
     connection.query(
         `insert into ordert(orders_id, lego_name, quantity, date, manager)
          values (?, ?, ?, ?, ?)`,
-         [id, lego_name, qty, date, manager],
-        function(err, result){
+        [id, lego_name, qty, date, manager],
+        function(err){
             if(err){
                 console.log(err)
             }else{
                 connection.query(
-                    `create table monitoring` + date_array[0] + date_array[1] + date_array[2] + `
-                    (monitor_id int auto_increment primary key,
-                     mold_temp double not null,
-                     melt_temp double not null,
-                     injection_speed double not null,
-                     hold_pressure double not null,
-                     injection_time double not null,
-                     hold_time double not null,
-                     filling_time double not null,
-                     cycle_time double not null,
-                     defect varchar(5) not null,
-                     date text not null)`,
-                    function(err0){
-                        res.redirect("/instruct")
+                    `update orders set work="Y" where orders_id=`+id,
+                    function(err){
+                        if(err){
+                            console.log(err)
+                        }else{
+                            connection.query(
+                                `create table monitoring` + date_array[0] + date_array[1] + date_array[2] + `
+                                (monitor_id int auto_increment primary key,
+                                 mold_temp double not null,
+                                 melt_temp double not null,
+                                 injection_speed double not null,
+                                 hold_pressure double not null,
+                                 injection_time double not null,
+                                 hold_time double not null,
+                                 filling_time double not null,
+                                 cycle_time double not null,
+                                 defect varchar(5) not null,
+                                 date text not null)`,
+                                function(err0){
+                                    res.redirect("/instruct")
+                                }
+                            )
+                        }
                     }
-                    
-                )
-                
+                )               
             }
         }
     )

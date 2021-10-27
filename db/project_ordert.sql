@@ -31,7 +31,7 @@ CREATE TABLE `ordert` (
   `date` varchar(45) NOT NULL,
   `manager` varchar(45) NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `ordert` (
 
 LOCK TABLES `ordert` WRITE;
 /*!40000 ALTER TABLE `ordert` DISABLE KEYS */;
-INSERT INTO `ordert` VALUES (1,NULL,NULL,'bricks_rect',1000,'2021-10-02','choi'),(2,NULL,NULL,'bricks_rect',1111,'2021-10-03','choi');
+INSERT INTO `ordert` VALUES (1,NULL,NULL,'bricks_rect',1000,'2021-10-02','choi'),(2,NULL,NULL,'bricks_rect',1111,'2021-10-03','choi'),(3,1,NULL,'bricks_rect',100,'2021-10-21','c'),(7,4,NULL,'bricks_rect',100,'2021-10-22','c'),(10,5,NULL,'circle',50,'2021-10-25','ㅊ'),(12,7,NULL,'bricks_square',10,'2021-10-26','kj'),(13,6,NULL,'bricks_square',10,'2021-10-26','c');
 /*!40000 ALTER TABLE `ordert` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-13 10:04:34
+-- Dump completed on 2021-10-26 13:22:24

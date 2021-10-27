@@ -10,18 +10,6 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
 
     <style>
-      .table {
-        width: 86vw;
-        text-align: center;
-        background-color: rgb(173, 185, 202);
-      }
-
-      .input-group {
-        width: 15.5vw;
-        text-align: center;
-        background-color: rgb(173, 185, 202);
-      }
-
       .input-group2{
         width: 18vw;
         text-align: center;
@@ -53,7 +41,7 @@
         background-color: var(--first-color);
       }
 
-      .modal_wrap2 {
+      .modal_wrap, .modal_wrap2 {
         display: none;
         position: absolute;
         top: 25vh;
@@ -127,63 +115,53 @@
   </head>
 
   <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
-    
-      <!-- 상단바 -->
-      <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
-        <div div class="font_nav">수주조회</div>
-      
-        <div class="input-group mb-3" style="position: absolute; left:13vw; top:5vh">
-          <label class="input-group-text" for="inputGroupSelect01" style="width:6vw">거래처</label>
-          <select class="form-select" id="search_c">
-            <option value=""></option>
-            <option value="삼성전자">삼성전자</option>
-            <option value="LG전자">LG전자</option>
-            <option value="카카오">카카오</option>
-            <option value="네이버">네이버</option>
-          </select>
-        </div>
-      
-        <div class="input-group mb-3" style="position: absolute; left:30vw; top:5vh">
-          <label class="input-group-text" for="inputGroupSelect01" style="width:6vw">품목명</label>
-          <select class="form-select" id="search_i">
-            <option value=""></option>
-            <option value="bricks_rect">bricks_rect</option>
-            <option value="bricks_square">bricks_square</option>
-            <option value="circle">circle</option>
-            <option value="floor">floor</option>
-          </select>
-        </div>
-      
-        <div class="input-group mb-3" style="position: absolute; left:47vw; top:5vh">
-          <label class="input-group-text" for="inputGroupSelect01" style="width:7vw">수주일자</label>
-          <input type="text" class="datepicker wdate" id="_date_o" style="width:8.5vw;">
-        </div>
-        <div align="center">
-        </div>
-      
-        <div class="input-group mb-3" style="position: absolute; left:64vw; top:5vh">
-          <label class="input-group-text" for="inputGroupSelect01" style="width:7vw">납기일자</label>
-          <input type="text" class="datepicker wdate" id="_date_d" style="width:8.5vw;">
-        </div>
-        <div align="center">
-        </div>
-      
-      </div>
-      <button class="btn btn-warning" onclick="search()" style="position:absolute; top:10.5vh; right: 5vw;">조회</button>
   
-    
+  <!-- 상단바 -->
+  <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+    <div class="font_nav">수주조회</div>
 
-    <!-- 상단바하단 -->
-    <button type="submit" class="btn btn-success modal_btn" style="position:absolute; top:22.5vh; right: 11vw;"
-      id="register">등록</button>
-    <button class="btn btn-danger " style="position:absolute; top: 22.5vh; right:5vw;" onclick="del()">삭제</button>
-    </div>
+    <div class="input_nav" style="top:2.5vh; left:10vw;" for="inputGroupSelect01">거래처</div>
+    <select class="form-select text select" id="search_c" style="top:2.5vh; left:17.1vw; width:11vw">
+      <option value=""></option>
+      <option value="삼성전자">삼성전자</option>
+      <option value="LG전자">LG전자</option>
+      <option value="카카오">카카오</option>
+      <option value="네이버">네이버</option>
+    </select>
+
+
+    <div class="input_nav" style="top:2.5vh; left:29vw;" for="inputGroupSelect01">품목명</div>
+    <select class="form-select text select" id="search_i" style="top:2.5vh; left:36.1vw; width:11vw">
+      <option value=""></option>
+      <option value="bricks_rect">bricks_rect</option>       
+      <option value="bricks_square">bricks_square</option>
+      <option value="circle">circle</option>
+      <option value="floor">floor</option>
+    </select>
+
+    <div class="input_nav" style="top:2.5vh; left:47.9vw;" for="inputGroupSelect01">수주일자</div>
+    <input type="text" class="datepicker wdate text" id="_date_o"
+      style="top:2.5vh; left:55vw; width:11vw; height:5vh;">
+
+     <div class="input_nav" style="top:2.5vh; left:66.8vw;" for="inputGroupSelect01">납기일자</div>
+    <input type="text" class="datepicker wdate text" id="_date_d"
+      style="top:2.5vh; left:73.9vw; width:11vw; height: 5vh;"> 
+
+  <button class="btn btn-outline-secondary" onclick="search()" style="top:2.5vh; right: 1.5vw;">조회</button>
+
+
+
+  <!-- 상단바하단 -->
+  <button type="submit" class="btn btn-outline-light modal_btn" style="position:absolute; top:15vh; right:6vw;"
+    id="register">등록</button>
+  <button class="btn btn-outline-danger" style="position:absolute; top: 15vh; right:1.5vw;" onclick="del()">삭제</button>
+  </div>
 
 
     <!-- 테이블 목록 -->
-    <div style="position: absolute; top:30vh; left:7vw; color:white; text-align: center;">
-      <table id="iTable" class="table table-bordered table-hover" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
-        <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
+    <div class="tableb"style="top:30vh; left:6vw;">
+      <table id="iTable" class="table table-bordered">
+        <thead class="thead">
           <tr>
             <th scope="col" style="width: 3vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
             <th scope="col" style="width: 8vw;">수주번호</th>
@@ -214,7 +192,6 @@
             <%}%>
         </tbody>
       </table>
-      <div class="col-lg-12" id="tr_id"></div>
     </div>
      
 

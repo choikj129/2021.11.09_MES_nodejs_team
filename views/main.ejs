@@ -8,22 +8,23 @@
 
         <style>
             .wrapper {
-                height: 25.5vh;
-                width: 22.5vw;
+                height: 28vh;
+                width: 23.1vw;
                 background-color: rgb(71, 74, 95);
             }
-
             .wrapper1 {
-                height: 4.5vh;
-                width: 21.9vw;
+                position:absolute;
+                top:0.5vh;
+                left: 0.3vw;
+                height: 5vh;
+                width: 22.4vw;
                 background-color: rgba(165, 171, 212, 0.603);
+                left:0.3vw;
+                text-align: center;
+                font-size: 20px;
+                line-height: 5.3vh;
+                color:white;
             }
-
-            /* .wrapper2 {
-                height: 10vh;
-                width: 91.35vw;
-                background-color: rgb(71, 74, 95);
-            } */
 
             .wrapper3 {
                 height: 8vh;
@@ -40,10 +41,9 @@
             }
 
             .sep {
-                width: 11.5vw;
-                background-color: white;
-                border: solid 0.1vh white;
-
+                width: 10vw;
+                border: dotted 2px white;
+                z-index: 2;
             }
             /* .jb1{
                 width: 12vw;
@@ -105,11 +105,11 @@
             }
             .dong {
                 border-radius:50%;
-                width:100px;
-                height:100px;
+                width:120px;
+                height:120px;
                 position:absolute; 
-                left:1vw; 
-                top:8vh;
+                left:0.7vw; 
+                top:7.7vh;
                 border:4px solid white;
             }
             .unit {
@@ -157,10 +157,14 @@
             } */
 
 
-            .sep2 {
-                width: 12vw;
-                background-color: white;
-                border: solid 0.2vh white;
+            .sep {
+                position: absolute;
+                left:10vw; 
+                width:12vw;
+                border-bottom: 2px dashed white;
+                border-left : none;
+                border-right: none;
+                border-top: none;
             }
             /* .modal_wrap {
                 display: none;
@@ -194,22 +198,6 @@
                 width: 5vw;
                 height: 5vh;
                 text-indent: -2.5vw;
-            }
-            .input-group {
-                width: 15.5vw;
-                text-align: center;
-                background-color: rgb(173, 185, 202);
-            }
-
-            .input-group2 {
-                width: 18vw;
-                text-align: center;
-                background-color: rgb(173, 185, 202);
-            }
-
-            .input-group-text {
-                border-radius: 0;
-                width: 4vw;
             }
             
             #main_icon{
@@ -295,7 +283,7 @@
                 position:absolute; 
                 left:2.5vw; 
                 top: 8vh; 
-                font-size: x-large;
+                font-size: 35px;
             }
             .inputn {
                 position: absolute; 
@@ -347,44 +335,56 @@
 
 
     <!-- BOX -->
-    <div id="b1" >
-        <div align="center" class="box1"
-            style="position: absolute; top:20vh; left:10vw; font-size: 1.2em; color: white; text-align:center; line-height: 5vh;">1</div>
-        <div align="center" class="box2"
-            style="position: absolute; top:25vh; left:10vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;"> Ready</div>
-    </div>
+    <div class="wrapper" style="position:absolute; top:65vh; left:5.7vw; width:93.6vw;">
+        <div class="wrapper1" style="width:93vw; position:absolute; top:0.5vh; color:white;"><b>공정 프로세스</b></div>
+        <div id="b1" >
+            <div align="center" class="box1"
+                style="position: absolute; top:10vh; left:3vw; font-size: 1.2em; color: white; text-align:center; line-height: 5vh;">1</div>
+            <div align="center" class="box2"
+                style="position: absolute; top:15vh; left:3vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;"> Ready</div>
+        </div>
 
-    <div id="b2">
-        <div align="center" class="box3" 
-            style="position: absolute; top:20vh; left:24vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">2</div>
-        <div align="center" class="box4"
-            style="position: absolute; top:25vh; left:24vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Injecting</div>
-    </div>
+        <div id="b2">
+            <div align="center" class="box3" 
+                style="position: absolute; top:10vh; left:20vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">2</div>
+            <div align="center" class="box4"
+                style="position: absolute; top:15vh; left:20vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Injecting</div>
+        </div>
 
-    <div id="b3">
-        <div align="center" class="box3" 
-            style="position: absolute; top:20vh; left:38vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">3</div>
-        <div align="center" class="box4"
-            style="position: absolute; top:25vh; left:38vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;"> Filling</div>
-    </div>
+        <div id="b3">
+            <div align="center" class="box3" 
+                style="position: absolute; top:10vh; left:37vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">3</div>
+            <div align="center" class="box4"
+                style="position: absolute; top:15vh; left:37vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;"> Filling</div>
+        </div>
 
-    <div id="b4">
-        <div align="center" class="box3"
-            style="position: absolute; top:20vh; left:52vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">4</div>
-        <div align="center" class="box4"
-            style="position: absolute; top:25vh; left:52vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Holding</div>
-    </div>
+        <div id="b4">
+            <div align="center" class="box3"
+                style="position: absolute; top:10vh; left:54vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">4</div>
+            <div align="center" class="box4"
+                style="position: absolute; top:15vh; left:54vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Holding</div>
+        </div>
 
-    <div id="b5">
-        <div align="center" class="box3"
-            style="position: absolute; top:20vh; left:66vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;"> 5</div>
-        <div align="center" class="box4"
-            style="position: absolute; top:25vh; left:66vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;"> Seperating</div>
+        <div id="b5">
+            <div align="center" class="box3"
+                style="position: absolute; top:10vh; left:71vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;"> 5</div>
+            <div align="center" class="box4"
+                style="position: absolute; top:15vh; left:71vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;"> Seperating</div>
+        </div>
+        <!-- 시작/종료/정지/입력 버튼 -->
+        <button type="button" id = "onoff" class="btn btn-light" style="width:8vw; height:6vh; position: absolute; right:1.5vw; top:11vh; font-size:1.2em;"
+        onclick="start()" disabled>
+        <b>ON/OFF</b>
+        </button>
+        <button type="button" class="btn btn-danger" style="width:8vw; height:6vh; position: absolute; right:1.5vw; top:18vh; font-size:1.2em;"
+            onclick="stop()">
+            <b>비상정지</b>
+        </button>
     </div>
 
 
     <!-- wrapper2 상단바 -->
-    <div class="wrapper_nav" style="position: absolute; top: 5vh; left:6.35vw; color:white; text-align:center; font-weight: 1000;">
+    <div class="wrapper_nav" style="position: absolute; bottom: 5vh; left:6.35vw; color:white; text-align:center; font-weight: 1000;">
         <div class="wrapper3" style="position: absolute; left:2vw;">생산목표</div>
         <div class="wrapper3" style="position: absolute; left:13vw;">
             <% if(dir){%>
@@ -411,16 +411,6 @@
         </div>
     </div>
 
-    <!-- 시작/종료/정지/입력 버튼 -->
-    <button type="button" id = "onoff" class="btn btn-light" style="width:9vw; height:7vh; position: absolute; right:8vw; top:20vh; font-size:1.2em;"
-        onclick="start()" disabled>
-        <b>ON/OFF</b>
-    </button>
-    <button type="button" class="btn btn-danger" style="width:9vw; height:7vh; position: absolute; right:8vw; top:28vh; font-size:1.2em;"
-        onclick="stop()">
-        <b>비상정지</b>
-    </button>
-
     <!-- 모달 -->
     <div class="black_bg"></div>
     <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170);"></div>
@@ -442,8 +432,8 @@
     </div>
 
     <!-- 용융온도 -->
-    <div class="wrapper modal_btn" onclick="modal('melt')" style="position: absolute; top: 41vh; left:6vw; color:white; font-weight: 1000;">
-        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>용융 온도</b></div>
+    <div class="wrapper modal_btn" onclick="modal('melt')" style="position: absolute; top: 5vh; left:5.7vw; color:white; font-weight: 1000;">
+        <div class="wrapper1"><b>용융 온도</b></div>
         <div class="dong">
             <div class="uniti" >°C</div>
         </div>
@@ -452,10 +442,13 @@
                 <%= monitor.melt_temp%>
             <% } %>
         </div>
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">기준값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
+        <div style="position: absolute; top:7.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
+        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div class="sep" style="top:11.5vh;"></div>
+        <div style="position: absolute; top:14.2vh; left:12vw; font-size: large; color:white;">입력값</div>
+        <div class="sep" style="top:20.5vh;"></div>
+        <div style="position: absolute; top:21.5vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
+        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
         <div class="inputn" id="set_melt">
             <% if(setup){%>
                 <%=setup.melt_temp%>
@@ -463,8 +456,8 @@
         </div>
     </div>
     <!-- 금형온도 -->
-    <div class="wrapper modal_btn" onclick="modal('mold')" style="position: absolute; top: 41vh; left:29vw; color:white; font-weight: 1000;">   
-        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw;text-align: center; color:white; line-height: 4.5vh;"><b>금형 온도</b></div>
+    <div class="wrapper modal_btn" onclick="modal('mold')" style="position: absolute; top: 5vh; left:29.2vw; color:white; font-weight: 1000;">   
+        <div class="wrapper1"><b>금형 온도</b></div>
         <div class="dong">
             <div class="uniti">°C</div>
         </div>
@@ -473,10 +466,13 @@
                 <%= monitor.mold_temp%>
             <% } %>
         </div>
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">기준값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
+        <div style="position: absolute; top:7.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
+        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div class="sep" style="top:11.5vh;"></div>
+        <div style="position: absolute; top:14.2vh; left:12vw; font-size: large; color:white;">입력값</div>
+        <div class="sep" style="top:20.5vh;"></div>
+        <div style="position: absolute; top:21.5vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
+        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
         <div class="inputn" id="set_mold">
             <% if(setup){%>
                 <%=setup.mold_temp%>
@@ -485,20 +481,23 @@
     </div>
 
     <!-- 사출속도 -->
-    <div class="wrapper modal_btn" onclick="modal('inj')" style="position: absolute; top: 41vh; left:52vw; color:white; font-weight: 1000;">
-        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;"><b>사출속도</b></div>
+    <div class="wrapper modal_btn" onclick="modal('inj')" style="position: absolute; top: 5vh; left:52.7vw; color:white; font-weight: 1000;">
+        <div class="wrapper1"><b>사출속도</b></div>
         <div class="dong">
-            <div class="uniti" style="left:1.5vw; font-size:large">mm/s</div>
+            <div class="uniti" style="left:1.2vw; font-size:x-large">mm/s</div>
         </div>
         <div class="unit" id="now_injection_speed">
             <% if(monitor){%>
                 <%= monitor.injection_speed%>
             <% } %>
         </div>
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">기준값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
+        <div style="position: absolute; top:7.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
+        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div class="sep" style="top:11.5vh;"></div>
+        <div style="position: absolute; top:14.2vh; left:12vw; font-size: large; color:white;">입력값</div>
+        <div class="sep" style="top:20.5vh;"></div>
+        <div style="position: absolute; top:21.5vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
+        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
         <div class="inputn" id="set_inj">
             <% if(setup){%>
                 <%=setup.injection_speed%>
@@ -507,21 +506,23 @@
     </div>
     </div>
     <!-- 보압 -->
-    <div class="wrapper modal_btn" onclick="modal('hold')" style="position: absolute; top: 41vh; left:75vw; color:white; font-weight: 1000;">
-        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; 
-        line-height: 4.5vh;"><b>보압</b></div>
+    <div class="wrapper modal_btn" onclick="modal('hold')" style="position: absolute; top: 5vh; left:76.2vw; color:white; font-weight: 1000;">
+        <div class="wrapper1"><b>보압</b></div>
         <div class="dong">
-            <div class="uniti" style="left:0.5vw; font-size:15px;">kgf/cm^3</div>
+            <div class="uniti" style="left:0.5vw; font-size:19px;">kgf/cm^3</div>
         </div>
         <div class="unit" id="now_hold_pressure">
             <% if(monitor){%>
                 <%= monitor.hold_pressure%>
             <% } %>
         </div>
-        <div style="position: absolute; top:7vh; left:9vw; font-size: large; color:white;">기준값</div>
-        <div style="position: absolute; top:7vh; left:16vw; font-size: large; color:white;">11</div>
-        <div class="sep" style="position: absolute; top:11.75vh; left:8vw;"></div>
-        <div style="position: absolute; top:13.5vh; left:9vw; font-size: large; color:white;">입력값</div>
+        <div style="position: absolute; top:7.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
+        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div class="sep" style="top:11.5vh;"></div>
+        <div style="position: absolute; top:14.2vh; left:12vw; font-size: large; color:white;">입력값</div>
+        <div class="sep" style="top:20.5vh;"></div>
+        <div style="position: absolute; top:21.5vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
+        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
         <div class="inputn" id="set_hold">
             <% if(setup){%>
                 <%=setup.hold_pressure%>
@@ -531,9 +532,8 @@
     </div>
 
     <!-- 사출시간 -->
-    <div class="wrapper" style="position: absolute; top: 68vh; left:6vw; color:white; font-weight: 1000;">
-        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; 
-        line-height: 4.5vh;"><b>사출시간</b></div>
+    <div class="wrapper" style="position: absolute; top: 35vh; left:5.7vw; color:white; font-weight: 1000;">
+        <div class="wrapper1"><b>사출시간</b></div>
         <div class="dong">
             <div class="uniti" style="left:25px">sec</div>
         </div>
@@ -547,8 +547,8 @@
     </div>
 
     <!-- 보압시간 -->
-    <div class="wrapper" style="position: absolute; top: 68vh; left:29vw; color:white; font-weight: 1000;">
-        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; line-height: 4.5vh;">
+    <div class="wrapper" style="position: absolute; top: 35vh; left:29.2vw; color:white; font-weight: 1000;">
+        <div class="wrapper1">
         <b>보압시간</b></div>
         <div class="dong">
         <div class="uniti" style="left:25px">sec</div>
@@ -563,9 +563,8 @@
     </div>
     </div>
     <!-- 배압시간 -->
-    <div class="wrapper" style="position: absolute; top: 68vh; left:52vw; color:white; font-weight: 1000;">
-        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; 
-        line-height: 4.5vh;"><b>배압시간</b></div>
+    <div class="wrapper" style="position: absolute; top: 35vh; left:52.7vw; color:white; font-weight: 1000;">
+        <div class="wrapper1"><b>배압시간</b></div>
         <div class="dong">
             <div class="uniti" style="left:25px">sec</div>
         </div>
@@ -579,9 +578,8 @@
     </div>
     </div>
     <!-- 총시간 -->
-    <div class="wrapper" style="position: absolute; top: 68vh; left:75vw; color:white; font-weight: 1000;">
-        <div class="wrapper1" style="position:absolute; top:0.5vh; left:0.3vw; text-align: center; color:white; 
-        line-height: 4.5vh;"><b>총시간</b></div>
+    <div class="wrapper" style="position: absolute; top: 35vh; left:76.2vw; color:white; font-weight: 1000;">
+        <div class="wrapper1"><b>총시간</b></div>
         <div class="dong">
             <div class="uniti" style="left:25px">sec</div>
         </div>

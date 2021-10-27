@@ -65,7 +65,9 @@ router.get("/cur",function(req, res){
 router.get("/update", function(req, res){
     var date = moment().format("YYYYMMDD")
     connection.query(
-        `select * from monitoring`+date+` order by monitor_id desc limit 1`,
+        `select *,count(*) cnt,
+        (select sum(quantity) from ordert where date(date) =`+date+`) total
+         from monitoring`+date+` order by monitor_id desc limit 1`,
         function(err, result){
             if(err){
                 console.log(err)
