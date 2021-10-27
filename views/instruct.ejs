@@ -11,101 +11,136 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
 
     <style>
+      .table {
+        width: 92.5vw;
+        text-align: center;
+        background-color: rgb(173, 185, 202);
+      }
+      /* .input-group {
+        width: 25vw;
+        text-align: center;
+        background-color: rgb(173, 185, 202);
+      } */
       #instruct_icon {
         background-color: var(--first-color);
       }
+      /* .input-group-text {
+        border-radius: 0;
+        width: 20vw;
+      }
+
+      .form-control {
+        border-radius: 0;
+      } */
+      /* .modal_wrap {
+        display: none;
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -250px 0 0 -250px;
+        background: #eee;
+        z-index: 2;
+      }
+
+      .black_bg {
+        display: none;
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        top: 0;
+        left: 0;
+        z-index: 1;
+      } */
+
+      .pagination a {
+            display:inline-block;
+            margin-right:5px;
+            cursor:pointer;
+            }
+
     </style>
 </head>
 
 <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
   <!-- <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
     <div div class="font_nav">작업지시관리</div> -->
-    <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
-      <div class="font_nav">작업지시·수주관리</div>
+  <div style="position: absolute; top:6.5vh; left:8vw; font-size: large; font-weight: bold; color:white;">작업지시관리</div>
+  <div class="wrapper" style="position: absolute; top:3vh; left:6vw;">
+    
+    <div class="input-group mb-3" style="position: absolute; left:10vw; top:3vh">
+      <label class="input-group-text" for="inputGroupSelect01" style="width:5vw">작업일</label>
+      <input type="text" id="date" class="datepicker wdate" style="width: 60%;">
+    </div>
+
+    <div class="input-group mb-3" style="position: absolute; left:37vw; top:3vh;">
+      <label class="input-group-text" for="inputGroupSelect01" style="width:5vw">거래처</label>
+      <input id="cust" type="text" style="width: 60%;">
+    </div>
   
-      <div class="input_nav" style="top:2.5vh; left:15vw;" for="inputGroupSelect01">작업일</div>
-      <input type="text" class="datepicker wdate text" id="date"
-        style="top:2.5vh; left:22.1vw; width:15vw; height:5vh;"> 
-  
-  
-      <div class="input_nav" style="top:2.5vh; left:39vw;" for="inputGroupSelect01">거래처</div>
-      <select class="form-select text select" id="cust" style="top:2.5vh; left:46.1vw;">
-        <option value=""></option>
-        <option value="삼성전자">삼성전자</option>
-        <option value="LG전자">LG전자</option>
-        <option value="카카오">카카오</option>
-        <option value="네이버">네이버</option>
-      </select>
-  
-      <div class="input_nav" style="top:2.5vh; left:63vw;" for="inputGroupSelect01">품목명</div>
-      <select class="form-select text select" id="product_i" style="top:2.5vh; left:70.1vw;">
+    <div class="input-group mb-3" style="position: absolute; left:63vw; top:3vh">
+      <label class="input-group-text" for="inputGroupSelect01" style="width:5vw">품목명</label>
+      <select class="form-select" id="product_i">
         <option value=""></option>
         <option value="bricks_rect">bricks_rect</option>
         <option value="bricks_square">bricks_square</option>
         <option value="circle">circle</option>
         <option value="floor">floor</option>
       </select>
-      <button class="btn btn-outline-secondary" onclick="search()" style="position:absolute; top:2.5vh; right:1.5vw">조회</button>
     </div>
+  
+    <button class="btn btn-secondary" onclick="search()" style="position:absolute; bottom:3vh; right:1.5vw">조회</button>
+  </div>
  
 
   <!-- 수주 조회 테이블 -->
-  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:25vh; left:-37vw;">수</div>
-  <div class="text" style="color:white;font-size:1.5vw; width:88vw; top:32vh; left:-37vw;">주</div>
-  <div class="text" style="color:white;font-size:1.5vw; width:88vw; top:40vh; left:-37vw;">조</div>
-  <div class="text" style="color:white;font-size:1.5vw; width:88vw; top:48vh; left:-37vw;">회</div>
-
-  <div class="tableb" style="top:17vh; left:9.5vw;">
-    <table id="iTable" class="table table-bordered" style="width:88vw;">
-      <thead class="thead" style="width:88vw;">
-
+  <div style="position: absolute; top:17vh; left:6vw; color:white; text-align: center; height: 220px;">
+    <table id="iTable" class="table table-bordered"
+      style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+      <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
         <tr>
-          <!-- <th scope="col" style="width: 4vw;"></th> -->
-          <th scope="col" style="width: 8vw;">수주번호</th>
-          <th scope="col" style="width: 14vw;">거래처</th>
-          <th scope="col" style="width: 14vw;">품목명</th>
-          <th scope="col" style="width: 8vw;">지시 수량</th>
-          <th scope="col" style="width: 18vw;">주문일</th>
-          <th scope="col" style="width: 18vw;">납기일</th>
-          <th scope="col" style="width: 8vw;">담당자</th>
+          <th scope="col" style="width: 4vw;"></th>
+          <th scope="col" style="width: 10vw;">수주번호</th>
+          <th scope="col" style="width: 16vw;">거래처</th>
+          <th scope="col" style="width: 16vw;">품목명</th>
+          <th scope="col" style="width: 10vw;">지시 수량</th>
+          <th scope="col" style="width: 20vw;">주문일</th>
+          <th scope="col" style="width: 20vw;">납기일</th>
+          <th scope="col" style="width: 10vw;">담당자</th>
         </tr>
       </thead>
       <tbody id="tbody1">
         <% for(var i=0; i < orders.length; i++) {%>
           <tr>
-            <td><input type="radio" class="rad form-check-input" name="select_radio" value="<%=orders[i].orders_id%>">
-            </td>
-            <td>
-              <%=orders[i].orders_id%>
-            </td>
-            <td>
-              <%=orders[i].cust_name%>
-            </td>
-            <td>
-              <%=orders[i].lego_name%>
-            </td>
-            <td>
-              <%=orders[i].orders_qty%>
-            </td>
-            <td>
-              <%=orders[i].orders_date%>
-            </td>
-            <td>
-              <%=orders[i].delivery_date%>
-            </td>
-            <td>
-              <%=orders[i].cid%>
-            </td>
+            <td><input type="radio" class="rad form-check-input"  name="select_radio" value="<%=orders[i].orders_id%>"></td>
+            <td><%=orders[i].orders_id%></td>
+            <td><%=orders[i].cust_name%></td>
+            <td><%=orders[i].lego_name%></td>
+            <td><%=orders[i].orders_qty%></td>
+            <td><%=orders[i].orders_date%></td>
+            <td><%=orders[i].delivery_date%></td>
+            <td><%=orders[i].cid%></td>
           </tr>
-          <%}%>
+        <%}%>
       </tbody>
     </table>
     <div class="col-lg-12" id="ex3_Result1"></div>
     <div class="col-lg-12" id="ex3_Result2"></div>
+    <nav aria-label="Page navigation example" >
+      <ul class="pagination pagination1" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+      height:5.6vh;">
+          
+      </ul>
+      </nav>
   </div>
+  
 
-  <button class="btn btn-outline-light modal_btn" id="selectBtn" style="position:absolute; top: 50vh; right: 8vw;">등록</button>
-  <button class="btn btn-outline-danger " style="position:absolute; top: 50vh; right:3vw;" onclick="del()">삭제</button>
+  
+  <button class="btn btn-light modal_btn" id="selectBtn" style="position:absolute; top: 50vh; right: 7vw;">등록</button>
+  <button class="btn btn-danger " style="position:absolute; top: 50vh; right:3vw;" onclick="del()">삭제</button>
 
   <!--모달-->
   <div class="black_bg"></div>
@@ -127,31 +162,28 @@
     <div class="modal_box1" style="top:30.6vh">담당자</div>
     <input type="text" class="modal_box2" style="top:30.6vh" id="manager">
     <div align="center">
-      <button class="btn btn-dark" id="modal_register"
-        style="position:absolute; bottom: 2.5vw; right: 18.5vw;">등록</button>
-      <button class="btn btn-dark modal_close" style="position:absolute; bottom: 2.5vw; right: 8.5vw;">취소</button>
+      <button class="btn btn-secondary" id="modal_register" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
+      height:5.6vh; font-size:large; line-height: 4vh;">등록</button>
+      <button class="btn btn-secondary modal_close" style="position:absolute; bottom: 2vh; right: 9vw;
+      width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
     </div>
   </div>
   
 
 
   <!-- 작업지시 테이블 -->
-  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:65vh; left:-37vw;">작</div>
-  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:72vh; left:-37vw;">업</div>
-  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:80vh; left:-37vw;">지</div>
-  <div class="text" style="color:white; font-size:1.5vw; width:88vw; top:88vh; left:-37vw;">시</div>
-
-  <div class="tableb"style="top:57vh; left:9.5vw;" >
-    <table class="table table-bordered" style="width:88vw;">
-      <thead class="thead" style="width:88vw;">
+  <div style="position: absolute; top:59vh; left:6vw; color:white; text-align: center;height: 220px;">
+    <table class="table table-bordered"
+      style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+      <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
         <tr>
-          <th scope="col" style="width: 2vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
+          <th scope="col" style="width: 4vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
           <th scope="col" style="width: 10vw;">작업지시번호</th>
           <th scope="col" style="width: 10vw;">수주번호</th>
           <th scope="col" style="width: 10vw;">품목명</th>
           <th scope="col" style="width: 10vw;">지시 수량</th>
-          <th scope="col" style="width: 18vw;">주문일</th>
-          <th scope="col" style="width: 18vw;">생산량</th>
+          <th scope="col" style="width: 20vw;">주문일</th>
+          <th scope="col" style="width: 20vw;">생산량</th>
           <th scope="col" style="width: 10vw;">상태</th>
         </tr>
       </thead>
@@ -170,10 +202,18 @@
         <%}%>
       </tbody>
     </table>
+    <nav aria-label="Page navigation example" >
+      <ul class="pagination pagination2" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+      height:5.6vh;">
+          
+      </ul>
+      </nav>
+
   </div>
+  
 
   <script>
-    $(function () {
+     $(function () {
       if ("<%=linkcode%>" == 0) {
         $("#linkcode").text("관리자")
       }else {
@@ -206,22 +246,16 @@
           var cnt = result.cnt
           var total = result.total
           var len = $("#tbody2 tr").length
-          if (cnt == total){
-            location.href="/stop?url=instruct"
-          }
           for (var i=0; i<len; i++){
             qty = parseInt($("#tbody2 tr:eq("+i+")>td:eq(4)").html())
-            if ($("#tbody2 tr:eq("+i+")>td:eq(7)").html()=="완료"){
-              cnt-=qty
-              continue
-            }
             if(cnt >= qty){
               $("#tbody2 tr:eq("+i+")>td:eq(6)").html(qty) 
               $("#tbody2 tr:eq("+i+")>td:eq(7)").html("완료") 
               cnt-=qty
               $.getJSON("/product/register",{
                 id : parseInt($("#tbody2 tr:eq("+i+")>td:eq(1)").html())
-              },function(){
+              },
+              function(){
               }) 
             }else if(cnt==0){
               $("#tbody2 tr:eq("+i+")>td:eq(6)").html(cnt)
@@ -233,7 +267,6 @@
               cnt = 0
             }
           }
-          
         })
       },1000)
     }
@@ -309,7 +342,6 @@
       $(".modal_wrap").css("display", "none")
       $(".black_bg").css("display", "none")
     })
-    
     //달력(날짜 1개 선택)
     $(".datepicker").datepicker({
       dateFormat: "yy-mm-dd",
@@ -350,13 +382,209 @@
       var lego_name = td.eq(3).text();
       var orders_qty = td.eq(4).text();
       var cid = td.eq(7).text();
-      $("#orders_id").val(orders_id.trim())
-      $("#lego_name").val(lego_name.trim()).prop("selected",true)
+
+      $("#orders_id").val(orders_id)
+      $("#lego_name").val(lego_name).prop("selected",true)
       // $("#lego_name").val(lego_name.options[lego_name.selectedindex].text)
-      $("#quantity").val(orders_qty.trim())
-      $("#manager").val(cid.trim())
+      $("#quantity").val(orders_qty)
+      $("#manager").val(cid)
         
     })
+//수주조회 페징
+    function pagination(){
+		var req_num_row=4;
+		var $tr=jQuery('#tbody1 tr');
+		var total_num_row=$tr.length;
+		var num_pages=0;
+		if(total_num_row % req_num_row ==0){
+			num_pages=total_num_row / req_num_row;
+		}
+		if(total_num_row % req_num_row >=1){
+			num_pages=total_num_row / req_num_row;
+			num_pages++;
+			num_pages=Math.floor(num_pages++);
+		}
+  
+        jQuery('.pagination1').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
+  
+		for(var i=1; i<=num_pages; i++){
+			jQuery('.pagination1').append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
+            jQuery('.pagination1 li:nth-child(2)').addClass("active");
+            jQuery('.pagination1 a').addClass("pagination1-link");
+		}
+  
+        jQuery('.pagination1').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
+  
+		$tr.each(function(i){
+        jQuery(this).hide();
+        if(i+1 <= req_num_row){
+				$tr.eq(i).show();
+			}
+		});
+  
+		jQuery('.pagination1 a').click('.pagination1-link', function(e){
+			e.preventDefault();
+			$tr.hide();
+			var page=jQuery(this).text();
+			var temp=page-1;
+			var start=temp*req_num_row;
+            var current_link = temp;
+      
+            jQuery('.pagination1 li').removeClass("active");
+			jQuery(this).parent().addClass("active");
+    
+			for(var i=0; i< req_num_row; i++){
+				$tr.eq(start+i).show();
+			}
+      
+        if(temp >= 1){
+        jQuery('.pagination1 li:first-child').removeClass("disabled");
+        }
+        else {
+        jQuery('.pagination1 li:first-child').addClass("disabled");
+        }            
+		});
+  
+        jQuery('.prev').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination1 li').removeClass("active");
+          jQuery('.pagination1 li:first-child').next().addClass("active");
+          $tr.hide();
+
+          var page=jQuery(this).next().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
+
+        jQuery('.next').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination1 li').removeClass("active");
+          jQuery('.pagination1 li:last-child').prev().addClass("active");
+          
+          $tr.hide();
+
+          var page=jQuery(this).prev().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
+
+	    }
+
+        jQuery('document').ready(function(){
+	    pagination();
+  
+        jQuery('.pagination1 li:first-child').addClass("disabled");
+  
+
+        });
+
+        //작업지페이징
+        function pagination2(){
+		var req_num_row=4;
+		var $tr=jQuery('#tbody2 tr');
+		var total_num_row=$tr.length;
+		var num_pages=0;
+		if(total_num_row % req_num_row ==0){
+			num_pages=total_num_row / req_num_row;
+		}
+		if(total_num_row % req_num_row >=1){
+			num_pages=total_num_row / req_num_row;
+			num_pages++;
+			num_pages=Math.floor(num_pages++);
+		}
+  
+        jQuery('.pagination2').append("<li class='page-item prev2'><a class='page-link'>&laquo;</a></li>");
+  
+		for(var i=1; i<=num_pages; i++){
+			jQuery('.pagination2').append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
+            jQuery('.pagination2 li:nth-child(2)').addClass("active");
+            jQuery('.pagination2 a').addClass("pagination2-link");
+		}
+  
+        jQuery('.pagination2').append("<li class='page-item next2'><a class='page-link'>&raquo;</a></li>");
+  
+		$tr.each(function(i){
+        jQuery(this).hide();
+        if(i+1 <= req_num_row){
+				$tr.eq(i).show();
+			}
+		});
+  
+		jQuery('.pagination2 a').click('.pagination2-link', function(e){
+			e.preventDefault();
+			$tr.hide();
+			var page=jQuery(this).text();
+			var temp=page-1;
+			var start=temp*req_num_row;
+            var current_link = temp;
+      
+            jQuery('.pagination2 li').removeClass("active");
+			jQuery(this).parent().addClass("active");
+    
+			for(var i=0; i< req_num_row; i++){
+				$tr.eq(start+i).show();
+			}
+      
+        if(temp >= 1){
+        jQuery('.pagination2 li:first-child').removeClass("disabled");
+        }
+        else {
+        jQuery('.pagination2 li:first-child').addClass("disabled");
+        }            
+		});
+  
+        jQuery('.prev2').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination2 li').removeClass("active");
+          jQuery('.pagination2 li:first-child').next().addClass("active");
+          $tr.hide();
+
+          var page=jQuery(this).next().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
+
+        jQuery('.next2').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination2 li').removeClass("active");
+          jQuery('.pagination2 li:last-child').prev().addClass("active");
+          
+          $tr.hide();
+
+          var page=jQuery(this).prev().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
+
+	    }
+
+        jQuery('document').ready(function(){
+	    pagination2();
+  
+        jQuery('.pagination2 li:first-child').addClass("disabled");
+  
+
+        });
   </script>
 </body>
 
