@@ -163,17 +163,16 @@
       <table id="iTable" class="table table-bordered">
         <thead class="thead">
           <tr>
-            <th scope="col" style="width: 2vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
+            <th scope="col" style="width: 3vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
             <th scope="col" style="width: 8vw;">수주번호</th>
-            <th scope="col" style="width: 7vw;">거래처</th>
-            <th scope="col" style="width: 10vw;">품목명</th>
+            <th scope="col" style="width: 10vw;">거래처</th>
+            <th scope="col" style="width: 11vw;">품목명</th>
             <th scope="col" style="width: 8vw;">주문수량</th>
-            <th scope="col" style="width: 10vw;">수주일자</th>
-            <th scope="col" style="width: 10vw;">납기일자</th>
-            <th scope="col" style="width: 10vw;">생성자</th>
-            <th scope="col" style="width: 10vw;">수정자</th>
-            <th scope="col" style="width: 10vw;">수정일</th>
-            <th scope="col" style="width: 10vw;">수정</th>
+            <th scope="col" style="width: 12vw;">수주일자</th>
+            <th scope="col" style="width: 12vw;">납기일자</th>
+            <th scope="col" style="width: 8vw;">생성자</th>
+            <th scope="col" style="width: 8vw;">수정자</th>
+            <th scope="col" style="width: 12vw;">수정일</th>
           </tr>
         </thead>
         <tbody>
@@ -188,8 +187,7 @@
               <td><%=orders[i].delivery_date%></td>
               <td><%=orders[i].cid%></td>
               <td><%=orders[i].mid%></td>
-              <td><%=orders[i].date_m%></td>    
-              <td><button type='button' class="btn btn-outline-secondary modal_btn2 btn-sm">수정</button></td>
+              <td><%=orders[i].date_m%></td>
             </tr>
             <%}%>
         </tbody>
@@ -261,7 +259,7 @@
     </div>
       
    
-    
+    d
     <!-- 페이지 넘김 숫자 -->
     <div id="nav" style="position:absolute; top:90vh; left:35vw;">
       <a href="#" rel="0" class="active">1</a>
@@ -350,6 +348,9 @@
         }
       })
 
+    
+
+
       // 수주관리 삭제
       function del() {
         var checkBoxArr = [];
@@ -378,14 +379,16 @@
 
         location.href = "/orderS/submit?_custname="+c+"&_legoname="+l+"&_quantity="+q+"&_date_o="+o+"&_date_d="+d+"&_cid="+ci
       }
+
       // 수주 수정
       function orders_modify(){
         var _id = id
         var qm = $("#_quantity_M").val();
         var dm = $("#_date_d_M").val();
         var cm = $("#_cid_M").val();
-
-        location.href = "/orderS/modify?_quantity="+qm+"&_date_d="+dm+"&_mid="+cm+"&_id="+_id
+        var date_m = new date();
+      
+        location.href = "/orderS/modify?_quantity="+qm+"&_date_d="+dm+"&_mid="+cm+"&_id="+_id+"&date_m="+date_m
       }
 
       // 전체선택 버튼 클릭시 체크박스 전체 선택
@@ -492,6 +495,7 @@
         $(".modal_wrap2").css("display", "block")
         $(".black_bg2").css("display", "block")
       })
+
 
 
     </script>

@@ -142,11 +142,12 @@ router.get("/modify", function(req, res){
     var quantity = req.query._quantity;
     var date_d = req.query._date_d;
     var mid = req.query._mid;
+    var date_m = moment().format("YYYY-MM-DD");
     console.log(id);
     connection.query(
-        `update orders set orders_qty=?, delivery_date=?, mid=? 
+        `update orders set orders_qty=?, delivery_date=?, mid=?, date_m=?
          where orders_id = ?`,
-        [quantity, date_d, mid, id],
+        [quantity, date_d, mid, date_m, id],
         function(err, result){
             if(err){
                 console.log(err)
@@ -174,5 +175,21 @@ router.post("/", function(req, res){
         }
     )
 })
+
+// router.get("/date", function(req,result3){
+//     var today = new Date();
+//     var year = today.getFullYear();
+//     var month = ('0' + (today.getMonth() + 1)).slice(-2);
+//     var day = ('0' + today.getDate()).slice(-2);
+
+//     var dateString = year + '-' + month  + '-' + day;
+//     console.log(dateString);
+
+//     res.json({
+//         "date" : result3
+//     })
+// })
+
+
 
 module.exports = router
