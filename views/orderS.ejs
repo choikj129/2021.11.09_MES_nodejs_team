@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
 
     <style>
+      .table {
+        width: 86vw;
+        text-align: center;
+        background-color: rgb(173, 185, 202);
+      }
+
+      .input-group {
+        width: 15.5vw;
+        text-align: center;
+        background-color: rgb(173, 185, 202);
+      }
+
       .input-group2{
         width: 18vw;
         text-align: center;
@@ -41,7 +53,7 @@
         background-color: var(--first-color);
       }
 
-      .modal_wrap, .modal_wrap2 {
+      .modal_wrap2 {
         display: none;
         position: absolute;
         top: 25vh;
@@ -84,84 +96,72 @@
         text-indent: -9999px;
       }
 
-      form {
-      width: 500px;
-      }
-      table {
-        border-collapse:collapse;
-        margin-bottom: 10px;
-      }
-      .off-screen {
-        display: none;
-      }
-      #nav {
-        width: 500px;
-        text-align: center;
-      }
-      #nav a {
-        display: inline-block;
-        padding: 3px 5px;
-        margin-right: 10px;
-        font-family:Tahoma;
-        background: #ccc;
-        color: #000;
-        text-decoration: none;
-      }
-      #nav a.active {
-        background: #333;
-        color: #fff;
-      }
+      .pagination a {
+            display:inline-block;
+            margin-right:5px;
+            cursor:pointer;
+            }
     </style>
   </head>
 
   <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
+    
+      <!-- 상단바 -->
+      <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+        <div div class="font_nav">수주조회</div>
+      
+        <div class="input-group mb-3" style="position: absolute; left:13vw; top:5vh">
+          <label class="input-group-text" for="inputGroupSelect01" style="width:6vw">거래처</label>
+          <select class="form-select" id="search_c">
+            <option value=""></option>
+            <option value="삼성전자">삼성전자</option>
+            <option value="LG전자">LG전자</option>
+            <option value="카카오">카카오</option>
+            <option value="네이버">네이버</option>
+          </select>
+        </div>
+      
+        <div class="input-group mb-3" style="position: absolute; left:30vw; top:5vh">
+          <label class="input-group-text" for="inputGroupSelect01" style="width:6vw">품목명</label>
+          <select class="form-select" id="search_i">
+            <option value=""></option>
+            <option value="bricks_rect">bricks_rect</option>
+            <option value="bricks_square">bricks_square</option>
+            <option value="circle">circle</option>
+            <option value="floor">floor</option>
+          </select>
+        </div>
+      
+        <div class="input-group mb-3" style="position: absolute; left:47vw; top:5vh">
+          <label class="input-group-text" for="inputGroupSelect01" style="width:7vw">수주일자</label>
+          <input type="text" class="datepicker wdate" id="_date_o" style="width:8.5vw;">
+        </div>
+        <div align="center">
+        </div>
+      
+        <div class="input-group mb-3" style="position: absolute; left:64vw; top:5vh">
+          <label class="input-group-text" for="inputGroupSelect01" style="width:7vw">납기일자</label>
+          <input type="text" class="datepicker wdate" id="_date_d" style="width:8.5vw;">
+        </div>
+        <div align="center">
+        </div>
+      
+      </div>
+      <button class="btn btn-warning" onclick="search()" style="position:absolute; top:10.5vh; right: 5vw;">조회</button>
   
-  <!-- 상단바 -->
-  <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
-    <div class="font_nav">수주조회</div>
+    
 
-    <div class="input_nav" style="top:2.5vh; left:10vw;" for="inputGroupSelect01">거래처</div>
-    <select class="form-select text select" id="search_c" style="top:2.5vh; left:17.1vw; width:11vw">
-      <option value=""></option>
-      <option value="삼성전자">삼성전자</option>
-      <option value="LG전자">LG전자</option>
-      <option value="카카오">카카오</option>
-      <option value="네이버">네이버</option>
-    </select>
-
-
-    <div class="input_nav" style="top:2.5vh; left:29vw;" for="inputGroupSelect01">품목명</div>
-    <select class="form-select text select" id="search_i" style="top:2.5vh; left:36.1vw; width:11vw">
-      <option value=""></option>
-      <option value="bricks_rect">bricks_rect</option>       
-      <option value="bricks_square">bricks_square</option>
-      <option value="circle">circle</option>
-      <option value="floor">floor</option>
-    </select>
-
-    <div class="input_nav" style="top:2.5vh; left:47.9vw;" for="inputGroupSelect01">수주일자</div>
-    <input type="text" class="datepicker wdate text" id="_date_o"
-      style="top:2.5vh; left:55vw; width:11vw; height:5vh;">
-
-     <div class="input_nav" style="top:2.5vh; left:66.8vw;" for="inputGroupSelect01">납기일자</div>
-    <input type="text" class="datepicker wdate text" id="_date_d"
-      style="top:2.5vh; left:73.9vw; width:11vw; height: 5vh;"> 
-
-  <button class="btn btn-warning" onclick="search()" style="position:absolute; top:2.5vh; right: 1.5vw;">조회</button>
-
-
-
-  <!-- 상단바하단 -->
-  <button type="submit" class="btn btn-success modal_btn" style="position:absolute; top:15vh; right: 11vw;"
-    id="register">등록</button>
-  <button class="btn btn-danger " style="position:absolute; top: 15vh; right:5vw;" onclick="del()">삭제</button>
-  </div>
+    <!-- 상단바하단 -->
+    <button type="submit" class="btn btn-success modal_btn" style="position:absolute; top:22.5vh; right: 11vw;"
+      id="register">등록</button>
+    <button class="btn btn-danger " style="position:absolute; top: 22.5vh; right:5vw;" onclick="del()">삭제</button>
+    </div>
 
 
     <!-- 테이블 목록 -->
-    <div class="tableb"style="top:30vh; left:6vw;">
-      <table id="iTable" class="table table-bordered">
-        <thead class="thead">
+    <div style="position: absolute; top:30vh; left:7vw; color:white; text-align: center;">
+      <table id="iTable" class="table table-bordered table-hover" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+        <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
           <tr>
             <th scope="col" style="width: 2vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
             <th scope="col" style="width: 8vw;">수주번호</th>
@@ -176,7 +176,7 @@
             <th scope="col" style="width: 10vw;">수정</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id ="tbody2">
           <% for(var i=0; i < orders.length; i++) {%>
             <tr>
               <td><input type="checkbox" id="del_row" class="chk" name="_selected_" value="<%=orders[i].orders_id%>"></td>
@@ -194,6 +194,13 @@
             <%}%>
         </tbody>
       </table>
+      <nav aria-label="Page navigation example">
+          <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+          height:5.6vh;" >
+              
+          </ul>
+        </nav>
+      <div class="col-lg-12" id="tr_id"></div>
     </div>
      
 
@@ -259,74 +266,6 @@
         width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
       </div>
     </div>
-      
-   
-    
-    <!-- 페이지 넘김 숫자 -->
-    <div id="nav" style="position:absolute; top:90vh; left:35vw;">
-      <a href="#" rel="0" class="active">1</a>
-      <a href="#" rel="1">2</a>
-      <a href="#" rel="2">3</a>
-      <a href="#" rel="3">4</a>
-    </div>
-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190,,,.js"></script>
-    <script src="https:// cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    
-    <script id="rendered-js">
-      var $setRows = $('#setRows');
-      $setRows.submit(function (e) {
-        e.preventDefault();
-        var rowPerPage = $('[name="rowPerPage"]').val() * 1;// 1 을  곱하여 문자열을 숫자형로 변환
-        //		console.log(typeof rowPerPage);
-        var zeroWarning = 'Sorry, but we cat\'t display "0" rows page. + \nPlease try again.'
-        if (!rowPerPage) {
-          alert(zeroWarning);
-          return;
-        }
-        $('#nav').remove();
-        var $products = $('#products');
-        $products.after('<div id="nav">');
-        var $tr = $($products).find('tbody tr');
-        var rowTotals = $tr.length;
-        //	console.log(rowTotals);
-        var pageTotal = Math.ceil(rowTotals / rowPerPage);
-        var i = 0;
-        for (; i < pageTotal; i++) {
-          $('<a href="#"></a>')
-            .attr('rel', i)
-            .html(i + 1)
-            .appendTo('#nav');
-        }
-        $tr.addClass('off-screen')
-          .slice(0, rowPerPage)
-          .removeClass('off-screen');
-        var $pagingLink = $('#nav a');
-        $pagingLink.on('click', function (evt) {
-          evt.preventDefault();
-          var $this = $(this);
-          if ($this.hasClass('active')) {
-            return;
-          }
-          $pagingLink.removeClass('active');
-          $this.addClass('active');
-          // 0 => 0(0*4), 4(0*4+4)
-          // 1 => 4(1*4), 8(1*4+4)
-          // 2 => 8(2*4), 12(2*4+4)
-          // 시작 행 = 페이지 번호 * 페이지당 행수
-          // 끝 행 = 시작 행 + 페이지당 행수
-          var currPage = $this.attr('rel');
-          var startItem = currPage * rowPerPage;
-          var endItem = startItem + rowPerPage;
-          $tr.css('opacity', '0.0')
-            .addClass('off-screen')
-            .slice(startItem, endItem)
-            .removeClass('off-screen')
-            .animate({ opacity: 1 }, 300);
-        });
-        $pagingLink.filter(':first').addClass('active');
-      });
-      $setRows.submit();
-    </script>
   
     <script>
       var id;
@@ -492,6 +431,104 @@
         $(".modal_wrap2").css("display", "block")
         $(".black_bg2").css("display", "block")
       })
+
+       //페이징
+       function pagination(){
+		var req_num_row=8;
+		var $tr=jQuery('#tbody2 tr');
+		var total_num_row=$tr.length;
+		var num_pages=0;
+		if(total_num_row % req_num_row ==0){
+			num_pages=total_num_row / req_num_row;
+		}
+		if(total_num_row % req_num_row >=1){
+			num_pages=total_num_row / req_num_row;
+			num_pages++;
+			num_pages=Math.floor(num_pages++);
+		}
+  
+        jQuery('.pagination').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
+  
+		for(var i=1; i<=num_pages; i++){
+			jQuery('.pagination').append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
+            jQuery('.pagination li:nth-child(2)').addClass("active");
+            jQuery('.pagination a').addClass("pagination-link");
+		}
+  
+        jQuery('.pagination').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
+  
+		$tr.each(function(i){
+        jQuery(this).hide();
+        if(i+1 <= req_num_row){
+				$tr.eq(i).show();
+			}
+		});
+  
+		jQuery('.pagination a').click('.pagination-link', function(e){
+			e.preventDefault();
+			$tr.hide();
+			var page=jQuery(this).text();
+			var temp=page-1;
+			var start=temp*req_num_row;
+            var current_link = temp;
+      
+            jQuery('.pagination li').removeClass("active");
+			jQuery(this).parent().addClass("active");
+    
+			for(var i=0; i< req_num_row; i++){
+				$tr.eq(start+i).show();
+			}
+      
+        if(temp >= 1){
+        jQuery('.pagination li:first-child').removeClass("disabled");
+        }
+        else {
+        jQuery('.pagination li:first-child').addClass("disabled");
+        }            
+		});
+  
+        jQuery('.prev').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination li').removeClass("active");
+          jQuery('.pagination li:first-child').next().addClass("active");
+          $tr.hide();
+
+          var page=jQuery(this).next().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
+
+        jQuery('.next').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination li').removeClass("active");
+          jQuery('.pagination li:last-child').prev().addClass("active");
+          
+          $tr.hide();
+
+          var page=jQuery(this).prev().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
+
+	    }
+
+        jQuery('document').ready(function(){
+	    pagination();
+  
+        jQuery('.pagination li:first-child').addClass("disabled");
+  
+
+        });
 
 
     </script>

@@ -13,20 +13,26 @@
         <link rel="stylesheet" href="/css/jquery-ui.css">
         
         <style>
-          .table {
-            position: absolute;
-            left: 31vw;
-            top: 20vh;
-            width: 65vw;
-            height: 15vh;
+          .table{
+            position:absolute;
+            left:31vw;
+            top:10vh; 
+            width:65vw;
+            height:15vh;
             text-align: center;
           }
-          td {
+          td{
             height: 1vh;
           }
-          #defect_icon {
-            background-color: var(--first-color);
+          #defect_icon{
+              background-color: var(--first-color);
           }
+
+          .pagination a {
+            display:inline-block;
+            margin-right:5px;
+            cursor:pointer;
+            }
         </style>
         
     </head>
@@ -68,46 +74,41 @@
           } 
         }
 
-        var canvas = document.getElementById('pieChart');
-        var pieChart = new Chart(canvas, config);
-        </script>
-      
-      <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width: 57vw;">
-        <div class="font_nav">결함확인</div>
-    
-        <div class="input_nav" style="top:2.5vh; left:20vw;" for="inputGroupSelect01">작업 날짜</div>
-          <input type="text" class="datepicker wdate text" id="datepicker" name="_date"
-          style="top:2.5vh; left:27.1vw; width:15vw; height:5vh;"> 
-    
-          <button class="btn btn-secondary" onclick="search()" style="position:absolute; top:2.5vh; right:1.5vw">조회</button>
-        </div>
-        <div class="table">
-          <table style="text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+        var canvas=document.getElementById('pieChart'); 
+        var pieChart = new Chart(canvas,config);
+      </script>
+
+      <div class="input-group mb-3" style="position: absolute; left:31vw; top:3vh;">
+        <label class="input-group-text" for="inputGroupSelect01" >작업 날짜</label>
+        <input type="text" id="datepicker" name="_date">
+        <button class="btn btn-secondary" onclick="search()">조회</button>
+      </div>
+      <div class="table">
+        <table style="text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
             <thead style="background-color: rgba(199, 202, 241, 0.308); height:8vh;">
               <tr>
                 <th scope="col" style="width: 17vw;">시간</th>
                 <th scope="col" style="width: 15vw">결함 유형</th>
-                <th scope="col" style="width: 25vw;">결함 원인</th>
+                <th scope="col" style="width: 25vw;">결함 원인</th> 
               </tr>
             </thead>
             <tbody>
-              <% for(var i=0; i < defect.length; i++){ %>
+              <% for(var i =0; i < defect.length; i++){ %>
                 <tr>
-                  <td>
-                    <%=defect[i].date %>
-                  </td>
-                  <td>
-                    <%=defect[i].cause %>
-                  </td>
-                  <td>
-                    <%=defect[i].error %>
-                  </td>
+                  <td><%=defect[i].date %></td>
+                  <td><%=defect[i].cause %></td>
+                  <td><%=defect[i].error %></td>
                 </tr>
-                <% } %>
+              <% } %>
             </tbody>
-          </table>
-        </div>
-    
+        </table>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+          height:5.6vh;" >
+              
+          </ul>
+        </nav>
+      </div>
 
       <script>
         $(function(){
@@ -166,6 +167,82 @@
         function stop(){
             clearInterval(interval);
         }
+
+        //페이징
+        function pagination(){
+        var req_num_row=10;
+        var $tr=jQuery('tbody tr');
+        var total_num_row=$tr.length;
+        var num_pages=0;
+        if(total_num_row % req_num_row ==0){
+          num_pages=total_num_row / req_num_row;
+        }
+        if(total_num_row % req_num_row >=1){
+          num_pages=total_num_row / req_num_row;
+          num_pages++;
+          num_pages=Math.floor(num_pages++);
+        }
+  
+        jQuery('.pagination').append("<li class='page-item'><a class='page-link'><<</a></li>");
+      
+        for(var i=1; i<=num_pages; i++){
+          jQuery('.pagination').append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
+          jQuery('.pagination li:nth-child(2)').addClass("active");
+          jQuery('.pagination a').addClass("pagination-link");
+        }
+  
+        jQuery('.pagination').append("<li class='page-item'><a class='page-link'>>></a></li>");
+  
+        $tr.each(function(i){
+            jQuery(this).hide();
+            if(i+1 <= req_num_row){
+            $tr.eq(i).show();
+          }
+        });
+      
+        jQuery('.pagination a').click('.pagination-link', function(e){
+          e.preventDefault();
+          $tr.hide();
+          var page=jQuery(this).text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+          var current_link = temp;
+      
+          jQuery('.pagination li').removeClass("active");
+			    jQuery(this).parent().addClass("active");
+    
+        for(var i=0; i< req_num_row; i++){
+          $tr.eq(start+i).show();
+        }
+      
+        if(temp >= 1){
+        jQuery('.pagination li:first-child').removeClass("disabled");
+        }
+        else {
+        jQuery('.pagination li:first-child').addClass("disabled");
+        }            
+		    });
+  
+        jQuery('.prev').click(function(e){
+            e.preventDefault();
+        jQuery('.pagination li:first-child').removeClass("active");
+        });
+
+        jQuery('.next').click(function(e){
+            e.preventDefault();
+        jQuery('.pagination li:last-child').removeClass("active");
+        });
+
+	      }
+
+        jQuery('document').ready(function(){
+	      pagination();
+  
+        jQuery('.pagination li:first-child').addClass("disabled");
+  
+
+        });
+
         
     </script> 
     </body>
