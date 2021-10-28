@@ -1,250 +1,255 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <%- include("./head.ejs") %>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script> 
-        <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
-        <!-- datepicker js&css -->
-        <script src="/js/jquery-ui.min.js"></script>
-        <link rel="stylesheet" href="/css/jquery-ui.css">
-        
-        <style>
-          .table{
-            position:absolute;
-            left:31vw;
-            top:10vh; 
-            width:65vw;
-            height:15vh;
-            text-align: center;
-          }
-          td{
-            height: 1vh;
-          }
-          #defect_icon{
-              background-color: var(--first-color);
-          }
+<head>
+  <%- include("./head.ejs") %>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
-          .pagination a {
-            display:inline-block;
-            margin-right:5px;
-            cursor:pointer;
-            }
-        </style>
-        
-    </head>
-    <body style="background-color: rgb(41, 43, 48); overflow-x:hidden;">
-      
-      <!--결함 차트-->
-      <div style="position:absolute;left:-2vw; top:31vh;">
-        <canvas id="pieChart" style="width:40vw; height:40vh;"></canvas>
-      </div>
-      <script>
-        var dataset = { 
-          label: "결함율", 
-          backgroundColor: ['royalblue', 'tomato',],//라벨별 컬러설정 
-          borderColor: 'white', data: ["<%=Y%>", "<%=N%>"] 
-        } 
-        var labels=['양품','불량품']; 
-        var datasets={ datasets:[dataset], labels:labels }
+    <!-- datepicker js&css -->
+    <script src="/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery-ui.css">
 
-        var config = { type: 'pie', data: datasets, //데이터 셋 
-          options: { 
-            responsive: true, 
-            maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
-            legend: { 
-              position: 'top', 
-              fontColor: 'white', 
-              align: 'center', 
-              display: true, 
-              fullWidth: true, 
-              labels: { fontColor: 'white' } 
-            }, 
-            plugins: { 
-              labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
-                render: 'value%', 
-                fontColor: 'white', 
-                fontSize: 17, 
-                precision: 2
-              } 
-            } 
-          } 
+    <style>
+      td {
+        height: 1vh;
+      }
+
+      #defect_icon{
+        background-color: var(--first-color);
+      }
+
+      .pagination a {
+        display: inline-block;
+        margin-right: 5px;
+        cursor: pointer;
+      }
+    </style>
+
+</head>
+
+<body style="background-color: black; overflow-x:hidden;">
+
+  <!--결함 차트-->
+  <div style="position:absolute;left:-2vw; top:31vh;">
+    <canvas id="pieChart" style="width:40vw; height:40vh;"></canvas>
+  </div>
+  <script>
+    var dataset = {
+      label: "결함율",
+      backgroundColor: ['royalblue', 'tomato',],//라벨별 컬러설정 
+      borderColor: 'white', data: ["<%=Y%>", "<%=N%>"]
+    }
+    var labels = ['양품', '불량품'];
+    var datasets = { datasets: [dataset], labels: labels }
+
+    var config = {
+      type: 'pie', data: datasets, //데이터 셋 
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
+        legend: {
+          position: 'bottom',
+          fontColor: 'white',
+          align: 'center',
+          display: true,
+          fullWidth: true,
+          labels: { fontColor: 'white' }
+        },
+        plugins: {
+          labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
+            render: 'value%',
+            fontColor: 'white',
+            fontSize: 17,
+            precision: 2
+          }
         }
+      }
+    }
 
-        var canvas=document.getElementById('pieChart'); 
-        var pieChart = new Chart(canvas,config);
-      </script>
+    var canvas = document.getElementById('pieChart');
+    var pieChart = new Chart(canvas, config);
+  </script>
 
-      <div class="input-group mb-3" style="position: absolute; left:31vw; top:3vh;">
-        <label class="input-group-text" for="inputGroupSelect01" >작업 날짜</label>
-        <input type="text" id="datepicker" name="_date">
-        <button class="btn btn-secondary" onclick="search()">조회</button>
-      </div>
-      <div class="table">
-        <table style="text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
-            <thead style="background-color: rgba(199, 202, 241, 0.308); height:8vh;">
-              <tr>
-                <th scope="col" style="width: 17vw;">시간</th>
-                <th scope="col" style="width: 15vw">결함 유형</th>
-                <th scope="col" style="width: 25vw;">결함 원인</th> 
-              </tr>
-            </thead>
-            <tbody>
-              <% for(var i =0; i < defect.length; i++){ %>
-                <tr>
-                  <td><%=defect[i].date %></td>
-                  <td><%=defect[i].cause %></td>
-                  <td><%=defect[i].error %></td>
-                </tr>
-              <% } %>
-            </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-          <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
-          height:5.6vh;" >
-              
-          </ul>
-        </nav>
-      </div>
+  <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width:57vw;">
+    <div class="font_nav">결함확인</div>
+    <div class="input_nav" style="top:2.5vh; left:20vw;" for="inputGroupSelect01">작업 날짜</div>
+    <input type="text" class="datepicker wdate text" id="datepicker" name="_date"
+      style="top:2.5vh; left:27.1vw; width:15vw; height:5vh;">
 
-      <script>
-        $(function(){
-            if ("<%=linkcode%>"==0){
-                $("#linkcode").text("관리자")
-            }else{
-                $("#linkcode").text("작업자")
+    <button class="btn btn-outline-secondary" onclick="search()" style="top:2.5vh; right:1.5vw">조회</button>
+  </div>
+  <div class="tableb" style="width:57vw; left:31vw; top:16vh;">
+    <table class="table table-bordered" style="width:57vw;">
+      <thead class="thead" style="width:57vw;">
+        <tr>
+          <th scope="col" style="width: 17vw;">시간</th>
+          <th scope="col" style="width: 15vw">결함 유형</th>
+          <th scope="col" style="width: 21vw;">결함 원인</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i < defect.length; i++){ %>
+          <tr>
+            <td>
+              <%=defect[i].date %>
+            </td>
+            <td>
+              <%=defect[i].cause %>
+            </td>
+            <td>
+              <%=defect[i].error %>
+            </td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+          height:5.6vh;">
+
+      </ul>
+    </nav>
+  </div>
+
+  <script>
+    $(function () {
+      if ("<%=linkcode%>" == 0) {
+        $("#linkcode").text("관리자")
+      } else {
+        $("#linkcode").text("작업자")
+      }
+    })
+
+    $("#datepicker").datepicker({
+      dateFormat: "yy-mm-dd",
+      monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+      dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+      changeMonth: true,
+      changeYear: true,
+      nextText: '다음달',
+      prevText: '이전달',
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      changeMonth: true,
+      changeYear: true
+    });
+    $('#datepicker').datepicker('setDate', 'today');
+
+    function search() {
+      $("tbody").html("");
+      var date = $("#datepicker").val()
+      $.getJSON("/defect/search", {
+        date: date
+      },
+        function (result) {
+          var body;
+          for (var i = 0; i < result.defect.length; i++) {
+            body += "<tr>"
+            for (key in result.defect[0]) {
+              body += "<td>" + result.defect[i][key] + "</td>"
             }
+            body += "</tr>"
+          }
+          $("tbody").html(body)
         })
-        
-        $("#datepicker").datepicker({
-          dateFormat : "yy-mm-dd",
-          monthNames : ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-          monthNamesShort : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-          dayNamesMin : ['월','화','수','목','금','토','일'],
-          changeMonth : true,
-          changeYear : true,
-          nextText : '다음달',
-          prevText : '이전달',
-          showOtherMonths: true,
-          selectOtherMonths: true,
-          changeMonth: true,
-          changeYear: true
-        });
-        $('#datepicker').datepicker('setDate', 'today');
+    }
 
-        function search() {
-          $("tbody").html("");
-          var date = $("#datepicker").val()
-          $.getJSON("/defect/search", {
-            date: date
-          },
-            function (result) {
-              var body;
-              for (var i=0; i<result.defect.length; i++){
-                body += "<tr>"
-                for (key in result.defect[0]){
-                  body += "<td>"+result.defect[i][key]+"</td>"
-                }
-                body += "</tr>"
-              }
-              $("tbody").html(body)
-            })
-        }
-
-        var interval;
-        function run(){
-            interval = setInterval(function(){
-                $.getJSON("/defect/ajax",
-                  function(result){
-                  }
-                )
-            },2000)
-        }
-
-        function stop(){
-            clearInterval(interval);
-        }
-
-        //페이징
-        function pagination(){
-        var req_num_row=10;
-        var $tr=jQuery('tbody tr');
-        var total_num_row=$tr.length;
-        var num_pages=0;
-        if(total_num_row % req_num_row ==0){
-          num_pages=total_num_row / req_num_row;
-        }
-        if(total_num_row % req_num_row >=1){
-          num_pages=total_num_row / req_num_row;
-          num_pages++;
-          num_pages=Math.floor(num_pages++);
-        }
-  
-        jQuery('.pagination').append("<li class='page-item'><a class='page-link'><<</a></li>");
-      
-        for(var i=1; i<=num_pages; i++){
-          jQuery('.pagination').append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
-          jQuery('.pagination li:nth-child(2)').addClass("active");
-          jQuery('.pagination a').addClass("pagination-link");
-        }
-  
-        jQuery('.pagination').append("<li class='page-item'><a class='page-link'>>></a></li>");
-  
-        $tr.each(function(i){
-            jQuery(this).hide();
-            if(i+1 <= req_num_row){
-            $tr.eq(i).show();
+    var interval;
+    function run() {
+      interval = setInterval(function () {
+        $.getJSON("/defect/ajax",
+          function (result) {
           }
-        });
-      
-        jQuery('.pagination a').click('.pagination-link', function(e){
-          e.preventDefault();
-          $tr.hide();
-          var page=jQuery(this).text();
-          var temp=page-1;
-          var start=temp*req_num_row;
-          var current_link = temp;
-      
-          jQuery('.pagination li').removeClass("active");
-			    jQuery(this).parent().addClass("active");
-    
-        for(var i=0; i< req_num_row; i++){
-          $tr.eq(start+i).show();
+        )
+      }, 2000)
+    }
+
+    function stop() {
+      clearInterval(interval);
+    }
+
+    //페이징
+    function pagination() {
+      var req_num_row = 10;
+      var $tr = jQuery('tbody tr');
+      var total_num_row = $tr.length;
+      var num_pages = 0;
+      if (total_num_row % req_num_row == 0) {
+        num_pages = total_num_row / req_num_row;
+      }
+      if (total_num_row % req_num_row >= 1) {
+        num_pages = total_num_row / req_num_row;
+        num_pages++;
+        num_pages = Math.floor(num_pages++);
+      }
+
+      jQuery('.pagination').append("<li class='page-item'><a class='page-link'><<</a></li>");
+
+      for (var i = 1; i <= num_pages; i++) {
+        jQuery('.pagination').append("<li class='page-item'><a class='page-link'>" + i + "</a></li>");
+        jQuery('.pagination li:nth-child(2)').addClass("active");
+        jQuery('.pagination a').addClass("pagination-link");
+      }
+
+      jQuery('.pagination').append("<li class='page-item'><a class='page-link'>>></a></li>");
+
+      $tr.each(function (i) {
+        jQuery(this).hide();
+        if (i + 1 <= req_num_row) {
+          $tr.eq(i).show();
         }
-      
-        if(temp >= 1){
-        jQuery('.pagination li:first-child').removeClass("disabled");
+      });
+
+      jQuery('.pagination a').click('.pagination-link', function (e) {
+        e.preventDefault();
+        $tr.hide();
+        var page = jQuery(this).text();
+        var temp = page - 1;
+        var start = temp * req_num_row;
+        var current_link = temp;
+
+        jQuery('.pagination li').removeClass("active");
+        jQuery(this).parent().addClass("active");
+
+        for (var i = 0; i < req_num_row; i++) {
+          $tr.eq(start + i).show();
+        }
+
+        if (temp >= 1) {
+          jQuery('.pagination li:first-child').removeClass("disabled");
         }
         else {
-        jQuery('.pagination li:first-child').addClass("disabled");
-        }            
-		    });
-  
-        jQuery('.prev').click(function(e){
-            e.preventDefault();
+          jQuery('.pagination li:first-child').addClass("disabled");
+        }
+      });
+
+      jQuery('.prev').click(function (e) {
+        e.preventDefault();
         jQuery('.pagination li:first-child').removeClass("active");
-        });
+      });
 
-        jQuery('.next').click(function(e){
-            e.preventDefault();
+      jQuery('.next').click(function (e) {
+        e.preventDefault();
         jQuery('.pagination li:last-child').removeClass("active");
-        });
+      });
 
-	      }
+    }
 
-        jQuery('document').ready(function(){
-	      pagination();
-  
-        jQuery('.pagination li:first-child').addClass("disabled");
-  
+    jQuery('document').ready(function () {
+      pagination();
 
-        });
+      jQuery('.pagination li:first-child').addClass("disabled");
 
-        
-    </script> 
-    </body>
+
+    });
+
+
+  </script>
+</body>
+
 </html>
-
