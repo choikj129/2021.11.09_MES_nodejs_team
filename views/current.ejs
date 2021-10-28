@@ -9,13 +9,13 @@
         .wrapper1{
             width:42vw;
             height:45vh;                
-            background-image: linear-gradient(to right bottom,rgba(159,159,255,1), rgba(98,98,255,0.5), rgba(36,40,0,0.1) );
+            background-image: linear-gradient(to top,#00ffcc40, #00d9c740, #00b4ba40, #008DA240, #23698040, #2F485840);
             /*border:0.1em solid white;*/
         }
         .wrapper2{
             width:3vw;
             height:45vh;
-            background-image: linear-gradient(to right bottom,rgba(159,159,255,1), rgba(98,98,255,0.5), rgba(36,40,0,0.1));
+            background-color: rgba(0, 255, 195, 0.13);
             text-align: center;
             color:white;
             line-height:5vw;
@@ -26,8 +26,8 @@
         }
     </style>
 </head>
-<body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
-    <!-- 시간현황 -->
+<body style="background-color: black; overflow-y:hidden">
+    <!-- 용융온도 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:4.5vh; left:11vw;">
             <div id="Chart0" style="width:100%; height:100%"></div>  
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <!-- 속도현황 -->
+    <!-- 금형온도 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:4.5vh; right:0.8vw;">
             <div id="Chart1" style="width:100%; height:100%"></div>
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <!-- 온도현황 -->
+    <!-- 사출속도 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:50.5vh; right:0.8vw">
             <div id="Chart3" style="width:100%; height:100%"></div>
@@ -117,9 +117,10 @@
             hold_pressure.push(cur[i].hold_pressure)
             date.push(cur[i].date.slice(11,19))
         }
+
         // 용융온도 그래프
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart0 = echarts.init(document.getElementById('Chart0'), 'dark');
+        var myChart0 = echarts.init(document.getElementById('Chart0'));
         //UCL, LCL
         const markLine0 = [];
         for (var i = 0; i < 3; i++) {
@@ -170,19 +171,27 @@
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: date
+                    data: date,
+                    axisLabel: {
+                        textStyle: {
+                            color: 'white'
+                        }
+                    },
                 },
             ],
             yAxis: [
                 {
-                    type: 'value',
+                    type: 'log',
                     scale: true,
-                    name: '용융온도(℃)',
+                    name: '(°C)',
                     max: 290,
                     min: 260,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
-                        formatter: '{value}'
+                        formatter: '{value}',
+                        textStyle: {
+                            color: 'white'
+                        }
                     },
                 }
             ],
@@ -195,8 +204,9 @@
                     markLine: {
                         data: markLine0,
                         symbol: 'none'
-                    }
-                }
+                    },
+                    color: '#1EFFB4'
+                }   
             ]
         };
 
@@ -230,7 +240,7 @@
 
         //금형온도 그래프
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart1 = echarts.init(document.getElementById('Chart1'), 'dark');
+        var myChart1 = echarts.init(document.getElementById('Chart1'));
 
         //chart의 설정을 정합니다.
         var option1 = {
@@ -255,19 +265,27 @@
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: date
+                    data: date,
+                    axisLabel: {
+                        textStyle: {
+                            color: 'white'
+                        }
+                    },
                 },
             ],
             yAxis: [
                 {
-                    type: 'value',
+                    type: 'log',
                     scale: true,
-                    name: '금형온도(℃)',
+                    name: '(℃)',
                     max: 35,
                     min: 15,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
-                        formatter: '{value}'
+                        formatter: '{value}',
+                        textStyle: {
+                            color: 'white'
+                        }
                     },
                 }
             ],
@@ -283,7 +301,8 @@
                     markLine: {
                         data: markLine1,
                         symbol: 'none'
-                    }
+                    },
+                    color: '#1EFFB4'
                 }
             ]
         };
@@ -319,7 +338,7 @@
         // 보압 그래프
 
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart2 = echarts.init(document.getElementById('Chart2'), 'dark');
+        var myChart2 = echarts.init(document.getElementById('Chart2'));
 
         //chart의 설정을 정합니다.
         var option2 = {
@@ -344,19 +363,27 @@
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: date
+                    data: date,
+                    axisLabel: {
+                        textStyle: {
+                            color: 'white'
+                        }
+                    },
                 },
             ],
             yAxis: [
                 {
-                    type: 'value',
+                    type: 'log',
                     scale: true,
-                    name: '압력(kgf/cm^3)',
+                    name: '(kgf/cm^3)',
                     max: 145,
                     min: 125,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
-                        formatter: '{value}'
+                        formatter: '{value}',
+                        textStyle: {
+                            color: 'white'
+                        }
                     },
                 }
             ],
@@ -372,7 +399,8 @@
                     markLine: {
                         data: markLine2,
                         symbol: 'none'
-                    }
+                    },
+                    color: '#1EFFB4'
                 }
             ]
         };
@@ -408,7 +436,7 @@
         //사출속도 그래프
 
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart3 = echarts.init(document.getElementById('Chart3'), 'dark');
+        var myChart3 = echarts.init(document.getElementById('Chart3'));
 
         //chart의 설정을 정합니다.
         var option3 = {
@@ -433,19 +461,27 @@
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: date
+                    data: date,
+                    axisLabel: {
+                        textStyle: {
+                            color: 'white'
+                        }
+                    },
                 },
             ],
             yAxis: [
                 {
-                    type: 'value',
+                    type: 'log',
                     scale: true,
-                    name: '사출속도(mm/s)',
+                    name: '(mm/s)',
                     max: 65,
                     min: 45,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
-                        formatter: '{value}'
+                        formatter: '{value}',
+                        textStyle: {
+                            color: 'white'
+                        }
                     },
                 }
             ],
@@ -461,7 +497,8 @@
                     markLine: {
                         data: markLine3,
                         symbol: 'none'
-                    }
+                    },
+                    color: '#1EFFB4'
                 }
             ]
         };
