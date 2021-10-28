@@ -12,7 +12,12 @@
   integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <!-- 부트스트랩 링크 복사 -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script src="/js/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/css/jquery-ui.css">
 <style>
   .bd-placeholder-img {
     font-size: 1.125rem;
@@ -165,17 +170,17 @@
           </a>
 
 
-          <a class="nav__link" id="settings-outline" onclick="location.href ='/orderS'">
+          <a class="nav__link" id="orders_icon" onclick="location.href ='/orderS'">
             <ion-icon name="cart-outline" class="nav__icon"></ion-icon>
             <span class="nav_name">수주관리</span>
           </a>
 
-          <a class="nav__link" id="settings-outline" onclick="location.href='/instruct'">
+          <a class="nav__link" id="instruct_icon" onclick="location.href='/instruct'">
             <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
             <span class="nav_name">작업지시관리</span>
           </a>
 
-          <a class="nav__link" id="settings-outline" onclick="location.href ='/product'">
+          <a class="nav__link" id="product_icon" onclick="location.href ='/product'">
             <ion-icon name="server-outline" class="nav__icon"></ion-icon>
             <span class="nav_name">생산실적관리</span>
           </a>

@@ -35,6 +35,7 @@
             width:24vw;
             background-color: rgb(173, 185, 202);
         }
+
     </style>
     <body style="background-color: rgb(68,84,106); overflow-y: hidden;">
         <div class="wrapper1" style="position: absolute; top:17vh; left:26vw;">
@@ -58,6 +59,42 @@
                 </form>
             </div>
         </div>
-        
+        <div class="weather">
+            <div class="CurrIcon">
+                <img class="Icon">
+            </div>
+            <div class="CurrTemp"></div>
+            <div class="City"></div>
+        </div>
     </body>
+
+<script>
+    $(document).ready(function(){
+        let weatherIcon={
+            "01" : "<ion-icon name='sunny-outline'></ion-icon>",
+            "02" : "fas fa-cloud-sun",
+            "03" : "fas fa-cloud",
+            "04" : "fas fa-cloud-meatball",
+            "09" : "fas fa-cloud-sun-rain",
+            "10" : "fas fa-cloud-showers-heavy",
+            "11" : "fas fa-poo-storm",
+            "13" : "far fa-snowflake",
+            "50" : "fas fa-smog"
+        }
+        $.ajax({
+            url : "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=e30c70d1d9ee1045d773798f2cdabbbb&units=metric",
+            dataType : "json",
+            type : "GET",
+            success : function(data){
+                var $Icon = data.weather[0].icon;
+                var $Temp = Math.floor(data.main.temp);
+                var $city = data.name;
+                $(".CurrIcon").append(weatherIcon[$Icon])
+                $(".CurrTemp").prepend($Temp);
+                $(".City").append($city);
+            }
+        })
+    })
+</script>
+
 </html>

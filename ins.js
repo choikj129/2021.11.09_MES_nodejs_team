@@ -15,6 +15,7 @@ const connection = mysql.createConnection({
 
 router.get("/",function(req,res){
     var date = moment().format("YYYYMMDD")
+    var datet = moment().format("YYYY-MM-DD")
     if(!req.session.logged){
         res.redirect("/")
     }else{
@@ -22,7 +23,7 @@ router.get("/",function(req,res){
             res.redirect("/alert")
         }else{
             connection.query(
-                `select * from orders where date(orders_date) <= ? and date(delivery_date) >= ? and work is NULL`,
+                `select * from orders where date(orders_date) <= ? and date(delivery_date) >= ? and regist is NULL`,
                 [date, date],
                 function(err0,result0){
                     if(err0){
@@ -55,7 +56,7 @@ router.get("/",function(req,res){
                                     res.render("instruct",{
                                         "ordert" : result,
                                         "orders" : result0,
-                                        "date" : date,
+                                        "date" : datet,
                                         "linkcode" : req.session.logged.linkcode,
                                         "run" : req.session.run,
                                         "cnt" : cnt,
@@ -87,7 +88,7 @@ router.get("/register", function(req, res){
                 console.log(err)
             }else{
                 connection.query(
-                    `update orders set work="Y" where orders_id=`+id,
+                    `update orders set regist="Y" where orders_id=`+id,
                     function(err){
                         if(err){
                             console.log(err)
@@ -146,21 +147,31 @@ router.get("/search", function(req,res){
 
 router.get("/del", function(req,res){
     var id = req.query._id;
-    id = id.replace(/,/gi," or order_id = ");
+    id = id.replace(/,/gi," or orders_id = ");
     console.log(id)
     if(!req.session.logged){
         res.redirect("/")
     }else{
         connection.query(
-            `delete from ordert where order_id =`+id,
-        function(err,result){
-            if(err){
-                console.log(err)
-                res.send("instruct SQL delete error")
-            }else{  
-                res.redirect("/instruct")
+            `delete from ordert where orders_id = `+id,
+            function(err,result){
+                if(err){
+                    console.log(err)
+                    res.send("instruct SQL delete error")
+                }else{  
+                    connection.query(
+                        `update orders set regist=NULL where orders_id=`+id,
+                        function(err1){
+                            if(err1){
+                                console.log(err1)
+                            }else{
+                                res.redirect("/instruct")
+                            }
+                        }
+                    )
+                }
             }
-        })
+        )
     }
 })
 
