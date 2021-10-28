@@ -2,12 +2,7 @@
 <html>
   <head>
     <%- include("./head.ejs") %>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <script src="/js/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="/css/jquery-ui.css">
+    
 
     <style>
       .table {
@@ -15,13 +10,11 @@
         text-align: center;
         background-color: rgb(173, 185, 202);
       }
-
       .input-group {
         width: 15.5vw;
         text-align: center;
         background-color: rgb(173, 185, 202);
       }
-
       .input-group2{
         width: 18vw;
         text-align: center;
@@ -38,21 +31,18 @@
       #instruct_icon {
         background-color: var(--first-color);
       }
-
       /* .input-group-text {
         border-radius: 0;
         width: 20vw;
         height: 6vh;
       }
-
       .form-control {
         border-radius: 0;
       } */
 
-      #instruct_icon {
+      #orders_icon {
         background-color: var(--first-color);
       }
-
       .modal_wrap2 {
         display: none;
         position: absolute;
@@ -64,7 +54,6 @@
         background: rgb(210, 215, 221);
         z-index: 10;
       }
-     
       .black_bg, .black_bg2 {
         display: none;
         position: absolute;
@@ -76,31 +65,48 @@
         left: 0;
         z-index: 1;
       }
-
-      /* .modal_close2, .modal_close{
-        width: 26px;
-        height: 26px;
-        position: absolute;
-        top: -30px;
-        right: 0;
-      } */
-
       .modal_close>a,.modal_close2>a {
         display: block;
-        /* width: 5vw;
-        height: 5vh; */
         width: 100%;
         height: 100%;
         background: url(https://img.icons8.com/metro/26/000000/close-window.png);
         /* text-indent: 2.5vw; */
         text-indent: -9999px;
       }
-
       .pagination a {
             display:inline-block;
             margin-right:5px;
             cursor:pointer;
             }
+
+      form {
+      width: 500px;
+      }
+      table {
+        border-collapse:collapse;
+        margin-bottom: 10px;
+      }
+      .off-screen {
+        display: none;
+      }
+      #nav {
+        width: 500px;
+        text-align: center;
+      }
+      #nav a {
+        display: inline-block;
+        padding: 3px 5px;
+        margin-right: 10px;
+        font-family:Tahoma;
+        background: #ccc;
+        color: #000;
+        text-decoration: none;
+      }
+      #nav a.active {
+        background: #333;
+        color: #fff;
+      }
+
     </style>
   </head>
 
@@ -148,12 +154,42 @@
       
       </div>
       <button class="btn btn-warning" onclick="search()" style="position:absolute; top:10.5vh; right: 5vw;">조회</button>
-  
-    
+
+  <!-- 상단바 -->
+  <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+    <div class="font_nav">수주조회</div>
+
+    <div class="input_nav" style="top:2.5vh; left:10vw;" for="inputGroupSelect01">거래처</div>
+    <select class="form-select text select" id="search_c" style="top:2.5vh; left:17.1vw; width:11vw">
+      <option value=""></option>
+      <option value="삼성전자">삼성전자</option>
+      <option value="LG전자">LG전자</option>
+      <option value="카카오">카카오</option>
+      <option value="네이버">네이버</option>
+    </select>
+
+
+    <div class="input_nav" style="top:2.5vh; left:29vw;" for="inputGroupSelect01">품목명</div>
+    <select class="form-select text select" id="search_i" style="top:2.5vh; left:36.1vw; width:11vw">
+      <option value=""></option>
+      <option value="bricks_rect">bricks_rect</option>       
+      <option value="bricks_square">bricks_square</option>
+      <option value="circle">circle</option>
+      <option value="floor">floor</option>
+    </select>
+
+    <div class="input_nav" style="top:2.5vh; left:47.9vw;" for="inputGroupSelect01">수주일자</div>
+    <input type="text" class="datepicker text" id="_date_o"
+      style="top:2.5vh; left:55vw; width:11vw; height:5vh;">
+
+    <div class="input_nav" style="top:2.5vh; left:66.8vw;" for="inputGroupSelect01">납기일자</div>
+    <input type="text" class="datepicker text" id="_date_d"
+      style="top:2.5vh; left:73.9vw; width:11vw; height: 5vh;"> 
+
+  <button class="btn btn-outline-secondary" onclick="search()" style="top:2.5vh; right: 1.5vw;">조회</button>
 
     <!-- 상단바하단 -->
-    <button type="submit" class="btn btn-success modal_btn" style="position:absolute; top:22.5vh; right: 11vw;"
-      id="register">등록</button>
+    <button type="submit" class="btn btn-success modal_btn" style="position:absolute; top:22.5vh; right: 11vw;" id="register">등록</button>
     <button class="btn btn-danger " style="position:absolute; top: 22.5vh; right:5vw;" onclick="del()">삭제</button>
     </div>
 
@@ -202,33 +238,6 @@
         </nav>
       <div class="col-lg-12" id="tr_id"></div>
     </div>
-     
-
-    <!---- 수정 모달창 ---->
-    <div class="black_bg"></div>
-    <div class="modal_wrap2 modal_name" style="height:5vh; top:20vh; background-color: rgb(151, 161, 170);">수정</div>
-    <div class="modal_wrap2" style="height: 380px">
-      <div class="modal_box1" style="top:5vh">거래처</div>
-      <input type="text" class="modal_box2" id="_custname_M" style="top:5vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
-      <div class="modal_box1" style="top:11.4vh">품목ID</div>
-      <input type="text" class="modal_box2" id="_legoname_M" style="top:11.4vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
-      <div class="modal_box1" style="top:17.8vh">주문수량</div>
-      <input type="text" class="modal_box2" id="_quantity_M" style="top:17.8vh">
-      <div class="modal_box1" style="top: 24.2vh">수주일자</div>
-      <input type="text" class="modal_box2" name="_date" id="_date_o_M" style="top: 24.2vh; background-color: rgba(119, 119, 119, 0.24);" disabled>  
-      <div class="modal_box1" style="top:30.6vh">납기일자</div>
-      <input type="text" class="modal_box2 datepicker" name="_date" id="_date_d_M" style="top: 30.6vh">
-      <div class="modal_box1" style="top: 37vh">수정자</div>
-      <input type="text" class="modal_box2" id="_cid_M" style="top: 37vh;">
-      <div align="center">
-        <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
-        height:5.6vh; font-size:large; line-height: 4vh;" onclick=orders_modify()>수정</button>
-        <button class="btn btn-secondary modal_close2"  style="position:absolute; bottom: 2vh; right: 9vw;
-        width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
-      </div>
-    </div>
-    
-    
 
     <!---- 등록모달창 ---->
     <div class="black_bg"></div>
@@ -265,7 +274,99 @@
         <button  class="btn btn-secondary modal_close" style="position:absolute; bottom: 2vh; right: 9vw;
         width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
       </div>
+
     </div>
+      
+   <!---- 수정 모달창 ---->
+   <div class="black_bg"></div>
+   <div class="modal_wrap2 modal_name" style="height:5vh; top:20vh; background-color: rgb(151, 161, 170);">수정</div>
+   <div class="modal_wrap2" style="height: 380px">
+     <div class="modal_box1" style="top:5vh">거래처</div>
+     <input type="text" class="modal_box2" id="_custname_M" style="top:5vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
+     <div class="modal_box1" style="top:11.4vh">품목ID</div>
+     <input type="text" class="modal_box2" id="_legoname_M" style="top:11.4vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
+     <div class="modal_box1" style="top:17.8vh">주문수량</div>
+     <input type="text" class="modal_box2" id="_quantity_M" style="top:17.8vh">
+     <div class="modal_box1" style="top: 24.2vh">수주일자</div>
+     <input type="text" class="modal_box2" name="_date" id="_date_o_M" style="top: 24.2vh; background-color: rgba(119, 119, 119, 0.24);" disabled>  
+     <div class="modal_box1" style="top:30.6vh">납기일자</div>
+     <input type="text" class="modal_box2 datepicker" name="_date" id="_date_d_M" style="top: 30.6vh">
+     <div class="modal_box1" style="top: 37vh">수정자</div>
+     <input type="text" class="modal_box2" id="_cid_M" style="top: 37vh;">
+     <div align="center">
+       <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
+       height:5.6vh; font-size:large; line-height: 4vh;" onclick=orders_modify()>수정</button>
+       <button class="btn btn-secondary modal_close2"  style="position:absolute; bottom: 2vh; right: 9vw;
+       width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
+     </div>
+   </div>
+    
+    <!-- 페이지 넘김 숫자 -->
+    <div id="nav" style="position:absolute; top:90vh; left:35vw;">
+      <a href="#" rel="0" class="active">1</a>
+      <a href="#" rel="1">2</a>
+      <a href="#" rel="2">3</a>
+      <a href="#" rel="3">4</a>
+    </div>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190,,,.js"></script>
+    <script src="https:// cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    
+    <script id="rendered-js">
+      var $setRows = $('#setRows');
+      $setRows.submit(function (e) {
+        e.preventDefault();
+        var rowPerPage = $('[name="rowPerPage"]').val() * 1;// 1 을  곱하여 문자열을 숫자형로 변환
+        //		console.log(typeof rowPerPage);
+        var zeroWarning = 'Sorry, but we cat\'t display "0" rows page. + \nPlease try again.'
+        if (!rowPerPage) {
+          alert(zeroWarning);
+          return;
+        }
+        $('#nav').remove();
+        var $products = $('#products');
+        $products.after('<div id="nav">');
+        var $tr = $($products).find('tbody tr');
+        var rowTotals = $tr.length;
+        //	console.log(rowTotals);
+        var pageTotal = Math.ceil(rowTotals / rowPerPage);
+        var i = 0;
+        for (; i < pageTotal; i++) {
+          $('<a href="#"></a>')
+            .attr('rel', i)
+            .html(i + 1)
+            .appendTo('#nav');
+        }
+        $tr.addClass('off-screen')
+          .slice(0, rowPerPage)
+          .removeClass('off-screen');
+        var $pagingLink = $('#nav a');
+        $pagingLink.on('click', function (evt) {
+          evt.preventDefault();
+          var $this = $(this);
+          if ($this.hasClass('active')) {
+            return;
+          }
+          $pagingLink.removeClass('active');
+          $this.addClass('active');
+          // 0 => 0(0*4), 4(0*4+4)
+          // 1 => 4(1*4), 8(1*4+4)
+          // 2 => 8(2*4), 12(2*4+4)
+          // 시작 행 = 페이지 번호 * 페이지당 행수
+          // 끝 행 = 시작 행 + 페이지당 행수
+          var currPage = $this.attr('rel');
+          var startItem = currPage * rowPerPage;
+          var endItem = startItem + rowPerPage;
+          $tr.css('opacity', '0.0')
+            .addClass('off-screen')
+            .slice(startItem, endItem)
+            .removeClass('off-screen')
+            .animate({ opacity: 1 }, 300);
+        });
+        $pagingLink.filter(':first').addClass('active');
+      });
+      $setRows.submit();
+    </script>
+
   
     <script>
       var id;
@@ -410,14 +511,21 @@
               body += "<tr>"
               body += "<td><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
               for (key in result.orders[0]) {
-                body += "<td>" + result.orders[i][key] + "</td>"
+                if (key=="work"){
+                  continue
+                }
+                if(result.orders[i][key]==null){
+                  body += "<td></td>"
+                }else{
+                  body += "<td>" + result.orders[i][key] + "</td>"
+                }
               }
-              body += "<td><button type='button' class='btn btn-outline-secondary modal_btn2 btn-sm'>수정</button></td>"
               body += "</tr>"
             }
             $("tbody").html(body)
           })
       }
+      // 행클릭 수정모달창
       $("#iTable tr").click(function(){
         var tr = $(this)
         var td = tr.children()
@@ -529,7 +637,6 @@
   
 
         });
-
 
     </script>
   </body>
