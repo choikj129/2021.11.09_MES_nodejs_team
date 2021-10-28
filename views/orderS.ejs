@@ -5,6 +5,16 @@
     
 
     <style>
+      .table {
+        width: 86vw;
+        text-align: center;
+        background-color: rgb(173, 185, 202);
+      }
+      .input-group {
+        width: 15.5vw;
+        text-align: center;
+        background-color: rgb(173, 185, 202);
+      }
       .input-group2{
         width: 18vw;
         text-align: center;
@@ -18,12 +28,14 @@
         ;
       } */
 
+      #instruct_icon {
+        background-color: var(--first-color);
+      }
       /* .input-group-text {
         border-radius: 0;
         width: 20vw;
         height: 6vh;
       }
-
       .form-control {
         border-radius: 0;
       } */
@@ -31,8 +43,7 @@
       #orders_icon {
         background-color: var(--first-color);
       }
-
-      .modal_wrap, .modal_wrap2 {
+      .modal_wrap2 {
         display: none;
         position: absolute;
         top: 25vh;
@@ -43,7 +54,6 @@
         background: rgb(210, 215, 221);
         z-index: 10;
       }
-     
       .black_bg, .black_bg2 {
         display: none;
         position: absolute;
@@ -55,26 +65,14 @@
         left: 0;
         z-index: 1;
       }
-
-      /* .modal_close2, .modal_close{
-        width: 26px;
-        height: 26px;
-        position: absolute;
-        top: -30px;
-        right: 0;
-      } */
-
       .modal_close>a,.modal_close2>a {
         display: block;
-        /* width: 5vw;
-        height: 5vh; */
         width: 100%;
         height: 100%;
         background: url(https://img.icons8.com/metro/26/000000/close-window.png);
         /* text-indent: 2.5vw; */
         text-indent: -9999px;
       }
-
       form {
       width: 500px;
       }
@@ -106,7 +104,50 @@
   </head>
 
   <body style="background-color: rgb(41, 43, 48); overflow-y:hidden">
-  
+    
+      <!-- 상단바 -->
+      <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+        <div div class="font_nav">수주조회</div>
+      
+        <div class="input-group mb-3" style="position: absolute; left:13vw; top:5vh">
+          <label class="input-group-text" for="inputGroupSelect01" style="width:6vw">거래처</label>
+          <select class="form-select" id="search_c">
+            <option value=""></option>
+            <option value="삼성전자">삼성전자</option>
+            <option value="LG전자">LG전자</option>
+            <option value="카카오">카카오</option>
+            <option value="네이버">네이버</option>
+          </select>
+        </div>
+      
+        <div class="input-group mb-3" style="position: absolute; left:30vw; top:5vh">
+          <label class="input-group-text" for="inputGroupSelect01" style="width:6vw">품목명</label>
+          <select class="form-select" id="search_i">
+            <option value=""></option>
+            <option value="bricks_rect">bricks_rect</option>
+            <option value="bricks_square">bricks_square</option>
+            <option value="circle">circle</option>
+            <option value="floor">floor</option>
+          </select>
+        </div>
+      
+        <div class="input-group mb-3" style="position: absolute; left:47vw; top:5vh">
+          <label class="input-group-text" for="inputGroupSelect01" style="width:7vw">수주일자</label>
+          <input type="text" class="datepicker wdate" id="_date_o" style="width:8.5vw;">
+        </div>
+        <div align="center">
+        </div>
+      
+        <div class="input-group mb-3" style="position: absolute; left:64vw; top:5vh">
+          <label class="input-group-text" for="inputGroupSelect01" style="width:7vw">납기일자</label>
+          <input type="text" class="datepicker wdate" id="_date_d" style="width:8.5vw;">
+        </div>
+        <div align="center">
+        </div>
+      
+      </div>
+      <button class="btn btn-warning" onclick="search()" style="position:absolute; top:10.5vh; right: 5vw;">조회</button>
+
   <!-- 상단바 -->
   <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
     <div class="font_nav">수주조회</div>
@@ -140,19 +181,16 @@
 
   <button class="btn btn-outline-secondary" onclick="search()" style="top:2.5vh; right: 1.5vw;">조회</button>
 
-
-
-  <!-- 상단바하단 -->
-  <button type="submit" class="btn btn-outline-light modal_btn" style="position:absolute; top:15vh; right:6vw;"
-    id="register">등록</button>
-  <button class="btn btn-outline-danger" style="position:absolute; top: 15vh; right:1.5vw;" onclick="del()">삭제</button>
-  </div>
+    <!-- 상단바하단 -->
+    <button type="submit" class="btn btn-success modal_btn" style="position:absolute; top:22.5vh; right: 11vw;" id="register">등록</button>
+    <button class="btn btn-danger " style="position:absolute; top: 22.5vh; right:5vw;" onclick="del()">삭제</button>
+    </div>
 
 
     <!-- 테이블 목록 -->
-    <div class="tableb"style="top:30vh; left:6vw;">
-      <table id="iTable" class="table table-bordered">
-        <thead class="thead">
+    <div style="position: absolute; top:30vh; left:7vw; color:white; text-align: center;">
+      <table id="iTable" class="table table-bordered table-hover" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
+        <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
           <tr>
             <th scope="col" style="width: 3vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
             <th scope="col" style="width: 8vw;">수주번호</th>
@@ -184,33 +222,6 @@
         </tbody>
       </table>
     </div>
-     
-
-    <!---- 수정 모달창 ---->
-    <div class="black_bg"></div>
-    <div class="modal_wrap2 modal_name" style="height:5vh; top:20vh; background-color: rgb(151, 161, 170);">수정</div>
-    <div class="modal_wrap2" style="height: 380px">
-      <div class="modal_box1" style="top:5vh">거래처</div>
-      <input type="text" class="modal_box2" id="_custname_M" style="top:5vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
-      <div class="modal_box1" style="top:11.4vh">품목ID</div>
-      <input type="text" class="modal_box2" id="_legoname_M" style="top:11.4vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
-      <div class="modal_box1" style="top:17.8vh">주문수량</div>
-      <input type="text" class="modal_box2" id="_quantity_M" style="top:17.8vh">
-      <div class="modal_box1" style="top: 24.2vh">수주일자</div>
-      <input type="text" class="modal_box2" name="_date" id="_date_o_M" style="top: 24.2vh; background-color: rgba(119, 119, 119, 0.24);" disabled>  
-      <div class="modal_box1" style="top:30.6vh">납기일자</div>
-      <input type="text" class="modal_box2 datepicker" name="_date" id="_date_d_M" style="top: 30.6vh">
-      <div class="modal_box1" style="top: 37vh">수정자</div>
-      <input type="text" class="modal_box2" id="_cid_M" style="top: 37vh;">
-      <div align="center">
-        <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
-        height:5.6vh; font-size:large; line-height: 4vh;" onclick=orders_modify()>수정</button>
-        <button class="btn btn-secondary modal_close2"  style="position:absolute; bottom: 2vh; right: 9vw;
-        width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
-      </div>
-    </div>
-    
-    
 
     <!---- 등록모달창 ---->
     <div class="black_bg"></div>
@@ -247,10 +258,33 @@
         <button  class="btn btn-secondary modal_close" style="position:absolute; bottom: 2vh; right: 9vw;
         width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
       </div>
+
     </div>
       
-   
-    d
+   <!---- 수정 모달창 ---->
+   <div class="black_bg"></div>
+   <div class="modal_wrap2 modal_name" style="height:5vh; top:20vh; background-color: rgb(151, 161, 170);">수정</div>
+   <div class="modal_wrap2" style="height: 380px">
+     <div class="modal_box1" style="top:5vh">거래처</div>
+     <input type="text" class="modal_box2" id="_custname_M" style="top:5vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
+     <div class="modal_box1" style="top:11.4vh">품목ID</div>
+     <input type="text" class="modal_box2" id="_legoname_M" style="top:11.4vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
+     <div class="modal_box1" style="top:17.8vh">주문수량</div>
+     <input type="text" class="modal_box2" id="_quantity_M" style="top:17.8vh">
+     <div class="modal_box1" style="top: 24.2vh">수주일자</div>
+     <input type="text" class="modal_box2" name="_date" id="_date_o_M" style="top: 24.2vh; background-color: rgba(119, 119, 119, 0.24);" disabled>  
+     <div class="modal_box1" style="top:30.6vh">납기일자</div>
+     <input type="text" class="modal_box2 datepicker" name="_date" id="_date_d_M" style="top: 30.6vh">
+     <div class="modal_box1" style="top: 37vh">수정자</div>
+     <input type="text" class="modal_box2" id="_cid_M" style="top: 37vh;">
+     <div align="center">
+       <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
+       height:5.6vh; font-size:large; line-height: 4vh;" onclick=orders_modify()>수정</button>
+       <button class="btn btn-secondary modal_close2"  style="position:absolute; bottom: 2vh; right: 9vw;
+       width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
+     </div>
+   </div>
+    
     <!-- 페이지 넘김 숫자 -->
     <div id="nav" style="position:absolute; top:90vh; left:35vw;">
       <a href="#" rel="0" class="active">1</a>
@@ -338,7 +372,6 @@
           $("#register").attr("disabled", "disabled")
         }
       })
-
       // 수주관리 삭제
       function del() {
         var checkBoxArr = [];
@@ -374,9 +407,8 @@
         var qm = $("#_quantity_M").val();
         var dm = $("#_date_d_M").val();
         var cm = $("#_cid_M").val();
-        var date_m = new date();
       
-        location.href = "/orderS/modify?_quantity="+qm+"&_date_d="+dm+"&_mid="+cm+"&_id="+_id+"&date_m="+date_m
+        location.href = "/orderS/modify?_quantity="+qm+"&_date_d="+dm+"&_mid="+cm+"&_id="+_id
       }
 
       // 전체선택 버튼 클릭시 체크박스 전체 선택
@@ -462,14 +494,21 @@
               body += "<tr>"
               body += "<td><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
               for (key in result.orders[0]) {
-                body += "<td>" + result.orders[i][key] + "</td>"
+                if (key=="work"){
+                  continue
+                }
+                if(result.orders[i][key]==null){
+                  body += "<td></td>"
+                }else{
+                  body += "<td>" + result.orders[i][key] + "</td>"
+                }
               }
-              body += "<td><button type='button' class='btn btn-outline-secondary modal_btn2 btn-sm'>수정</button></td>"
               body += "</tr>"
             }
             $("tbody").html(body)
           })
       }
+      // 행클릭 수정모달창
       $("#iTable tr").click(function(){
         var tr = $(this)
         var td = tr.children()
