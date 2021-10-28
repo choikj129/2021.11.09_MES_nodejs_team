@@ -73,6 +73,12 @@
         /* text-indent: 2.5vw; */
         text-indent: -9999px;
       }
+      .pagination a {
+            display:inline-block;
+            margin-right:5px;
+            cursor:pointer;
+            }
+
       form {
       width: 500px;
       }
@@ -100,6 +106,7 @@
         background: #333;
         color: #fff;
       }
+
     </style>
   </head>
 
@@ -192,19 +199,20 @@
       <table id="iTable" class="table table-bordered table-hover" style=" text-align: center; color:white; background-color: rgba(95, 100, 126, 0.699);">
         <thead style="background-color: rgba(199, 202, 241, 0.308); height:4vh;">
           <tr>
-            <th scope="col" style="width: 3vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
+            <th scope="col" style="width: 2vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
             <th scope="col" style="width: 8vw;">수주번호</th>
-            <th scope="col" style="width: 10vw;">거래처</th>
-            <th scope="col" style="width: 11vw;">품목명</th>
+            <th scope="col" style="width: 7vw;">거래처</th>
+            <th scope="col" style="width: 10vw;">품목명</th>
             <th scope="col" style="width: 8vw;">주문수량</th>
-            <th scope="col" style="width: 12vw;">수주일자</th>
-            <th scope="col" style="width: 12vw;">납기일자</th>
-            <th scope="col" style="width: 8vw;">생성자</th>
-            <th scope="col" style="width: 8vw;">수정자</th>
-            <th scope="col" style="width: 12vw;">수정일</th>
+            <th scope="col" style="width: 10vw;">수주일자</th>
+            <th scope="col" style="width: 10vw;">납기일자</th>
+            <th scope="col" style="width: 10vw;">생성자</th>
+            <th scope="col" style="width: 10vw;">수정자</th>
+            <th scope="col" style="width: 10vw;">수정일</th>
+            <th scope="col" style="width: 10vw;">수정</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id ="tbody2">
           <% for(var i=0; i < orders.length; i++) {%>
             <tr>
               <td><input type="checkbox" id="del_row" class="chk" name="_selected_" value="<%=orders[i].orders_id%>"></td>
@@ -216,11 +224,19 @@
               <td><%=orders[i].delivery_date%></td>
               <td><%=orders[i].cid%></td>
               <td><%=orders[i].mid%></td>
-              <td><%=orders[i].date_m%></td>
+              <td><%=orders[i].date_m%></td>    
+              <td><button type='button' class="btn btn-outline-secondary modal_btn2 btn-sm">수정</button></td>
             </tr>
             <%}%>
         </tbody>
       </table>
+      <nav aria-label="Page navigation example">
+          <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+          height:5.6vh;" >
+              
+          </ul>
+        </nav>
+      <div class="col-lg-12" id="tr_id"></div>
     </div>
 
     <!---- 등록모달창 ---->
@@ -350,6 +366,7 @@
       });
       $setRows.submit();
     </script>
+
   
     <script>
       var id;
@@ -372,6 +389,7 @@
           $("#register").attr("disabled", "disabled")
         }
       })
+
       // 수주관리 삭제
       function del() {
         var checkBoxArr = [];
@@ -400,14 +418,13 @@
 
         location.href = "/orderS/submit?_custname="+c+"&_legoname="+l+"&_quantity="+q+"&_date_o="+o+"&_date_d="+d+"&_cid="+ci
       }
-
       // 수주 수정
       function orders_modify(){
         var _id = id
         var qm = $("#_quantity_M").val();
         var dm = $("#_date_d_M").val();
         var cm = $("#_cid_M").val();
-      
+
         location.href = "/orderS/modify?_quantity="+qm+"&_date_d="+dm+"&_mid="+cm+"&_id="+_id
       }
 
@@ -522,6 +539,104 @@
         $(".modal_wrap2").css("display", "block")
         $(".black_bg2").css("display", "block")
       })
+
+       //페이징
+       function pagination(){
+		var req_num_row=8;
+		var $tr=jQuery('#tbody2 tr');
+		var total_num_row=$tr.length;
+		var num_pages=0;
+		if(total_num_row % req_num_row ==0){
+			num_pages=total_num_row / req_num_row;
+		}
+		if(total_num_row % req_num_row >=1){
+			num_pages=total_num_row / req_num_row;
+			num_pages++;
+			num_pages=Math.floor(num_pages++);
+		}
+  
+        jQuery('.pagination').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
+  
+		for(var i=1; i<=num_pages; i++){
+			jQuery('.pagination').append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
+            jQuery('.pagination li:nth-child(2)').addClass("active");
+            jQuery('.pagination a').addClass("pagination-link");
+		}
+  
+        jQuery('.pagination').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
+  
+		$tr.each(function(i){
+        jQuery(this).hide();
+        if(i+1 <= req_num_row){
+				$tr.eq(i).show();
+			}
+		});
+  
+		jQuery('.pagination a').click('.pagination-link', function(e){
+			e.preventDefault();
+			$tr.hide();
+			var page=jQuery(this).text();
+			var temp=page-1;
+			var start=temp*req_num_row;
+            var current_link = temp;
+      
+            jQuery('.pagination li').removeClass("active");
+			jQuery(this).parent().addClass("active");
+    
+			for(var i=0; i< req_num_row; i++){
+				$tr.eq(start+i).show();
+			}
+      
+        if(temp >= 1){
+        jQuery('.pagination li:first-child').removeClass("disabled");
+        }
+        else {
+        jQuery('.pagination li:first-child').addClass("disabled");
+        }            
+		});
+  
+        jQuery('.prev').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination li').removeClass("active");
+          jQuery('.pagination li:first-child').next().addClass("active");
+          $tr.hide();
+
+          var page=jQuery(this).next().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
+
+        jQuery('.next').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination li').removeClass("active");
+          jQuery('.pagination li:last-child').prev().addClass("active");
+          
+          $tr.hide();
+
+          var page=jQuery(this).prev().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
+
+	    }
+
+        jQuery('document').ready(function(){
+	    pagination();
+  
+        jQuery('.pagination li:first-child').addClass("disabled");
+  
+
+        });
 
     </script>
   </body>
