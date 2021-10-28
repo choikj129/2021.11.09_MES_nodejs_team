@@ -8,9 +8,12 @@
 
         <style>
             .wrapper {
-                height: 28vh;
+                position:absolute;
+                height: 30vh;
                 width: 23.1vw;
-                background-color: rgb(71, 74, 95);
+                background-color: rgba(69, 134, 231, 0.445);
+                border: 2px solid white;
+                color: white;
             }
             .wrapper1 {
                 position:absolute;
@@ -22,20 +25,18 @@
                 left:0.3vw;
                 text-align: center;
                 font-size: 20px;
-                line-height: 5.3vh;
+                line-height: 5vh;
                 color:white;
             }
 
             .wrapper3 {
-                height: 8vh;
+                position: absolute;
+                left: 2vw;
+                height: 7vh;
                 width: 10vw;
-                border-radius: 0.5em;
-                position: absolute;
-                border: 0.3vh solid white;
-                position: absolute;
-                top: 1vh;
+                background-color: rgba(255, 255, 255, 0.226);
                 text-align: center;
-                line-height: 7.5vh;
+                line-height: 6.5vh;
                 font-size: x-large;
                 color: white;
             }
@@ -63,24 +64,7 @@
                 transition-duration: 100s;
 
             } */
-            
-            .box1 {
-                width: 12vw;
-                top:20vh;
-                height: 6vh;
-                border: solid 0.8vh yellow;
-                /* color: linear-gradient(to right bottom, gray, navy); */
 
-            }
-
-
-            .box2 {
-                width: 12vw;
-                height: 10vh;
-                border: solid 0.8vh yellow;
-                /* color: linear-gradient(to right bottom, gray, navy); */
- 
-            }
             @keyframes example{
             /* A상태에서 B 상태로 */
                 from { /* A */
@@ -90,26 +74,45 @@
                     background-color: red;
                 }
             }
-
-            .box3 {
-                width: 12vw;
-                top:20vh;
-                height: 6vh;
-                border: solid 0.8vh rgb(180, 195, 216);
+            
+            .pr_box1 {
+                position: absolute; 
+                top:9.5vh;
+                width: 10vw;
+                height: 5vh;
+                /*border: solid 3px rgb(180, 195, 216);*/
+                background-color: rgba(240, 255, 255, 0.329);
+                font-size: 20px;
+                color: white; 
+                text-align:center; 
+                line-height: 4.5vh;
+            }
+            .pr_box2 {
+                position: absolute; 
+                top:14vh;
+                width: 10vw;
+                height: 12vh;
+                /*border: solid 3px rgb(180, 195, 216);*/
+                background-color: rgba(240, 255, 255, 0.452);
+                color: white;
+                font-size: 20px;
+                text-align:center;
+                line-height:8vh;
+            }
+            .pr_num{
+                position: absolute;
+                top: 20.3vh;
+                font-size:21px;
+                color:white;
             }
 
-            .box4 {
-                width: 12vw;
-                height: 10vh;
-                border: solid 0.8vh rgb(180, 195, 216);
-            }
             .dong {
                 border-radius:50%;
-                width:120px;
-                height:120px;
+                width:130px;
+                height:130px;
                 position:absolute; 
-                left:0.7vw; 
-                top:7.7vh;
+                left:0.5vw; 
+                top:8.3vh;
                 border:4px solid white;
             }
             .unit {
@@ -119,43 +122,6 @@
                 font-size: x-large; 
                 color:white
             }
-            /* .box5 {
-                width: 12vw;
-                top:20vh;
-                height: 6vh;
-                border: solid 0.8vh rgb(180, 195, 216);
-            }
-
-            .box6 {
-                width: 12vw;
-                height: 10vh;
-                border: solid 0.8vh rgb(180, 195, 216);
-            }
-            .box7 {
-                width: 12vw;
-                top:20vh;
-                height: 6vh;
-                border: solid 0.8vh rgb(180, 195, 216);
-            }
-
-            .box8 {
-                width: 12vw;
-                height: 10vh;
-                border: solid 0.8vh rgb(180, 195, 216);
-            }
-            .box9 {
-                width: 12vw;
-                top:21.3vh;
-                height: 6vh;
-                border: solid 0.8vh rgb(180, 195, 216);
-            }
-
-            .box10 {
-                width: 12vw;
-                height: 10vh;
-                border: solid 0.8vh rgb(180, 195, 216);
-            } */
-
 
             .sep {
                 position: absolute;
@@ -281,15 +247,15 @@
              */
             .uniti {
                 position:absolute; 
-                left:2.5vw; 
-                top: 8vh; 
+                left:3vw; 
+                top: 9vh; 
                 font-size: 35px;
             }
             .inputn {
                 position: absolute; 
-                top:13.5vh; 
-                left:15.5vw; 
-                font-size: large; 
+                top:14.5vh; 
+                left:17.5vw; 
+                font-size: x-large; 
                 color:white;
             }
              .alertI{
@@ -298,7 +264,7 @@
         </style>
 </head>
 
-<body style="background-color: rgb(41, 43, 48); overflow-x: hidden; overflow-y:hidden;">
+<body style="background-color: black; overflow-x: hidden; overflow-y:hidden;">
 
     <!-- 자판  -->
     <!-- <table class="table table-bordered " id="keyboard">
@@ -334,43 +300,57 @@
     </div>
 
 
-    <!-- BOX -->
-    <div class="wrapper" style="position:absolute; top:65vh; left:5.7vw; width:93.6vw;">
+    <!-- 공정 프로세스 -->
+    <div class="wrapper" style="position:absolute; height:30vh; top:67vh; left:5.7vw; width:93.6vw; background-color:rgba(83, 130, 231, 0.438);">
         <div class="wrapper1" style="width:93vw; position:absolute; top:0.5vh; color:white;"><b>공정 프로세스</b></div>
         <div id="b1" >
-            <div align="center" class="box1"
-                style="position: absolute; top:10vh; left:3vw; font-size: 1.2em; color: white; text-align:center; line-height: 5vh;">1</div>
-            <div align="center" class="box2"
-                style="position: absolute; top:15vh; left:3vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;"> Ready</div>
+            <div align="center" class="pr_box1" style="left:3vw;">1</div>
+            <div align="center" class="pr_box2" style="left:3vw;">Ready</div>
+            
         </div>
 
         <div id="b2">
-            <div align="center" class="box3" 
-                style="position: absolute; top:10vh; left:20vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">2</div>
-            <div align="center" class="box4"
-                style="position: absolute; top:15vh; left:20vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Injecting</div>
+            <div align="center" class="pr_box1" style="left:20vw;">2</div>
+            <div align="center" class="pr_box2" style="left:20vw;">Injecting</div>
+            <div class="pr_num" id="now_injection_time" style="left:24vw;">
+                <% if(monitor){%>
+                    <%= monitor.injection_time%>
+                <% } %>
+            </div>
+
         </div>
 
         <div id="b3">
-            <div align="center" class="box3" 
-                style="position: absolute; top:10vh; left:37vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">3</div>
-            <div align="center" class="box4"
-                style="position: absolute; top:15vh; left:37vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;"> Filling</div>
+            <div align="center" class="pr_box1" style="left:37vw;">3</div>
+            <div align="center" class="pr_box2" style="left:37vw;">Filling</div>
+            <div class="pr_num" id="now_filling_time" style="left:41vw;">
+                <% if(monitor){%>
+                    <%= monitor.filling_time%>
+                <% } %>
+            </div>  
         </div>
 
         <div id="b4">
-            <div align="center" class="box3"
-                style="position: absolute; top:10vh; left:54vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;">4</div>
-            <div align="center" class="box4"
-                style="position: absolute; top:15vh; left:54vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;">Holding</div>
+            <div align="center" class="pr_box1" style="left:54vw;">4</div>
+            <div align="center" class="pr_box2" style="left:54vw;">Holding</div>
+            <div class="pr_num" style="left:58vw;" id="now_hold_time">
+                <% if(monitor){%>
+                    <%= monitor.hold_time%>
+                <% } %>
+            </div> 
         </div>
 
         <div id="b5">
-            <div align="center" class="box3"
-                style="position: absolute; top:10vh; left:71vw; font-size: 1.2em; color:white; text-align:center; line-height: 5vh;"> 5</div>
-            <div align="center" class="box4"
-                style="position: absolute; top:15vh; left:71vw; font-size: 1.2em; color:white; text-align:center; line-height: 9vh;"> Seperating</div>
+            <div align="center" class="pr_box1" style="left:71vw;"> 5</div>
+            <div align="center" class="pr_box2" style="left:71vw;">Seperating</div>
+            <!--총시간
+                <div class="unit" id="now_cycle_time">
+                <% if(monitor){%>
+                    <%= monitor.cycle_time%>
+                <% } %>
+            </div>--> 
         </div>
+
         <!-- 시작/종료/정지/입력 버튼 -->
         <button type="button" id = "onoff" class="btn btn-light" style="width:8vw; height:6vh; position: absolute; right:1.5vw; top:11vh; font-size:1.2em;"
         onclick="start()" disabled>
@@ -380,35 +360,6 @@
             onclick="stop()">
             <b>비상정지</b>
         </button>
-    </div>
-
-
-    <!-- wrapper2 상단바 -->
-    <div class="wrapper_nav" style="position: absolute; bottom: 5vh; left:6.35vw; color:white; text-align:center; font-weight: 1000;">
-        <div class="wrapper3" style="position: absolute; left:2vw;">생산목표</div>
-        <div class="wrapper3" style="position: absolute; left:13vw;">
-            <% if(dir){%>
-                <%= order[0].total%>
-            <%}%>
-        </div>
-        <div class="wrapper3" style="position: absolute; left:24vw;">생산실적</div>
-        <div class="wrapper3" id = "cnt" style="position: absolute; left:35vw;">
-            <% if(monitor){%>
-                <%= monitor.cnt%>
-            <% } %>
-        </div>
-        <div class="wrapper3" style="position: absolute; left:46vw;">달성률</div>
-        <div class="wrapper3" id = "qnt" style="position: absolute; left:57vw;">
-            <% if(monitor) {%>
-                <%= (monitor.cnt/order[0].total).toFixed(2)*100%>%
-            <%}%>
-        </div>
-        <div class="wrapper3" style="position: absolute; left:68vw;">불량률</div>
-        <div class="wrapper3" id = "def" style="position: absolute; left:79vw; color:red;">
-            <% if(monitor) {%>
-                <%= (monitor.def/monitor.cnt).toFixed(2)*100%>%
-            <%}%>
-        </div>
     </div>
 
     <!-- 모달 -->
@@ -425,14 +376,14 @@
         <input type="text" class="modal_box2" id="set" style="top:24.2vh; border:none;">
         <div align="center">
             <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
-            height:5.6vh; font-size:large; line-height: 4vh;" id="register"><b>등록</b></button>
+            height:5.6vh; font-size:17px; line-height: 3.3vh;" id="register"><b>등록</b></button>
             <button class="modal_close btn btn-secondary" style="position:absolute; bottom: 2vh; right: 9vw;
-            width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large"><b>취소</b></button>
+            width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 3.3vh; font-size:17.5px"><b>취소</b></button>
         </div>
     </div>
 
     <!-- 용융온도 -->
-    <div class="wrapper modal_btn" onclick="modal('melt')" style="position: absolute; top: 5vh; left:5.7vw; color:white; font-weight: 1000;">
+    <div class="wrapper modal_btn" onclick="modal('melt')" style="position: absolute; top: 5vh; left:5.7vw; color:white;">
         <div class="wrapper1"><b>용융 온도</b></div>
         <div class="dong">
             <div class="uniti" >°C</div>
@@ -442,13 +393,13 @@
                 <%= monitor.melt_temp%>
             <% } %>
         </div>
-        <div style="position: absolute; top:7.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
-        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
-        <div class="sep" style="top:11.5vh;"></div>
-        <div style="position: absolute; top:14.2vh; left:12vw; font-size: large; color:white;">입력값</div>
-        <div class="sep" style="top:20.5vh;"></div>
-        <div style="position: absolute; top:21.5vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
-        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:9.1vh; left:9.5vw; font-size: medium; color:white;">UCL</div>
+        <div style="position: absolute; top:9.1vh; left:12vw; font-size: medium; color:white;">35.0</div>
+        <div class="sep" style="top:10.5vh; width:7.5vw;left:14.5vw"></div>
+        <div style="position: absolute; top:15vh; left:12vw; font-size: large; color:white;"><b>입력값</b></div>
+        <div class="sep" style="top:22vh; left:10vw; width:7.5vw;"></div>
+        <div style="position: absolute; top:20.6vh; left:17.8vw; font-size: medium; color:white;">LCL</div>
+        <div style="position: absolute; top:20.6vh; left:20.1vw; font-size: medium; color:white;">35.0</div>
         <div class="inputn" id="set_melt">
             <% if(setup){%>
                 <%=setup.melt_temp%>
@@ -456,7 +407,7 @@
         </div>
     </div>
     <!-- 금형온도 -->
-    <div class="wrapper modal_btn" onclick="modal('mold')" style="position: absolute; top: 5vh; left:29.2vw; color:white; font-weight: 1000;">   
+    <div class="wrapper modal_btn" onclick="modal('mold')" style="position: absolute; top: 5vh; left:29.2vw; color:white;">   
         <div class="wrapper1"><b>금형 온도</b></div>
         <div class="dong">
             <div class="uniti">°C</div>
@@ -481,35 +432,35 @@
     </div>
 
     <!-- 사출속도 -->
-    <div class="wrapper modal_btn" onclick="modal('inj')" style="position: absolute; top: 5vh; left:52.7vw; color:white; font-weight: 1000;">
+    <div class="wrapper modal_btn" onclick="modal('inj')" style="position: absolute; top: 36vh; left:5.7vw; color:white;">
         <div class="wrapper1"><b>사출속도</b></div>
         <div class="dong">
-            <div class="uniti" style="left:1.2vw; font-size:x-large">mm/s</div>
+            <div class="uniti" style="left:1.4vw; font-size:27px"><b>mm/s</b></div>
         </div>
         <div class="unit" id="now_injection_speed">
             <% if(monitor){%>
                 <%= monitor.injection_speed%>
             <% } %>
         </div>
-        <div style="position: absolute; top:7.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
-        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
-        <div class="sep" style="top:11.5vh;"></div>
-        <div style="position: absolute; top:14.2vh; left:12vw; font-size: large; color:white;">입력값</div>
-        <div class="sep" style="top:20.5vh;"></div>
-        <div style="position: absolute; top:21.5vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
-        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:8.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
+        <div style="position: absolute; top:8.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div class="sep" style="top:11.7vh;"></div>
+        <div style="position: absolute; top:15.5vh; left:12vw; font-size: large; color:white;">입력값</div>
+        <div class="sep" style="top:22.5vh;"></div>
+        <div style="position: absolute; top:23vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
+        <div style="position: absolute; top:23vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
         <div class="inputn" id="set_inj">
             <% if(setup){%>
                 <%=setup.injection_speed%>
-            <%}%>
+            <%}%>23
         </div>
     </div>
     </div>
     <!-- 보압 -->
-    <div class="wrapper modal_btn" onclick="modal('hold')" style="position: absolute; top: 5vh; left:76.2vw; color:white; font-weight: 1000;">
+    <div class="wrapper modal_btn" onclick="modal('hold')" style="position: absolute; top: 36vh; left:29.2vw; color:white;">
         <div class="wrapper1"><b>보압</b></div>
         <div class="dong">
-            <div class="uniti" style="left:0.5vw; font-size:19px;">kgf/cm^3</div>
+            <div class="uniti" style="left:0.6vw; font-size:21px;"><b>kgf/cm^3</b></div>
         </div>
         <div class="unit" id="now_hold_pressure">
             <% if(monitor){%>
@@ -531,65 +482,42 @@
     </div>
     </div>
 
-    <!-- 사출시간 -->
-    <div class="wrapper" style="position: absolute; top: 35vh; left:5.7vw; color:white; font-weight: 1000;">
-        <div class="wrapper1"><b>사출시간</b></div>
-        <div class="dong">
-            <div class="uniti" style="left:25px">sec</div>
+    <!-- 생산현황 -->
+    <div class="wrapper" style="position: absolute; height:61vh; top: 5vh; left:52.7vw; background-color:rgba(83, 130, 231, 0.438);">
+        <div class="wrapper1"><b>생산현황</b></div>
+        <div class="wrapper3" style="top:15vh;">생산목표</div>
+        <div style="position: absolute; left:16vw; top:16vh; font-size:x-large;">
+            <b><% if(dir){%>
+                <%= order[0].total%>
+            <%}%></b>
         </div>
-        <div class="unit" id="now_injection_time">
-            <% if(monitor){%>
-                <%= monitor.injection_time%>
-            <% } %>
-        </div>        
-        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">9.5</div>
+        <div class="wrapper3" style="top:24vh;">생산실적</div>
+        <div id = "cnt" style="position: absolute; top:25vh; left:16vw; font-size:x-large;">
+            <b><% if(monitor){%>
+                <%= monitor.cnt%>
+            <% } %></b>
+        </div>
+        <div class="wrapper3" style="top:33vh;">달성률</div>
+        <div id = "qnt" style="position: absolute; top:34vh; left:16vw; font-size:x-large; color:chartreuse">
+            <b><% if(monitor) {%>
+                <%= (monitor.cnt/order[0].total).toFixed(2)*100%>%
+            <%}%></b>
+        </div>
+        <div class="wrapper3" style="top:42vh;">불량률</div>
+        <div id = "def" style="position: absolute; top:43vh; left:16vw; font-size:x-large; color:orangered">
+            <b><% if(monitor) {%>
+                <%= (monitor.def/monitor.cnt).toFixed(2)*100%>%
+            <%}%></b>
+        </div>
     </div>
 
-    <!-- 보압시간 -->
-    <div class="wrapper" style="position: absolute; top: 35vh; left:29.2vw; color:white; font-weight: 1000;">
-        <div class="wrapper1">
-        <b>보압시간</b></div>
-        <div class="dong">
-        <div class="uniti" style="left:25px">sec</div>
-        </div>
-        <div class="unit" id="now_hold_time">
-            <% if(monitor){%>
-                <%= monitor.hold_time%>
-            <% } %>
-        </div>        
-        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">9.5</div>
+    <!-- 오늘의 날씨 -->
+    <div class="wrapper" style="position: absolute; top: 5vh; left:76.2vw; background-color:rgba(83, 130, 231, 0.438);">
+        <div class="wrapper1"><b>오늘 날씨</b></div>
     </div>
-    </div>
-    <!-- 배압시간 -->
-    <div class="wrapper" style="position: absolute; top: 35vh; left:52.7vw; color:white; font-weight: 1000;">
-        <div class="wrapper1"><b>배압시간</b></div>
-        <div class="dong">
-            <div class="uniti" style="left:25px">sec</div>
-        </div>
-        <div class="unit" id="now_filling_time">
-            <% if(monitor){%>
-                <%= monitor.filling_time%>
-            <% } %>
-        </div>        
-        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">9.5</div>
-    </div>
-    </div>
-    <!-- 총시간 -->
-    <div class="wrapper" style="position: absolute; top: 35vh; left:76.2vw; color:white; font-weight: 1000;">
-        <div class="wrapper1"><b>총시간</b></div>
-        <div class="dong">
-            <div class="uniti" style="left:25px">sec</div>
-        </div>
-        <div class="unit" id="now_cycle_time">
-            <% if(monitor){%>
-                <%= monitor.cycle_time%>
-            <% } %>
-        </div>        
-        <div style="position: absolute; top:8vh; left:9vw; font-size: large; color:white;">입력값</div>
-        <div style="position: absolute; top:8vh; left:15vw; font-size: large; color:white;">9.5</div>
+    <!-- 작업지시현황 -->
+    <div class="wrapper" style="position: absolute; top: 36vh; left:76.2vw; background-color:rgba(83, 130, 231, 0.438);">
+        <div class="wrapper1"><b>작업지시현황</b></div>
     </div>
 
     <script>
