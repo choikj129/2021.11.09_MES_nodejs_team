@@ -162,7 +162,6 @@
             <th scope="col" style="width: 10vw;">생성자</th>
             <th scope="col" style="width: 10vw;">수정자</th>
             <th scope="col" style="width: 10vw;">수정일</th>
-            <th scope="col" style="width: 10vw;">수정</th>
           </tr>
         </thead>
         <tbody id ="tbody2">
@@ -178,7 +177,6 @@
               <td><%=orders[i].cid%></td>
               <td><%=orders[i].mid%></td>
               <td><%=orders[i].date_m%></td>    
-              <td><button type='button' class="btn btn-outline-secondary modal_btn2 btn-sm">수정</button></td>
             </tr>
             <%}%>
         </tbody>
@@ -464,7 +462,7 @@
               body += "<tr>"
               body += "<td><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
               for (key in result.orders[0]) {
-                if (key=="work"){
+                if (key=="regist"){
                   continue
                 }
                 if(result.orders[i][key]==null){
@@ -478,21 +476,30 @@
             $("tbody").html(body)
           })
       }
+
+      
+    
+
       // 행클릭 수정모달창
       $("#iTable tr").click(function(){
         var tr = $(this)
+        console.log(tr);
         var td = tr.children()
         id = td.eq(1).text()
+        
         $("#_custname_M").val(td.eq(2).text())
         $("#_legoname_M").val(td.eq(3).text())
         $("#_quantity_M").val(td.eq(4).text())
         $("#_date_o_M").val(td.eq(5).text())
         $("#_date_d_M").val(td.eq(6).text())
         $("#_cid_M").val(td.eq(7).text())
+
+
         $(".modal_wrap2").css("display", "block")
         $(".black_bg2").css("display", "block")
       })
 
+      
        //페이징
        function pagination(){
 		var req_num_row=8;
