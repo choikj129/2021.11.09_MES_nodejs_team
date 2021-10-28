@@ -514,6 +514,11 @@
     <!-- 오늘의 날씨 -->
     <div class="wrapper" style="position: absolute; top: 5vh; left:76.2vw; background-color:rgba(83, 130, 231, 0.438);">
         <div class="wrapper1"><b>오늘 날씨</b></div>
+        <!-- <div class = 'weather'>
+            <div class = 'CurrIcon'></div>
+            <div class = 'CurrTemp'></div>
+            <div class = 'City'></div>
+        </div> -->
     </div>
     <!-- 작업지시현황 -->
     <div class="wrapper" style="position: absolute; top: 36vh; left:76.2vw; background-color:rgba(83, 130, 231, 0.438);">
@@ -601,6 +606,35 @@
             var set = $("#set").val();
             location.href = "/register?name="+name+"&set="+set
         })
+
+        // $(document).ready(function(){
+        //     let weatherIcon = {
+        //         '01' : 'fas fa-sun',
+        //         '02' : 'fas fa-cloud-sun',
+        //         '03' : 'fas fa-cloud',
+        //         '04' : 'fas fa-cloud-meatball',
+        //         '09' : 'fas fa-cloud-sun-rain',
+        //         '10' : 'fas fa-cloud-showers-heavy',
+        //         '11' : 'fas fa-poo-storm',
+        //         '13' : 'fas fa-snowflake',
+        //         '50' : 'fas fa-smog',
+
+        //     }
+        //     $.ajax({
+        //         url : 'http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=8e4af6be132643c342c74f8dba11b2f0&units=metric',
+        //         dataType:'json',
+        //         type : 'GET',
+        //         success : function(data){
+        //             var $Icon = (data.weather[0].icon);
+        //             var $Temp = Math.floor(data.main.temp)+'0';
+        //             var $city = data.name;
+
+        //             $('.CurrIcon').append('<i class="'+ weatherIcon[$Icon] + '"><//i>');
+        //             $('CurrTemp').prepend($Temp);
+        //             $('.City').append($city);
+        //         }
+        //     })
+        // })
 
     </script>
 
