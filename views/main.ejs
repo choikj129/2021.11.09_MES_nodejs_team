@@ -25,7 +25,6 @@
                 line-height: 5vh;
                 color:white;
             }
-
             .wrapper3 {
                 position: absolute;
                 left: 2vw;
@@ -250,7 +249,7 @@
                 font-size: 25px;
             }
             .inputn {
-                position: absolute; 
+                position: absolute;
                 top:9.8vh; 
                 left:17vw; 
                 font-size: x-large; 
@@ -335,7 +334,7 @@
         <div class="inputn" id="set_melt">
             <% if(setup){%>
                 <%=setup.melt_temp%>
-            <%}%>
+            <%}%>23
         </div>
         <div class="sep" style="top:18.5vh;"></div>
         <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
@@ -406,14 +405,14 @@
         <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;">35.0</div>
         <div class="sep" style="top:6.5vh;"></div>
         <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
+        <div class="sep" style="top:18.5vh;"></div>
+        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
+        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;">35.0</div>        
         <div class="inputn" id="set_hold">  
             <% if(setup){%>
                 <%=setup.hold_pressure%>
             <%}%>
-        </div>
-        <div class="sep" style="top:18.5vh;"></div>
-        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
-        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;">35.0</div>         
+        </div>        
     </div>
     </div>
 
