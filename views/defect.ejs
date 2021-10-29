@@ -18,7 +18,7 @@
         height: 1vh;
       }
 
-      #defect_icon{
+      #defect_icon {
         background-color: var(--first-color);
       }
 
@@ -91,7 +91,7 @@
           <th scope="col" style="width: 21vw;">결함 원인</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="tbody2">
         <% for(var i=0; i < defect.length; i++){ %>
           <tr>
             <td>
@@ -175,8 +175,8 @@
 
     //페이징
     function pagination() {
-      var req_num_row = 10;
-      var $tr = jQuery('tbody tr');
+      var req_num_row = 3;
+      var $tr = jQuery('#tbody2 tr');
       var total_num_row = $tr.length;
       var num_pages = 0;
       if (total_num_row % req_num_row == 0) {
@@ -188,7 +188,7 @@
         num_pages = Math.floor(num_pages++);
       }
 
-      jQuery('.pagination').append("<li class='page-item'><a class='page-link'><<</a></li>");
+      jQuery('.pagination').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
 
       for (var i = 1; i <= num_pages; i++) {
         jQuery('.pagination').append("<li class='page-item'><a class='page-link'>" + i + "</a></li>");
@@ -196,7 +196,7 @@
         jQuery('.pagination a').addClass("pagination-link");
       }
 
-      jQuery('.pagination').append("<li class='page-item'><a class='page-link'>>></a></li>");
+      jQuery('.pagination').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
 
       $tr.each(function (i) {
         jQuery(this).hide();
@@ -230,25 +230,40 @@
 
       jQuery('.prev').click(function (e) {
         e.preventDefault();
-        jQuery('.pagination li:first-child').removeClass("active");
-      });
+        jQuery('.pagination li').removeClass("active");
+        jQuery('.pagination li:first-child').next().addClass("active");
+        $tr.hide();
+        var page = jQuery(this).next().text();
+        var temp = page - 1;
+        var start = temp * req_num_row;
+        var current_link = temp;
 
+        for (var i = 0; i < req_num_row; i++) {
+          $tr.eq(start + i).show();
+        }
+      });
       jQuery('.next').click(function (e) {
         e.preventDefault();
-        jQuery('.pagination li:last-child').removeClass("active");
+        jQuery('.pagination li').removeClass("active");
+        jQuery('.pagination li:last-child').prev().addClass("active");
+
+        $tr.hide();
+        var page = jQuery(this).prev().text();
+        var temp = page - 1;
+        var start = temp * req_num_row;
+        var current_link = temp;
+
+        for (var i = 0; i < req_num_row; i++) {
+          $tr.eq(start + i).show();
+        }
       });
-
     }
-
     jQuery('document').ready(function () {
       pagination();
 
       jQuery('.pagination li:first-child').addClass("disabled");
 
-
     });
-
-
   </script>
 </body>
 
