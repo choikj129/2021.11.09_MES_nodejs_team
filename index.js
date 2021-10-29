@@ -127,6 +127,7 @@ app.get("/main", function(req, res){
                     connection.query(
                         `select *, sum(quantity) total, count(*) order_qty
                         from ordert where date(date)= ?`,
+                        [date],
                         function(err0, result0){
                             if (err0){
                                 console.log(err0)
