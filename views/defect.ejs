@@ -33,13 +33,13 @@
 
 <body style="background-color: black; overflow-x:hidden;">
 
-  <!--결함 차트-->
-  <div style="position:absolute;left:-2vw; top:31vh;">
+  <!--불량품 차트-->
+  <div style="position:absolute;left:-2vw; top:10vh;">
     <canvas id="pieChart" style="width:40vw; height:40vh;"></canvas>
   </div>
   <script>
     var dataset = {
-      label: "결함율",
+      label: "불량율",
       backgroundColor: ['royalblue', 'tomato',],//라벨별 컬러설정 
       borderColor: 'white', data: ["<%=Y%>", "<%=N%>"]
     }
@@ -69,26 +69,68 @@
         }
       }
     }
-
     var canvas = document.getElementById('pieChart');
     var pieChart = new Chart(canvas, config);
   </script>
 
-  <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width:57vw;">
-    <div class="font_nav">결함확인</div>
-    <div class="input_nav" style="top:2.5vh; left:20vw;" for="inputGroupSelect01">작업 날짜</div>
-    <input type="text" class="datepicker wdate text" id="datepicker" name="_date"
-      style="top:2.5vh; left:27.1vw; width:15vw; height:5vh;">
+    <!--불량유형 차트-->
+    <div style="position:absolute;left:-2vw; top:55vh;">
+      <canvas id="pieChart" style="width:40vw; height:40vh;"></canvas>
+    </div>
+    <script>
+      var dataset = {
+        label: "불량유형",
+        backgroundColor: ['green', 'greenyellow', 'goldenrod'],//라벨별 컬러설정 
+        borderColor: 'white', data: ["<%=Y%>", "<%=N%>", "<%=N%>" ]
+      }
+      var labels = ['유형1', '유형2', '유형3'];
+      var datasets = { datasets: [dataset], labels: labels }
+  
+      var config = {
+        type: 'pie', data: datasets, //데이터 셋 
+        options: {
+          responsive: true,
+          maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
+          legend: {
+            position: 'bottom',
+            fontColor: 'white',
+            align: 'center',
+            display: true,
+            fullWidth: true,
+            labels: { fontColor: 'white' }
+          },
+          plugins: {
+            labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
+              render: 'value%',
+              fontColor: 'white',
+              fontSize: 17,
+              precision: 2
+            }
+          }
+        }
+      }
+  
+      var canvas = document.getElementById('pieChart');
+      var pieChart = new Chart(canvas, config);
+    </script>
+  
 
-    <button class="btn btn-outline-secondary" onclick="search()" style="top:2.5vh; right:1.5vw">조회</button>
+  <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width:57vw;">
+    <div class="font_nav">불량확인</div>
+    <div class="input_nav" style="top:2.5vh; left:15vw;" for="inputGroupSelect01">작업 날짜</div>
+    <input type="text" class="datepicker wdate text" id="datepicker" name="_date"
+      style="top:2.5vh; left:22.1vw; width:15vw; height:5vh;">
+    <button class="btn btn-outline-secondary" onclick="search()"
+      style="position:absolute; top:2.5vh; right:10vw">조회</button>
+    <button class="btn btn-outline-secondary" onclick="reset()" style="position:absolute; top:2.5vh; right:2.5vw">검색초기화</button>
   </div>
   <div class="tableb" style="width:57vw; left:31vw; top:16vh;">
     <table class="table table-bordered" style="width:57vw;">
       <thead class="thead" style="width:57vw;">
         <tr>
           <th scope="col" style="width: 17vw;">시간</th>
-          <th scope="col" style="width: 15vw">결함 유형</th>
-          <th scope="col" style="width: 21vw;">결함 원인</th>
+          <th scope="col" style="width: 15vw">불량 유형</th>
+          <th scope="col" style="width: 21vw;">불량 원인</th>
         </tr>
       </thead>
       <tbody id="tbody2">
