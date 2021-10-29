@@ -81,7 +81,7 @@
                 font-size: 20px;
                 color: white; 
                 text-align:center; 
-                line-height: 4.5vh;
+                line-height: 4.7vh;
             }
             .pr_box2 {
                 position: absolute; 
@@ -93,7 +93,7 @@
                 color: white;
                 font-size: 20px;
                 text-align:center;
-                line-height:8vh;
+                line-height:11.5vh;
             }
             .pr_num{
                 position: absolute;
@@ -334,7 +334,7 @@
         <div class="inputn" id="set_melt">
             <% if(setup){%>
                 <%=setup.melt_temp%>
-            <%}%>23
+            <%}%>
         </div>
         <div class="sep" style="top:18.5vh;"></div>
         <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
@@ -420,25 +420,25 @@
     <div class="wrapper1" style="top:4.7vh; left: 52.7vw;">생산현황</div>
     <div class="wrapper" style="position: absolute; height:57vh; top: 10vh; left:52.7vw; background-color:rgb(40, 44, 48);">
        
-        <div class="wrapper3" style="top:10.5vh;">생산목표</div>
+        <div class="wrapper3" style="top:9.8vh;">생산목표</div>
         <div style="position: absolute; left:15vw; top:11vh; font-size:x-large;">
             <b><% if(dir){%>
                 <%= order[0].total%>
             <%}%></b>
         </div>
-        <div class="wrapper3" style="top:20.5vh;">생산실적</div>
+        <div class="wrapper3" style="top:20.1vh;">생산실적</div>
         <div id = "cnt" style="position: absolute; top:21vh; left:15vw; font-size:x-large;">
             <b><% if(monitor){%>
                 <%= monitor.cnt%>
             <% } %></b>
         </div>
-        <div class="wrapper3" style="top:30.5vh;">달성률</div>
+        <div class="wrapper3" style="top:30.4vh;">달성률</div>
         <div id = "qnt" style="position: absolute; top:31vh; left:15vw; font-size:x-large; color:rgb(53, 190, 71)">
             <b><% if(monitor) {%>
                 <%= (monitor.cnt/order[0].total*100).toFixed(2)%>%
             <%}%></b>
         </div>
-        <div class="wrapper3" style="top:40.5vh;">불량률</div>
+        <div class="wrapper3" style="top:40.7vh;">불량률</div>
         <div id = "def" style="position: absolute; top:41vh; left:15vw; font-size:x-large; color:rgb(199, 85, 43)">
             <b><% if(monitor) {%>
                 <%= (monitor.def/monitor.cnt).toFixed(2)*100%>%
@@ -454,61 +454,26 @@
     <!-- 작업지시현황 -->
     <div class="wrapper1" style="top:36.2vh; left: 76.2vw;">작업지시현황</div>
     <div class="wrapper" style="position: absolute; top: 41.5vh; left:76.2vw; background-color:rgb(40, 44, 48);">
-        <div class="wrapper3" style="top:4.5vh;">기업수주   <%=orders_qty%></div> 
-        <div class="wrapper3" style="top:13.5vh;">작업지시   <%=order_qty%></div>
+        <div class="wrapper3" style="top:4.5vh;">기업수주</div> 
+        <div style="position: absolute; left: 17vw; top:5vh; font-size: 25px;"><%=orders_qty%></div>
+        <div class="wrapper3" style="top:13.5vh;">작업지시</div>
+        <div style="position: absolute; left: 17vw; top:14vh; font-size: 25px;"><%=order_qty%></div>
     </div>
     
     <!-- 공정 프로세스 -->
     <div class="wrapper1" style="width:93.6vw; position:absolute; left:5.7vw; top:67.7vh; color:white;">공정 프로세스</div>
     <div class="wrapper" style="position:absolute; height:25vh; top:73vh; left:5.7vw; width:93.6vw; background-color:rgb(40, 44, 48);">
-        <div id="b1" >
-            <div align="center" class="pr_box1" style="left:3vw;">1</div>
-            <div align="center" class="pr_box2" style="left:3vw;">Ready</div>
-            
-        </div>
-
-        <div id="b2">
-            <div align="center" class="pr_box1" style="left:20vw;">2</div>
-            <div align="center" class="pr_box2" style="left:20vw;">Injecting</div>
-            <div class="pr_num" id="now_injection_time" style="left:23.5vw;">
-                <% if(monitor){%>
-                    <%= monitor.injection_time%>
-                <% } %>
-            </div>
-
-        </div>
-
-        <div id="b3">
-            <div align="center" class="pr_box1" style="left:37vw;">3</div>
-            <div align="center" class="pr_box2" style="left:37vw;">Filling</div>
-            <div class="pr_num" id="now_filling_time" style="left:40.5vw;">
-                <% if(monitor){%>
-                    <%= monitor.filling_time%>
-                <% } %>
-            </div>  
-        </div>
-
-        <div id="b4">
-            <div align="center" class="pr_box1" style="left:54vw;">4</div>
-            <div align="center" class="pr_box2" style="left:54vw;">Holding</div>
-            <div class="pr_num" style="left:57.7vw;" id="now_hold_time">
-                <% if(monitor){%>
-                    <%= monitor.hold_time%>
-                <% } %>
-            </div> 
-        </div>
-
-        <div id="b5">
-            <div align="center" class="pr_box1" style="left:71vw;"> 5</div>
-            <div align="center" class="pr_box2" style="left:71vw;">Seperating</div>
-            <!--총시간
-                <div class="unit" id="now_cycle_time">
-                <% if(monitor){%>
-                    <%= monitor.cycle_time%>
-                <% } %>
-            </div>--> 
-        </div>
-
+        <div align="center" class="pr_box1" style="left:3vw; ">1</div>
+        <div align="center" class="pr_box2" style="left:3vw; ">Ready</div>
+        <div align="center" class="pr_box1" style="left:20vw;">2</div>
+        <div align="center" class="pr_box2" style="left:20vw;">Injecting</div>
+        <div align="center" class="pr_box1" style="left:37vw;">3</div>
+        <div align="center" class="pr_box2" style="left:37vw;">Filling</div>
+        <div align="center" class="pr_box1" style="left:54vw;">4</div>
+        <div align="center" class="pr_box2" style="left:54vw;">Holding</div>
+        <div align="center" class="pr_box1" style="left:71vw;"> 5</div>
+        <div align="center" class="pr_box2" style="left:71vw;">Seperating</div>
+    
         <!-- 시작/종료/정지/입력 버튼 -->
         <button type="button" id = "onoff" class="btn btn-light" style="width:8vw; height:6vh; position: absolute; right:1.5vw; top:6vh; font-size:22px; line-height:3vh;"
         onclick="start()" disabled>
