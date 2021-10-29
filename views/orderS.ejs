@@ -11,9 +11,11 @@
         text-align: center;
         background-color: rgb(173, 185, 202);
       }
+
       #orders_icon {
         background-color: var(--first-color);
       }
+
       .modal_wrap,
       .modal_wrap2 {
         display: none;
@@ -48,12 +50,6 @@
         background: url(https://img.icons8.com/metro/26/000000/close-window.png);
         /* text-indent: 2.5vw; */
         text-indent: -9999px;
-      }
-
-      .pagination a {
-        display: inline-block;
-        margin-right: 5px;
-        cursor: pointer;
       }
     </style>
 </head>
@@ -94,12 +90,13 @@
     <!-- 상단바하단 -->
     <button type="submit" class="btn btn-outline-light modal_btn" style="position:absolute; top:15vh; right:6vw;"
       id="register">등록</button>
-    <button class="btn btn-outline-danger " style="position:absolute; top: 15vh; right:1.5vw;" onclick="del()">삭제</button>
+    <button class="btn btn-outline-danger " style="position:absolute; top: 15vh; right:1.5vw;"
+      onclick="del()">삭제</button>
   </div>
 
 
   <!-- 테이블 목록 -->
-  <div class="tableb"style="top:30vh; left:6vw;">
+  <div class="tableb" style="top:30vh; left:6vw;">
     <table id="iTable" class="table table-bordered">
       <thead class="thead">
         <tr>
@@ -150,14 +147,13 @@
           <%}%>
       </tbody>
     </table>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
-          height:5.6vh;">
-
-      </ul>
-    </nav>
-    <div class="col-lg-12" id="tr_id"></div>
   </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+        height:5.6vh;">
+    </ul>
+  </nav>
+  <div class="col-lg-12" id="tr_id"></div>
 
   <!---- 등록모달창 ---->
   <div class="black_bg"></div>

@@ -7,11 +7,50 @@
       #instruct_icon {
         background-color: var(--first-color);
       }
-      .pagination a {
-            display:inline-block;
-            margin-right:5px;
-            cursor:pointer;
-            }
+    
+      .pagination1 a {
+        left: 3vw;
+        top: 25vh;
+        display: inline-block;
+        margin-right: 5px;
+        cursor: pointer;
+        color:black;
+        border: 0.2vw solid rgba(0, 255, 191, 0.11);
+        background-color: rgba(0, 255, 191, 0.11);
+      }
+    
+      .pagination2 a {
+        left: 3vw;
+        top: 20vh;
+        display: inline-block;
+        margin-right: 5px;
+        cursor: pointer;
+        color:black;
+        border: 0.2vw solid rgba(0, 255, 191, 0.11);
+        background-color: rgba(0, 255, 191, 0.11);
+      }
+    
+      .page-item.active .page-link {
+        z-index: 3;
+        color: white;
+        background-color: black;
+        border-color: rgba(0, 255, 191, 0.11);
+      }
+    
+      .page-item.disabled .page-link {
+        color: white;
+        pointer-events: none;
+        color: black;
+        background-color: rgba(0, 255, 191, 0.11);
+        border-color: rgba(0, 255, 191, 0.11);
+      }
+    
+      .page-link:hover {
+        z-index: 2;
+        color: rgba(0, 255, 191, 0.11);
+        background-color: rgb(38, 43, 51);
+        border-color: rgba(0, 255, 191, 0.11);
+      }
     </style>
 </head>
 
