@@ -77,6 +77,7 @@ app.post("/login", function(req, res){
                                 req.session.hold = [parseFloat(result[0].hold_m), parseFloat(result[0].hold_s)]
                                 req.session.inj = [parseFloat(result[0].inj_m), parseFloat(result[0].inj_s)]
                                 req.session.total = result[0].total
+                                req.session.process = ""
                                 res.redirect("/main")
                             }
                         }
@@ -125,54 +126,75 @@ app.get("/main", function(req, res){
                     console.log(err)
                 }else{
                     connection.query(
-                        `select *,
-                        (select sum(quantity) from ordert where date(date) =`+date+`) total
-                         from ordert where date(date)=(select date_format(now(),'%Y-%m-%d') from dual)`,
+                        `select *, sum(quantity) total, count(*) order_qty
+                         from ordert where date(date)= ?`,
+                         [date],
                         function(err0, result0){
                             if (err0){
                                 console.log(err0)
                             }else{
-                                if(result0.length==0){
-                                    res.render("main",{
-                                        'monitor' : result0[0],
-                                        'run' : req.session.run,
-                                        'linkcode' : req.session.logged.linkcode,
-                                        "dir" : req.session.dir,
-                                        "melt" : req.session.melt,
-                                        "mold" : req.session.mold,
-                                        "hold" : req.session.hold,
-                                        "inj" : req.session.inj,
-                                        "setup" : result1[0]
-                                    })
-                                }else{
-                                    req.session.dir = true;
-                                    connection.query(
-                                        `select *, (select count(*) from monitoring`+date+`) cnt,
-                                        (select count(*) from monitoring`+date+` where defect='N') def
-                                        from monitoring`+date+` order by monitor_id desc limit 1`,
-                                        function(err, result){
-                                            if (err){
-                                                console.log(err)
+                                connection.query(
+                                    `select count(*) orders_qty from orders where date(orders_date)=?`,
+                                    [date],
+                                    function(err, result2){
+                                        if(err){
+                                            console.log(err)
+                                        }else{
+                                            if(result2.length==0){
+                                                var orders_qty = 0
                                             }else{
-                                                if(result.length>0){
-                                                    req.session.cnt = result[0].cnt
-                                                }
-                                                res.render('main', {
-                                                    'monitor' : result[0],
-                                                    "run" : req.session.run,
-                                                    "linkcode" : req.session.logged.linkcode,
+                                                var orders_qty = result2[0].orders_qty
+                                            }
+                                            if(result0[0].total==null){
+                                                res.render("main",{
+                                                    'monitor' : null,
+                                                    'run' : req.session.run,
+                                                    'linkcode' : req.session.logged.linkcode,
                                                     "dir" : req.session.dir,
-                                                    "order" : result0,
                                                     "melt" : req.session.melt,
                                                     "mold" : req.session.mold,
                                                     "hold" : req.session.hold,
                                                     "inj" : req.session.inj,
-                                                    "setup" : result1[0]
+                                                    "setup" : result1[0],
+                                                    "order_qty" : 0,
+                                                    "orders_qty" : orders_qty,
+                                                    "process" : req.session.process
                                                 })
+                                            }else{
+                                                req.session.dir = true;
+                                                connection.query(
+                                                    `select *, (select count(*) from monitoring`+date+`) cnt,
+                                                    (select count(*) from monitoring`+date+` where defect='N') def
+                                                    from monitoring`+date+` order by monitor_id desc limit 1`,
+                                                    function(err, result){
+                                                        if (err){
+                                                            console.log(err)
+                                                        }else{
+                                                            if(result.length>0){
+                                                                req.session.cnt = result[0].cnt
+                                                            }
+                                                            res.render('main', {
+                                                                'monitor' : result[0],
+                                                                "run" : req.session.run,
+                                                                "linkcode" : req.session.logged.linkcode,
+                                                                "dir" : req.session.dir,
+                                                                "order" : result0,
+                                                                "melt" : req.session.melt,
+                                                                "mold" : req.session.mold,
+                                                                "hold" : req.session.hold,
+                                                                "inj" : req.session.inj,
+                                                                "setup" : result1[0],
+                                                                "order_qty" : result0[0].order_qty,
+                                                                "orders_qty" : orders_qty,
+                                                                "process" : req.session.process
+                                                            })
+                                                        }
+                                                    }
+                                                )        
                                             }
                                         }
-                                    )        
-                                }
+                                    }
+                                )
                             }
                         }
                     )
@@ -205,6 +227,7 @@ app.get("/main_update", function(req, res){
                     if(result.length>0){
                         req.session.cnt = result[0].cnt
                     }
+                    var id = result.monitor_id
                     if (req.session.run == false){
                         req.session.run = true;
                         interval = setInterval(function () {
@@ -219,14 +242,66 @@ app.get("/main_update", function(req, res){
                             || injs<inj[0]-2*inj[1] || injs>inj[0]+2*inj[1]){
                                 defect = "N"
                             }
+                            
                             connection.query(
                                 `insert into monitoring` + date + `
-                                 (mold_temp, melt_temp, injection_speed, hold_pressure, injection_time, hold_time, filling_time, cycle_time, defect, date)
-                                 values(?, ?, ?, ?, 9.58, 7.13, 4.47, 59.52, ?, now())`,
-                                [moldt, meltt, injs, holdp, defect],
+                                 (mold_temp, melt_temp, injection_time, hold_time, filling_time, cycle_time, date)
+                                 values(?, ?, 9.58, 7.13, 4.47, 59.52, now())`,
+                                [moldt, meltt],
                                 function (err) {
                                     if (err) {
                                         console.log(err)
+                                    }else{
+                                        connection.query(
+                                            `select monitor_id from monitoring` + date + ` limit 1`,
+                                            function(err,result){
+                                                if(err){
+                                                    console.log(err)
+                                                }else{
+                                                    var id = result[0].monitor_id
+                                                    req.session.process = "ready"
+                                                    setTimeout(() => {
+                                                        console.log("ready")
+                                                        connection.query(
+                                                            `update monitoring`+date+` set injection_speed=? 
+                                                            where monitor_id=?`,
+                                                            [injs, id],
+                                                            function(err){
+                                                                if(err){
+                                                                    console.log(err)
+                                                                }else{
+                                                                    req.session.process = "injecting"
+                                                                    setTimeout(() => {
+                                                                        console.log("injecting")
+                                                                        req.session.process = "filling"
+                                                                        setTimeout(() => {
+                                                                            console.log("filling")
+                                                                            connection.query(
+                                                                                `update monitoring`+date+` set hold_pressure=?, defect=?
+                                                                                where monitor_id=?`,
+                                                                                [holdp, defect, id],
+                                                                                function(err){
+                                                                                    if (err){
+                                                                                        console.log(err)
+                                                                                    }else{
+                                                                                        req.session.process = "holding"
+                                                                                        setTimeout(() => {
+                                                                                            console.log("holding")
+                                                                                            req.session.process = "seperating"
+                                                                                        }, 300);
+                                                                                    }
+                                                                                }
+                                                                            )
+                                                                        }, 200);
+                                                                    }, 400);
+                                                                }
+                                                            }
+                                                        )
+                                                    }, 500);
+                                                }
+                                            }
+                                        )
+                                        
                                     }
                                 }
                             )
@@ -240,7 +315,8 @@ app.get("/main_update", function(req, res){
                             "melt" : req.session.melt,
                             "mold" : req.session.mold,
                             "hold" : req.session.hold,
-                            "inj" : req.session.inj
+                            "inj" : req.session.inj,
+                            "process" : req.session.process
                         })
                     }
                 }

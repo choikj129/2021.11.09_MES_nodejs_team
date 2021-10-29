@@ -96,16 +96,16 @@ router.get("/register", function(req, res){
                             connection.query(
                                 `create table monitoring` + date_array[0] + date_array[1] + date_array[2] + `
                                 (monitor_id int auto_increment primary key,
-                                 mold_temp double not null,
-                                 melt_temp double not null,
-                                 injection_speed double not null,
-                                 hold_pressure double not null,
-                                 injection_time double not null,
-                                 hold_time double not null,
-                                 filling_time double not null,
-                                 cycle_time double not null,
-                                 defect varchar(5) not null,
-                                 date text not null)`,
+                                 mold_temp double,
+                                 melt_temp double,
+                                 injection_speed double,
+                                 hold_pressure double,
+                                 injection_time double,
+                                 hold_time double,
+                                 filling_time double,
+                                 cycle_time double,
+                                 defect varchar(5),
+                                 date text)`,
                                 function(err0){
                                     res.redirect("/instruct")
                                 }

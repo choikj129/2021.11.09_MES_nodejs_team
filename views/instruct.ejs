@@ -19,34 +19,35 @@
   <!-- <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
     <div div class="font_nav">작업지시관리</div> -->
 
-    <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
-      <div class="font_nav">작업지시·수주관리</div>
-  
-      <div class="input_nav" style="top:2.5vh; left:15vw;">작업일</div>
-      <input type="text" class="datepicker text" id="_date" value="<%=date%>"
-        style="top:2.5vh; left:22.1vw; width:15vw; height:5vh;"> 
-  
-      <div class="input_nav" style="top:2.5vh; left:39vw;">거래처</div>
-      <select class="form-select text select" id="cust" style="top:2.5vh; left:46.1vw;">
-        <option value=""></option>
-        <option value="삼성전자">삼성전자</option>
-        <option value="LG전자">LG전자</option>
-        <option value="카카오">카카오</option>
-        <option value="네이버">네이버</option>
-      </select>
-  
-      <div class="input_nav" style="top:2.5vh; left:63vw;">품목명</div>
-      <select class="form-select text select" id="product_i" style="top:2.5vh; left:70.1vw;">
-        <option value=""></option>
-        <option value="bricks_rect">bricks_rect</option>
-        <option value="bricks_square">bricks_square</option>
-        <option value="circle">circle</option>
-        <option value="floor">floor</option>
-      </select>
-    </div>
-  
+  <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+    <div class="font_nav">작업지시·수주관리</div>
+
+    <div class="input_nav" style="top:2.5vh; left:15vw;">작업일</div>
+    <input type="text" class="datepicker text" id="_date" value="<%=date%>"
+      style="top:2.5vh; left:22.1vw; width:15vw; height:5vh;"> 
+
+    <div class="input_nav" style="top:2.5vh; left:39vw;">거래처</div>
+    <select class="form-select text select" id="cust" style="top:2.5vh; left:46.1vw;">
+      <option value=""></option>
+      <option value="삼성전자">삼성전자</option>
+      <option value="LG전자">LG전자</option>
+      <option value="카카오">카카오</option>
+      <option value="네이버">네이버</option>
+    </select>
+
+    <div class="input_nav" style="top:2.5vh; left:63vw;">품목명</div>
+    <select class="form-select text select" id="product_i" style="top:2.5vh; left:70.1vw;">
+      <option value=""></option>
+      <option value="bricks_rect">bricks_rect</option>
+      <option value="bricks_square">bricks_square</option>
+      <option value="circle">circle</option>
+      <option value="floor">floor</option>
+    </select>
     <button class="btn btn-secondary" onclick="search()" style="position:absolute; bottom:3vh; right:1.5vw">조회</button>
+
   </div>
+  
+    
  
 
   <!-- 수주 조회 테이블 -->

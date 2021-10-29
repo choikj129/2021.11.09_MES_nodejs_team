@@ -394,12 +394,12 @@
             <% } %>
         </div>
         <div style="position: absolute; top:9.1vh; left:9.5vw; font-size: medium; color:white;">UCL</div>
-        <div style="position: absolute; top:9.1vh; left:12vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:9.1vh; left:12vw; font-size: medium; color:white;" id="melt_ucl"></div>
         <div class="sep" style="top:10.5vh; width:7.5vw;left:14.5vw"></div>
         <div style="position: absolute; top:15vh; left:12vw; font-size: large; color:white;"><b>입력값</b></div>
         <div class="sep" style="top:22vh; left:10vw; width:7.5vw;"></div>
         <div style="position: absolute; top:20.6vh; left:17.8vw; font-size: medium; color:white;">LCL</div>
-        <div style="position: absolute; top:20.6vh; left:20.1vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:20.6vh; left:20.1vw; font-size: medium; color:white;" id="melt_lcl"></div>
         <div class="inputn" id="set_melt">
             <% if(setup){%>
                 <%=setup.melt_temp%>
@@ -418,12 +418,12 @@
             <% } %>
         </div>
         <div style="position: absolute; top:7.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
-        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;" id="mold_ucl"></div>
         <div class="sep" style="top:11.5vh;"></div>
         <div style="position: absolute; top:14.2vh; left:12vw; font-size: large; color:white;">입력값</div>
         <div class="sep" style="top:20.5vh;"></div>
         <div style="position: absolute; top:21.5vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
-        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;" id="mold_lcl"></div>
         <div class="inputn" id="set_mold">
             <% if(setup){%>
                 <%=setup.mold_temp%>
@@ -443,16 +443,16 @@
             <% } %>
         </div>
         <div style="position: absolute; top:8.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
-        <div style="position: absolute; top:8.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:8.5vh; left:16.5vw; font-size: medium; color:white;" id="inj_ucl"></div>
         <div class="sep" style="top:11.7vh;"></div>
         <div style="position: absolute; top:15.5vh; left:12vw; font-size: large; color:white;">입력값</div>
         <div class="sep" style="top:22.5vh;"></div>
         <div style="position: absolute; top:23vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
-        <div style="position: absolute; top:23vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:23vh; left:16.5vw; font-size: medium; color:white;" id="inj_lcl"></div>
         <div class="inputn" id="set_inj">
             <% if(setup){%>
                 <%=setup.injection_speed%>
-            <%}%>23
+            <%}%>   
         </div>
     </div>
     </div>
@@ -460,7 +460,7 @@
     <div class="wrapper modal_btn" onclick="modal('hold')" style="position: absolute; top: 36vh; left:29.2vw; color:white;">
         <div class="wrapper1"><b>보압</b></div>
         <div class="dong">
-            <div class="uniti" style="left:0.6vw; font-size:21px;"><b>kgf/cm^3</b></div>
+            <div class="uniti" style="left:0.6vw; font-size:21px;"><b>kgf/cm<sup>3</sup></b></div>
         </div>
         <div class="unit" id="now_hold_pressure">
             <% if(monitor){%>
@@ -468,12 +468,12 @@
             <% } %>
         </div>
         <div style="position: absolute; top:7.5vh; left:13.5vw; font-size: medium; color:white;">UCL</div>
-        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:7.5vh; left:16.5vw; font-size: medium; color:white;" id="hold_ucl"></div>
         <div class="sep" style="top:11.5vh;"></div>
         <div style="position: absolute; top:14.2vh; left:12vw; font-size: large; color:white;">입력값</div>
         <div class="sep" style="top:20.5vh;"></div>
         <div style="position: absolute; top:21.5vh; left:13.5vw; font-size: medium; color:white;">LCL</div>
-        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;">35.0</div>
+        <div style="position: absolute; top:21.5vh; left:16.5vw; font-size: medium; color:white;" id="hold_lcl"></div>
         <div class="inputn" id="set_hold">
             <% if(setup){%>
                 <%=setup.hold_pressure%>
@@ -518,6 +518,8 @@
     <!-- 작업지시현황 -->
     <div class="wrapper" style="position: absolute; top: 36vh; left:76.2vw; background-color:rgba(83, 130, 231, 0.438);">
         <div class="wrapper1"><b>작업지시현황</b></div>
+        <div>작업지시 : <%=order_qty%></div>
+        <div>수주현황 : <%=orders_qty%></div>
     </div>
 
     <script>
@@ -535,6 +537,14 @@
             }else{
                 $("#onoff").attr("disabled", "disabled")
             }
+            $("#melt_ucl").text((parseFloat("<%=melt[0]%>")+2*parseFloat("<%=melt[1]%>")).toFixed(2))
+            $("#melt_lcl").text((parseFloat("<%=melt[0]%>")-2*parseFloat("<%=melt[1]%>")).toFixed(2))
+            $("#mold_ucl").text((parseFloat("<%=mold[0]%>")+2*parseFloat("<%=mold[1]%>")).toFixed(2))
+            $("#mold_lcl").text((parseFloat("<%=mold[0]%>")-2*parseFloat("<%=mold[1]%>")).toFixed(2))
+            $("#inj_ucl").text((parseFloat("<%=inj[0]%>")+2*parseFloat("<%=inj[1]%>")).toFixed(2))
+            $("#inj_lcl").text((parseFloat("<%=inj[0]%>")-2*parseFloat("<%=inj[1]%>")).toFixed(2))
+            $("#hold_ucl").text((parseFloat("<%=hold[0]%>")+2*parseFloat("<%=hold[1]%>")).toFixed(2))
+            $("#hold_lcl").text((parseFloat("<%=hold[0]%>")-2*parseFloat("<%=hold[1]%>")).toFixed(2))
 
             if ("<%=run%>" == "true"){
                 start()
@@ -572,6 +582,7 @@
             $(".modal_wrap").css("display", "none")
             $(".black_bg").css("display", "none")
         })
+
         function modal(name){
             if (name == "melt"){
                 $("#ucl").text((parseFloat("<%=melt[0]%>")+2*parseFloat("<%=melt[1]%>")).toFixed(2))
