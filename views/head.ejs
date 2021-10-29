@@ -143,8 +143,41 @@
     position:absolute;
     border-width: 0.2vw;
   }
-  
-
+  .page-item.active .page-link {
+                z-index: 3;
+                color: white;
+                background-color: black;
+                border-color: rgba(0, 255, 191, 0.11);
+  }
+  .pagination a {
+  display:inline-block;
+  margin-right:5px;
+  cursor:pointer;
+  background-color:rgba(0, 255, 191, 0.11);
+  }
+  .page-link {
+      left: 7vw;
+      top: 85vh;
+      position: relative;
+      display: block;
+      color: white;
+      text-decoration: none;
+      background-color:black;
+      border: 0.2vw solid rgba(0, 255, 191, 0.11);
+      border-radius: 0.5vw;
+  }
+  .page-item.disabled .page-link {
+    color: white;
+    pointer-events: none;
+    background-color: rgba(0, 255, 191, 0.11);
+    border-color: rgba(0, 255, 191, 0.11);
+  }
+  .page-link:hover {
+    z-index: 2;
+    color: rgba(0, 255, 191, 0.11);
+    background-color: rgb(38, 43, 51);
+    border-color: rgba(0, 255, 191, 0.11);
+  }
 </style>
 <link rel="stylesheet" href="/css/style.css">
 
