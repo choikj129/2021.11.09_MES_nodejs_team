@@ -164,7 +164,6 @@
           <th scope="col" style="width: 10vw;">생성자</th>
           <th scope="col" style="width: 10vw;">수정자</th>
           <th scope="col" style="width: 10vw;">수정일</th>
-          <th scope="col" style="width: 10vw;">수정</th>
         </tr>
       </thead>
       <tbody id="tbody2">
@@ -198,7 +197,6 @@
             <td>
               <%=orders[i].date_m%>
             </td>
-            <td><button type='button' class="btn btn-outline-secondary modal_btn2 btn-sm">수정</button></td>
           </tr>
           <%}%>
       </tbody>
@@ -423,7 +421,7 @@
             body += "<tr>"
             body += "<td><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
             for (key in result.orders[0]) {
-              if (key == "work") {
+              if (key == "regist") {
                 continue
               }
               if (result.orders[i][key] == null) {
