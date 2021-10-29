@@ -146,7 +146,7 @@ app.get("/main", function(req, res){
                                             }
                                             if(result0[0].total==null){
                                                 res.render("main",{
-                                                    'monitor' : result0[0],
+                                                    'monitor' : null,
                                                     'run' : req.session.run,
                                                     'linkcode' : req.session.logged.linkcode,
                                                     "dir" : req.session.dir,

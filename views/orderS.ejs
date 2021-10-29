@@ -1,503 +1,496 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <%- include("./head.ejs") %>
+      <style>
+        .input-group2 {
+          width: 18vw;
+          text-align: center;
+          background-color: rgb(173, 185, 202);
+        }
 
-<head>
-  <%- include("./head.ejs") %>
+        #orders_icon {
+          background-color: var(--first-color);
+        }
 
+        .modal_wrap,
+        .modal_wrap2 {
+          display: none;
+          position: absolute;
+          top: 25vh;
+          left: 40%;
+          width: 420px;
+          height: 280px;
+          position: absolute;
+          background: rgb(210, 215, 221);
+          z-index: 10;
+        }
 
-    <style>
-      .input-group2 {
-        width: 18vw;
-        text-align: center;
-        background-color: rgb(173, 185, 202);
-      }
-      #orders_icon {
-        background-color: var(--first-color);
-      }
-      .modal_wrap,
-      .modal_wrap2 {
-        display: none;
-        position: absolute;
-        top: 25vh;
-        left: 40%;
-        width: 420px;
-        height: 280px;
-        position: absolute;
-        background: rgb(210, 215, 221);
-        z-index: 10;
-      }
+        .black_bg,
+        .black_bg2 {
+          display: none;
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
 
-      .black_bg,
-      .black_bg2 {
-        display: none;
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        top: 0;
-        left: 0;
-        z-index: 1;
-      }
+        .modal_close>a,
+        .modal_close2>a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: url(https://img.icons8.com/metro/26/000000/close-window.png);
+          /* text-indent: 2.5vw; */
+          text-indent: -9999px;
+        }
 
-      .modal_close>a,
-      .modal_close2>a {
-        display: block;
-        width: 100%;
-        height: 100%;
-        background: url(https://img.icons8.com/metro/26/000000/close-window.png);
-        /* text-indent: 2.5vw; */
-        text-indent: -9999px;
-      }
+        .pagination a {
+          display: inline-block;
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      </style>
+  </head>
 
-      .pagination a {
-        display: inline-block;
-        margin-right: 5px;
-        cursor: pointer;
-      }
-    </style>
-</head>
+  <body style="background-color: black; overflow-y:hidden">
 
-<body style="background-color: black; overflow-y:hidden">
+    <!---- 상단바 ---->
+    <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
+      <div class="font_nav">수주조회</div>
 
-  <!-- 상단바 -->
-  <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
-    <div class="font_nav">수주조회</div>
+      <div class="input_nav" style="top:2.5vh; left:10vw;" for="inputGroupSelect01">거래처</div>
+      <select class="form-select text select" id="search_c" style="top:2.5vh; left:17.1vw; width:11vw">
+        <option value=""></option>
+        <option value="삼성전자">삼성전자</option>
+        <option value="LG전자">LG전자</option>
+        <option value="카카오">카카오</option>
+        <option value="네이버">네이버</option>
+      </select>
 
-    <div class="input_nav" style="top:2.5vh; left:10vw;" for="inputGroupSelect01">거래처</div>
-    <select class="form-select text select" id="search_c" style="top:2.5vh; left:17.1vw; width:11vw">
-      <option value=""></option>
-      <option value="삼성전자">삼성전자</option>
-      <option value="LG전자">LG전자</option>
-      <option value="카카오">카카오</option>
-      <option value="네이버">네이버</option>
-    </select>
+      <div class="input_nav" style="top:2.5vh; left:29vw;" for="inputGroupSelect01">품목명</div>
+      <select class="form-select text select" id="search_i" style="top:2.5vh; left:36.1vw; width:11vw">
+        <option value=""></option>
+        <option value="bricks_rect">bricks_rect</option>
+        <option value="bricks_square">bricks_square</option>
+        <option value="circle">circle</option>
+        <option value="floor">floor</option>
+      </select>
 
+      <div class="input_nav" style="top:2.5vh; left:47.9vw;" for="inputGroupSelect01">수주일자</div>
+      <input type="text" class="datepicker text" id="_date_o" style="top:2.5vh; left:55vw; width:11vw; height:5vh;">
 
-    <div class="input_nav" style="top:2.5vh; left:29vw;" for="inputGroupSelect01">품목명</div>
-    <select class="form-select text select" id="search_i" style="top:2.5vh; left:36.1vw; width:11vw">
-      <option value=""></option>
-      <option value="bricks_rect">bricks_rect</option>
-      <option value="bricks_square">bricks_square</option>
-      <option value="circle">circle</option>
-      <option value="floor">floor</option>
-    </select>
+      <div class="input_nav" style="top:2.5vh; left:66.8vw;" for="inputGroupSelect01">납기일자</div>
+      <input type="text" class="datepicker text" id="_date_d" style="top:2.5vh; left:73.9vw; width:11vw; height: 5vh;">
 
-    <div class="input_nav" style="top:2.5vh; left:47.9vw;" for="inputGroupSelect01">수주일자</div>
-    <input type="text" class="datepicker text" id="_date_o" style="top:2.5vh; left:55vw; width:11vw; height:5vh;">
+      <button class="btn btn-outline-secondary" onclick="search()" style="top:2.5vh; right: 1.5vw;">조회</button>
 
-    <div class="input_nav" style="top:2.5vh; left:66.8vw;" for="inputGroupSelect01">납기일자</div>
-    <input type="text" class="datepicker text" id="_date_d" style="top:2.5vh; left:73.9vw; width:11vw; height: 5vh;">
+      <!---- 상단바하단 ---->
+      <button type="submit" class="btn btn-outline-light modal_btn" style="position:absolute; top:15vh; right:6vw;"
+        id="register">등록</button>
+      <button class="btn btn-outline-danger " style="position:absolute; top: 15vh; right:1.5vw;" onclick="del()">삭제</button>
+    </div>
 
-    <button class="btn btn-outline-secondary" onclick="search()" style="top:2.5vh; right: 1.5vw;">조회</button>
-
-    <!-- 상단바하단 -->
-    <button type="submit" class="btn btn-outline-light modal_btn" style="position:absolute; top:15vh; right:6vw;"
-      id="register">등록</button>
-    <button class="btn btn-outline-danger " style="position:absolute; top: 15vh; right:1.5vw;" onclick="del()">삭제</button>
-  </div>
-
-
-  <!-- 테이블 목록 -->
-  <div class="tableb"style="top:30vh; left:6vw;">
-    <table id="iTable" class="table table-bordered">
-      <thead class="thead">
-        <tr>
-          <th scope="col" style="width: 2vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
-          <th scope="col" style="width: 8vw;">수주번호</th>
-          <th scope="col" style="width: 7vw;">거래처</th>
-          <th scope="col" style="width: 10vw;">품목명</th>
-          <th scope="col" style="width: 8vw;">주문수량</th>
-          <th scope="col" style="width: 10vw;">수주일자</th>
-          <th scope="col" style="width: 10vw;">납기일자</th>
-          <th scope="col" style="width: 10vw;">생성자</th>
-          <th scope="col" style="width: 10vw;">수정자</th>
-          <th scope="col" style="width: 10vw;">수정일</th>
-        </tr>
-      </thead>
-      <tbody id="tbody2">
-        <% for(var i=0; i < orders.length; i++) {%>
+    <!---- 테이블 목록 ---->
+    <div class="tableb"style="top:30vh; left:6vw;">
+      <table id="iTable" class="table table-bordered">
+        <thead class="thead">
           <tr>
-            <td><input type="checkbox" id="del_row" class="chk" name="_selected_" value="<%=orders[i].orders_id%>"></td>
-            <td>
-              <%=orders[i].orders_id%>
-            </td>
-            <td>
-              <%=orders[i].cust_name%>
-            </td>
-            <td>
-              <%=orders[i].lego_name%>
-            </td>
-            <td>
-              <%=orders[i].orders_qty%>
-            </td>
-            <td>
-              <%=orders[i].orders_date%>
-            </td>
-            <td>
-              <%=orders[i].delivery_date%>
-            </td>
-            <td>
-              <%=orders[i].cid%>
-            </td>
-            <td>
-              <%=orders[i].mid%>
-            </td>
-            <td>
-              <%=orders[i].date_m%>
-            </td>
+            <th scope="col" style="width: 2vw;"><input type="checkbox" id="checkAll" name="_selected_all_"></th>
+            <th scope="col" style="width: 8vw;">수주번호</th>
+            <th scope="col" style="width: 7vw;">거래처</th>
+            <th scope="col" style="width: 10vw;">품목명</th>
+            <th scope="col" style="width: 8vw;">주문수량</th>
+            <th scope="col" style="width: 10vw;">수주일자</th>
+            <th scope="col" style="width: 10vw;">납기일자</th>
+            <th scope="col" style="width: 10vw;">생성자</th>
+            <th scope="col" style="width: 10vw;">수정자</th>
+            <th scope="col" style="width: 10vw;">수정일</th>
           </tr>
-          <%}%>
-      </tbody>
-    </table>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
-          height:5.6vh;">
+        </thead>
+        <tbody id="tbody2">
+          <% for(var i=0; i < orders.length; i++) {%>
+            <tr>
+              <td onclick="event.cancelBubble=true"><input type="checkbox" class="chk" name="_selected_" value="<%=orders[i].orders_id%>"></td>
+              <td>
+                <%=orders[i].orders_id%>
+              </td>
+              <td>
+                <%=orders[i].cust_name%>
+              </td>
+              <td>
+                <%=orders[i].lego_name%>
+              </td>
+              <td>
+                <%=orders[i].orders_qty%>
+              </td>
+              <td>
+                <%=orders[i].orders_date%>
+              </td>
+              <td>
+                <%=orders[i].delivery_date%>
+              </td>
+              <td>
+                <%=orders[i].cid%>
+              </td>
+              <td>
+                <%=orders[i].mid%>
+              </td>
+              <td>
+                <%=orders[i].date_m%>
+              </td>
+            </tr>
+            <%}%>
+        </tbody>
+      </table>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+            height:5.6vh;">
+        </ul>
+      </nav>
+    </div>
 
-      </ul>
-    </nav>
-    <div class="col-lg-12" id="tr_id"></div>
-  </div>
+    <!---- 등록모달창 ---->
+    <div class="black_bg"></div>
+    <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170);">등록</div>
+    <div class="modal_wrap" style="height:380px;">
+      <div class="modal_box1" style="top:5vh">거래처</div>
+      <select class="modal_box2" id="_custname_S" style="top:5vh;">
+        <option value=""></option>
+        <option value="삼성전자">삼성전자</option>
+        <option value="LG전자">LG전자</option>
+        <option value="카카오">카카오</option>
+        <option value="네이버">네이버</option>
+      </select>
 
-  <!---- 등록모달창 ---->
-  <div class="black_bg"></div>
-  <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170);">등록</div>
-  <div class="modal_wrap" style="height:380px;">
-    <div class="modal_box1" style="top:5vh">거래처</div>
-    <select class="modal_box2" id="_custname_S" style="top:5vh;">
-      <option value=""></option>
-      <option value="삼성전자">삼성전자</option>
-      <option value="LG전자">LG전자</option>
-      <option value="카카오">카카오</option>
-      <option value="네이버">네이버</option>
-    </select>
-    <div class="modal_box1" style="top:11.4vh">품목ID</div>
-    <select class="modal_box2" id="_legoname_S" style="top:11.4vh;">
-      <option value=""></option>
-      <option value="bricks_rect">bricks_rect</option>
-      <option value="bricks_square">bricks_square</option>
-      <option value="circle">circle</option>
-      <option value="floor">floor</option>
-    </select>
-    <div class="modal_box1" style="top:17.8vh">주문수량</div>
-    <input type="text" class="modal_box2" id="_quantity_S" style="top:17.8vh">
-    <div class="modal_box1" style="top: 24.2vh">수주일자</div>
-    <input type="text" class="modal_box2 datepicker" name="_date" id="_date_o_S" style="top: 24.2vh">
-    <div class="modal_box1" style="top:30.6vh">납기일자</div>
-    <input type="text" class="modal_box2 datepicker" name="_date" id="_date_d_S" style="top: 30.6vh">
-    <div class="modal_box1" style="top: 37vh">생성자</div>
-    <input type="text" class="modal_box2" id="_cid_S" style="top: 37vh;">
+      <div class="modal_box1" style="top:11.4vh">품목ID</div>
+      <select class="modal_box2" id="_legoname_S" style="top:11.4vh;">
+        <option value=""></option>
+        <option value="bricks_rect">bricks_rect</option>
+        <option value="bricks_square">bricks_square</option>
+        <option value="circle">circle</option>
+        <option value="floor">floor</option>
+      </select>
 
-    <div align="center">
-      <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
-        height:5.6vh; font-size:large; line-height: 4vh;" onclick=orders_submit()>등록</button>
-      <button class="btn btn-secondary modal_close"
-        style="position:absolute; bottom: 2vh; right: 9vw;
+      <div class="modal_box1" style="top:17.8vh">주문수량</div>
+      <input type="text" class="modal_box2" id="_quantity_S" style="top:17.8vh">
+      <div class="modal_box1" style="top: 24.2vh">수주일자</div>
+      <input type="text" class="modal_box2 datepicker" name="_date" id="_date_o_S" style="top: 24.2vh">
+      <div class="modal_box1" style="top:30.6vh">납기일자</div>
+      <input type="text" class="modal_box2 datepicker" name="_date" id="_date_d_S" style="top: 30.6vh">
+      <div class="modal_box1" style="top: 37vh">생성자</div>
+      <input type="text" class="modal_box2" id="_cid_S" style="top: 37vh;">
+
+      <div align="center">
+        <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
+          height:5.6vh; font-size:large; line-height: 4vh;" onclick=orders_submit()>등록</button>
+        <button class="btn btn-secondary modal_close" style="position:absolute; bottom: 2vh; right: 9vw;
+          width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
+      </div>
+
+    </div>
+
+    <!---- 수정 모달창 ---->
+    <div class="black_bg"></div>
+    <div class="modal_wrap2 modal_name" style="height:5vh; top:20vh; background-color: rgb(151, 161, 170);">수정</div>
+    <div class="modal_wrap2" style="height: 380px">
+      <div class="modal_box1" style="top:5vh">거래처</div>
+      <input type="text" class="modal_box2" id="_custname_M" style="top:5vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
+      <div class="modal_box1" style="top:11.4vh">품목ID</div>
+      <input type="text" class="modal_box2" id="_legoname_M"
+        style="top:11.4vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
+      <div class="modal_box1" style="top:17.8vh">주문수량</div>
+      <input type="text" class="modal_box2" id="_quantity_M" style="top:17.8vh">
+      <div class="modal_box1" style="top: 24.2vh">수주일자</div>
+      <input type="text" class="modal_box2" name="_date" id="_date_o_M"
+        style="top: 24.2vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
+      <div class="modal_box1" style="top:30.6vh">납기일자</div>
+      <input type="text" class="modal_box2 datepicker" name="_date" id="_date_d_M" style="top: 30.6vh">
+      <div class="modal_box1" style="top: 37vh">수정자</div>
+      <input type="text" class="modal_box2" id="_cid_M" style="top: 37vh;">
+      <div align="center">
+        <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
+        height:5.6vh; font-size:large; line-height: 4vh;" onclick=orders_modify()>수정</button>
+        <button class="btn btn-secondary modal_close2"
+          style="position:absolute; bottom: 2vh; right: 9vw;
         width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
+      </div>
     </div>
 
-  </div>
 
-  <!---- 수정 모달창 ---->
-  <div class="black_bg"></div>
-  <div class="modal_wrap2 modal_name" style="height:5vh; top:20vh; background-color: rgb(151, 161, 170);">수정</div>
-  <div class="modal_wrap2" style="height: 380px">
-    <div class="modal_box1" style="top:5vh">거래처</div>
-    <input type="text" class="modal_box2" id="_custname_M" style="top:5vh; background-color: rgba(119, 119, 119, 0.24);"
-      disabled>
-    <div class="modal_box1" style="top:11.4vh">품목ID</div>
-    <input type="text" class="modal_box2" id="_legoname_M"
-      style="top:11.4vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
-    <div class="modal_box1" style="top:17.8vh">주문수량</div>
-    <input type="text" class="modal_box2" id="_quantity_M" style="top:17.8vh">
-    <div class="modal_box1" style="top: 24.2vh">수주일자</div>
-    <input type="text" class="modal_box2" name="_date" id="_date_o_M"
-      style="top: 24.2vh; background-color: rgba(119, 119, 119, 0.24);" disabled>
-    <div class="modal_box1" style="top:30.6vh">납기일자</div>
-    <input type="text" class="modal_box2 datepicker" name="_date" id="_date_d_M" style="top: 30.6vh">
-    <div class="modal_box1" style="top: 37vh">수정자</div>
-    <input type="text" class="modal_box2" id="_cid_M" style="top: 37vh;">
-    <div align="center">
-      <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
-       height:5.6vh; font-size:large; line-height: 4vh;" onclick=orders_modify()>수정</button>
-      <button class="btn btn-secondary modal_close2"
-        style="position:absolute; bottom: 2vh; right: 9vw;
-       width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 4vh; font-size:large">취소</button>
-    </div>
-  </div>
-
-
-  <script>
-    var id;
-    $(function () {
-      if ("<%=linkcode%>" == 0) {
-        $("#linkcode").text("관리자")
-      } else {
-        $("#linkcode").text("작업자")
-      }
-    });
-
-    $("input").keyup(function () {
-      var manager = $("#manager").val();
-      var quantity = $("#quantity").val();
-      var date = $(".wdate").val();
-
-      if (manager && quantity && date) {
-        $("#register").removeAttr("disabled")
-      } else {
-        $("#register").attr("disabled", "disabled")
-      }
-    })
-
-    // 수주관리 삭제
-    function del() {
-      var checkBoxArr = [];
-      if ($("input[name='_selected_all_']:checked").length == 1
-        && $("input:checkbox[name='_selected_']:checked").length == 0) {
-        alert("삭제불가능");
-      } else {
-        $("input:checkbox[name='_selected_']:checked").each(function () {
-          checkBoxArr.push($(this).val()); //체크된 값 뽑아서 push
-        })
-        if (confirm("삭제 하시겠습니까?")) {
-          alert("삭제되었습니다.");
-          location.href = "/orderS/del?_id=" + checkBoxArr
+    <script>
+      var id;
+      $(function () {
+        if ("<%=linkcode%>" == 0) {
+          $("#linkcode").text("관리자")
+        } else {
+          $("#linkcode").text("작업자")
         }
-      }
-    }
+      });
 
-    // 수주관리 등록
-    function orders_submit() {
-      var c = $("#_custname_S").val();
-      var l = $("#_legoname_S").val();
-      var q = $("#_quantity_S").val();
-      var o = $("#_date_o_S").val();
-      var d = $("#_date_d_S").val();
-      var ci = $("#_cid_S").val();
+      $("input").keyup(function () {
+        var manager = $("#manager").val();
+        var quantity = $("#quantity").val();
+        var date = $(".wdate").val();
 
-      location.href = "/orderS/submit?_custname=" + c + "&_legoname=" + l + "&_quantity=" + q + "&_date_o=" + o + "&_date_d=" + d + "&_cid=" + ci
-    }
-    // 수주 수정
-    function orders_modify() {
-      var _id = id
-      var qm = $("#_quantity_M").val();
-      var dm = $("#_date_d_M").val();
-      var cm = $("#_cid_M").val();
+        if (manager && quantity && date) {
+          $("#register").removeAttr("disabled")
+        } else {
+          $("#register").attr("disabled", "disabled")
+        }
+      })
 
-      location.href = "/orderS/modify?_quantity=" + qm + "&_date_d=" + dm + "&_mid=" + cm + "&_id=" + _id
-    }
-
-    // 전체선택 버튼 클릭시 체크박스 전체 선택
-    $("#checkAll").click(function () {
-      if ($("#checkAll").is(":checked")) {
-        $(".chk").prop("checked", true);
-      } else {
-        $(".chk").prop("checked", false);
-      }
-    })
-    // 전체선택 중 한개의 체크박스 선택 해제 시 체크박스 해제
-    $(".chk").click(function () {
-      if ($("input[name='_selected_']:checked").length == iTable.rows.length) {
-        $("#checkAll").prop("checked", true);
-      } else {
-        $("#checkAll").prop("checked", false);
-      }
-    });
-
-    // 모달
-    $(".modal_btn").click(function () {
-      $(".modal_wrap").css("display", "block")
-      $(".black_bg").css("display", "block")
-      $(".modal_btn2").attr("disabled", true)
-    })
-
-    $(".modal_close").click(function () {
-      $(".modal_wrap").css("display", "none")
-      $(".black_bg").css("display", "none")
-      $(".modal_btn2").attr("disabled", false)
-    })
-
-    $(".modal_btn2").click(function () {
-      $(".modal_btn").attr("disabled", true)
-      var tr = $(this).parent().parent()
-      var td = tr.children()
-
-      $("#_custname_M").val(td.eq(2).text())
-      $("#_legoname_M").val(td.eq(3).text())
-      $("#_quantity_M").val(td.eq(4).text())
-      $("#_date_o_M").val(td.eq(5).text())
-      $("#_date_d_M").val(td.eq(6).text())
-      $("#_cid_M").val(td.eq(7).text())
-
-      $(".modal_wrap2").css("display", "block")
-      $(".black_bg2").css("display", "block")
-    })
-
-    $(".modal_close2").click(function () {
-      $(".modal_wrap2").css("display", "none")
-      $(".black_bg2").css("display", "none")
-      $(".modal_btn").attr("disabled", false)
-    })
-
-    //달력(날짜 1개 선택)
-    $(".datepicker").datepicker({
-      dateFormat: "yy-mm-dd",
-      monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-      monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-      dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-      changeMonth: true,
-      changeYear: true,
-      nextText: '다음달',
-      prevText: '이전달',
-      showOtherMonths: true,
-      selectOtherMonths: true,
-      changeMonth: true,
-      changeYear: true
-    });
-
-    // 수주관리 검색
-    function search() {
-      $("tbody").html("");
-      $.getJSON("/orderS/search", {
-        search_c: $("#search_c").val(),
-        search_i: $("#search_i").val(),
-        _date_o: $("#_date_o").val(),
-        _date_d: $("#_date_d").val()
-      },
-        function (result) {
-          var body;
-          for (var i = 0; i < result.orders.length; i++) {
-            body += "<tr>"
-            body += "<td><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
-            for (key in result.orders[0]) {
-              if (key == "regist") {
-                continue
-              }
-              if (result.orders[i][key] == null) {
-                body += "<td></td>"
-              } else {
-                body += "<td>" + result.orders[i][key] + "</td>"
-              }
-            }
-            body += "</tr>"
+      // 수주관리 삭제
+      function del() {
+        var checkBoxArr = [];
+        if ($("input[name='_selected_all_']:checked").length == 1
+          && $("input:checkbox[name='_selected_']:checked").length == 0) {
+          alert("삭제불가능");
+        } else {
+          $("input:checkbox[name='_selected_']:checked").each(function () {
+            checkBoxArr.push($(this).val()); //체크된 값 뽑아서 push
+          })
+          if (confirm("삭제 하시겠습니까?")) {
+            alert("삭제되었습니다.");
+            location.href = "/orderS/del?_id=" + checkBoxArr
           }
-          $("tbody").html(body)
-        })
-    }
-    // 행클릭 수정모달창
-    $("#iTable tr").click(function () {
-      var tr = $(this)
-      var td = tr.children()
-      id = td.eq(1).text()
-      $("#_custname_M").val(td.eq(2).text())
-      $("#_legoname_M").val(td.eq(3).text())
-      $("#_quantity_M").val(td.eq(4).text())
-      $("#_date_o_M").val(td.eq(5).text())
-      $("#_date_d_M").val(td.eq(6).text())
-      $("#_cid_M").val(td.eq(7).text())
-      $(".modal_wrap2").css("display", "block")
-      $(".black_bg2").css("display", "block")
-    })
-
-    //페이징
-    function pagination() {
-      var req_num_row = 8;
-      var $tr = jQuery('#tbody2 tr');
-      var total_num_row = $tr.length;
-      var num_pages = 0;
-      if (total_num_row % req_num_row == 0) {
-        num_pages = total_num_row / req_num_row;
-      }
-      if (total_num_row % req_num_row >= 1) {
-        num_pages = total_num_row / req_num_row;
-        num_pages++;
-        num_pages = Math.floor(num_pages++);
+        }
       }
 
-      jQuery('.pagination').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
+      // 수주관리 등록
+      function orders_submit() {
+        var c = $("#_custname_S").val();
+        var l = $("#_legoname_S").val();
+        var q = $("#_quantity_S").val();
+        var o = $("#_date_o_S").val();
+        var d = $("#_date_d_S").val();
+        var ci = $("#_cid_S").val();
 
-      for (var i = 1; i <= num_pages; i++) {
-        jQuery('.pagination').append("<li class='page-item'><a class='page-link'>" + i + "</a></li>");
-        jQuery('.pagination li:nth-child(2)').addClass("active");
-        jQuery('.pagination a').addClass("pagination-link");
+        location.href = "/orderS/submit?_custname=" + c + "&_legoname=" + l + "&_quantity=" + q + "&_date_o=" + o + "&_date_d=" + d + "&_cid=" + ci
       }
 
-      jQuery('.pagination').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
+      // 수주 수정
+      function orders_modify() {
+        var _id = id
+        var qm = $("#_quantity_M").val();
+        var dm = $("#_date_d_M").val();
+        var cm = $("#_cid_M").val();
 
-      $tr.each(function (i) {
-        jQuery(this).hide();
-        if (i + 1 <= req_num_row) {
-          $tr.eq(i).show();
+        location.href = "/orderS/modify?_quantity=" + qm + "&_date_d=" + dm + "&_mid=" + cm + "&_id=" + _id
+      }
+
+      // 전체선택 버튼 클릭시 체크박스 전체 선택
+      $("#checkAll").click(function () {
+        if ($("#checkAll").is(":checked")) {
+          $(".chk").prop("checked", true);
+        } else {
+          $(".chk").prop("checked", false);
+        }
+      })
+      // 전체선택 중 한개의 체크박스 선택 해제 시 체크박스 해제
+      $(".chk").click(function () {
+        if ($("input[name='_selected_']:checked").length == iTable.rows.length) {
+          $("#checkAll").prop("checked", true);
+        } else {
+          $("#checkAll").prop("checked", false);
         }
       });
 
-      jQuery('.pagination a').click('.pagination-link', function (e) {
-        e.preventDefault();
-        $tr.hide();
-        var page = jQuery(this).text();
-        var temp = page - 1;
-        var start = temp * req_num_row;
-        var current_link = temp;
+      // 모달
+      $(".modal_btn").click(function () {
+        $(".modal_wrap").css("display", "block")
+        $(".black_bg").css("display", "block")
+        $(".modal_btn2").attr("disabled", true)
+      })
 
-        jQuery('.pagination li').removeClass("active");
-        jQuery(this).parent().addClass("active");
+      $(".modal_close").click(function () {
+        $(".modal_wrap").css("display", "none")
+        $(".black_bg").css("display", "none")
+        $(".modal_btn2").attr("disabled", false)
+      })
 
-        for (var i = 0; i < req_num_row; i++) {
-          $tr.eq(start + i).show();
-        }
+      $(".modal_btn2").click(function () {
+        $(".modal_btn").attr("disabled", true)
+        var tr = $(this).parent().parent()
+        var td = tr.children()
 
-        if (temp >= 1) {
-          jQuery('.pagination li:first-child').removeClass("disabled");
-        }
-        else {
-          jQuery('.pagination li:first-child').addClass("disabled");
-        }
+        $("#_custname_M").val(td.eq(2).text())
+        $("#_legoname_M").val(td.eq(3).text())
+        $("#_quantity_M").val(td.eq(4).text())
+        $("#_date_o_M").val(td.eq(5).text())
+        $("#_date_d_M").val(td.eq(6).text())
+        $("#_cid_M").val(td.eq(7).text())
+
+        $(".modal_wrap2").css("display", "block")
+        $(".black_bg2").css("display", "block")
+      })
+
+      $(".modal_close2").click(function () {
+        $(".modal_wrap2").css("display", "none")
+        $(".black_bg2").css("display", "none")
+        $(".modal_btn").attr("disabled", false)
+      })
+
+      //달력(날짜 1개 선택)
+      $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+        changeMonth: true,
+        changeYear: true,
+        nextText: '다음달',
+        prevText: '이전달',
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        changeMonth: true,
+        changeYear: true
       });
 
-      jQuery('.prev').click(function (e) {
-        e.preventDefault();
-        jQuery('.pagination li').removeClass("active");
-        jQuery('.pagination li:first-child').next().addClass("active");
-        $tr.hide();
+      // 수주관리 검색
+      function search() {
+        $("tbody").html("");
+        $.getJSON("/orderS/search", {
+          search_c: $("#search_c").val(),
+          search_i: $("#search_i").val(),
+          _date_o: $("#_date_o").val(),
+          _date_d: $("#_date_d").val()
+        },
+          function (result) {
+            var body;
+            for (var i = 0; i < result.orders.length; i++) {
+              body += "<tr>"
+              body += "<td><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
+              for (key in result.orders[0]) {
+                if (key == "regist") {
+                  continue
+                }
+                if (result.orders[i][key] == null) {
+                  body += "<td></td>"
+                } else {
+                  body += "<td>" + result.orders[i][key] + "</td>"
+                }
+              }
+              body += "</tr>"
+            }
+            $("tbody").html(body)
+          })
+      }
 
-        var page = jQuery(this).next().text();
-        var temp = page - 1;
-        var start = temp * req_num_row;
-        var current_link = temp;
+      // 행클릭 수정모달창
+      $("#iTable tr").click(function () {
+        var tr = $(this)    // 현재 클릭된 Row(<tr>)
+        var td = tr.children()
+        id = td.eq(1).text()
+        $("#_custname_M").val(td.eq(2).text())
+        $("#_legoname_M").val(td.eq(3).text())
+        $("#_quantity_M").val(td.eq(4).text())
+        $("#_date_o_M").val(td.eq(5).text())
+        $("#_date_d_M").val(td.eq(6).text())
+        $("#_cid_M").val(td.eq(7).text())
 
-        for (var i = 0; i < req_num_row; i++) {
-          $tr.eq(start + i).show();
+        $(".modal_wrap2").css("display", "block")
+        $(".black_bg2").css("display", "block")
+      })
+
+      //페이징
+      function pagination() {
+        var req_num_row = 8;
+        var $tr = jQuery('#tbody2 tr');
+        var total_num_row = $tr.length;
+        var num_pages = 0;
+        if (total_num_row % req_num_row == 0) {
+          num_pages = total_num_row / req_num_row;
         }
+        if (total_num_row % req_num_row >= 1) {
+          num_pages = total_num_row / req_num_row;
+          num_pages++;
+          num_pages = Math.floor(num_pages++);
+        }
+
+        jQuery('.pagination').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
+
+        for (var i = 1; i <= num_pages; i++) {
+          jQuery('.pagination').append("<li class='page-item'><a class='page-link'>" + i + "</a></li>");
+          jQuery('.pagination li:nth-child(2)').addClass("active");
+          jQuery('.pagination a').addClass("pagination-link");
+        }
+
+        jQuery('.pagination').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
+
+        $tr.each(function (i) {
+          jQuery(this).hide();
+          if (i + 1 <= req_num_row) {
+            $tr.eq(i).show();
+          }
+        });
+
+        jQuery('.pagination a').click('.pagination-link', function (e) {
+          e.preventDefault();
+          $tr.hide();
+          var page = jQuery(this).text();
+          var temp = page - 1;
+          var start = temp * req_num_row;
+          var current_link = temp;
+
+          jQuery('.pagination li').removeClass("active");
+          jQuery(this).parent().addClass("active");
+
+          for (var i = 0; i < req_num_row; i++) {
+            $tr.eq(start + i).show();
+          }
+
+          if (temp >= 1) {
+            jQuery('.pagination li:first-child').removeClass("disabled");
+          }
+          else {
+            jQuery('.pagination li:first-child').addClass("disabled");
+          }
+        });
+
+        jQuery('.prev').click(function (e) {
+          e.preventDefault();
+          jQuery('.pagination li').removeClass("active");
+          jQuery('.pagination li:first-child').next().addClass("active");
+          $tr.hide();
+
+          var page = jQuery(this).next().text();
+          var temp = page - 1;
+          var start = temp * req_num_row;
+          var current_link = temp;
+
+          for (var i = 0; i < req_num_row; i++) {
+            $tr.eq(start + i).show();
+          }
+        });
+
+        jQuery('.next').click(function (e) {
+          e.preventDefault();
+          jQuery('.pagination li').removeClass("active");
+          jQuery('.pagination li:last-child').prev().addClass("active");
+
+          $tr.hide();
+
+          var page = jQuery(this).prev().text();
+          var temp = page - 1;
+          var start = temp * req_num_row;
+          var current_link = temp;
+
+          for (var i = 0; i < req_num_row; i++) {
+            $tr.eq(start + i).show();
+          }
+        });
+      }
+
+      jQuery('document').ready(function () {
+        pagination();
+        jQuery('.pagination li:first-child').addClass("disabled");
       });
 
-      jQuery('.next').click(function (e) {
-        e.preventDefault();
-        jQuery('.pagination li').removeClass("active");
-        jQuery('.pagination li:last-child').prev().addClass("active");
-
-        $tr.hide();
-
-        var page = jQuery(this).prev().text();
-        var temp = page - 1;
-        var start = temp * req_num_row;
-        var current_link = temp;
-
-        for (var i = 0; i < req_num_row; i++) {
-          $tr.eq(start + i).show();
-        }
-      });
-
-    }
-
-    jQuery('document').ready(function () {
-      pagination();
-
-      jQuery('.pagination li:first-child').addClass("disabled");
-
-
-    });
-
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
