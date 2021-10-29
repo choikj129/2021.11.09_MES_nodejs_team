@@ -125,54 +125,72 @@ app.get("/main", function(req, res){
                     console.log(err)
                 }else{
                     connection.query(
-                        `select *,
-                        (select sum(quantity) from ordert where date(date) =`+date+`) total
-                         from ordert where date(date)=(select date_format(now(),'%Y-%m-%d') from dual)`,
+                        `select *, sum(quantity) total, count(*) order_qty
+                        from ordert where date(date)= ?`,
                         function(err0, result0){
                             if (err0){
                                 console.log(err0)
                             }else{
-                                if(result0.length==0){
-                                    res.render("main",{
-                                        'monitor' : result0[0],
-                                        'run' : req.session.run,
-                                        'linkcode' : req.session.logged.linkcode,
-                                        "dir" : req.session.dir,
-                                        "melt" : req.session.melt,
-                                        "mold" : req.session.mold,
-                                        "hold" : req.session.hold,
-                                        "inj" : req.session.inj,
-                                        "setup" : result1[0]
-                                    })
-                                }else{
-                                    req.session.dir = true;
-                                    connection.query(
-                                        `select *, (select count(*) from monitoring`+date+`) cnt,
-                                        (select count(*) from monitoring`+date+` where defect='N') def
-                                        from monitoring`+date+` order by monitor_id desc limit 1`,
-                                        function(err, result){
-                                            if (err){
-                                                console.log(err)
+                                connection.query(
+                                    `select count(*) orders_qty from orders where date(orders_date)=?`,
+                                    [date],
+                                    function(err, result2){
+                                        if(err){
+                                            console.log(err)
+                                        }else{
+                                            if(result2.length==0){
+                                                var orders_qty = 0
                                             }else{
-                                                if(result.length>0){
-                                                    req.session.cnt = result[0].cnt
-                                                }
-                                                res.render('main', {
-                                                    'monitor' : result[0],
-                                                    "run" : req.session.run,
-                                                    "linkcode" : req.session.logged.linkcode,
+                                                var orders_qty = result2[0].orders_qty
+                                            }
+                                            if(result0[0].total==null){
+                                                res.render("main",{
+                                                    'monitor' : result0[0],
+                                                    'run' : req.session.run,
+                                                    'linkcode' : req.session.logged.linkcode,
                                                     "dir" : req.session.dir,
-                                                    "order" : result0,
                                                     "melt" : req.session.melt,
                                                     "mold" : req.session.mold,
                                                     "hold" : req.session.hold,
                                                     "inj" : req.session.inj,
-                                                    "setup" : result1[0]
+                                                    "setup" : result1[0],
+                                                    "order_qty" : 0,
+                                                    "orders_qty" : orders_qty
                                                 })
+                                            }else{
+                                                req.session.dir = true;
+                                                connection.query(
+                                                    `select *, (select count(*) from monitoring`+date+`) cnt,
+                                                    (select count(*) from monitoring`+date+` where defect='N') def
+                                                    from monitoring`+date+` order by monitor_id desc limit 1`,
+                                                    function(err, result){
+                                                        if (err){
+                                                            console.log(err)
+                                                        }else{
+                                                            if(result.length>0){
+                                                                req.session.cnt = result[0].cnt
+                                                            }
+                                                            res.render('main', {
+                                                                'monitor' : result[0],
+                                                                "run" : req.session.run,
+                                                                "linkcode" : req.session.logged.linkcode,
+                                                                "dir" : req.session.dir,
+                                                                "order" : result0,
+                                                                "melt" : req.session.melt,
+                                                                "mold" : req.session.mold,
+                                                                "hold" : req.session.hold,
+                                                                "inj" : req.session.inj,
+                                                                "setup" : result1[0],
+                                                                "order_qty" : result0[0].order_qty,
+                                                                "orders_qty" : orders_qty
+                                                            })
+                                                        }
+                                                    }
+                                                )        
                                             }
                                         }
-                                    )        
-                                }
+                                    }
+                                )
                             }
                         }
                     )

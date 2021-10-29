@@ -134,5 +134,5 @@ function start(){
 
 function stop(){
     clearInterval(interval);
-    location.href = "/stop"
+    location.href = "/stop?url=main"
 }
