@@ -115,7 +115,8 @@
       <tbody id="tbody2">
         <% for(var i=0; i < orders.length; i++) {%>
           <tr>
-            <td><input type="checkbox" id="del_row" class="chk" name="_selected_" value="<%=orders[i].orders_id%>"></td>
+            <td onclick="event.cancelBubble=true"><input type="checkbox" id="del_row" class="chk" name="_selected_"
+                value="<%=orders[i].orders_id%>"></td>
             <td>
               <%=orders[i].orders_id%>
             </td>
@@ -364,7 +365,7 @@
           var body;
           for (var i = 0; i < result.orders.length; i++) {
             body += "<tr>"
-            body += "<td><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
+            body += "<td onclick='event.cancelBubble=true'><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
             for (key in result.orders[0]) {
               if (key == "regist") {
                 continue
