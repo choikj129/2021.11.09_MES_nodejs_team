@@ -18,7 +18,7 @@
             background-color: rgba(0, 255, 195, 0.13);
             text-align: center;
             color:white;
-            line-height:5vw;
+            line-height:5vh;
             /*border:0.1em solid white;*/
         }
         #current_icon{
@@ -128,21 +128,33 @@
                 {
                     name: 'UCL'+i,
                     yAxis: melt[0]+2*melt[1],
-                    symbol : 'none'
+                    symbol : 'none',
+                    label: {
+                        formatter: 'UCL',
+                        position: 'left'
+                    }
                 }
             );
             markLine0.push(
                 {
                     name: 'LCL'+i,
                     yAxis: melt[0]-2*melt[1],
-                    symbol: 'none'
+                    symbol: 'none',
+                    label: {
+                        formatter: 'LCL',
+                        position: 'left'
+                    }
                 }
             );
             markLine0.push(
                 {
                     name: 'Setting'+i,
                     yAxis: set_melt,
-                    symbol: 'none'
+                    symbol: 'none',
+                    label: {
+                        formatter: 'Set-up',
+                        position: 'left'
+                    }
                 }
             );
         }
@@ -154,13 +166,16 @@
                 trigger: 'axis',
                 axisPointer: {
                     label: {
-                        backgroundColor: '#283b56'
+                        backgroundColor: 'white'
                     }
                 }
             },
             legend: {
                 data:['용융온도'],
-                y:'bottom'
+                y:'bottom',
+                textStyle: {
+                    color: 'white'
+                }
             },
             dataZoom: {
                 show: false,
@@ -183,7 +198,6 @@
                 {
                     type: 'log',
                     scale: true,
-                    name: '(°C)',
                     max: 290,
                     min: 260,
                     boundaryGap: [0.2, 0.2],
@@ -192,7 +206,7 @@
                         textStyle: {
                             color: 'white'
                         }
-                    },
+                    }
                 }
             ],
             series: [
@@ -203,9 +217,10 @@
                     data: melt_temp,
                     markLine: {
                         data: markLine0,
-                        symbol: 'none'
+                        symbol: 'none',
+                        itemStyle: {color: 'red'}
                     },
-                    color: '#1EFFB4'
+                    color: 'orange'
                 }   
             ]
         };
@@ -219,21 +234,33 @@
                 {
                     name: 'UCL'+i,
                     yAxis: mold[0]+2*mold[1],
-                    symbol : 'none'
+                    symbol : 'none',
+                    label: {
+                        formatter: 'UCL',
+                        position: 'left'
+                    }
                 }
             );
             markLine1.push(
                 {
                     name: 'LCL'+i,
                     yAxis: mold[0]-2*mold[1],
-                    symbol: 'none'
+                    symbol: 'none',
+                    label: {
+                        formatter: 'LCL',
+                        position: 'left'
+                    }
                 }
             );
             markLine1.push(
                 {
                     name: 'Setting'+i,
                     yAxis: set_mold,
-                    symbol: 'none'
+                    symbol: 'none',
+                    label: {
+                        formatter: 'Set-up',
+                        position: 'left'
+                    }
                 }
             );
         }  
@@ -254,7 +281,10 @@
             },
             legend: {
                 data:['금형온도'],
-                y:'bottom'
+                y:'bottom',
+                textStyle: {
+                    color: 'white'
+                }
             },
             dataZoom: {
                 show: false,
@@ -277,7 +307,6 @@
                 {
                     type: 'log',
                     scale: true,
-                    name: '(℃)',
                     max: 35,
                     min: 15,
                     boundaryGap: [0.2, 0.2],
@@ -300,9 +329,10 @@
                     data: mold_temp,
                     markLine: {
                         data: markLine1,
-                        symbol: 'none'
+                        symbol: 'none',
+                        itemStyle: {color: 'red'}
                     },
-                    color: '#1EFFB4'
+                    color: 'orange'
                 }
             ]
         };
@@ -316,21 +346,33 @@
                 {
                     name: 'UCL'+i,
                     yAxis: hold[0]+2*hold[1],
-                    symbol : 'none'
+                    symbol : 'none',
+                    label: {
+                        formatter: 'UCL',
+                        position: 'left'
+                    }
                 }
             );
             markLine2.push(
                 {
                     name: 'LCL'+i,
                     yAxis: hold[0]-2*hold[1],
-                    symbol: 'none'
+                    symbol: 'none',
+                    label: {
+                        formatter: 'LCL',
+                        position: 'left'
+                    }
                 }
             );
             markLine2.push(
                 {
                     name: 'Setting'+i,
                     yAxis: set_hold,
-                    symbol: 'none'
+                    symbol: 'none',
+                    label: {
+                        formatter: 'Set-up',
+                        position: 'left'
+                    }
                 }
             );
         }  
@@ -352,7 +394,10 @@
             },
             legend: {
                 data:['보압'],
-                y:'bottom'
+                y:'bottom',
+                textStyle: {
+                    color: 'white'
+                }
             },
             dataZoom: {
                 show: false,
@@ -375,7 +420,6 @@
                 {
                     type: 'log',
                     scale: true,
-                    name: '(kgf/cm^3)',
                     max: 145,
                     min: 125,
                     boundaryGap: [0.2, 0.2],
@@ -398,9 +442,10 @@
                     data: hold_pressure,
                     markLine: {
                         data: markLine2,
-                        symbol: 'none'
+                        symbol: 'none',
+                        itemStyle: {color: 'red'}
                     },
-                    color: '#1EFFB4'
+                    color: 'orange'
                 }
             ]
         };
@@ -414,21 +459,33 @@
                 {
                     name: 'UCL'+i,
                     yAxis: inj[0]+2*inj[1],
-                    symbol : 'none'
+                    symbol : 'none',
+                    label: {
+                        formatter: 'UCL',
+                        position: 'left'
+                    }
                 }
             );
             markLine3.push(
                 {
                     name: 'LCL'+i,
                     yAxis: inj[0]-2*inj[1],
-                    symbol: 'none'
+                    symbol: 'none',
+                    label: {
+                        formatter: 'LCL',
+                        position: 'left'
+                    }
                 }
             );
             markLine3.push(
                 {
                     name: 'Setting'+i,
                     yAxis: set_inj,
-                    symbol: 'none'
+                    symbol: 'none',
+                    label: {
+                        formatter: 'Set-up',
+                        position: 'left'
+                    }
                 }
             );
         }
@@ -450,7 +507,10 @@
             },
             legend: {
                 data:['사출속도'],
-                y:'bottom'
+                y:'bottom',
+                textStyle: {
+                    color: 'white'
+                }
             },
             dataZoom: {
                 show: false,
@@ -473,7 +533,6 @@
                 {
                     type: 'log',
                     scale: true,
-                    name: '(mm/s)',
                     max: 65,
                     min: 45,
                     boundaryGap: [0.2, 0.2],
@@ -496,9 +555,10 @@
                     data: injection_speed,
                     markLine: {
                         data: markLine3,
-                        symbol: 'none'
+                        symbol: 'none',
+                        itemStyle: {color: 'red'}
                     },
-                    color: '#1EFFB4'
+                    color: 'orange'
                 }
             ]
         };

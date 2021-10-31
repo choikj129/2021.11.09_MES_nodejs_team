@@ -28,34 +28,40 @@
         .wrapper {
             height:66vh;
             width:24vw;
-            background-color: white;
+            background-color: rgba(56, 87, 78, 0.596);
+            border : 1.5px solid rgb(0, 255, 200);
+            box-shadow: 0 0 20px rgba(0, 255, 179, 0.63);
         }
         .wrapper1 {
             height:66vh;
             width:24vw;
-            background-color: rgb(173, 185, 202);
+            background-color: rgba(25, 83, 65, 0.479);
+            border : 1.5px solid rgb(0, 255, 200);
+            box-shadow: 0 0 20px rgba(0, 255, 179, 0.63);
         }
 
     </style>
-    <body style="background-color: rgb(68,84,106); overflow-y: hidden;">
+    <body style="background-color: black; overflow-y: hidden;">
         <div class="wrapper1" style="position: absolute; top:17vh; left:26vw;">
-            <b style="position: absolute; left:4vw; top:12vh; font-size:2.5vw;">레고 사출공정</b><br>
-            <p style="position: absolute; left:7vw; top:22vh; font-size:25px">실시간 모니터링</p>
-            <img src="/img/monitor.gif" style="position:absolute; border-width:3vw; width:20vw; top:33vh; left:2vw;
-            border: 3px solid rgb(173, 185, 202); border-radius:2vw; filter:grayscale(40%);"> 
+            <b style="position: absolute; left:30%; top:20%; font-size:50px; color:rgb(255, 255, 255);
+            text-shadow: /* White glow */ 0 0 7px rgba(255, 255, 255, 0.6), 0 0 10px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.6), /* Green glow */ 0 0 50px #0fa, 0 0 60px #0fa, 0 0 80px #0fa, 0 0 102px #0fa, 0 0 151px #0fa">LEGO</b><br>
+            <b style="position: absolute; left:5%; bottom:22%; font-size:40px; color:rgb(255, 255, 255); text-shadow: 0 7px 10px rgba(255, 255, 255, 0.445);">사출공정</b>
+            <b style="position: absolute; left:5%; bottom:9%; font-size:40px; color:rgb(255, 255, 255); text-shadow: 0 7px 10px rgba(255, 255, 255, 0.445);">실시간 모니터링</b>
+            <!--<img src="/img/amico.png" style="position:absolute; width:18vw; top:26vh; left:3vw;">-->
         </div>
         <div class="wrapper" style="position: absolute; top:17vh; right:26vw;">
             <div class = "container login">
-                <img src="/img/blockmotion2.gif" style="position:absolute; width:20vw; height:30vh; left:2vw; top:5vh; filter:grayscale(60%);">
+                <img src="/img/blocks.png" style="position:absolute; width:100px; height:100px; left:35%; top:110px">
                 <form action="/login" method="post">
-                    <div class="input-group mb-3" style="width:14vw; position:absolute; left:5vw; top:39vh">
-                        <input type="id" class="form-control" placeholder="ID" name="_id">
+                    <div class="input-group mb-3" style="width:14vw; position:absolute; left:5vw; top: 55%">
+                        <input type="id" class="form-control" style="background-color: rgba(255, 255, 255, 0.185); border: 2px solid aquamarine; color:white;" placeholder="ID" name="_id">
                     </div>
-                    <div class="input-group mb-3" style="width:14vw; position:absolute; left:5vw; top:45vh">
-                        <input type="password" class="form-control" placeholder="Password" name="_password">
+                    <div class="input-group mb-3" style="width:14vw; position:absolute; left:5vw; top:65%">
+                        <input type="password" class="form-control" style="background-color: rgba(255, 255, 255, 0.185); border: 2px solid aquamarine; color:white;" placeholder="Password" name="_password">
                     </div>
-                    <div align="center" style="position: absolute; top:52vh; left:35%">
-                        <input type="submit" class="btn btn-outline-dark _button" value="login">
+                    <div align="center" style="position: absolute; top:80%; left:35%">
+                        <input type="submit" class="btn _button" style="height:7vh; border:aquamarine 2px solid;
+                         box-shadow: 0 0 5px aquamarine; color: aquamarine; font-size: 20px; font-weight: 600;" value="login">
                     </div>
                 </form>
             </div>
