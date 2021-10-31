@@ -134,13 +134,48 @@
     background-color: rgb(52, 58, 63)
   }
   .thead{
-    background-color: rgb(40,44,48);
+    background-color:rgb(40,44,48);
     height:4vh;
   }
   .btn{
     border-radius: 0.5vw;
     position:absolute;
     border-width: 0.2vw;
+  }
+  .page-item.active .page-link {
+                z-index: 3;
+                color: white;
+                background-color: black;
+                border-color: rgba(0, 255, 191, 0.11);
+  }
+  .pagination a {
+  display:inline-block;
+  margin-right:5px;
+  cursor:pointer;
+  background-color:rgba(0, 255, 191, 0.11);
+  }
+  .page-link {
+      left: 7vw;
+      top: 85vh;
+      position: relative;
+      display: block;
+      color: white;
+      text-decoration: none;
+      background-color:black;
+      border: 0.2vw solid rgba(0, 255, 191, 0.11);
+      border-radius: 0.5vw;
+  }
+  .page-item.disabled .page-link {
+    color: white;
+    pointer-events: none;
+    background-color: rgba(0, 255, 191, 0.11);
+    border-color: rgba(0, 255, 191, 0.11);
+  }
+  .page-link:hover {
+    z-index: 2;
+    color: rgba(0, 255, 191, 0.11);
+    background-color: rgb(38, 43, 51);
+    border-color: rgba(0, 255, 191, 0.11);
   }
 </style>
 <link rel="stylesheet" href="/css/style.css">
@@ -162,7 +197,7 @@
 
           <a class="nav__link" id="defect_icon" onclick="location.href = '/defect'">
             <ion-icon name="warning" class="nav__icon"></ion-icon>
-            <span class="nav_name">결함</span>
+            <span class="nav_name">불량</span>
           </a>
 
           <a class="nav__link" id="current_icon" onclick="location.href = '/current'">
