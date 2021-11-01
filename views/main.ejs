@@ -523,15 +523,15 @@
             $("#hold_lcl").text((parseFloat("<%=hold[0]%>")-2*parseFloat("<%=hold[1]%>")).toFixed(2))
 
             let weatherIcon={
-                "01" : `<ion-icon name='sunny-outline' style='width:50px; height:50px'></ion-icon>`,
-                "02" : `<ion-icon name="partly-sunny-outline" style="width:50px; height:50px"></ion-icon>`,
-                "03" : "fas fa-cloud",
-                "04" : "fas fa-cloud-meatball",
-                "09" : "fas fa-cloud-sun-rain",
-                "10" : "fas fa-cloud-showers-heavy",
-                "11" : "fas fa-poo-storm",
-                "13" : "far fa-snowflake",
-                "50" : "fas fa-smog"
+                "01" : `<ion-icon name='sunny-outline' style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "02" : `<ion-icon name="partly-sunny-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "03" : `<ion-icon name="cloudy-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "04" : `<i class="fas fa-cloud" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
+                "09" : `<i class="fas fa-cloud-sun-rain" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
+                "10" : `<ion-icon name="rainy-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "11" : `<ion-icon name="thunderstorm-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "13" : `<i class="far fa-snowflake" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
+                "50" : `<i class="fas fa-smog" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`
             }
             $.ajax({
                 url : "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=e30c70d1d9ee1045d773798f2cdabbbb&units=metric",
@@ -544,8 +544,8 @@
                     var $humi = data.main.humidity;
                     $("#weather").html(
                     weatherIcon[$Icon]+`
-                    <div>온도 : `+$Temp+`</div>
-                    <div>습도 : `+$humi+`</div>
+                    <div style='font-weight:bold; font-size:1.5em; position: absolute; left:15vw; top:6vh'>온도 : `+$Temp+`</div>
+                    <div style='font-weight:bold; font-size:1.5em; position: absolute; left:15vw; top:12vh'>습도 : `+$humi+`</div>
                     `)
                 }
             })
