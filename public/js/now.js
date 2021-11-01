@@ -51,7 +51,11 @@
 function now(){
     $.getJSON("/main_update",
     function(result){
-        var error = "";
+        var error = 0;
+        var mold = result.monitor.mold_temp
+        var melt = result.monitor.melt_temp
+        var hold = result.monitor.hold_pressure
+        var inj = result.monitor.injection_speed
         $("#now_mold_temp").text(result.monitor.mold_temp)
         $("#now_melt_temp").text(result.monitor.melt_temp)
         $("#now_injection_speed").text(result.monitor.injection_speed)
@@ -63,60 +67,45 @@ function now(){
         if (result.monitor.mold_temp<result.mold[0]-2*result.mold[1]
         || result.monitor.mold_temp>result.mold[0]+2*result.mold[1]){
             $("#now_mold_temp").css("background-color", "#F48453")
-            var def = (result.monitor.mold_temp-result.mold[0]).toFixed(2)
-            if (def>0){
-                def = "(+"+def+") "
-            }else{
-                def = "("+def+") "
-            }
-            error += "mold_temp : "+result.monitor.mold_temp+def
+            mold+="x"
+            error=1
         }else{
             $("#now_mold_temp").css("background-color", "")
+            mold+="o"
         }
         if (result.monitor.melt_temp<result.melt[0]-2*result.melt[1] 
         || result.monitor.melt_temp>result.melt[0]+2*result.melt[1]){
             $("#now_melt_temp").css("background-color", "#F48453")
-            var def = (result.monitor.melt_temp-result.melt[0]).toFixed(2)
-            if (def>0){
-                def = "(+"+def+") "
-            }else{
-                def = "("+def+") "
-            }
-            error += "melt_temp : "+result.monitor.melt_temp+def
+            melt+="x"
+            error=1
         }else{
             $("#now_melt_temp").css("background-color", "")
+            melt+="o"
         }
         if (result.monitor.injection_speed<result.inj[0]-2*result.inj[1]
         || result.monitor.injection_speed>result.inj[0]+2*result.inj[1]){
             $("#now_injection_speed").css("background-color", "#F48453")
-            var def = (result.monitor.injection_speed-result.inj[0]).toFixed(2)
-            if (def>0){
-                def = "(+"+def+") "
-            }else{
-                def = "("+def+") "
-            }
-            error += "injection_speed : "+result.monitor.injection_speed+def
+            inj+="x"
+            error=1            
         }else{
             $("#now_injection_speed").css("background-color", "")
+            inj+="o"
         }
         if (result.monitor.hold_pressure<result.hold[0]-2*result.hold[1]
         || result.monitor.hold_pressure>result.hold[0]+2*result.hold[1]){
             $("#now_hold_pressure").css("background-color", "#F48453")
-            var def = (result.monitor.hold_pressure-result.hold[0]).toFixed(2)
-            if (def>0){
-                def = "(+"+def+") "
-            }else{
-                def = "("+def+") "
-            }
-            error += "hold_pressure : "+result.monitor.hold_pressure+def
+            hold+="x"
+            error=1
         }else{
             $("#now_hold_pressure").css("background-color", "")
+            hold+="o"
         }
-        if(error!=""){
+        if(error==1){
             $(".alertI").css("display","block")
-            location.href="/defect/update?_id="+result.monitor.monitor_id+"&date="+result.monitor.date+"&error="+error
+            location.href="/defect/update?_id="+result.monitor.monitor_id+"&date="+result.monitor.date+"&mold="+mold+"&melt="+melt+"&hold="+hold+"&inj="+inj
         }
         if(result.monitor.cnt==result.monitor.total){
+            $("#onoff").attr("disabled", "disabled")
             stop()
         }
     })

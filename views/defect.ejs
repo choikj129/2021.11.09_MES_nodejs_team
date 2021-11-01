@@ -117,12 +117,14 @@
 
   <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width:57vw;">
     <div class="font_nav">불량확인</div>
-    <div class="input_nav" style="top:2.5vh; left:15vw;" for="inputGroupSelect01">작업 날짜</div>
+    <div class="input_nav" style="top:2.5vh; left:8vw;" for="inputGroupSelect01">작업 날짜</div>
     <input type="text" class="datepicker wdate text" id="datepicker" name="_date"
-      style="top:2.5vh; left:22.1vw; width:15vw; height:5vh;">
+      style="top:2.5vh; left:15vw; width:15vw; height:5vh;" value="<%=lastM%>">
+    <input type="text" class="datepicker wdate text" id="datepicker2" name="_date"
+      style="top:2.5vh; left:30vw; width:15vw; height:5vh;" value="<%=today%>">
     <button class="btn btn-outline-secondary" onclick="search()"
-      style="position:absolute; top:2.5vh; right:10vw">조회</button>
-    <button class="btn btn-outline-secondary" onclick="reset()" style="position:absolute; top:2.5vh; right:2.5vw">검색초기화</button>
+      style="position:absolute; top:2.5vh; right:9vw">조회</button>
+    <button class="btn btn-outline-secondary" onclick="reset()" style="position:absolute; top:2.5vh; right:2vw">검색초기화</button>
   </div>
   <div class="tableb" style="width:57vw; left:31vw; top:16vh;">
     <table class="table table-bordered" style="width:57vw;">
@@ -130,7 +132,10 @@
         <tr>
           <th scope="col" style="width: 17vw;">시간</th>
           <th scope="col" style="width: 15vw">불량 유형</th>
-          <th scope="col" style="width: 21vw;">불량 원인</th>
+          <th scope="col" style="width: 6vw;">용융온도</th>
+          <th scope="col" style="width: 6vw;">금형온도</th>
+          <th scope="col" style="width: 6vw;">사출속도</th>
+          <th scope="col" style="width: 6vw;">보압</th>
         </tr>
       </thead>
       <tbody id="tbody2">
@@ -143,13 +148,26 @@
               <%=defect[i].cause %>
             </td>
             <td>
-              <%=defect[i].error %>
+              <%=defect[i].melt %>
+            </td>
+            <td>
+              <%=defect[i].mold %>
+            </td>
+            <td>
+              <%=defect[i].hold %>
+            </td>
+            <td>
+              <%=defect[i].injection %>
             </td>
           </tr>
           <% } %>
       </tbody>
     </table>
-    
+    <nav aria-label="Page navigation example">
+      <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+          height:5.6vh;">
+      </ul>
+    </nav>
   </div>
   <nav aria-label="Page navigation example" >
     <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
@@ -166,7 +184,7 @@
       }
     })
 
-    $("#datepicker").datepicker({
+    $(".datepicker").datepicker({
       dateFormat: "yy-mm-dd",
       monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
       monthNamesShort: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -179,20 +197,24 @@
       selectOtherMonths: true,
       changeMonth: true,
       changeYear: true
-    });
-    $('#datepicker').datepicker('setDate', 'today');
+    });   
 
     function search() {
       $("tbody").html("");
-      var date = $("#datepicker").val()
+        var date = $("#datepicker").val()
+        var date2 = $("#datepicher2").val()
       $.getJSON("/defect/search", {
-        date: date
+        date : $("#datepicker").val(),
+        date2 : $("#datepicker2").val()
       },
         function (result) {
           var body;
           for (var i = 0; i < result.defect.length; i++) {
             body += "<tr>"
             for (key in result.defect[0]) {
+              if(key=="defect_id" || key=="monitor_id"){
+                continue
+              }
               body += "<td>" + result.defect[i][key] + "</td>"
             }
             body += "</tr>"
@@ -200,12 +222,21 @@
           $("tbody").html(body)
         })
     }
-
     var interval;
     function run() {
       interval = setInterval(function () {
         $.getJSON("/defect/ajax",
           function (result) {
+            if($("tbody").find("tr:last>td:eq(0)").html().trim()!=result.defect.date){
+              var body=""
+              for (key in result.defect[0]){
+                if(key=="defect_id" || key=="monitor_id"){
+                  continue
+                }
+                body += "<td>" + result.defect[0][key] + "</td>"
+              }
+              $("tbody tr").append(body)
+            }
           }
         )
       }, 2000)

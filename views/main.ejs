@@ -448,7 +448,7 @@
 
     <!-- 오늘의 날씨 -->
     <div class="wrapper1" style="top:4.7vh; left:76.2vw;">오늘 날씨</div>
-    <div class="wrapper" style="position: absolute; top: 10vh; left:76.2vw; background-color:rgb(40, 44, 48);">
+    <div class="wrapper" id="weather" style="position: absolute; top: 10vh; left:76.2vw; background-color:rgb(40, 44, 48);">
         
     </div>
     <!-- 작업지시현황 -->
@@ -463,16 +463,26 @@
     <!-- 공정 프로세스 -->
     <div class="wrapper1" style="width:93.6vw; position:absolute; left:5.7vw; top:67.7vh; color:white;">공정 프로세스</div>
     <div class="wrapper" style="position:absolute; height:25vh; top:73vh; left:5.7vw; width:93.6vw; background-color:rgb(40, 44, 48);">
-        <div align="center" class="pr_box1" style="left:3vw; ">1</div>
-        <div align="center" class="pr_box2" style="left:3vw; ">Ready</div>
-        <div align="center" class="pr_box1" style="left:20vw;">2</div>
-        <div align="center" class="pr_box2" style="left:20vw;">Injecting</div>
-        <div align="center" class="pr_box1" style="left:37vw;">3</div>
-        <div align="center" class="pr_box2" style="left:37vw;">Filling</div>
-        <div align="center" class="pr_box1" style="left:54vw;">4</div>
-        <div align="center" class="pr_box2" style="left:54vw;">Holding</div>
-        <div align="center" class="pr_box1" style="left:71vw;"> 5</div>
-        <div align="center" class="pr_box2" style="left:71vw;">Seperating</div>
+        <div id="b1">
+            <div align="center" class="pr_box1" style="left:3vw; ">1</div>
+            <div align="center" class="pr_box2" style="left:3vw; ">Ready</div>
+        </div>
+        <div id="b2">
+            <div align="center" class="pr_box1" style="left:20vw;">2</div>
+            <div align="center" class="pr_box2" style="left:20vw;">Injecting</div>
+        </div>
+        <div id="b3">
+            <div align="center" class="pr_box1" style="left:37vw;">3</div>
+            <div align="center" class="pr_box2" style="left:37vw;">Filling</div>
+        </div>
+        <div id="b4">
+            <div align="center" class="pr_box1" style="left:54vw;">4</div>
+            <div align="center" class="pr_box2" style="left:54vw;">Holding</div>
+        </div>
+        <div id="b5">
+            <div align="center" class="pr_box1" style="left:71vw;"> 5</div>
+            <div align="center" class="pr_box2" style="left:71vw;">Seperating</div>
+        </div>
     
         <!-- 시작/종료/정지/입력 버튼 -->
         <button type="button" id = "onoff" class="btn btn-light" style="color:black; width:8vw; height:6vh; position: absolute; right:1.5vw; top:6vh; font-size:22px; line-height:3vh;"
@@ -500,6 +510,9 @@
             }else{
                 $("#onoff").attr("disabled", "disabled")
             }
+            
+            
+
             $("#melt_ucl").text((parseFloat("<%=melt[0]%>")+2*parseFloat("<%=melt[1]%>")).toFixed(2))
             $("#melt_lcl").text((parseFloat("<%=melt[0]%>")-2*parseFloat("<%=melt[1]%>")).toFixed(2))
             $("#mold_ucl").text((parseFloat("<%=mold[0]%>")+2*parseFloat("<%=mold[1]%>")).toFixed(2))

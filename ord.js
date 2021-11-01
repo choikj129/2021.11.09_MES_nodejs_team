@@ -33,7 +33,8 @@ router.get("/",function(req,res){
                             "orders" : result,
                             "date" : date,
                             "date_m" : lastdate,
-                            "linkcode" : req.session.logged.linkcode
+                            "linkcode" : req.session.logged.linkcode,
+                            "run" : req.session.run
                         })
                     }
                 }
@@ -159,37 +160,23 @@ router.get("/modify", function(req, res){
     )
 })
 
-router.post("/", function(req, res){
-    var name = req.body._custname;
-    var product = req.body._legoname;
-    var quantity = req.body._quantity;
-    var date_o = req.body._date_o;
-    var date_d = req.body._date_d;
-    var cid = req.body._cid;
-    console.log(name, date_o, date_d);
+router.get("/ajax", function(req, res){
+    date = moment().format("YYYYMMDD")
     connection.query(
-        `insert into orders(cust_name, lego_name, orders_qty, orders_date, delivery_date, cid) values (?, ?, ?, ?, ?, ?)`,
-        [name, product, quantity, date_o, date_d, cid],
+        `select 
+        (select count(*) from monitoring`+date+`) cnt, 
+        (select sum(quantity) from ordert where date(date) =`+date+`) total`,
         function(err, result){
-            
+            if(err){
+                console.log(err)
+            }else{
+                res.json({
+                    "count" : result[0]
+                })
+            }
         }
     )
+    
 })
-
-// router.get("/date", function(req,result3){
-//     var today = new Date();
-//     var year = today.getFullYear();
-//     var month = ('0' + (today.getMonth() + 1)).slice(-2);
-//     var day = ('0' + today.getDate()).slice(-2);
-
-//     var dateString = year + '-' + month  + '-' + day;
-//     console.log(dateString);
-
-//     res.json({
-//         "date" : result3
-//     })
-// })
-
-
 
 module.exports = router

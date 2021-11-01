@@ -243,6 +243,18 @@
       } else {
         $("#register").attr("disabled", "disabled")
       }
+
+      if ("<%=run%>" == "true"){
+        interval = setInterval(function () {
+          $.getJSON("/orderS/ajax",
+            function (result) {
+              if (result.count.cnt==result.count.total){
+                location.href = "/stop?url=orderS"
+              }
+            }
+          )
+        }, 1000)
+      }
     })
 
     // 수주관리 삭제
