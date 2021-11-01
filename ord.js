@@ -138,10 +138,10 @@ router.get("/submit", function(req, res){
 })
 
 router.get("/modify", function(req, res){
-    var id = req.query._id.trim();
-    var quantity = req.query._quantity.trim();
-    var date_d = req.query._date_d.trim();
-    var mid = req.query._mid.trim();
+    var id = req.query._id;
+    var quantity = req.query._quantity;
+    var date_d = req.query._date_d;
+    var mid = req.query._mid;
     var date_m = moment().format("YYYY-MM-DD");
     console.log(id);
     connection.query(
