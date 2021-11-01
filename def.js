@@ -32,7 +32,9 @@ router.get("/", function(req,res){
                 `select *, 
                 (select count(*) from monitoring`+date+` where defect='N') nn,
                 (select count(*) from monitoring`+date+` where defect='Y') yy
-                from defect where date(date) between date_sub(?, interval 1 month) and ?`,
+                from defect where date(date) between date_sub(?, interval 1 month) and ?
+                order by defect_id desc
+                `,
                 [date, date, date],
                 function(err,result){
                     if(err){
@@ -63,27 +65,22 @@ router.get("/", function(req,res){
 
 router.get("/update", function(req, res){
     var _id = req.query._id
-    if(_id!=req.session.monitor_id){
-        req.session.monitor_id=_id
-        var date = req.query.date
-        var mold = req.query.mold
-        var melt = req.query.melt
-        var hold = req.query.hold
-        var inj = req.query.inj
-        var arr = ["치수 불량", "색 불량"]
-        var cause = arr[Math.floor(Math.random()*arr.length)]
-        connection.query(
-            `insert into defect(monitor_id, date, mold, melt,
-                hold, injection, cause)
-            values (?,?,?,?,?,?,?)`,
-            [_id,date,mold,melt,hold,inj,cause],
-            function(err, result){
-                if(err){
-                   console.log(err)
-                }
-            }
-        )
-    }
+    var date = req.query.date
+    var mold = req.query.mold
+    var melt = req.query.melt
+    var hold = req.query.hold
+    var inj = req.query.inj
+    var arr = ["치수 불량", "색 불량"]
+    var cause = arr[Math.floor(Math.random()*arr.length)]
+    connection.query(
+        `insert into defect(monitor_id, date, mold, melt,
+            hold, injection, cause)
+        values (?,?,?,?,?,?,?)`,
+        [_id,date,mold,melt,hold,inj,cause],
+        function(err, result){
+            res.json()
+        }
+    )
 })
 
 router.get("/search", function(req,res){
@@ -92,7 +89,8 @@ router.get("/search", function(req,res){
     console.log(date, date2)
     connection.query(
         `select date,cause,error from defect 
-        where date(date) between ? and ?`,
+        where date(date) between ? and ?
+        order by defect_id desc`,
         [date, date2],
         function(err1, result1){
             if (err1){
@@ -107,18 +105,33 @@ router.get("/search", function(req,res){
 })
 
 router.get("/ajax", function(req, res){
+    var date = moment().format("YYYYMMDD")
     connection.query(
-        `select * from defect order by defect_id desc limit 1`,
-        function(err,result){
-            if (err){
+        `select (select count(*) from monitoring`+date+`) cnt, 
+        (select sum(quantity) from ordert where date(date) =`+date+`) total`,
+        function(err, result0){
+            if(err){
                 console.log(err)
             }else{
-                res.json({
-                    "defect" : result
-                })
+                connection.query(
+                    `select * from defect order by defect_id desc limit 1`,
+                    function(err,result){
+                        if (err){
+                            console.log(err)
+                        }else{
+                            res.json({
+                                "defect" : result[0],
+                                "cnt" : result0[0].cnt,
+                                "total" : result0[0].total,
+                                "run" : req.session.run
+                            })
+                        }
+                    }
+                )
             }
         }
     )
+    
 })
 
 module.exports = router

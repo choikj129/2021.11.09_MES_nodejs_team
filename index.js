@@ -260,7 +260,6 @@ app.get("/main_update", function(req, res){
                     if (result[0]!=undefined && result[0].total==result[0].cnt){
                         res.redirect("/stop")
                     }else{
-                        console.log(result[0])
                         res.json({
                             "monitor" : result[0],
                             "melt" : req.session.melt,

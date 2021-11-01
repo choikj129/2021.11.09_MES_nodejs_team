@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 df = pd.read_csv("./data.csv")
 
@@ -19,4 +20,6 @@ for i in df.loc[:, "mold_temp":"cycle_time"]:
 for e,i in enumerate(dfli):
     for j in range(len(df)):
         dfli[i] += ((df[i][j]-mean[e])**2)/499
-    dfli[i] = round(dfli[i] ** (0.5),2)
+    dfli[i] = [round(mean[e]-3*(dfli[i] ** (0.5)),2), mean[e], round(mean[e]+3*(dfli[i] ** (0.5)),2)]
+
+print(json.dumps(dfli))

@@ -222,28 +222,29 @@
           $("tbody").html(body)
         })
     }
-    var interval;
-    function run() {
+    if ("<%=run%>"=="true"){
       interval = setInterval(function () {
         $.getJSON("/defect/ajax",
           function (result) {
-            if($("tbody").find("tr:last>td:eq(0)").html().trim()!=result.defect.date){
-              var body=""
-              for (key in result.defect[0]){
-                if(key=="defect_id" || key=="monitor_id"){
-                  continue
-                }
-                body += "<td>" + result.defect[0][key] + "</td>"
+            if(result.defect.length>0){
+              if (result.cnt>=result.total){
+                location.href="/stop?url=defect"
               }
-              $("tbody tr").append(body)
+              if($("tbody").find("tr:first>td:eq(0)").html().trim()!=result.defect.date){
+                var body="<tr>"
+                for (key in result.defect[0]){
+                  if(key=="defect_id" || key=="monitor_id"){
+                    continue
+                  }
+                  body += "<td>" + result.defect[0][key] + "</td>"
+                }
+                body+="</tr>"
+                $("tbody").prepend(body)
+              }
             }
           }
         )
       }, 2000)
-    }
-
-    function stop() {
-      clearInterval(interval);
     }
 
     //페이징

@@ -238,7 +238,7 @@
           var cnt = result.cnt
           var total = result.total
           var len = $("#tbody2 tr").length
-          if (cnt == total){
+          if (cnt >= total){
             location.href="/stop?url=instruct"
           }
           for (var i=0; i<len; i++){
