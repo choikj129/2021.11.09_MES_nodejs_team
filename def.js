@@ -77,10 +77,12 @@ router.get("/update", function(req, res){
 
 router.get("/search", function(req,res){
     var date = req.query.date;
-    console.log(date)
+    var date2 = req.query.date2;
+    console.log(date, date2)
     connection.query(
-        `select date,cause,error from defect where date(date)=?`,
-        [date],
+        `select date,cause,error from defect 
+        where date(date) between ? and ?`,
+        [date, date2],
         function(err1, result1){
             if (err1){
                 console.log(err1)
