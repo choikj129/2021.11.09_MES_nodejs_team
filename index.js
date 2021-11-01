@@ -156,7 +156,9 @@ app.get("/main", function(req, res){
                                                     "inj" : req.session.inj,
                                                     "setup" : result1[0],
                                                     "order_qty" : 0,
-                                                    "orders_qty" : orders_qty
+                                                    "orders_qty" : orders_qty,
+                                                    "total" : 0,
+                                                    "cnt" : 0
                                                 })
                                             }else{
                                                 req.session.dir = true;
@@ -170,6 +172,8 @@ app.get("/main", function(req, res){
                                                         }else{
                                                             if(result.length>0){
                                                                 req.session.cnt = result[0].cnt
+                                                            }else{
+                                                                req.session.cnt = 0
                                                             }
                                                             res.render('main', {
                                                                 'monitor' : result[0],
@@ -183,7 +187,9 @@ app.get("/main", function(req, res){
                                                                 "inj" : req.session.inj,
                                                                 "setup" : result1[0],
                                                                 "order_qty" : result0[0].order_qty,
-                                                                "orders_qty" : orders_qty
+                                                                "orders_qty" : orders_qty,
+                                                                "total" : result0[0].total,
+                                                                "cnt" : req.session.cnt
                                                             })
                                                         }
                                                     }
@@ -254,6 +260,7 @@ app.get("/main_update", function(req, res){
                     if (result[0]!=undefined && result[0].total==result[0].cnt){
                         res.redirect("/stop")
                     }else{
+                        console.log(result[0])
                         res.json({
                             "monitor" : result[0],
                             "melt" : req.session.melt,

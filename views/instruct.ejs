@@ -241,8 +241,15 @@
           var cnt = result.cnt
           var total = result.total
           var len = $("#tbody2 tr").length
+          if (cnt == total){
+            location.href="/stop?url=instruct"
+          }
           for (var i=0; i<len; i++){
             qty = parseInt($("#tbody2 tr:eq("+i+")>td:eq(4)").html())
+            if ($("#tbody2 tr:eq("+i+")>td:eq(7)").html()=="완료"){
+              cnt-=qty
+              continue
+            }
             if(cnt >= qty){
               $("#tbody2 tr:eq("+i+")>td:eq(6)").html(qty) 
               $("#tbody2 tr:eq("+i+")>td:eq(7)").html("완료") 
