@@ -56,13 +56,9 @@ function now(){
         $("#now_melt_temp").text(result.monitor.melt_temp)
         $("#now_injection_speed").text(result.monitor.injection_speed)
         $("#now_hold_pressure").text(result.monitor.hold_pressure)
-        $("#now_injection_time").text(result.monitor.injection_time)
-        $("#now_hold_time").text(result.monitor.hold_time)
-        $("#now_filling_time").text(result.monitor.filling_time)
-        $("#now_cycle_time").text(result.monitor.cycle_time)
         $("#cnt").text(result.monitor.cnt)
-        $("#qnt").text((result.monitor.cnt/result.monitor.total).toFixed(2)*100+"%")
-        $("#def").text((result.monitor.def/result.monitor.cnt).toFixed(2)*100+"%")
+        $("#qnt").text(Math.round(result.monitor.cnt/result.monitor.total*100)+"%")
+        $("#def").text(Math.round(result.monitor.def/result.monitor.cnt*100)+"%")
 
         if (result.monitor.mold_temp<result.mold[0]-2*result.mold[1]
         || result.monitor.mold_temp>result.mold[0]+2*result.mold[1]){
@@ -130,9 +126,45 @@ function start(){
     interval = setInterval(function(){
         now()
     },1000)
+
+    interval2 = setInterval(() => {
+        $("#b5").children("div:eq(0)").css("border","")
+        $("#b5").children("div:eq(1)").css("border","")
+        $("#b1").children("div:eq(0)").css({"border":"2px solid white", "border-bottom":"none"})
+        $("#b1").children("div:eq(1)").css({"border":"2px solid white", "border-top":"none"})
+
+        setTimeout(() => {
+            $("#b1").children("div:eq(0)").css("border","")
+            $("#b1").children("div:eq(1)").css("border","")
+            $("#b2").children("div:eq(0)").css({"border":"2px solid white", "border-bottom":"none"})
+            $("#b2").children("div:eq(1)").css({"border":"2px solid white", "border-top":"none"})
+            setTimeout(() => {
+                $("#b2").children("div:eq(0)").css("border","")
+                $("#b2").children("div:eq(1)").css("border","")
+                $("#b3").children("div:eq(0)").css({"border":"2px solid white", "border-bottom":"none"})
+                $("#b3").children("div:eq(1)").css({"border":"2px solid white", "border-top":"none"})
+                setTimeout(() => {
+                    $("#b3").children("div:eq(0)").css("border","")
+                    $("#b3").children("div:eq(1)").css("border","")
+                    $("#b4").children("div:eq(0)").css({"border":"2px solid white", "border-bottom":"none"})
+                    $("#b4").children("div:eq(1)").css({"border":"2px solid white", "border-top":"none"})
+                    setTimeout(() => {
+                        $("#b4").children("div:eq(0)").css("border","")
+                        $("#b4").children("div:eq(1)").css("border","")
+                        $("#b5").children("div:eq(0)").css({"border":"2px solid white", "border-bottom":"none"})
+                        $("#b5").children("div:eq(1)").css({"border":"2px solid white", "border-top":"none"})
+                        setTimeout(() => {
+                        }, 600);
+                    }, 300);
+                }, 200);
+            }, 400);
+        }, 500);
+    }, 2000);
+    
 }
 
 function stop(){
     clearInterval(interval);
+    clearInterval(interval2);
     location.href = "/stop?url=main"
 }
