@@ -58,7 +58,7 @@
 
   <!-- 상단바 -->
   <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
-    <div class="font_nav">수주조회</div>
+    <div class="font_nav">수주관리</div>
 
     <div class="input_nav" style="top:2.5vh; left:10vw;" for="inputGroupSelect01">거래처</div>
     <select class="form-select text select" id="search_c" style="top:2.5vh; left:17.1vw; width:11vw">
@@ -88,15 +88,15 @@
     <button class="btn btn-outline-secondary" onclick="search()" style="top:2.5vh; right: 1.5vw;">조회</button>
 
     <!-- 상단바하단 -->
-    <button type="submit" class="btn btn-outline-light modal_btn" style="position:absolute; top:15vh; right:6vw;"
+    <button type="submit" class="btn btn-outline-light modal_btn" style="position:absolute; top:11.5vh; right:6vw;"
       id="register">등록</button>
-    <button class="btn btn-outline-danger " style="position:absolute; top: 15vh; right:1.5vw;"
+    <button class="btn btn-outline-danger " style="position:absolute; top: 11.5vh; right:1.5vw;"
       onclick="del()">삭제</button>
   </div>
 
 
   <!-- 테이블 목록 -->
-  <div class="tableb" style="top:30vh; left:6vw;">
+  <div class="tableb" style="top:24vh; left:6vw;">
     <table id="iTable" class="table table-bordered">
       <thead class="thead">
         <tr>
@@ -150,11 +150,10 @@
     </table>
   </div>
   <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+    <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-6svh; left: 40%; width:4.6vw; 
         height:5.6vh;">
     </ul>
   </nav>
-  <div class="col-lg-12" id="tr_id"></div>
 
   <!---- 등록모달창 ---->
   <div class="black_bg"></div>
@@ -379,6 +378,8 @@
             body += "</tr>"
           }
           $("tbody").html(body)
+          $(".pagination").html("")
+          pagination()
         })
     }
     // 행클릭 수정모달창
@@ -397,102 +398,103 @@
     })
 
     //페이징
-    function pagination() {
-      var req_num_row = 8;
-      var $tr = jQuery('#tbody2 tr');
-      var total_num_row = $tr.length;
-      var num_pages = 0;
-      if (total_num_row % req_num_row == 0) {
-        num_pages = total_num_row / req_num_row;
-      }
-      if (total_num_row % req_num_row >= 1) {
-        num_pages = total_num_row / req_num_row;
-        num_pages++;
-        num_pages = Math.floor(num_pages++);
-      }
-
-      jQuery('.pagination').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
-
-      for (var i = 1; i <= num_pages; i++) {
-        jQuery('.pagination').append("<li class='page-item'><a class='page-link'>" + i + "</a></li>");
-        jQuery('.pagination li:nth-child(2)').addClass("active");
-        jQuery('.pagination a').addClass("pagination-link");
-      }
-
-      jQuery('.pagination').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
-
-      $tr.each(function (i) {
+    //수주조회 페징
+    function pagination(){
+		var req_num_row=10;
+		var $tr=jQuery('#tbody2 tr');
+		var total_num_row=$tr.length;
+		var num_pages=0;
+		if(total_num_row % req_num_row ==0){
+			num_pages=total_num_row / req_num_row;
+		}
+		if(total_num_row % req_num_row >=1){
+			num_pages=total_num_row / req_num_row;
+			num_pages++;
+			num_pages=Math.floor(num_pages++);
+		}
+  
+        jQuery('.pagination').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
+  
+		for(var i=1; i<=num_pages; i++){
+			jQuery('.pagination').append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
+            jQuery('.pagination li:nth-child(2)').addClass("active");
+            jQuery('.pagination a').addClass("pagination-link");
+		}
+  
+        jQuery('.pagination').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
+  
+		$tr.each(function(i){
         jQuery(this).hide();
-        if (i + 1 <= req_num_row) {
-          $tr.eq(i).show();
-        }
-      });
-
-      jQuery('.pagination a').click('.pagination-link', function (e) {
-        e.preventDefault();
-        $tr.hide();
-        var page = jQuery(this).text();
-        var temp = page - 1;
-        var start = temp * req_num_row;
-        var current_link = temp;
-
-        jQuery('.pagination li').removeClass("active");
-        jQuery(this).parent().addClass("active");
-
-        for (var i = 0; i < req_num_row; i++) {
-          $tr.eq(start + i).show();
-        }
-
-        if (temp >= 1) {
-          jQuery('.pagination li:first-child').removeClass("disabled");
+        if(i+1 <= req_num_row){
+				$tr.eq(i).show();
+			}
+		});
+  
+		jQuery('.pagination a').click('.pagination-link', function(e){
+			e.preventDefault();
+			$tr.hide();
+			var page=jQuery(this).text();
+			var temp=page-1;
+			var start=temp*req_num_row;
+            var current_link = temp;
+      
+            jQuery('.pagination li').removeClass("active");
+			jQuery(this).parent().addClass("active");
+    
+			for(var i=0; i< req_num_row; i++){
+				$tr.eq(start+i).show();
+			}
+      
+        if(temp >= 1){
+        jQuery('.pagination li:first-child').removeClass("disabled");
         }
         else {
-          jQuery('.pagination li:first-child').addClass("disabled");
-        }
-      });
+        jQuery('.pagination li:first-child').addClass("disabled");
+        }            
+		});
+  
+        jQuery('.prev').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination1 li').removeClass("active");
+          jQuery('.pagination1 li:first-child').next().addClass("active");
+          $tr.hide();
 
-      jQuery('.prev').click(function (e) {
-        e.preventDefault();
-        jQuery('.pagination li').removeClass("active");
-        jQuery('.pagination li:first-child').next().addClass("active");
-        $tr.hide();
+          var page=jQuery(this).next().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
 
-        var page = jQuery(this).next().text();
-        var temp = page - 1;
-        var start = temp * req_num_row;
-        var current_link = temp;
+        jQuery('.next').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination li').removeClass("active");
+          jQuery('.pagination li:last-child').prev().addClass("active");
+          
+          $tr.hide();
 
-        for (var i = 0; i < req_num_row; i++) {
-          $tr.eq(start + i).show();
-        }
-      });
+          var page=jQuery(this).prev().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
 
-      jQuery('.next').click(function (e) {
-        e.preventDefault();
-        jQuery('.pagination li').removeClass("active");
-        jQuery('.pagination li:last-child').prev().addClass("active");
+	    }
 
-        $tr.hide();
+        jQuery('document').ready(function(){
+	    pagination();
+  
+        jQuery('.pagination li:first-child').addClass("disabled");
+  
 
-        var page = jQuery(this).prev().text();
-        var temp = page - 1;
-        var start = temp * req_num_row;
-        var current_link = temp;
-
-        for (var i = 0; i < req_num_row; i++) {
-          $tr.eq(start + i).show();
-        }
-      });
-
-    }
-
-    jQuery('document').ready(function () {
-      pagination();
-
-      jQuery('.pagination li:first-child').addClass("disabled");
-
-
-    });
+        });
 
   </script>
 </body>

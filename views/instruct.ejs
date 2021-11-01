@@ -9,8 +9,8 @@
       }
     
       .pagination1 a {
-        left: 3vw;
-        top: 25vh;
+        left: 6vw;
+        top: 45vh;
         display: inline-block;
         margin-right: 5px;
         cursor: pointer;
@@ -20,8 +20,8 @@
       }
     
       .pagination2 a {
-        left: 3vw;
-        top: 20vh;
+        left: 6vw;
+        top: 85vh;
         display: inline-block;
         margin-right: 5px;
         cursor: pointer;
@@ -59,7 +59,7 @@
     <div div class="font_nav">작업지시관리</div> -->
 
     <div class="wrapper_nav" style="position: absolute; top:5vh; left:6vw;">
-      <div class="font_nav">작업지시·수주관리</div>
+      <div class="font_nav">작업지시·수주조회</div>
   
       <div class="input_nav" style="top:2.5vh; left:15vw;"for="inputGroupSelect01">작업일</div>
       <input type="text" class="datepicker text" id="_date" value="<%=date%>"
@@ -121,15 +121,13 @@
         <%}%>
       </tbody>
     </table>
-    <div class="col-lg-12" id="ex3_Result1"></div>
-    <div class="col-lg-12" id="ex3_Result2"></div>
-    <nav aria-label="Page navigation example" >
-      <ul class="pagination pagination1" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
-      height:5.6vh;">
-          
-      </ul>
-      </nav>
+   
   </div>
+  <nav aria-label="Page navigation example" >
+    <ul class="pagination pagination1" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+    height:5.6vh;">          
+    </ul>
+    </nav>
  
   <button class="btn btn-outline-light modal_btn" id="selectBtn" style="position:absolute; top: 50vh; right: 8vw;">등록</button>
   <button class="btn btn-outline-danger" style="position:absolute; top: 50vh; right:3vw;" onclick="del()">삭제</button>
@@ -197,14 +195,13 @@
         <%}%>
       </tbody>
     </table>
-    <nav aria-label="Page navigation example" >
-      <ul class="pagination pagination2" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
-      height:5.6vh;">
-          
-      </ul>
-      </nav>
-
+    
   </div>
+  <nav aria-label="Page navigation example" >
+    <ul class="pagination pagination2" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+    height:5.6vh;">          
+    </ul>
+    </nav>
   
 
   <script>
@@ -318,14 +315,20 @@
         function (result) {
           var body;
           for (var i = 0; i < result.instruct.length; i++) {
-            body += "<tr>"
+            body += `<tr>
+            <td><input type="radio" class="rad form-check-input"  
+              name="select_radio" value="<%=`+result.instruct.orders_id+`[i].orders_id%>"></td>
+              `
             for (key in result.instruct[0]) {
               body += "<td>" + result.instruct[i][key] + "</td>"
             }
             body += "</tr>"
           }
           $("#tbody1").html(body)
+          $(".pagination1").html("")
+          pagination()
         })
+      
     }
 
     $(".modal_btn").click(function () {
@@ -380,7 +383,7 @@
       $("#manager").val(cid)
         
     })
-//수주조회 페징
+//수주조회 페이징
     function pagination(){
 		var req_num_row=4;
 		var $tr=jQuery('#tbody1 tr');
@@ -494,7 +497,7 @@
 		}
   
         jQuery('.pagination2').append("<li class='page-item prev2'><a class='page-link'>&laquo;</a></li>");
-  
+
 		for(var i=1; i<=num_pages; i++){
 			jQuery('.pagination2').append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
             jQuery('.pagination2 li:nth-child(2)').addClass("active");
