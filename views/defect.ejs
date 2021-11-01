@@ -169,6 +169,11 @@
       </ul>
     </nav>
   </div>
+  <nav aria-label="Page navigation example" >
+    <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+    height:5.6vh;">
+    </ul>
+  </nav>
 
   <script>
     $(function () {
@@ -242,96 +247,102 @@
     }
 
     //페이징
-    function pagination() {
-      var req_num_row = 3;
-      var $tr = jQuery('#tbody2 tr');
-      var total_num_row = $tr.length;
-      var num_pages = 0;
-      if (total_num_row % req_num_row == 0) {
-        num_pages = total_num_row / req_num_row;
-      }
-      if (total_num_row % req_num_row >= 1) {
-        num_pages = total_num_row / req_num_row;
-        num_pages++;
-        num_pages = Math.floor(num_pages++);
-      }
-
-      jQuery('.pagination').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
-
-      for (var i = 1; i <= num_pages; i++) {
-        jQuery('.pagination').append("<li class='page-item'><a class='page-link'>" + i + "</a></li>");
-        jQuery('.pagination li:nth-child(2)').addClass("active");
-        jQuery('.pagination a').addClass("pagination-link");
-      }
-
-      jQuery('.pagination').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
-
-      $tr.each(function (i) {
+    function pagination(){
+		var req_num_row=10;
+		var $tr=jQuery('#tbody2 tr');
+		var total_num_row=$tr.length;
+		var num_pages=0;
+		if(total_num_row % req_num_row ==0){
+			num_pages=total_num_row / req_num_row;
+		}
+		if(total_num_row % req_num_row >=1){
+			num_pages=total_num_row / req_num_row;
+			num_pages++;
+			num_pages=Math.floor(num_pages++);
+		}
+  
+        jQuery('.pagination').append("<li class='page-item prev'><a class='page-link'>&laquo;</a></li>");
+  
+		for(var i=1; i<=num_pages; i++){
+			jQuery('.pagination').append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
+            jQuery('.pagination li:nth-child(2)').addClass("active");
+            jQuery('.pagination a').addClass("pagination-link");
+		}
+  
+        jQuery('.pagination').append("<li class='page-item next'><a class='page-link'>&raquo;</a></li>");
+  
+		$tr.each(function(i){
         jQuery(this).hide();
-        if (i + 1 <= req_num_row) {
-          $tr.eq(i).show();
-        }
-      });
-
-      jQuery('.pagination a').click('.pagination-link', function (e) {
-        e.preventDefault();
-        $tr.hide();
-        var page = jQuery(this).text();
-        var temp = page - 1;
-        var start = temp * req_num_row;
-        var current_link = temp;
-
-        jQuery('.pagination li').removeClass("active");
-        jQuery(this).parent().addClass("active");
-
-        for (var i = 0; i < req_num_row; i++) {
-          $tr.eq(start + i).show();
-        }
-
-        if (temp >= 1) {
-          jQuery('.pagination li:first-child').removeClass("disabled");
+        if(i+1 <= req_num_row){
+				$tr.eq(i).show();
+			}
+		});
+  
+		jQuery('.pagination a').click('.pagination-link', function(e){
+			e.preventDefault();
+			$tr.hide();
+			var page=jQuery(this).text();
+			var temp=page-1;
+			var start=temp*req_num_row;
+            var current_link = temp;
+      
+            jQuery('.pagination li').removeClass("active");
+			jQuery(this).parent().addClass("active");
+    
+			for(var i=0; i< req_num_row; i++){
+				$tr.eq(start+i).show();
+			}
+      
+        if(temp >= 1){
+        jQuery('.pagination li:first-child').removeClass("disabled");
         }
         else {
-          jQuery('.pagination li:first-child').addClass("disabled");
-        }
-      });
+        jQuery('.pagination li:first-child').addClass("disabled");
+        }            
+		});
+  
+        jQuery('.prev').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination li').removeClass("active");
+          jQuery('.pagination li:first-child').next().addClass("active");
+          $tr.hide();
 
-      jQuery('.prev').click(function (e) {
-        e.preventDefault();
-        jQuery('.pagination li').removeClass("active");
-        jQuery('.pagination li:first-child').next().addClass("active");
-        $tr.hide();
-        var page = jQuery(this).next().text();
-        var temp = page - 1;
-        var start = temp * req_num_row;
-        var current_link = temp;
+          var page=jQuery(this).next().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
 
-        for (var i = 0; i < req_num_row; i++) {
-          $tr.eq(start + i).show();
-        }
-      });
-      jQuery('.next').click(function (e) {
-        e.preventDefault();
-        jQuery('.pagination li').removeClass("active");
-        jQuery('.pagination li:last-child').prev().addClass("active");
+        jQuery('.next').click(function(e){
+          e.preventDefault();
+          jQuery('.pagination li').removeClass("active");
+          jQuery('.pagination li:last-child').prev().addClass("active");
+          
+          $tr.hide();
 
-        $tr.hide();
-        var page = jQuery(this).prev().text();
-        var temp = page - 1;
-        var start = temp * req_num_row;
-        var current_link = temp;
+          var page=jQuery(this).prev().text();
+          var temp=page-1;
+          var start=temp*req_num_row;
+                var current_link = temp;
+        
+          for(var i=0; i< req_num_row; i++){
+            $tr.eq(start+i).show();
+          }
+        });
 
-        for (var i = 0; i < req_num_row; i++) {
-          $tr.eq(start + i).show();
-        }
-      });
-    }
-    jQuery('document').ready(function () {
-      pagination();
+	    }
 
-      jQuery('.pagination li:first-child').addClass("disabled");
+        jQuery('document').ready(function(){
+	    pagination();
+  
+        jQuery('.pagination li:first-child').addClass("disabled");
+  
 
-    });
+        });
   </script>
 </body>
 
