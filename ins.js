@@ -123,7 +123,7 @@ router.get("/search", function(req,res){
     var lego = req.query._search_i;
     var date = req.query._date;
     sql = `select orders_id, cust_name, lego_name, orders_qty, orders_date, delivery_date, cid 
-    from orders where date(orders_date) <= ? and date(delivery_date) >= ?`
+    from orders where date(orders_date) <= ? and date(delivery_date) >= ? and regist is NULL`
     if(cust!=""){
         sql += " and cust_name='"+cust+"'"
     }

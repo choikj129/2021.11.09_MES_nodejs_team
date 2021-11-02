@@ -19,106 +19,109 @@ router.get("/", function(req,res){
     if(!req.session.logged){
        res.redirect("/")
     }else{
-        if (!req.session.dir){
-            res.render("defect",{
-                "defect" : [],
-                "linkcode" : req.session.logged.linkcode,
-                "run" : req.session.run,
-                "Y" : null,
-                "N" : null,
-                "today" : today,
-                "lastM" : moment().subtract(1, 'M').format("YYYY-MM-DD")
-            })
-        }else{
-            connection.query(
-                `select *, 
-                (select count(*) from monitoring`+date+` where defect='N') nn,
-                (select count(*) from monitoring`+date+` where defect='Y') yy
-                from defect where date(date) between date_sub(?, interval 1 month) and ?
-                order by defect_id desc
-                `,
-                [date, date, date],
-                function(err,result){
-                    if(err){
-                        console.log(err)
-                    }else{
-                        if(result.length==0){
-                            yy = req.session.cnt
-                            nn = 0
-                        }else{
-                            yy = result[0].yy
-                            nn = result[0].nn
-                        }
-                        res.render("defect",{
-                            'defect' : result,
-                            "linkcode" : req.session.logged.linkcode,
-                            "run" : req.session.run,
-                            "Y" : yy,
-                            "N" : nn,
-                            "today" : today,
-                            "lastM" : moment().subtract(1, 'M').format("YYYY-MM-DD")
-                        });
-                    }
+        connection.query(
+            `select *, 
+            (select sum(qty_def) from performance where date(date) between date_sub(?, interval 1 month) and ?) nn,
+            (select sum(qty_good) from performance where date(date) between date_sub(?, interval 1 month) and ?) yy,
+            (select count(*) from defect where cause='크랙' and date(date) between date_sub(?, interval 1 month) and ?) crack,
+            (select count(*) from defect where cause='치수 불량' and date(date) between date_sub(?, interval 1 month) and ?) size,
+            (select count(*) from defect where cause='색 불량' and date(date) between date_sub(?, interval 1 month) and ?) color
+            from defect where date(date) between date_sub(?, interval 1 month) and ?
+            order by defect_id desc`,
+            [date, date,date, date,date, date,date, date,date, date,date, date],
+            function(err,result){
+                if(err){
+                    console.log(err)
+                }else{
+                    res.render("defect",{
+                        "defect" : result,
+                        "linkcode" : req.session.logged.linkcode,
+                        "run" : req.session.run,
+                        "Y" : result[0].yy,
+                        "N" : result[0].nn,
+                        "crack" : result[0].crack,
+                        "color" : result[0].color,
+                        "size" : result[0].size,
+                        "today" : today,
+                        "lastM" : moment().subtract(1, 'M').format("YYYY-MM-DD")
+                    })
                 }
-            )
-        }
+            }
+        )
     }
-})
-
-router.get("/update", function(req, res){
-    var _id = req.query._id
-    var date = req.query.date
-    var mold = req.query.mold
-    var melt = req.query.melt
-    var hold = req.query.hold
-    var inj = req.query.inj
-    var arr = ["치수 불량", "색 불량"]
-    var cause = arr[Math.floor(Math.random()*arr.length)]
-    connection.query(
-        `insert into defect(monitor_id, date, mold, melt,
-            hold, injection, cause)
-        values (?,?,?,?,?,?,?)`,
-        [_id,date,mold,melt,hold,inj,cause],
-        function(err, result){
-            res.json()
-        }
-    )
 })
 
 router.get("/search", function(req,res){
     var date = req.query.date;
     var date2 = req.query.date2;
-    console.log(date, date2)
     connection.query(
-        `select date,melt,mold,hold,injection,cause from defect 
-        where date(date) between ? and ?
-        order by defect_id desc`,
-        [date, date2],
-        function(err1, result1){
-            if (err1){
-                console.log(err1)
-            }else{
-                res.json({
-                    "defect" : result1
-                })
-            }
-        }
-    )           
-})
-router.get("/reset", function(req,res){
-    connection.query(
-        `select * from defect order by date desc`,
-        function(err,result){
+        `select 
+        (select sum(qty_def) from performance where date(date) between ? and ?) nn,
+        (select sum(qty_good) from performance where date(date) between ? and ?) yy,
+        (select count(*) from defect where cause='크랙' and date(date) between ? and ?) crack,
+        (select count(*) from defect where cause='치수 불량' and date(date) between ? and ?) size,
+        (select count(*) from defect where cause='색 불량' and date(date) between ? and ?) color`,
+        [date, date2,date, date2,date, date2,date, date2,date, date2],
+        function(err, result){
             if(err){
                 console.log(err)
             }else{
                 console.log(result)
-                res.json({
-                    "defect" : result
-                })
+                connection.query(
+                    `select * from defect 
+                    where date(date) between ? and ?
+                    order by defect_id desc`,
+                    [date, date2],
+                    function(err1, result1){
+                        if (err1){
+                            console.log(err1)
+                        }else{
+                            res.json({
+                                "defect" : result1,
+                                "count" : result[0]
+                            })
+                        }
+                    }
+                )           
             }
-
         }
+
+    )
+})
+router.get("/reset", function(req,res){
+    var date = moment().format("YYYY-MM-DD")
+    connection.query(
+        `select 
+        (select sum(qty_def) from performance where date(date) between date_sub(?, interval 1 month) and ?) nn,
+        (select sum(qty_good) from performance where date(date) between date_sub(?, interval 1 month) and ?) yy,
+        (select count(*) from defect where cause='크랙' and date(date) between date_sub(?, interval 1 month) and ?) crack,
+        (select count(*) from defect where cause='치수 불량' and date(date) between date_sub(?, interval 1 month) and ?) size,
+        (select count(*) from defect where cause='색 불량' and date(date) between date_sub(?, interval 1 month) and ?) color`,
+        [date, date,date, date,date, date,date, date,date, date],
+        function(err, result){
+            if(err){
+                console.log(err)
+            }else{
+                console.log(result)
+                connection.query(
+                    `select * from defect 
+                    where date(date) between date_sub(?, interval 1 month) and ?
+                    order by defect_id desc`,
+                    [date, date],
+                    function(err1, result1){
+                        if (err1){
+                            console.log(err1)
+                        }else{
+                            res.json({
+                                "defect" : result1,
+                                "count" : result[0]
+                            })
+                        }
+                    }
+                )           
+            }
+        }
+
     )
 })
 
@@ -126,7 +129,14 @@ router.get("/ajax", function(req, res){
     var date = moment().format("YYYYMMDD")
     connection.query(
         `select (select count(*) from monitoring`+date+`) cnt, 
-        (select sum(quantity) from ordert where date(date) =`+date+`) total`,
+        (select sum(quantity) from ordert where date(date)=?) total,
+        (select count(*) from monitoring`+date+` where defect="Y") yy,
+        (select count(*) from monitoring`+date+` where defect="N") nn,
+        (select count(*) from defect where cause='크랙' and date(date)=?) crack,
+        (select count(*) from defect where cause='치수 불량' and date(date)=?) size,
+        (select count(*) from defect where cause='색 불량' and date(date)=?) color
+        `,
+        [date,date,date,date],
         function(err, result0){
             if(err){
                 console.log(err)
@@ -139,9 +149,8 @@ router.get("/ajax", function(req, res){
                         }else{
                             res.json({
                                 "defect" : result[0],
-                                "cnt" : result0[0].cnt,
-                                "total" : result0[0].total,
-                                "run" : req.session.run
+                                "run" : req.session.run,
+                                "count" : result0[0]
                             })
                         }
                     }
@@ -149,7 +158,6 @@ router.get("/ajax", function(req, res){
             }
         }
     )
-    
 })
 
 module.exports = router

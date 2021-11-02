@@ -7,6 +7,12 @@ const moment = require("moment");
 const session = require("express-session");
 const ps = require("python-shell");
 
+var options = {
+    mode: 'text',
+    pythonPath: '',
+    pythonOptions: ['-u'],
+    scriptPath: ''
+};
 
 const connection = mysql.createConnection({
     host : data.host,
@@ -15,14 +21,6 @@ const connection = mysql.createConnection({
     password : data.password,
     database : data.database    
 })
-
-var options = {
-    mode: 'json',
-    pythonPath: '',
-    pythonOptions: ['-u'],
-    scriptPath: './',
-    args: ['value1']
-};
 
 var interval;
 module.exports={
@@ -107,7 +105,6 @@ module.exports={
                                             break
                                         }else if (result[0].cnt==n){
                                             var id = result[i]
-                                            n += result[i].quantity
                                             connection.query(
                                                 `insert into performance(order_id, date, lego_name, quantity, qty_good, qty_def, manager)
                                                 values (?, now(), ?, ?, ?, ?, ?)`,
@@ -116,13 +113,20 @@ module.exports={
                                                 function(err){
                                                     if (err){
                                                         console.log(err)
+                                                    }else{
+                                                        if(n==result[0].total){
+                                                            ps.PythonShell.run("./public/py/xchart.py",options,
+                                                            function(err){
+                                                                if(err){
+                                                                    console.log(err)
+                                                                }
+                                                            })
+                                                            clearInterval(interval);
+                                                        }
                                                     }
                                                 }
                                             )
-                                            if(n==result[0].total){
-                                                stop()
-                                            }
-                                            break
+                                            
                                         }
                                     }
                                 }
@@ -137,16 +141,5 @@ module.exports={
         
     stop : function(){
         clearInterval(interval);
-    },
-
-    test : function(){
-        ps.PythonShell.run("xchart.py", options,
-         function(err, result){
-             if(err){
-                console.log(err)
-             }else{
-                console.log(result)
-             }
-         })
     }
 }

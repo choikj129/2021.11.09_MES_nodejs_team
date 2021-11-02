@@ -66,7 +66,6 @@ function now(){
 
         if (result.monitor.mold_temp<result.mold[0]-2*result.mold[1]
         || result.monitor.mold_temp>result.mold[0]+2*result.mold[1]){
-            $("#now_mold_temp").css("background-color", "#F48453")
             $("#mold_box").css("border", "4px solid red")
         }else{
             $("#mold_box").css("border", "4px solid rgb(30, 255, 180)")

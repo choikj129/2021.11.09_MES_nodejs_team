@@ -111,7 +111,6 @@ app.get("/time", function(req, res){
 })
 
 app.get("/main", function(req, res){
-    update.test()
     console.log("run : "+req.session.run)
     req.session.dir = false;
     var date = moment().format("YYYYMMDD")
@@ -211,10 +210,6 @@ app.get("/main", function(req, res){
 })
 
 app.get("/main_update", function(req, res){
-    var mold = req.session.mold;
-    var melt = req.session.melt;
-    var hold = req.session.hold;
-    var inj = req.session.inj;
     date = moment().format("YYYYMMDD")
     if(!req.session.logged){
         res.redirect("/")

@@ -37,82 +37,11 @@
   <div style="position:absolute;left:-2vw; top:10vh;">
     <canvas id="pieChart" style="width:40vw; height:40vh;"></canvas>
   </div>
-  <script>
-    var dataset = {
-      label: "불량율",
-      backgroundColor: ['royalblue', 'tomato',],//라벨별 컬러설정 
-      borderColor: 'white', data: ["<%=Y%>", "<%=N%>"]
-    }
-    var labels = ['양품', '불량품'];
-    var datasets = { datasets: [dataset], labels: labels }
 
-    var config = {
-      type: 'pie', data: datasets, //데이터 셋 
-      options: {
-        responsive: true,
-        maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
-        legend: {
-          position: 'bottom',
-          fontColor: 'white',
-          align: 'center',
-          display: true,
-          fullWidth: true,
-          labels: { fontColor: 'white' }
-        },
-        plugins: {
-          labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
-            render: 'value%',
-            fontColor: 'white',
-            fontSize: 17,
-            precision: 2
-          }
-        }
-      }
-    }
-    var canvas = document.getElementById('pieChart');
-    var pieChart = new Chart(canvas, config);
-  </script>
-
-    <!--불량유형 차트-->
-    <div style="position:absolute;left:-2vw; top:52vh;">
-      <canvas id="pieChart" style="width:40vw; height:40vh;"></canvas>
-    </div>
-    <script>
-      var dataset = {
-        label: "불량유형",
-        backgroundColor: ['green', 'greenyellow', 'goldenrod'],//라벨별 컬러설정 
-        borderColor: 'white', data: ["<%=Y%>", "<%=N%>", "<%=N%>" ]
-      }
-      var labels = ['유형1', '유형2', '유형3'];
-      var datasets = { datasets: [dataset], labels: labels }
-  
-      var config = {
-        type: 'pie', data: datasets, //데이터 셋 
-        options: {
-          responsive: true,
-          maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
-          legend: {
-            position: 'bottom',
-            fontColor: 'white',
-            align: 'center',
-            display: true,
-            fullWidth: true,
-            labels: { fontColor: 'white' }
-          },
-          plugins: {
-            labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
-              render: 'value%',
-              fontColor: 'white',
-              fontSize: 17,
-              precision: 2
-            }
-          }
-        }
-      }
-  
-      var canvas = document.getElementById('pieChart');
-      var pieChart = new Chart(canvas, config);
-    </script>
+  <!--불량유형 차트-->
+  <div style="position:absolute;left:-2vw; top:52vh;">
+    <canvas id="pieChart1" style="width:40vw; height:40vh;"></canvas>
+  </div>
   
 
   <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width:57vw;">
@@ -151,10 +80,10 @@
               <%=defect[i].mold %>
             </td>
             <td>
-              <%=defect[i].hold %>
+              <%=defect[i].injection %>
             </td>
             <td>
-              <%=defect[i].injection %>
+              <%=defect[i].hold %>
             </td>
             <td>
               <%=defect[i].cause %>
@@ -163,11 +92,6 @@
           <% } %>
       </tbody>
     </table>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
-          height:5.6vh;">
-      </ul>
-    </nav>
   </div>
   <nav aria-label="Page navigation example" >
     <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
@@ -176,11 +100,91 @@
   </nav>
 
   <script>
+    var dataset0 = {
+      label: "불량율",
+      backgroundColor: ['royalblue', 'tomato',],//라벨별 컬러설정 
+      borderColor: 'white', data: ["<%=Y%>", "<%=N%>"]
+    }
+    var labels0 = ['양품', '불량품'];
+    var datasets0 = { datasets: [dataset0], labels: labels0 }
+
+    var config0 = {
+      type: 'pie', data: datasets0, //데이터 셋 
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
+        legend: {
+          position: 'bottom',
+          fontColor: 'white',
+          align: 'center',
+          display: true,
+          fullWidth: true,
+          labels: { fontColor: 'white' }
+        },
+        plugins: {
+          labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
+            render: 'value%',
+            fontColor: 'white',
+            fontSize: 17,
+            precision: 2
+          }
+        }
+      }
+    }
+    var canvas0 = document.getElementById('pieChart');
+    var pieChart0 = new Chart(canvas0, config0);
+
+    var dataset1 = {
+      label: "불량유형",
+      backgroundColor: ['green', 'greenyellow', 'goldenrod'],//라벨별 컬러설정 
+      borderColor: 'white', data: ["<%=crack%>", "<%=color%>", "<%=size%>" ]
+    }
+    var labels1 = ['크랙', '색 불량', '치수 불량'];
+    var datasets1 = { datasets: [dataset1], labels: labels1 }
+
+    var config1 = {
+      type: 'pie', data: datasets1, //데이터 셋 
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
+        legend: {
+          position: 'bottom',
+          fontColor: 'white',
+          align: 'center',
+          display: true,
+          fullWidth: true,
+          labels: { fontColor: 'white' }
+        },
+        plugins: {
+          labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
+            render: 'value%',
+            fontColor: 'white',
+            fontSize: 17,
+            precision: 2
+          }
+        }
+      }
+    }
+    var canvas1 = document.getElementById('pieChart1');
+    var pieChart1 = new Chart(canvas1, config1);
     $(function () {
       if ("<%=linkcode%>" == 0) {
         $("#linkcode").text("관리자")
       } else {
         $("#linkcode").text("작업자")
+      }
+      for (var i=0; i<$("tbody tr").length; i++){
+        for (var j=0; j<$("tbody tr:eq(0)>td").length; j++){
+          var t = $("tbody tr:eq("+i+")>td:eq("+j+")").html().trim()
+          if(j==0 || j==5){
+            $("tbody tr:eq("+i+")>td:eq("+j+")").html(t)
+            continue
+          }
+          if(t.charAt(t.length-1)=="x"){
+            $("tbody tr:eq("+i+")>td:eq("+j+")").css("background-color","red")
+          }
+          $("tbody tr:eq("+i+")>td:eq("+j+")").html(t.slice(0,-1))
+        }
       }
     })
 
@@ -197,12 +201,10 @@
       selectOtherMonths: true,
       changeMonth: true,
       changeYear: true
-    });   
+    }); 
 
     function search() {
       $("tbody").html("");
-        var date = $("#datepicker").val()
-        var date2 = $("#datepicher2").val()
       $.getJSON("/defect/search", {
         date : $("#datepicker").val(),
         date2 : $("#datepicker2").val()
@@ -211,62 +213,121 @@
           var body;
           for (var i = 0; i < result.defect.length; i++) {
             body += "<tr>"
+            var c = 0
             for (key in result.defect[0]) {
               if(key=="defect_id" || key=="monitor_id"){
                 continue
               }
-              body += "<td>" + result.defect[i][key] + "</td>"
+              c += 1
+              if(key=="date" || key=="cause"){
+                body += "<td>" + result.defect[i][key] + "</td>"
+                continue
+              }
+              if(result.defect[i][key].charAt(result.defect[i][key].length-1)=="x"){
+                body += `<td style="background-color:red">` + result.defect[i][key].slice(0,-1) + "</td>"
+              }else{
+                body += "<td>" + result.defect[i][key].slice(0,-1) + "</td>"
+              }
+              
             }
             body += "</tr>"
           }
           $("tbody").html(body)
           $(".pagination").html("")
           pagination()
+          if (result.count.nn==null){
+            result.count.nn=0
+          }
+          if (result.count.yy==null){
+            result.count.yy=0
+          }
+          config0.data.datasets[0].data = [result.count.yy, result.count.nn]
+          pieChart0.update();
+
+          config1.data.datasets[0].data = [result.count.crack, result.count.color, result.count.size]
+          pieChart1.update();
         })
     }
     function reset(){
-            $("#tbody").html("")
-            $("#datepicker").val("")
-            $("#datepicker option:eq(0)").prop("selected", true)
-            $("#datepicker2").val("")
-            $("#datepicker2 option:eq(0)").prop("selected", true)
-            $.getJSON("/defect/reset",
-            function(result){ 
-              var body;
-              for(var i=0; i<result.defect.length; i++){
-                body += "<tr>"
-                  for (key in result.defect[0]){
-                    if(key=="pp_id"){
-                            continue
-                    }
-                    body += "<td>"+result.defect[i][key]+"</td>"
-                  }
-                body += "</tr>"
-              }
-              $("#tbody2").html(body)
-              $(".pagination").html("")
-          pagination()
+      $("#tbody").html("")
+      $.getJSON("/defect/reset",
+      function(result){ 
+        var body;
+        for (var i = 0; i < result.defect.length; i++) {
+          body += "<tr>"
+          var c = 0
+          for (key in result.defect[0]) {
+            if(key=="defect_id" || key=="monitor_id"){
+              continue
             }
-            )
+            c += 1
+            if(key=="date" || key=="cause"){
+              body += "<td>" + result.defect[i][key] + "</td>"
+              continue
+            }
+            if(result.defect[i][key].charAt(result.defect[i][key].length-1)=="x"){
+              body += `<td style="background-color:red">` + result.defect[i][key].slice(0,-1) + "</td>"
+            }else{
+              body += "<td>" + result.defect[i][key].slice(0,-1) + "</td>"
+            }
+          }
+          body += "</tr>"
         }
+        $("#tbody2").html(body)
+        $("#datepicker").val(result.lastM)
+        $("#datepicker2").val(result.today)
+        $(".pagination").html("")
+        pagination()
+
+        config0.data.datasets[0].data = [result.count.yy, result.count.nn]
+        pieChart0.update();
+
+        config1.data.datasets[0].data = [result.count.crack, result.count.color, result.count.size]
+        pieChart1.update();
+      })
+    }
     if ("<%=run%>"=="true"){
-      interval = setInterval(function () {
+      reset()
+      var yy = parseInt(config0.data.datasets[0].data[0])
+      var nn = parseInt(config0.data.datasets[0].data[1])
+      var crack = parseInt(config1.data.datasets[0].data[0])
+      var color = parseInt(config1.data.datasets[0].data[1])
+      var size = parseInt(config1.data.datasets[0].data[2])
+      setInterval(function () {
         $.getJSON("/defect/ajax",
           function (result) {
-            if(result.defect.length>0){
-              if (result.cnt>=result.total){
+            if(result.defect){
+              if (result.count.cnt>=result.count.total){
                 location.href="/stop?url=defect"
               }
-              if($("tbody").find("tr:first>td:eq(0)").html().trim()!=result.defect.date){
+              if($("tbody tr:eq(0)>td:eq(0)").html().trim()!=result.defect.date){
                 var body="<tr>"
-                for (key in result.defect[0]){
-                  if(key=="defect_id" || key=="monitor_id"){
-                    continue
+                  for (key in result.defect) {
+                    if(key=="defect_id" || key=="monitor_id"){
+                      continue
+                    }
+                    if(key=="date" || key=="cause"){
+                      body += "<td>" + result.defect[key] + "</td>"
+                      continue
+                    }
+                    if(result.defect[key].charAt(result.defect[key].length-1)=="x"){
+                      body += `<td style="background-color:red">` + result.defect[key].slice(0,-1) + "</td>"
+                    }else{
+                      body += "<td>" + result.defect[key].slice(0,-1) + "</td>"
+                    }
                   }
-                  body += "<td>" + result.defect[0][key] + "</td>"
-                }
                 body+="</tr>"
                 $("tbody").prepend(body)
+                $(".pagination").html("")
+                pagination()
+                config0.data.datasets[0].data[0] = yy + result.count.yy
+                config0.data.datasets[0].data[1] = nn + result.count.nn
+                pieChart0.update();
+
+                config1.data.datasets[0].data[0] = crack + result.count.crack
+                config1.data.datasets[0].data[1] = color + result.count.color
+                config1.data.datasets[0].data[2] = size + result.count.size
+                pieChart1.update();
               }
             }
           }

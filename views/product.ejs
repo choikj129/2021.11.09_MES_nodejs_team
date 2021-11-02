@@ -95,10 +95,6 @@
             height:5.6vh;">
             </ul>
         </nav>
-
-
-        
-
         <script>
             //달력
             $("input").keyup(function(){
@@ -178,7 +174,7 @@
         }
         //페이징
         function pagination(){
-		var req_num_row=3;
+		var req_num_row=10;
 		var $tr=jQuery('#tbody2 tr');
 		var total_num_row=$tr.length;
 		var num_pages=0;
