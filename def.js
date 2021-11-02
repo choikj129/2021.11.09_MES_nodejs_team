@@ -25,7 +25,9 @@ router.get("/", function(req,res){
                 "linkcode" : req.session.logged.linkcode,
                 "run" : req.session.run,
                 "Y" : null,
-                "N" : null
+                "N" : null,
+                "today" : today,
+                "lastM" : moment().subtract(1, 'M').format("YYYY-MM-DD")
             })
         }else{
             connection.query(

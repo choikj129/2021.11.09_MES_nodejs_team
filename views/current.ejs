@@ -15,7 +15,7 @@
         .wrapper2{
             width:3vw;
             height:45vh;
-            background-color: rgba(0, 255, 195, 0.13);
+            background-color: rgba(0, 255, 195, 0.199);
             text-align: center;
             color:white;
             line-height:5vh;
@@ -49,25 +49,25 @@
             </div>
         </div>
     </div>
-    <!-- 압력현황 --> 
+    <!-- 사출속도 --> 
     <div>
         <div class="wrapper1" style="position: absolute; top:50.5vh; left:11vw;"> 
             <div id="Chart2" style="width:100%; height:100%"></div>
         </div>
         <div class="wrapper2" style="position: absolute; top:50.5vh; left:7.5vw;">
             <div style="font-size:2.8vh">
-                <b>압<br>력<br>현<br>황</b>
+                <b>사<br>출<br>속<br>도</b>
             </div>
         </div>
     </div>
-    <!-- 사출속도 -->
+    <!-- 압력현황 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:50.5vh; right:0.8vw">
             <div id="Chart3" style="width:100%; height:100%"></div>
         </div>
         <div class="wrapper2" style="position: absolute; top:50.5vh; right:43.3vw;">
             <div style="font-size:2.8vh">
-                <b>사<br>출<br>속<br>도</b>
+                <b>보<br>압</b>
             </div>
         </div>
     </div>
@@ -339,123 +339,11 @@
 
         // 위에서 설정한 속성을 차트에 반영합니다.
         myChart1.setOption(option1);     
+
         //UCL, LCL
         const markLine2 = [];
         for (var i = 0; i < 3; i++) {
             markLine2.push(
-                {
-                    name: 'UCL'+i,
-                    yAxis: hold[0]+2*hold[1],
-                    symbol : 'none',
-                    label: {
-                        formatter: 'UCL',
-                        position: 'left'
-                    }
-                }
-            );
-            markLine2.push(
-                {
-                    name: 'LCL'+i,
-                    yAxis: hold[0]-2*hold[1],
-                    symbol: 'none',
-                    label: {
-                        formatter: 'LCL',
-                        position: 'left'
-                    }
-                }
-            );
-            markLine2.push(
-                {
-                    name: 'Setting'+i,
-                    yAxis: set_hold,
-                    symbol: 'none',
-                    label: {
-                        formatter: 'Set-up',
-                        position: 'left'
-                    }
-                }
-            );
-        }  
-
-        // 보압 그래프
-
-        // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart2 = echarts.init(document.getElementById('Chart2'));
-
-        //chart의 설정을 정합니다.
-        var option2 = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    label: {
-                        backgroundColor: '#283b56'
-                    }
-                }
-            },
-            legend: {
-                data:['보압'],
-                y:'bottom',
-                textStyle: {
-                    color: 'white'
-                }
-            },
-            dataZoom: {
-                show: false,
-                start: 0,
-                end: 100
-            },
-            xAxis: [
-                {
-                    type: 'category',
-                    boundaryGap: true,
-                    data: date,
-                    axisLabel: {
-                        textStyle: {
-                            color: 'white'
-                        }
-                    },
-                },
-            ],
-            yAxis: [
-                {
-                    type: 'log',
-                    scale: true,
-                    max: 145,
-                    min: 125,
-                    boundaryGap: [0.2, 0.2],
-                    axisLabel: {
-                        formatter: '{value}',
-                        textStyle: {
-                            color: 'white'
-                        }
-                    },
-                }
-            ],
-            series: [
-                {
-                    name: '보압',
-                    type: 'scatter',
-                    lineStyle:{
-                        color:'#2A265C' //line차트 색상 변경
-                    },
-                    yAxisIndex: 0, //yAxis 1번째 사용
-                    data: hold_pressure,
-                    markLine: {
-                        data: markLine2,
-                        symbol: 'none',
-                        itemStyle: {color: 'red'}
-                    },
-                    color: 'orange'
-                }
-            ]
-        };
-
-        // 위에서 설정한 속성을 차트에 반영합니다.
-        myChart2.setOption(option2);
-        //UCL, LCL
-        const markLine3 = [];
-        for (var i = 0; i < 3; i++) {
-            markLine3.push(
                 {
                     name: 'UCL'+i,
                     yAxis: inj[0]+2*inj[1],
@@ -466,7 +354,7 @@
                     }
                 }
             );
-            markLine3.push(
+            markLine2.push(
                 {
                     name: 'LCL'+i,
                     yAxis: inj[0]-2*inj[1],
@@ -477,7 +365,7 @@
                     }
                 }
             );
-            markLine3.push(
+            markLine2.push(
                 {
                     name: 'Setting'+i,
                     yAxis: set_inj,
@@ -493,10 +381,10 @@
         //사출속도 그래프
 
         // DOM을 준비하고 echart 객체를 만듭니다.
-        var myChart3 = echarts.init(document.getElementById('Chart3'));
+        var myChart2 = echarts.init(document.getElementById('Chart2'));
 
         //chart의 설정을 정합니다.
-        var option3 = {
+        var option2 = {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
@@ -554,6 +442,120 @@
                     yAxisIndex: 0, //yAxis 1번째 사용
                     data: injection_speed,
                     markLine: {
+                        data: markLine2,
+                        symbol: 'none',
+                        itemStyle: {color: 'red'}
+                    },
+                    color: 'orange'
+                }
+            ]
+        };
+
+        // 위에서 설정한 속성을 차트에 반영합니다.
+        myChart2.setOption(option2);
+
+        //UCL, LCL
+        const markLine3 = [];
+        for (var i = 0; i < 3; i++) {
+            markLine3.push(
+                {
+                    name: 'UCL'+i,
+                    yAxis: hold[0]+2*hold[1],
+                    symbol : 'none',
+                    label: {
+                        formatter: 'UCL',
+                        position: 'left'
+                    }
+                }
+            );
+            markLine3.push(
+                {
+                    name: 'LCL'+i,
+                    yAxis: hold[0]-2*hold[1],
+                    symbol: 'none',
+                    label: {
+                        formatter: 'LCL',
+                        position: 'left'
+                    }
+                }
+            );
+            markLine3.push(
+                {
+                    name: 'Setting'+i,
+                    yAxis: set_hold,
+                    symbol: 'none',
+                    label: {
+                        formatter: 'Set-up',
+                        position: 'left'
+                    }
+                }
+            );
+        }  
+
+        // 보압 그래프
+
+        // DOM을 준비하고 echart 객체를 만듭니다.
+        var myChart3 = echarts.init(document.getElementById('Chart3'));
+
+        //chart의 설정을 정합니다.
+        var option3 = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    label: {
+                        backgroundColor: '#283b56'
+                    }
+                }
+            },
+            legend: {
+                data:['보압'],
+                y:'bottom',
+                textStyle: {
+                    color: 'white'
+                }
+            },
+            dataZoom: {
+                show: false,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: date,
+                    axisLabel: {
+                        textStyle: {
+                            color: 'white'
+                        }
+                    },
+                },
+            ],
+            yAxis: [
+                {
+                    type: 'log',
+                    scale: true,
+                    max: 145,
+                    min: 125,
+                    boundaryGap: [0.2, 0.2],
+                    axisLabel: {
+                        formatter: '{value}',
+                        textStyle: {
+                            color: 'white'
+                        }
+                    },
+                }
+            ],
+            series: [
+                {
+                    name: '보압',
+                    type: 'scatter',
+                    lineStyle:{
+                        color:'#2A265C' //line차트 색상 변경
+                    },
+                    yAxisIndex: 0, //yAxis 1번째 사용
+                    data: hold_pressure,
+                    markLine: {
                         data: markLine3,
                         symbol: 'none',
                         itemStyle: {color: 'red'}
@@ -566,96 +568,75 @@
         // 위에서 설정한 속성을 차트에 반영합니다.
         myChart3.setOption(option3);
 
-
         if(run){
             setInterval(function (){
-            //시간 
             $.getJSON("/current/update",
             function(result){
                 //x축에 실시간 데이터 생성
+                //용융온도
                 if (result.cur.cnt == result.cur.total){
                     location.href = "/stop?url=current"
                 }
                 var axisData = result.cur.date.slice(11,19);
-
                 var data0 = option0.series[0].data
-
                 //데이터의 가장 왼쪽 값을 제거
                 if(date.length==20){
                     data0.shift();
                     option0.xAxis[0].data.shift();
                 }
-                
-
                 //데이터의 가장 오른쪽 값을 추가
                 data0.push(result.cur.melt_temp)
-
                 //x축에 시간 데이터 추가
                 option0.xAxis[0].data.push(axisData);
-
                 //차트에 반영
                 myChart0.setOption(option0);
 
 
-                // 속도
+                // 금형온도
                 //x축에 실시간 데이터 생성
                 var data1 = option1.series[0].data; //순수익 데이터
-
                 //데이터의 가장 왼쪽 값을 제거
                 if(date.length==20){
                     data1.shift();
                     option1.xAxis[0].data.shift();
                 }
-
                 //데이터의 가장 오른쪽 값을 추가
                 data1.push(result.cur.mold_temp);
-
                 //x축에 시간 데이터 추가
-                
                 option1.xAxis[0].data.push(axisData);
-
                 //차트에 반영
                 myChart1.setOption(option1);
 
 
-                // 압력
-                var data2 = option2.series[0].data; //순수익 데이터
-
+                //속도
+                var data2 = option2.series[0].data;
                 //데이터의 가장 왼쪽 값을 제거
                 if(date.length==20){
                     data2.shift();
                     option2.xAxis[0].data.shift();
                 }
-
                 //데이터의 가장 오른쪽 값을 추가
-                data2.push(result.cur.hold_pressure);
-
+                data2.push(result.cur.injection_speed);
                 //x축에 시간 데이터 추가
                 option2.xAxis[0].data.push(axisData);
-
                 //차트에 반영
                 myChart2.setOption(option2);
+                })
 
 
-                //온도
-                var data3 = option3.series[0].data;
-
+                // 압력
+                var data3 = option3.series[0].data; //순수익 데이터
                 //데이터의 가장 왼쪽 값을 제거
                 if(date.length==20){
                     data3.shift();
                     option3.xAxis[0].data.shift();
                 }
-                
-
                 //데이터의 가장 오른쪽 값을 추가
-                data3.push(result.cur.injection_speed);
-
+                data3.push(result.cur.hold_pressure);
                 //x축에 시간 데이터 추가
                 option3.xAxis[0].data.push(axisData);
-
                 //차트에 반영
                 myChart3.setOption(option3);
-                })
             }, 2100);
         }
     </script>

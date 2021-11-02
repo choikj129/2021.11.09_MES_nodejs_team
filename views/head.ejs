@@ -89,7 +89,7 @@
   .wrapper_nav {
     height: 10vh;
     width: 91.35vw;
-    background-color:rgb(38, 43, 51);
+    background-color:rgb(52, 58, 63);
     text-align: center;
   }
   .text{
@@ -110,7 +110,7 @@
     position: absolute;
     width: 7vw;
     height: 5vh;
-    background-color: rgba(0, 255, 191, 0.075);
+    background-color: rgba(0, 255, 191, 0.226);
     font-size: large;
     color: white;
     text-align: center;
@@ -143,39 +143,39 @@
     border-width: 0.2vw;
   }
   .page-item.active .page-link {
-                z-index: 3;
-                color: white;
-                background-color: black;
-                border-color: rgba(0, 255, 191, 0.11);
+    z-index: 3;
+    color: white;
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(0, 255, 191, 0.5);
   }
   .pagination a {
-  display:inline-block;
-  margin-right:5px;
-  cursor:pointer;
-  background-color:rgba(0, 255, 191, 0.11);
+    display:inline-block;
+    margin-right:5px;
+    cursor:pointer;
+    background-color:rgba(255, 255, 255, 0);
   }
   .page-link {
-      left: 7vw;
-      top: 85vh;
-      position: relative;
-      display: block;
-      color: white;
-      text-decoration: none;
-      background-color:black;
-      border: 0.2vw solid rgba(0, 255, 191, 0.11);
-      border-radius: 0.5vw;
+    left: 7vw;
+    top: 85vh;
+    position: relative;
+    display: block;
+    color: white;
+    text-decoration: none;
+    background-color:rgba(255, 255, 255, 0);
+    border: 0.2vw solid rgba(0, 255, 191, 0.5);
+    border-radius: 0.5px;
   }
   .page-item.disabled .page-link {
     color: white;
     pointer-events: none;
-    background-color: rgba(0, 255, 191, 0.11);
-    border-color: rgba(0, 255, 191, 0.11);
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(0, 255, 191, 0.5);
   }
   .page-link:hover {
     z-index: 2;
     color: rgba(0, 255, 191, 0.11);
-    background-color: rgb(38, 43, 51);
-    border-color: rgba(0, 255, 191, 0.11);
+    background-color: rgba(0, 255, 213, 0.3);
+    border-color: rgb(0, 255, 191);
   }
 </style>
 <link rel="stylesheet" href="/css/style.css">
@@ -245,8 +245,8 @@
   </div>
 
   <!-- 현재시간 -->
-  <div id="date" style="color:white; position: absolute; top:1vh; right: -5vw; width:20vw; height:5vh;"></div>
-  <div id="time" style="color:white; position: absolute; top:1vh; right: -12vw; width:20vw; height:5vh;"></div>
+  <div id="date" style="color:white; position: absolute; top:1vh; right: -6vw; width:20vw; height:5vh;"></div>
+  <div id="time" style="color:white; position: absolute; top:1vh; right: -13vw; width:20vw; height:5vh;"></div>
 
   <!-- IONICONS -->
   <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>

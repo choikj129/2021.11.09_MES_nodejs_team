@@ -8,23 +8,25 @@
 
         <style>
             .wrapper {
-                position:absolute;
+                position: absolute;
                 height: 25.5vh;
                 width: 23.1vw;
-                background-color:rgb(52, 58, 63);
+                background-color: rgb(52, 58, 63);
                 color: white;
             }
+
             .wrapper1 {
-                position:absolute;
+                position: absolute;
                 height: 5vh;
                 width: 23.1vw;
                 background-color: rgb(38, 43, 51);
-                left:0.3vw;
+                left: 0.3vw;
                 text-align: center;
                 font-size: 20px;
                 line-height: 5vh;
-                color:white;
+                color: white;
             }
+
             .wrapper3 {
                 position: absolute;
                 left: 2vw;
@@ -42,109 +44,69 @@
                 border: dotted 2px red;
                 z-index: 2;
             }
-            /* .jb1{
-                width: 12vw;
-                top:21.3vh;
-                height: 6vh;
-                border: solid 0.8vh yellow;
-                transition-timing-function: step-start;
-                transition-duration: 100s;
 
-
-            }
-            .jb2{
-                width: 12vw;
-                height: 10vh;
-                border: solid 0.8vh yellow;
-                transition-timing-function: step-start;
-                transition-duration: 100s;
-
-            } */
-
-            @keyframes example{
-            /* A상태에서 B 상태로 */
-                from { /* A */
-                    background-color: green;
-                }
-                to { /* B */
-                    background-color: red;
-                }
-            }
-            
             .pr_box1 {
-                position: absolute; 
-                top:4.5vh;
+                position: absolute;
+                top: 4.5vh;
                 width: 10vw;
                 height: 5vh;
                 /*border: solid 3px rgb(180, 195, 216);*/
                 background-color: rgba(0, 255, 191, 0.178);
                 font-size: 20px;
-                color: white; 
-                text-align:center; 
+                color: white;
+                text-align: center;
                 line-height: 4.7vh;
             }
+
             .pr_box2 {
-                position: absolute; 
-                top:9vh;
+                position: absolute;
+                top: 9vh;
                 width: 10vw;
                 height: 12vh;
                 /*border: solid 3px rgb(180, 195, 216);*/
                 background-color: rgba(0, 255, 191, 0.178);
                 color: white;
                 font-size: 20px;
-                text-align:center;
-                line-height:11.5vh;
+                text-align: center;
+                line-height: 11.5vh;
             }
-            .pr_num{
+
+            .pr_num {
                 position: absolute;
                 top: 15.3vh;
-                font-size:21px;
-                color:white;
+                font-size: 21px;
+                color: white;
             }
 
             .dong {
-                border-radius:50%;
-                width:120px;
-                height:120px;
-                position:absolute; 
-                left:0.5vw; 
-                top:4vh;
-                border:4px solid rgb(30, 255, 180);
+                border-radius: 50%;
+                width: 120px;
+                height: 120px;
+                position: absolute;
+                left: 0.5vw;
+                top: 4vh;
+                border: 4px solid rgb(30, 255, 180);
             }
+
             .unit {
-                position: absolute; 
-                left:27px; 
-                top:65px; 
-                font-size: 25px; 
-                color:white;
+                position: absolute;
+                left: 27px;
+                top: 65px;
+                font-size: 25px;
+                color: white;
             }
 
             .sep {
                 position: absolute;
-                left:10vw; 
-                width:12vw;
+                left: 10vw;
+                width: 12vw;
                 border-bottom: 2px dashed;
-                border-color:lightgrey;
-                border-left : none;
+                border-color: lightgrey;
+                border-left: none;
                 border-right: none;
                 border-top: none;
             }
-            /* .modal_wrap {
-                display: none;
-                width: 400px;
-                height: 320px;
-                position: absolute;
-                margin: -200px 0 0 -200px;
-                background: rgb(210, 215, 221);
-                z-index: 2;
-            }
-            .black_bg{
-                display: none;
-                position: fixed;
-                top:0; left: 0; bottom: 0; right: 0;
-                background: rgba(0, 0, 0, 0.8);
-                z-index : 1;
-            } */
+
             .modal_close {
                 color: white;
                 width: 4.5vw;
@@ -155,6 +117,7 @@
                 text-indent: -2.5vw;
 
             }
+
             .modal_close>a {
                 display: block;
                 color: white;
@@ -162,134 +125,33 @@
                 height: 5vh;
                 text-indent: -2.5vw;
             }
-            
-            #main_icon{
+
+            #main_icon {
                 background-color: var(--first-color);
             }
-            /* .blinking{ -webkit-animation:blink 1.5s ease-in-out infinite alternate; 
-                    -moz-animation:blink 1.5s ease-in-out infinite alternate; 
-                    animation:blink 1.5s ease-in-out infinite alternate;
-            }
-            @-webkit-keyframes blink{ 
-                0% {opacity:0;} 
-                100% {opacity:1;} 
-            } 
-            @-moz-keyframes blink{
-                 0% {opacity:0;}
-                  100% {opacity:1;}
-            } 
-            @keyframes blink{
-                 0% {opacity:0;}
-                  100% {opacity:1;}
-            }
 
-            #test {
-                animation: fadein 2s;
-                -moz-animation: fadein 2s;
-                -webkit-animation: fadein 2s; 
-                -o-animation: fadein 2s; 
-            }
-            @keyframes fadein {
-                from {
-                    opacity:0;
-                }
-                to {
-                    opacity:1;
-                }
-            }
-            @-moz-keyframes fadein {
-                from {
-                    opacity:0;
-                }
-                to {
-                    opacity:1;
-                }
-            }
-            @-webkit-keyframes fadein 
-                from {
-                    opacity:0;
-                }
-                to {
-                    opacity:1;
-                }
-            }
-            @-o-keyframes fadein {
-                from {
-                    opacity:0;
-                }
-                to {
-                    opacity: 1;
-                }
-            } */
-
-            /* 
-            #keyboard{
-                display: none;
-                background-color: rgb(68,84,106);
-                color: white; 
-                position:absolute; 
-                left:500px; 
-                top:200px; 
-                table-layout: fixed; 
-                width:120px;
-            }
-            .btn{
-                width:6.5rem; 
-                height:2.5rem; 
-                position:absolute; 
-                bottom:0.3rem; 
-                line-height: 1em;
-            }
-            
-             */
             .uniti {
-                position:absolute; 
-                left:3.5vw; 
-                top: 10vh; 
+                position: absolute;
+                left: 3.5vw;
+                top: 10vh;
                 font-size: 25px;
             }
+
             .inputn {
                 position: absolute;
-                top:9.8vh; 
-                left:17vw; 
-                font-size: x-large; 
-                color:white;
+                top: 9.8vh;
+                left: 17vw;
+                font-size: x-large;
+                color: white;
             }
-             .alertI{
-                display : none;
-             }
+
+            .alertI {
+                display: none;
+            }
         </style>
 </head>
 
 <body style="background-color: black; overflow-x: hidden; overflow-y:hidden;">
-
-    <!-- 자판  -->
-    <!-- <table class="table table-bordered " id="keyboard">
-        <tr>
-            <td onclick="add(1)">1</td>
-            <td onclick="add(2)">2</td>
-            <td onclick="add(3)">3</td>
-        </tr>
-        <tr>
-            <td onclick="add(4)">4</td>
-            <td onclick="add(5)">5</td>
-            <td onclick="add(6)">6</td>
-        </tr>
-        <tr>
-            <td onclick="add(7)">7</td>
-            <td onclick="add(8)">8</td>
-            <td onclick="add(9)">9</td>
-        </tr>
-        <tr>
-            <td onclick="reset()">AC</td>
-            <td onclick="add(0)">0</td>
-            <td onclick="add('.')">.</td>
-        </tr>
-        <tr>
-            <td colspan="2" id="ok">OK</td>
-            <td onclick="del()">←</td>
-        </tr>
-    </table> -->
 
     <!--결함발생 alert -->
     <div class="alertI">
@@ -298,7 +160,8 @@
 
     <!-- 모달 -->
     <div class="black_bg"></div>
-    <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170);"></div>
+    <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170); 
+    font-size: 19px; line-height:5.3vh; font-weight: bold;"></div>
     <div class="modal_wrap">
         <div class="modal_box1" style="top:5vh;"><b>상한값</b></div>
         <div class="modal_box2" style="top:5vh;" id="ucl"></div>
@@ -306,75 +169,83 @@
         <div class="modal_box2" style="top:11.4vh;" id="cl"></div>
         <div class="modal_box1" style="top:17.8vh;"><b>하한값</b></div>
         <div class="modal_box2" style="top:17.8vh;" id="lcl"></div>
-        <div class="modal_box1" style="top:24.2vh;"><b>입력값</b></div>            
+        <div class="modal_box1" style="top:24.2vh;"><b>입력값</b></div>
         <input type="text" class="modal_box2" id="set" style="top:24.2vh; border:none;">
         <div align="center">
             <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
             height:5.6vh; font-size:17px; line-height: 3.3vh;" id="register"><b>등록</b></button>
-            <button class="modal_close btn btn-secondary" style="position:absolute; bottom: 2vh; right: 9vw;
+            <button class="modal_close btn btn-secondary"
+                style="position:absolute; bottom: 2vh; right: 9vw;
             width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 3.3vh; font-size:17.5px"><b>취소</b></button>
         </div>
     </div>
 
     <!-- 용융온도 -->
     <div class="wrapper1" style="top:4.7vh; left: 5.7vw;">용융 온도</div>
-    <div class="wrapper modal_btn" onclick="modal('melt')" style="position: absolute; top: 10vh; left:5.7vw; color:white;">
+    <div class="wrapper modal_btn" onclick="modal('melt')"
+        style="position: absolute; top: 10vh; left:5.7vw; color:white;">
         <div class="dong">
-            <div class="uniti" >°C</div>
+            <div class="uniti">°C</div>
         </div>
-        <div class="unit" id="now_melt_temp">            
+        <div class="unit" id="now_melt_temp">
             <% if(monitor){%>
                 <%= monitor.melt_temp%>
-            <% } %>
+                    <% } %>
         </div>
         <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
-        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="melt_ucl"></div>
+        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="melt_ucl">
+        </div>
         <div class="sep" style="top:6.5vh;"></div>
         <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
         <div class="inputn" id="set_melt">
             <% if(setup){%>
                 <%=setup.melt_temp%>
-            <%}%>
+                    <%}%>
         </div>
         <div class="sep" style="top:18.5vh;"></div>
         <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
-        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="melt_lcl"></div>
+        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="melt_lcl">
+        </div>
     </div>
     <!-- 금형온도 -->
     <div class="wrapper1" style="top:4.7vh; left: 29.2vw;">금형 온도</div>
-    <div class="wrapper modal_btn" onclick="modal('mold')" style="position: absolute; top: 10vh; left:29.2vw; color:white;">       
+    <div class="wrapper modal_btn" onclick="modal('mold')"
+        style="position: absolute; top: 10vh; left:29.2vw; color:white;">
         <div class="dong">
             <div class="uniti">°C</div>
         </div>
         <div class="unit" id="now_mold_temp">
             <% if(monitor){%>
                 <%= monitor.mold_temp%>
-            <% } %>
+                    <% } %>
         </div>
         <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
-        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="mold_ucl"></div>
+        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="mold_ucl">
+        </div>
         <div class="sep" style="top:6.5vh;"></div>
         <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
         <div class="inputn" id="set_mold">
             <% if(setup){%>
                 <%=setup.mold_temp%>
-            <%}%>
+                    <%}%>
         </div>
         <div class="sep" style="top:18.5vh;"></div>
         <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
-        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="mold_lcl"></div>
+        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="mold_lcl">
+        </div>
     </div>
 
     <!-- 사출속도 -->
     <div class="wrapper1" style="top:36.2vh; left: 5.7vw;">사출속도</div>
-    <div class="wrapper modal_btn" onclick="modal('inj')" style="position: absolute; top: 41.5vh; left:5.7vw; color:white;">
+    <div class="wrapper modal_btn" onclick="modal('inj')"
+        style="position: absolute; top: 41.5vh; left:5.7vw; color:white;">
         <div class="dong">
-            <div class="uniti" style="left:2vw; font-size:20px">mm/s</div>
+            <div class="uniti" style="left:1.8vw; font-size:20px">mm/s</div>
         </div>
         <div class="unit" id="now_injection_speed">
             <% if(monitor){%>
                 <%= monitor.injection_speed%>
-            <% } %>
+                    <% } %>
         </div>
         <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
         <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="inj_ucl"></div>
@@ -382,87 +253,106 @@
         <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
         <div class="sep" style="top:18.5vh;"></div>
         <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
-        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="inj_lcl"></div>
+        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="inj_lcl">
+        </div>
         <div class="inputn" id="set_inj">
             <% if(setup){%>
                 <%=setup.injection_speed%>
-            <%}%>
+                    <%}%>
         </div>
     </div>
     </div>
     <!-- 보압 -->
     <div class="wrapper1" style="top:36.2vh; left:29.2vw;">보압</div>
-    <div class="wrapper modal_btn" onclick="modal('hold')" style="position: absolute; top: 41.5vh; left:29.2vw; color:white;"> 
+    <div class="wrapper modal_btn" onclick="modal('hold')"
+        style="position: absolute; top: 41.5vh; left:29.2vw; color:white;">
         <div class="dong">
-            <div class="uniti" style="left:1.1vw; font-size:17px;">kgf/cm<sup>3</sup></div>
+            <div class="uniti" style="left:1.4vw; font-size:19px;">kgf/cm<sup>3</sup></div>
         </div>
         <div class="unit" id="now_hold_pressure">
             <% if(monitor){%>
                 <%= monitor.hold_pressure%>
-            <% } %>
+                    <% } %>
         </div>
         <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
-        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="hold_ucl"></div>
+        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="hold_ucl">
+        </div>
         <div class="sep" style="top:6.5vh;"></div>
         <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
         <div class="sep" style="top:18.5vh;"></div>
         <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
-        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="hold_lcl"></div>        
-        <div class="inputn" id="set_hold">  
+        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="hold_lcl">
+        </div>
+        <div class="inputn" id="set_hold">
             <% if(setup){%>
                 <%=setup.hold_pressure%>
-            <%}%>
-        </div>        
+                    <%}%>
+        </div>
     </div>
     </div>
 
     <!-- 생산현황 -->
     <div class="wrapper1" style="top:4.7vh; left: 52.7vw;">생산현황</div>
-    <div class="wrapper" style="position: absolute; height:57vh; top: 10vh; left:52.7vw; background-color:rgb(40, 44, 48);">
-       
+    <div class="wrapper"
+        style="position: absolute; height:57vh; top: 10vh; left:52.7vw; background-color:rgb(40, 44, 48);">
+
         <div class="wrapper3" style="top:9.8vh;">생산목표</div>
         <div style="position: absolute; left:15vw; top:11vh; font-size:x-large;">
-            <b><% if(dir){%>
-                <%= order[0].total%>
-            <%}%></b>
+            <b>
+                <% if(dir){%>
+                    <%= order[0].total%>
+                        <%}%>
+            </b>
         </div>
         <div class="wrapper3" style="top:20.1vh;">생산실적</div>
-        <div id = "cnt" style="position: absolute; top:21vh; left:15vw; font-size:x-large;">
-            <b><% if(monitor){%>
-                <%= monitor.cnt%>
-            <% } %></b>
+        <div id="cnt" style="position: absolute; top:21vh; left:15vw; font-size:x-large;">
+            <b>
+                <% if(monitor){%>
+                    <%= monitor.cnt%>
+                        <% } %>
+            </b>
         </div>
         <div class="wrapper3" style="top:30.4vh;">달성률</div>
-        <div id = "qnt" style="position: absolute; top:31vh; left:15vw; font-size:x-large; color:rgb(53, 190, 71)">
-            <b><% if(monitor) {%>
-                <%= (monitor.cnt/order[0].total*100).toFixed(2)%>%
-            <%}%></b>
+        <div id="qnt" style="position: absolute; top:31vh; left:15vw; font-size:x-large; color:rgb(53, 190, 71)">
+            <b>
+                <% if(monitor) {%>
+                    <%= (monitor.cnt/order[0].total*100).toFixed(2)%>%
+                        <%}%>
+            </b>
         </div>
         <div class="wrapper3" style="top:40.7vh;">불량률</div>
-        <div id = "def" style="position: absolute; top:41vh; left:15vw; font-size:x-large; color:rgb(199, 85, 43)">
-            <b><% if(monitor) {%>
-                <%= (monitor.def/monitor.cnt).toFixed(2)*100%>%
-            <%}%></b>
+        <div id="def" style="position: absolute; top:41vh; left:15vw; font-size:x-large; color:rgb(199, 85, 43)">
+            <b>
+                <% if(monitor) {%>
+                    <%= (monitor.def/monitor.cnt).toFixed(2)*100%>%
+                        <%}%>
+            </b>
         </div>
     </div>
 
     <!-- 오늘의 날씨 -->
     <div class="wrapper1" style="top:4.7vh; left:76.2vw;">오늘 날씨</div>
-    <div class="wrapper" id="weather" style="position: absolute; top: 10vh; left:76.2vw; background-color:rgb(40, 44, 48);">
-        
+    <div class="wrapper" id="weather"
+        style="position: absolute; top: 10vh; left:76.2vw; background-color:rgb(40, 44, 48);">
+
     </div>
     <!-- 작업지시현황 -->
     <div class="wrapper1" style="top:36.2vh; left: 76.2vw;">작업지시현황</div>
     <div class="wrapper" style="position: absolute; top: 41.5vh; left:76.2vw; background-color:rgb(40, 44, 48);">
-        <div class="wrapper3" style="top:4.5vh;">기업수주</div> 
-        <div style="position: absolute; left: 17vw; top:5vh; font-size: 25px;"><%=orders_qty%></div>
+        <div class="wrapper3" style="top:4.5vh;">기업수주</div>
+        <div style="position: absolute; left: 17vw; top:5vh; font-size: 25px;">
+            <%=orders_qty%>
+        </div>
         <div class="wrapper3" style="top:13.5vh;">작업지시</div>
-        <div style="position: absolute; left: 17vw; top:14vh; font-size: 25px;"><%=order_qty%></div>
+        <div style="position: absolute; left: 17vw; top:14vh; font-size: 25px;">
+            <%=order_qty%>
+        </div>
     </div>
-    
+
     <!-- 공정 프로세스 -->
     <div class="wrapper1" style="width:93.6vw; position:absolute; left:5.7vw; top:67.7vh; color:white;">공정 프로세스</div>
-    <div class="wrapper" style="position:absolute; height:25vh; top:73vh; left:5.7vw; width:93.6vw; background-color:rgb(40, 44, 48);">
+    <div class="wrapper"
+        style="position:absolute; height:25vh; top:73vh; left:5.7vw; width:93.6vw; background-color:rgb(40, 44, 48);">
         <div id="b1">
             <div align="center" class="pr_box1" style="left:3vw; ">1</div>
             <div align="center" class="pr_box2" style="left:3vw; ">Ready</div>
@@ -483,13 +373,15 @@
             <div align="center" class="pr_box1" style="left:71vw;"> 5</div>
             <div align="center" class="pr_box2" style="left:71vw;">Seperating</div>
         </div>
-    
+
         <!-- 시작/종료/정지/입력 버튼 -->
-        <button type="button" id = "onoff" class="btn btn-light" style="color:black; width:8vw; height:6vh; position: absolute; right:1.5vw; top:6vh; font-size:22px; line-height:3vh;"
-        onclick="start()" disabled>
-        <b>ON/OFF</b>
+        <button type="button" id="onoff" class="btn btn-light"
+            style="color:black; width:8vw; height:6vh; position: absolute; right:1.5vw; top:6vh; font-size:22px; line-height:3vh;"
+            onclick="start()" disabled>
+            <b>ON/OFF</b>
         </button>
-        <button type="button" class="btn btn-danger" style="width:8vw; height:6vh; position: absolute; right:1.5vw; top:13vh; font-size:20px; line-height:3.5vh;"
+        <button type="button" class="btn btn-danger"
+            style="width:8vw; height:6vh; position: absolute; right:1.5vw; top:13vh; font-size:20px; line-height:3.5vh;"
             onclick="stop()">
             <b>비상정지</b>
         </button>
@@ -503,54 +395,53 @@
                 $("#linkcode").text("작업자")
             }
 
-            if (("<%=dir%>" == "true") && $("#set_melt").text().trim()!=""
-            && $("#set_mold").text().trim()!="" && $("#set_inj").text().trim()!=""
-            && $("#set_hold").text().trim()!=""){
+            if (("<%=dir%>" == "true") && $("#set_melt").text().trim() != ""
+                && $("#set_mold").text().trim() != "" && $("#set_inj").text().trim() != ""
+                && $("#set_hold").text().trim() != "") {
                 $("#onoff").removeAttr("disabled")
-            }else{
+            } else {
                 $("#onoff").attr("disabled", "disabled")
             }
-            
-            
 
-            $("#melt_ucl").text((parseFloat("<%=melt[0]%>")+2*parseFloat("<%=melt[1]%>")).toFixed(2))
-            $("#melt_lcl").text((parseFloat("<%=melt[0]%>")-2*parseFloat("<%=melt[1]%>")).toFixed(2))
-            $("#mold_ucl").text((parseFloat("<%=mold[0]%>")+2*parseFloat("<%=mold[1]%>")).toFixed(2))
-            $("#mold_lcl").text((parseFloat("<%=mold[0]%>")-2*parseFloat("<%=mold[1]%>")).toFixed(2))
-            $("#inj_ucl").text((parseFloat("<%=inj[0]%>")+2*parseFloat("<%=inj[1]%>")).toFixed(2))
-            $("#inj_lcl").text((parseFloat("<%=inj[0]%>")-2*parseFloat("<%=inj[1]%>")).toFixed(2))
-            $("#hold_ucl").text((parseFloat("<%=hold[0]%>")+2*parseFloat("<%=hold[1]%>")).toFixed(2))
-            $("#hold_lcl").text((parseFloat("<%=hold[0]%>")-2*parseFloat("<%=hold[1]%>")).toFixed(2))
 
-            let weatherIcon={
-                "01" : `<ion-icon name='sunny-outline' style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
-                "02" : `<ion-icon name="partly-sunny-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
-                "03" : `<ion-icon name="cloudy-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
-                "04" : `<i class="fas fa-cloud" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
-                "09" : `<i class="fas fa-cloud-sun-rain" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
-                "10" : `<ion-icon name="rainy-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
-                "11" : `<ion-icon name="thunderstorm-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
-                "13" : `<i class="far fa-snowflake" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
-                "50" : `<i class="fas fa-smog" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`
+
+            $("#melt_ucl").text((parseFloat("<%=melt[0]%>") + 2 * parseFloat("<%=melt[1]%>")).toFixed(2))
+            $("#melt_lcl").text((parseFloat("<%=melt[0]%>") - 2 * parseFloat("<%=melt[1]%>")).toFixed(2))
+            $("#mold_ucl").text((parseFloat("<%=mold[0]%>") + 2 * parseFloat("<%=mold[1]%>")).toFixed(2))
+            $("#mold_lcl").text((parseFloat("<%=mold[0]%>") - 2 * parseFloat("<%=mold[1]%>")).toFixed(2))
+            $("#inj_ucl").text((parseFloat("<%=inj[0]%>") + 2 * parseFloat("<%=inj[1]%>")).toFixed(2))
+            $("#inj_lcl").text((parseFloat("<%=inj[0]%>") - 2 * parseFloat("<%=inj[1]%>")).toFixed(2))
+            $("#hold_ucl").text((parseFloat("<%=hold[0]%>") + 2 * parseFloat("<%=hold[1]%>")).toFixed(2))
+            $("#hold_lcl").text((parseFloat("<%=hold[0]%>") - 2 * parseFloat("<%=hold[1]%>")).toFixed(2))
+
+            let weatherIcon = {
+                "01": `<ion-icon name='sunny-outline' style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "02": `<ion-icon name="partly-sunny-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "03": `<ion-icon name="cloudy-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "04": `<i class="fas fa-cloud" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
+                "09": `<i class="fas fa-cloud-sun-rain" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
+                "10": `<ion-icon name="rainy-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "11": `<ion-icon name="thunderstorm-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "13": `<i class="far fa-snowflake" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
+                "50": `<i class="fas fa-smog" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`
             }
             $.ajax({
-                url : "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=e30c70d1d9ee1045d773798f2cdabbbb&units=metric",
-                dataType : "json",
-                type : "GET",
-                success : function(data){
-                    console.log(data)
-                    var $Icon = (data.weather[0].icon).substr(0,2)
+                url: "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=e30c70d1d9ee1045d773798f2cdabbbb&units=metric",
+                dataType: "json",
+                type: "GET",
+                success: function (data) {
+                    var $Icon = (data.weather[0].icon).substr(0, 2)
                     var $Temp = Math.floor(data.main.temp);
                     var $humi = data.main.humidity;
                     $("#weather").html(
-                    weatherIcon[$Icon]+`
-                    <div style='font-weight:bold; font-size:1.5em; position: absolute; left:15vw; top:6vh'>온도 : `+$Temp+`</div>
-                    <div style='font-weight:bold; font-size:1.5em; position: absolute; left:15vw; top:12vh'>습도 : `+$humi+`</div>
+                        weatherIcon[$Icon] + `
+                    <div style='font-weight:bold; font-size:1.5em; position: absolute; left:15vw; top:6vh'>온도 : `+ $Temp + `</div>
+                    <div style='font-weight:bold; font-size:1.5em; position: absolute; left:15vw; top:12vh'>습도 : `+ $humi + `</div>
                     `)
                 }
             })
 
-            if ("<%=run%>" == "true"){
+            if ("<%=run%>" == "true") {
                 start()
             }
         })
@@ -586,34 +477,34 @@
             $(".modal_wrap").css("display", "none")
             $(".black_bg").css("display", "none")
         })
-        function modal(name){
-            if (name == "melt"){
-                $("#ucl").text((parseFloat("<%=melt[0]%>")+2*parseFloat("<%=melt[1]%>")).toFixed(2))
+        function modal(name) {
+            if (name == "melt") {
+                $("#ucl").text((parseFloat("<%=melt[0]%>") + 2 * parseFloat("<%=melt[1]%>")).toFixed(2))
                 $("#cl").text(parseFloat("<%=melt[0]%>").toFixed(2))
-                $("#lcl").text((parseFloat("<%=melt[0]%>")-2*parseFloat("<%=melt[1]%>")).toFixed(2))
+                $("#lcl").text((parseFloat("<%=melt[0]%>") - 2 * parseFloat("<%=melt[1]%>")).toFixed(2))
                 $(".modal_name").text("용융온도")
-            }else if (name == "mold"){
-                $("#ucl").text((parseFloat("<%=mold[0]%>")+2*parseFloat("<%=mold[1]%>")).toFixed(2))
+            } else if (name == "mold") {
+                $("#ucl").text((parseFloat("<%=mold[0]%>") + 2 * parseFloat("<%=mold[1]%>")).toFixed(2))
                 $("#cl").text(parseFloat("<%=mold[0]%>").toFixed(2))
-                $("#lcl").text((parseFloat("<%=mold[0]%>")-2*parseFloat("<%=mold[1]%>")).toFixed(2))
+                $("#lcl").text((parseFloat("<%=mold[0]%>") - 2 * parseFloat("<%=mold[1]%>")).toFixed(2))
                 $(".modal_name").text("금형온도")
-            }else if (name == "hold"){
-                $("#ucl").text((parseFloat("<%=hold[0]%>")+2*parseFloat("<%=hold[1]%>")).toFixed(2))
+            } else if (name == "hold") {
+                $("#ucl").text((parseFloat("<%=hold[0]%>") + 2 * parseFloat("<%=hold[1]%>")).toFixed(2))
                 $("#cl").text(parseFloat("<%=hold[0]%>").toFixed(2))
-                $("#lcl").text((parseFloat("<%=hold[0]%>")-2*parseFloat("<%=hold[1]%>")).toFixed(2))
+                $("#lcl").text((parseFloat("<%=hold[0]%>") - 2 * parseFloat("<%=hold[1]%>")).toFixed(2))
                 $(".modal_name").text("보압")
-            }else{
-                $("#ucl").text((parseFloat("<%=inj[0]%>")+2*parseFloat("<%=inj[1]%>")).toFixed(2))
+            } else {
+                $("#ucl").text((parseFloat("<%=inj[0]%>") + 2 * parseFloat("<%=inj[1]%>")).toFixed(2))
                 $("#cl").text(parseFloat("<%=inj[0]%>").toFixed(2))
-                $("#lcl").text((parseFloat("<%=inj[0]%>")-2*parseFloat("<%=inj[1]%>")).toFixed(2))
+                $("#lcl").text((parseFloat("<%=inj[0]%>") - 2 * parseFloat("<%=inj[1]%>")).toFixed(2))
                 $(".modal_name").text("사출속도")
             }
         }
 
-        $("#register").click(function(){
+        $("#register").click(function () {
             var name = $(".modal_name").text();
             var set = $("#set").val();
-            location.href = "/register?name="+name+"&set="+set
+            location.href = "/register?name=" + name + "&set=" + set
         })
 
     </script>
