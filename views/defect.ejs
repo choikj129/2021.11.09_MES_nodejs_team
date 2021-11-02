@@ -34,7 +34,7 @@
 <body style="background-color: black; overflow-x:hidden;">
 
   <!--불량품 차트-->
-  <div style="position:absolute;left:-2vw; top:10vh;">
+  <div style="position:absolute; left:-2vw; top:10vh;">
     <canvas id="pieChart" style="width:40vw; height:40vh;"></canvas>
   </div>
   <script>
@@ -73,46 +73,46 @@
     var pieChart = new Chart(canvas, config);
   </script>
 
-    <!--불량유형 차트-->
-    <div style="position:absolute;left:-2vw; top:55vh;">
-      <canvas id="pieChart" style="width:40vw; height:40vh;"></canvas>
-    </div>
-    <script>
-      var dataset = {
-        label: "불량유형",
-        backgroundColor: ['green', 'greenyellow', 'goldenrod'],//라벨별 컬러설정 
-        borderColor: 'white', data: ["<%=Y%>", "<%=N%>", "<%=N%>" ]
-      }
-      var labels = ['유형1', '유형2', '유형3'];
-      var datasets = { datasets: [dataset], labels: labels }
-  
-      var config = {
-        type: 'pie', data: datasets, //데이터 셋 
-        options: {
-          responsive: true,
-          maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
-          legend: {
-            position: 'bottom',
+  <!-- 불량유형 차트 -->
+  <div style="position:absolute; left:-2vw; top:52vh;">
+    <canvas id="pieChart1" style="width:40vw; height:40vh;"></canvas>
+  </div>
+  <script>
+    var dataset = {
+      label: "불량유형",
+      backgroundColor: ['green', 'greenyellow', 'goldenrod'],//라벨별 컬러설정 
+      borderColor: 'white', data: ["<%=Y%>", "<%=N%>", "<%=Y%>" ]
+    }
+    var labels = ['유형1', '유형2', '유형3'];
+    var datasets = { datasets: [dataset], labels: labels }
+
+    var config = {
+      type: 'pie', data: datasets, //데이터 셋 
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, //true 하게 되면 캔버스 width,height에 따라 리사이징된다. 
+        legend: {
+          position: 'bottom',
+          fontColor: 'white',
+          align: 'center',
+          display: true,
+          fullWidth: true,
+          labels: { fontColor: 'white' }
+        },
+        plugins: {
+          labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
+            render: 'value%',
             fontColor: 'white',
-            align: 'center',
-            display: true,
-            fullWidth: true,
-            labels: { fontColor: 'white' }
-          },
-          plugins: {
-            labels: {   //두번째 script태그를 설정하면 각 항목에다가 원하는 데이터 라벨링을 할 수 있다. 
-              render: 'value%',
-              fontColor: 'white',
-              fontSize: 17,
-              precision: 2
-            }
+            fontSize: 17,
+            precision: 2
           }
         }
       }
-  
-      var canvas = document.getElementById('pieChart');
-      var pieChart = new Chart(canvas, config);
-    </script>
+    }
+
+    var canvas = document.getElementById('pieChart1');
+    var pieChart1 = new Chart(canvas, config);
+  </script>
   
 
   <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width:57vw;">

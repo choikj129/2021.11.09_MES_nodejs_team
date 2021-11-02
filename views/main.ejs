@@ -129,22 +129,6 @@
                 border-right: none;
                 border-top: none;
             }
-            /* .modal_wrap {
-                display: none;
-                width: 400px;
-                height: 320px;
-                position: absolute;
-                margin: -200px 0 0 -200px;
-                background: rgb(210, 215, 221);
-                z-index: 2;
-            }
-            .black_bg{
-                display: none;
-                position: fixed;
-                top:0; left: 0; bottom: 0; right: 0;
-                background: rgba(0, 0, 0, 0.8);
-                z-index : 1;
-            } */
             .modal_close {
                 color: white;
                 width: 4.5vw;
@@ -263,34 +247,6 @@
 
 <body style="background-color: black; overflow-x: hidden; overflow-y:hidden;">
 
-    <!-- 자판  -->
-    <!-- <table class="table table-bordered " id="keyboard">
-        <tr>
-            <td onclick="add(1)">1</td>
-            <td onclick="add(2)">2</td>
-            <td onclick="add(3)">3</td>
-        </tr>
-        <tr>
-            <td onclick="add(4)">4</td>
-            <td onclick="add(5)">5</td>
-            <td onclick="add(6)">6</td>
-        </tr>
-        <tr>
-            <td onclick="add(7)">7</td>
-            <td onclick="add(8)">8</td>
-            <td onclick="add(9)">9</td>
-        </tr>
-        <tr>
-            <td onclick="reset()">AC</td>
-            <td onclick="add(0)">0</td>
-            <td onclick="add('.')">.</td>
-        </tr>
-        <tr>
-            <td colspan="2" id="ok">OK</td>
-            <td onclick="del()">←</td>
-        </tr>
-    </table> -->
-
     <!--결함발생 alert -->
     <div class="alertI">
         <img src="/img/alert.WEBP" style="width:6vw; height:10vh; position:absolute; right:3vw; top:32vh;">
@@ -298,7 +254,7 @@
 
     <!-- 모달 -->
     <div class="black_bg"></div>
-    <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170);"></div>
+    <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170); font-size: 19px; line-height:5.3vh; font-weight: bold;"></div>
     <div class="modal_wrap">
         <div class="modal_box1" style="top:5vh;"><b>상한값</b></div>
         <div class="modal_box2" style="top:5vh;" id="ucl"></div>
@@ -369,7 +325,7 @@
     <div class="wrapper1" style="top:36.2vh; left: 5.7vw;">사출속도</div>
     <div class="wrapper modal_btn" onclick="modal('inj')" style="position: absolute; top: 41.5vh; left:5.7vw; color:white;">
         <div class="dong">
-            <div class="uniti" style="left:2vw; font-size:20px">mm/s</div>
+            <div class="uniti" style="left:1.8vw; font-size:20px">mm/s</div>
         </div>
         <div class="unit" id="now_injection_speed">
             <% if(monitor){%>
@@ -394,7 +350,7 @@
     <div class="wrapper1" style="top:36.2vh; left:29.2vw;">보압</div>
     <div class="wrapper modal_btn" onclick="modal('hold')" style="position: absolute; top: 41.5vh; left:29.2vw; color:white;"> 
         <div class="dong">
-            <div class="uniti" style="left:1.1vw; font-size:17px;">kgf/cm<sup>3</sup></div>
+            <div class="uniti" style="left:1.4vw; font-size:19px;">kgf/cm<sup>3</sup></div>
         </div>
         <div class="unit" id="now_hold_pressure">
             <% if(monitor){%>
