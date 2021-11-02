@@ -5,6 +5,8 @@ const data = JSON.parse(fs.readFileSync(__dirname + '/db.json'));
 const mysql = require("mysql2");
 const moment = require("moment");
 const session = require("express-session");
+const update = require("./update")
+const ps = require("python-shell");
 
 const connection = mysql.createConnection({
     host : data.host,
@@ -108,9 +110,8 @@ app.get("/time", function(req, res){
     })
 })
 
-var interval;
-
 app.get("/main", function(req, res){
+    update.test()
     console.log("run : "+req.session.run)
     req.session.dir = false;
     var date = moment().format("YYYYMMDD")
@@ -132,6 +133,7 @@ app.get("/main", function(req, res){
                             if (err0){
                                 console.log(err0)
                             }else{
+
                                 connection.query(
                                     `select count(*) orders_qty from orders where date(orders_date)=?`,
                                     [date],
@@ -232,42 +234,16 @@ app.get("/main_update", function(req, res){
                     }
                     if (req.session.run == false){
                         req.session.run = true;
-                        interval = setInterval(function () {
-                            moldt = (Math.random()*10 + req.session.set_mold-5).toFixed(2)
-                            meltt = (Math.random()*10 + req.session.set_melt-5).toFixed(2)
-                            holdp = (Math.random()*6 + req.session.set_hold-3).toFixed(2)
-                            injs = (Math.random()*6 + req.session.set_inj-3).toFixed(2)
-                            var defect = "Y"
-                            if(moldt<mold[0]-2*mold[1] || moldt>mold[0]+2*mold[1]
-                            || meltt<melt[0]-2*melt[1] || meltt>melt[0]+2*melt[1]
-                            || holdp<hold[0]-2*hold[1] || holdp>hold[0]+2*hold[1]
-                            || injs<inj[0]-2*inj[1] || injs>inj[0]+2*inj[1]){
-                                defect = "N"
-                            }
-                            connection.query(
-                                `insert into monitoring` + date + `
-                                 (mold_temp, melt_temp, injection_speed, hold_pressure, injection_time, hold_time, filling_time, cycle_time, defect, date)
-                                 values(?, ?, ?, ?, 9.58, 7.13, 4.47, 59.52, ?, now())`,
-                                [moldt, meltt, injs, holdp, defect],
-                                function (err) {
-                                    if (err) {
-                                        console.log(err)
-                                    }
-                                }
-                            )
-                        }, 2000)
+                        update.run(req.session.set_mold, req.session.set_melt, req.session.set_hold, req.session.set_inj,
+                            req.session.mold, req.session.melt, req.session.hold, req.session.inj)
                     }
-                    if (result[0]!=undefined && result[0].total==result[0].cnt){
-                        res.redirect("/stop")
-                    }else{
-                        res.json({
-                            "monitor" : result[0],
-                            "melt" : req.session.melt,
-                            "mold" : req.session.mold,
-                            "hold" : req.session.hold,
-                            "inj" : req.session.inj
-                        })
-                    }
+                    res.json({
+                        "monitor" : result[0],
+                        "melt" : req.session.melt,
+                        "mold" : req.session.mold,
+                        "hold" : req.session.hold,
+                        "inj" : req.session.inj
+                    })
                 }
             }
         )
@@ -329,10 +305,9 @@ app.get("/register", function(req, res){
 
 app.get("/stop", function(req, res){
     req.session.run = false;
+    update.stop()
     var url = req.query.url
-    clearInterval(interval);
-    res.redirect("/"+url)
-    
+    res.redirect("/"+url) 
 })
 
 const defect = require("./def");

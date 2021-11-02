@@ -286,11 +286,6 @@
                 $("#tbody2 tr:eq(" + i + ")>td:eq(6)").html(qty)
                 $("#tbody2 tr:eq(" + i + ")>td:eq(7)").html("완료")
                 cnt -= qty
-                $.getJSON("/product/register", {
-                  id: parseInt($("#tbody2 tr:eq(" + i + ")>td:eq(1)").html())
-                },
-                  function () {
-                  })
               } else if (cnt == 0) {
                 $("#tbody2 tr:eq(" + i + ")>td:eq(6)").html(cnt)
                 $("#tbody2 tr:eq(" + i + ")>td:eq(7)").html("대기")

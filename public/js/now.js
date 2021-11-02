@@ -51,11 +51,11 @@
 function now(){
     $.getJSON("/main_update",
     function(result){
-        var error = 0;
-        var mold = result.monitor.mold_temp
-        var melt = result.monitor.melt_temp
-        var hold = result.monitor.hold_pressure
-        var inj = result.monitor.injection_speed
+        if(result.monitor.cnt==result.monitor.total){
+            clearInterval(interval);
+            clearInterval(interval2);
+            location.href = "/stop?url=main"
+        }
         $("#now_mold_temp").text(result.monitor.mold_temp)
         $("#now_melt_temp").text(result.monitor.melt_temp)
         $("#now_injection_speed").text(result.monitor.injection_speed)
@@ -67,62 +67,32 @@ function now(){
         if (result.monitor.mold_temp<result.mold[0]-2*result.mold[1]
         || result.monitor.mold_temp>result.mold[0]+2*result.mold[1]){
             $("#now_mold_temp").css("background-color", "#F48453")
-            mold+="x"
-            error=1
+            $("#mold_box").css("border", "4px solid red")
         }else{
-            $("#now_mold_temp").css("background-color", "")
-            mold+="o"
+            $("#mold_box").css("border", "4px solid rgb(30, 255, 180)")
         }
         if (result.monitor.melt_temp<result.melt[0]-2*result.melt[1] 
         || result.monitor.melt_temp>result.melt[0]+2*result.melt[1]){
-            $("#now_melt_temp").css("background-color", "#F48453")
-            melt+="x"
-            error=1
+            $("#melt_box").css("border", "4px solid red")
         }else{
-            $("#now_melt_temp").css("background-color", "")
-            melt+="o"
+            $("#melt_box").css("border", "4px solid rgb(30, 255, 180)")
         }
         if (result.monitor.injection_speed<result.inj[0]-2*result.inj[1]
         || result.monitor.injection_speed>result.inj[0]+2*result.inj[1]){
-            $("#now_injection_speed").css("background-color", "#F48453")
-            inj+="x"
-            error=1            
+            $("#inj_box").css("border", "4px solid red")
         }else{
-            $("#now_injection_speed").css("background-color", "")
-            inj+="o"
+            $("#inj_box").css("border", "4px solid rgb(30, 255, 180)")
         }
         if (result.monitor.hold_pressure<result.hold[0]-2*result.hold[1]
         || result.monitor.hold_pressure>result.hold[0]+2*result.hold[1]){
-            $("#now_hold_pressure").css("background-color", "#F48453")
-            hold+="x"
-            error=1
+            $("#hold_box").css("border", "4px solid red")
         }else{
-            $("#now_hold_pressure").css("background-color", "")
-            hold+="o"
-        }
-        if(error==1){
-            $(".alertI").css("display","block")
-            $.getJSON("/defect/update",
-            {
-                _id : result.monitor.monitor_id,
-                date : result.monitor.date,
-                mold : mold,
-                melt : melt,
-                hold : hold,
-                inj : inj
-            },
-            function(result){
-
-            }
-            )
-        }
-        if(result.monitor.cnt==result.monitor.total){
-            $("#onoff").attr("disabled", "disabled")
-            stop()
+            $("#hold_box").css("border", "4px solid rgb(30, 255, 180)")
         }
     })
 }
 var interval;
+var interval2;
 function start(){
     interval = setInterval(function(){
         now()
@@ -161,7 +131,6 @@ function start(){
             }, 400);
         }, 500);
     }, 2000);
-    
 }
 
 function stop(){
