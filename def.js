@@ -90,7 +90,7 @@ router.get("/search", function(req,res){
     var date2 = req.query.date2;
     console.log(date, date2)
     connection.query(
-        `select date,cause,error from defect 
+        `select date,melt,mold,hold,injection,cause from defect 
         where date(date) between ? and ?
         order by defect_id desc`,
         [date, date2],
@@ -104,6 +104,22 @@ router.get("/search", function(req,res){
             }
         }
     )           
+})
+router.get("/reset", function(req,res){
+    connection.query(
+        `select * from defect order by date desc`,
+        function(err,result){
+            if(err){
+                console.log(err)
+            }else{
+                console.log(result)
+                res.json({
+                    "defect" : result
+                })
+            }
+
+        }
+    )
 })
 
 router.get("/ajax", function(req, res){

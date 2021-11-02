@@ -131,11 +131,11 @@
       <thead class="thead" style="width:57vw;">
         <tr>
           <th scope="col" style="width: 17vw;">시간</th>
-          <th scope="col" style="width: 15vw">불량 유형</th>
           <th scope="col" style="width: 6vw;">용융온도</th>
           <th scope="col" style="width: 6vw;">금형온도</th>
           <th scope="col" style="width: 6vw;">사출속도</th>
           <th scope="col" style="width: 6vw;">보압</th>
+          <th scope="col" style="width: 15vw">불량 유형</th>
         </tr>
       </thead>
       <tbody id="tbody2">
@@ -143,9 +143,6 @@
           <tr>
             <td>
               <%=defect[i].date %>
-            </td>
-            <td>
-              <%=defect[i].cause %>
             </td>
             <td>
               <%=defect[i].melt %>
@@ -158,6 +155,9 @@
             </td>
             <td>
               <%=defect[i].injection %>
+            </td>
+            <td>
+              <%=defect[i].cause %>
             </td>
           </tr>
           <% } %>
@@ -220,8 +220,35 @@
             body += "</tr>"
           }
           $("tbody").html(body)
+          $(".pagination").html("")
+          pagination()
         })
     }
+    function reset(){
+            $("#tbody").html("")
+            $("#datepicker").val("")
+            $("#datepicker option:eq(0)").prop("selected", true)
+            $("#datepicker2").val("")
+            $("#datepicker2 option:eq(0)").prop("selected", true)
+            $.getJSON("/defect/reset",
+            function(result){ 
+              var body;
+              for(var i=0; i<result.defect.length; i++){
+                body += "<tr>"
+                  for (key in result.defect[0]){
+                    if(key=="pp_id"){
+                            continue
+                    }
+                    body += "<td>"+result.defect[i][key]+"</td>"
+                  }
+                body += "</tr>"
+              }
+              $("#tbody2").html(body)
+              $(".pagination").html("")
+          pagination()
+            }
+            )
+        }
     if ("<%=run%>"=="true"){
       interval = setInterval(function () {
         $.getJSON("/defect/ajax",
