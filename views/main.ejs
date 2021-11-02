@@ -153,148 +153,10 @@
 
 <body style="background-color: black; overflow-x: hidden; overflow-y:hidden;">
 
-    <!--결함발생 alert -->
-    <div class="alertI">
-        <img src="/img/alert.WEBP" style="width:6vw; height:10vh; position:absolute; right:3vw; top:32vh;">
-    </div>
-
-    <!-- 모달 -->
-    <div class="black_bg"></div>
-    <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170); 
-    font-size: 19px; line-height:5.3vh; font-weight: bold;"></div>
-    <div class="modal_wrap">
-        <div class="modal_box1" style="top:5vh;"><b>상한값</b></div>
-        <div class="modal_box2" style="top:5vh;" id="ucl"></div>
-        <div class="modal_box1" style="top:11.4vh;"><b>추천최적값</b></div>
-        <div class="modal_box2" style="top:11.4vh;" id="cl"></div>
-        <div class="modal_box1" style="top:17.8vh;"><b>하한값</b></div>
-        <div class="modal_box2" style="top:17.8vh;" id="lcl"></div>
-        <div class="modal_box1" style="top:24.2vh;"><b>입력값</b></div>
-        <input type="text" class="modal_box2" id="set" style="top:24.2vh; border:none;">
-        <div align="center">
-            <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
-            height:5.6vh; font-size:17px; line-height: 3.3vh;" id="register"><b>등록</b></button>
-            <button class="modal_close btn btn-secondary"
-                style="position:absolute; bottom: 2vh; right: 9vw;
-            width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 3.3vh; font-size:17.5px"><b>취소</b></button>
-        </div>
-    </div>
-
-    <!-- 용융온도 -->
-    <div class="wrapper1" style="top:4.7vh; left: 5.7vw;">용융 온도</div>
-    <div class="wrapper modal_btn" onclick="modal('melt')"
-        style="position: absolute; top: 10vh; left:5.7vw; color:white;">
-        <div class="dong" id="melt_box">
-            <div class="uniti">°C</div>
-        </div>
-        <div class="unit" id="now_melt_temp">
-            <% if(monitor){%>
-                <%= monitor.melt_temp%>
-                    <% } %>
-        </div>
-        <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
-        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="melt_ucl">
-        </div>
-        <div class="sep" style="top:6.5vh;"></div>
-        <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
-        <div class="inputn" id="set_melt">
-            <% if(setup){%>
-                <%=setup.melt_temp%>
-                    <%}%>
-        </div>
-        <div class="sep" style="top:18.5vh;"></div>
-        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
-        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="melt_lcl">
-        </div>
-    </div>
-    <!-- 금형온도 -->
-    <div class="wrapper1" style="top:4.7vh; left: 29.2vw;">금형 온도</div>
-    <div class="wrapper modal_btn" onclick="modal('mold')"
-        style="position: absolute; top: 10vh; left:29.2vw; color:white;">
-        <div class="dong" id="mold_box">
-            <div class="uniti">°C</div>
-        </div>
-        <div class="unit" id="now_mold_temp">
-            <% if(monitor){%>
-                <%= monitor.mold_temp%>
-                    <% } %>
-        </div>
-        <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
-        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="mold_ucl">
-        </div>
-        <div class="sep" style="top:6.5vh;"></div>
-        <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
-        <div class="inputn" id="set_mold">
-            <% if(setup){%>
-                <%=setup.mold_temp%>
-                    <%}%>
-        </div>
-        <div class="sep" style="top:18.5vh;"></div>
-        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
-        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="mold_lcl">
-        </div>
-    </div>
-
-    <!-- 사출속도 -->
-    <div class="wrapper1" style="top:36.2vh; left: 5.7vw;">사출속도</div>
-    <div class="wrapper modal_btn" onclick="modal('inj')"
-        style="position: absolute; top: 41.5vh; left:5.7vw; color:white;">
-        <div class="dong" id="inj_box">
-            <div class="uniti" style="left:1.8vw; font-size:20px">mm/s</div>
-        </div>
-        <div class="unit" id="now_injection_speed">
-            <% if(monitor){%>
-                <%= monitor.injection_speed%>
-                    <% } %>
-        </div>
-        <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
-        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="inj_ucl"></div>
-        <div class="sep" style="top:6.5vh;"></div>
-        <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
-        <div class="sep" style="top:18.5vh;"></div>
-        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
-        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="inj_lcl">
-        </div>
-        <div class="inputn" id="set_inj">
-            <% if(setup){%>
-                <%=setup.injection_speed%>
-                    <%}%>
-        </div>
-    </div>
-    </div>
-    <!-- 보압 -->
-    <div class="wrapper1" style="top:36.2vh; left:29.2vw;">보압</div>
-    <div class="wrapper modal_btn" onclick="modal('hold')"
-        style="position: absolute; top: 41.5vh; left:29.2vw; color:white;">
-        <div class="dong" id="hold_box">
-            <div class="uniti" style="left:1.4vw; font-size:19px;">kgf/cm<sup>3</sup></div>
-        </div>
-        <div class="unit" id="now_hold_pressure">
-            <% if(monitor){%>
-                <%= monitor.hold_pressure%>
-                    <% } %>
-        </div>
-        <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
-        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="hold_ucl">
-        </div>
-        <div class="sep" style="top:6.5vh;"></div>
-        <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
-        <div class="sep" style="top:18.5vh;"></div>
-        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
-        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="hold_lcl">
-        </div>
-        <div class="inputn" id="set_hold">
-            <% if(setup){%>
-                <%=setup.hold_pressure%>
-                    <%}%>
-        </div>
-    </div>
-    </div>
-
     <!-- 생산현황 -->
-    <div class="wrapper1" style="top:4.7vh; left: 52.7vw;">생산현황</div>
+    <div class="wrapper1" style="top:4.7vh; left: 5.7vw;">생산현황</div>
     <div class="wrapper"
-        style="position: absolute; height:57vh; top: 10vh; left:52.7vw; background-color:rgb(40, 44, 48);">
+        style="position: absolute; height:57vh; top: 10vh; left:5.7vw; background-color:rgb(40, 44, 48);">
 
         <div class="wrapper3" style="top:9.8vh;">생산목표</div>
         <div style="position: absolute; left:15vw; top:11vh; font-size:x-large;">
@@ -330,11 +192,148 @@
         </div>
     </div>
 
+    <!--결함발생 alert -->
+    <div class="alertI">
+        <img src="/img/alert.WEBP" style="width:6vw; height:10vh; position:absolute; right:3vw; top:32vh;">
+    </div>
+
+    <!-- 모달 -->
+    <div class="black_bg"></div>
+    <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170); 
+    font-size: 19px; line-height:5.3vh; font-weight: bold;"></div>
+    <div class="modal_wrap">
+        <div class="modal_box1" style="top:5vh;"><b>상한값</b></div>
+        <div class="modal_box2" style="top:5vh;" id="ucl"></div>
+        <div class="modal_box1" style="top:11.4vh;"><b>추천최적값</b></div>
+        <div class="modal_box2" style="top:11.4vh;" id="cl"></div>
+        <div class="modal_box1" style="top:17.8vh;"><b>하한값</b></div>
+        <div class="modal_box2" style="top:17.8vh;" id="lcl"></div>
+        <div class="modal_box1" style="top:24.2vh;"><b>입력값</b></div>
+        <input type="text" class="modal_box2" id="set" style="top:24.2vh; border:none;">
+        <div align="center">
+            <button class="btn btn-secondary" style="position:absolute; bottom: 2vh; left: 9vw; width:4.6vw; 
+            height:5.6vh; font-size:17px; line-height: 3.3vh;" id="register"><b>등록</b></button>
+            <button class="modal_close btn btn-secondary"
+                style="position:absolute; bottom: 2vh; right: 9vw;
+            width:4.6vw; height:5.6vh; display:inline-block; text-indent: 0px; line-height: 3.3vh; font-size:17.5px"><b>취소</b></button>
+        </div>
+    </div>
+
+    <!-- 용융온도 -->
+    <div class="wrapper1" style="top:4.7vh; left: 29.2vw;">용융 온도</div>
+    <div class="wrapper modal_btn" onclick="modal('melt')"
+        style="position: absolute; top: 10vh; left:29.2vw; color:white;">
+        <div class="dong" id="melt_box">
+            <div class="uniti">°C</div>
+        </div>
+        <div class="unit" id="now_melt_temp">
+            <% if(monitor){%>
+                <%= monitor.melt_temp%>
+                    <% } %>
+        </div>
+        <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
+        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="melt_ucl">
+        </div>
+        <div class="sep" style="top:6.5vh;"></div>
+        <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
+        <div class="inputn" id="set_melt">
+            <% if(setup){%>
+                <%=setup.melt_temp%>
+                    <%}%>
+        </div>
+        <div class="sep" style="top:18.5vh;"></div>
+        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
+        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="melt_lcl">
+        </div>
+    </div>
+    <!-- 금형온도 -->
+    <div class="wrapper1" style="top:4.7vh; left: 52.7vw;">금형 온도</div>
+    <div class="wrapper modal_btn" onclick="modal('mold')"
+        style="position: absolute; top: 10vh; left:52.7vw; color:white;">
+        <div class="dong" id="mold_box">
+            <div class="uniti">°C</div>
+        </div>
+        <div class="unit" id="now_mold_temp">
+            <% if(monitor){%>
+                <%= monitor.mold_temp%>
+                    <% } %>
+        </div>
+        <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
+        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="mold_ucl">
+        </div>
+        <div class="sep" style="top:6.5vh;"></div>
+        <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
+        <div class="inputn" id="set_mold">
+            <% if(setup){%>
+                <%=setup.mold_temp%>
+                    <%}%>
+        </div>
+        <div class="sep" style="top:18.5vh;"></div>
+        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
+        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="mold_lcl">
+        </div>
+    </div>
+
+    <!-- 사출속도 -->
+    <div class="wrapper1" style="top:36.2vh; left: 29.2vw;">사출속도</div>
+    <div class="wrapper modal_btn" onclick="modal('inj')"
+        style="position: absolute; top: 41.5vh; left:29.2vw; color:white;">
+        <div class="dong" id="inj_box">
+            <div class="uniti" style="left:1.8vw; font-size:20px">mm/s</div>
+        </div>
+        <div class="unit" id="now_injection_speed">
+            <% if(monitor){%>
+                <%= monitor.injection_speed%>
+                    <% } %>
+        </div>
+        <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
+        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="inj_ucl"></div>
+        <div class="sep" style="top:6.5vh;"></div>
+        <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
+        <div class="sep" style="top:18.5vh;"></div>
+        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
+        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="inj_lcl">
+        </div>
+        <div class="inputn" id="set_inj">
+            <% if(setup){%>
+                <%=setup.injection_speed%>
+                    <%}%>
+        </div>
+    </div>
+    </div>
+    <!-- 보압 -->
+    <div class="wrapper1" style="top:36.2vh; left:52.7vw;">보압</div>
+    <div class="wrapper modal_btn" onclick="modal('hold')"
+        style="position: absolute; top: 41.5vh; left:52.7vw; color:white;">
+        <div class="dong" id="hold_box">
+            <div class="uniti" style="left:1.4vw; font-size:19px;">kgf/cm<sup>3</sup></div>
+        </div>
+        <div class="unit" id="now_hold_pressure">
+            <% if(monitor){%>
+                <%= monitor.hold_pressure%>
+                    <% } %>
+        </div>
+        <div style="position: absolute; top:3.2vh; left:13.5vw; font-size: medium; color:lightgrey;">UCL</div>
+        <div style="position: absolute; top:3.2vh; left:16.5vw; font-size: medium; color:lightgrey;" id="hold_ucl">
+        </div>
+        <div class="sep" style="top:6.5vh;"></div>
+        <div style="position: absolute; top:10vh; left:11vw; font-size: 22px; color:white;">Set-up</div>
+        <div class="sep" style="top:18.5vh;"></div>
+        <div style="position: absolute; top:18.8vh; left:13.5vw; font-size: medium; color:lightgrey;">LCL</div>
+        <div style="position: absolute; top:18.8vh; left:16.5vw; font-size: medium; color:lightgrey;" id="hold_lcl">
+        </div>
+        <div class="inputn" id="set_hold">
+            <% if(setup){%>
+                <%=setup.hold_pressure%>
+                    <%}%>
+        </div>
+    </div>
+    </div>
+
     <!-- 오늘의 날씨 -->
     <div class="wrapper1" style="top:4.7vh; left:76.2vw;">오늘 날씨</div>
     <div class="wrapper" id="weather"
         style="position: absolute; top: 10vh; left:76.2vw; background-color:rgb(40, 44, 48);">
-
     </div>
     <!-- 작업지시현황 -->
     <div class="wrapper1" style="top:36.2vh; left: 76.2vw;">작업지시현황</div>
@@ -417,7 +416,7 @@
             let weatherIcon = {
                 "01": `<ion-icon name='sunny-outline' style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
                 "02": `<ion-icon name="partly-sunny-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
-                "03": `<ion-icon name="cloudy-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
+                "03": `<ion-icon name="cloudy-outline" style='position: absolute; width:130px; height:120px; left:2vw; top:3vh'></ion-icon>`,
                 "04": `<i class="fas fa-cloud" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
                 "09": `<i class="fas fa-cloud-sun-rain" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></i>`,
                 "10": `<ion-icon name="rainy-outline" style='position: absolute; width:150px; height:150px; left:2.5vw; top:3vh'></ion-icon>`,
@@ -435,8 +434,8 @@
                     var $humi = data.main.humidity;
                     $("#weather").html(
                         weatherIcon[$Icon] + `
-                    <div style='font-weight:bold; font-size:1.5em; position: absolute; left:15vw; top:6vh'>온도 : `+ $Temp + `</div>
-                    <div style='font-weight:bold; font-size:1.5em; position: absolute; left:15vw; top:12vh'>습도 : `+ $humi + `</div>
+                    <div style='font-size:1.5em; position: absolute; left:13vw; top:6.5vh'>온도 : `+ $Temp + ` °C</div>
+                    <div style='font-size:1.5em; position: absolute; left:13vw; top:12.5vh'>습도 : `+ $humi + ` %</div>
                     `)
                 }
             })

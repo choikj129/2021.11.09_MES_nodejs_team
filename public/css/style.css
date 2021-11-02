@@ -6,8 +6,8 @@
     --nav--width: 70px;
 
     /* Colores */
-    --first-color: #0c5df4;
-    --bg-color: #12192c;
+    --first-color: rgba(30, 255, 180, 0.7);
+    --bg-color: rgb(52, 58, 63);;
     --sub-color: #b6cefc;
     --white-color: #fff;
 
