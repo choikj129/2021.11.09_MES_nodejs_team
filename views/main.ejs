@@ -178,7 +178,7 @@
         <div id="qnt" style="position: absolute; top:31vh; left:15vw; font-size:x-large; color:rgb(53, 190, 71)">
             <b>
                 <% if(monitor) {%>
-                    <%= (monitor.cnt/order[0].total*100).toFixed(2)%>%
+                    <%= Math.round(monitor.cnt/order[0].total*100)%>%
                         <%}%>
             </b>
         </div>
@@ -186,7 +186,7 @@
         <div id="def" style="position: absolute; top:41vh; left:15vw; font-size:x-large; color:rgb(199, 85, 43)">
             <b>
                 <% if(monitor) {%>
-                    <%= (monitor.def/monitor.cnt).toFixed(2)*100%>%
+                    <%= Math.round(monitor.def/monitor.cnt*100)%>%
                         <%}%>
             </b>
         </div>

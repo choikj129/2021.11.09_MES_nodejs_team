@@ -4,6 +4,8 @@ import pymysql as mysql
 import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.font_manager as fm
+from matplotlib import rc
 
 with open("db.json","r") as f:
     data = json.load(f)
@@ -47,34 +49,42 @@ mold_y = (1/np.sqrt(2*np.pi*mold_s**2)) * np.exp(-(mold_set-mold_m)**2/(2*mold_s
 melt_y = (1/np.sqrt(2*np.pi*melt_s**2)) * np.exp(-(melt_set-melt_m)**2/(2*melt_s**2))
 hold_y = (1/np.sqrt(2*np.pi*hold_s**2)) * np.exp(-(hold_set-hold_m)**2/(2*hold_s**2))
 inj_y = (1/np.sqrt(2*np.pi*inj_s**2)) * np.exp(-(inj_set-inj_m)**2/(2*inj_s**2))
-mold_y0 = np.random.normal(mold_m, mold_s, 500)
-melt_y0 = np.random.normal(melt_m, melt_s, 500)
-hold_y0 = np.random.normal(hold_m, hold_s, 500)
-inj_y0 = np.random.normal(inj_m, inj_s, 500)
+mold_y0 = np.random.normal(mold_m, mold_s, 300)
+melt_y0 = np.random.normal(melt_m, melt_s, 300)
+hold_y0 = np.random.normal(hold_m, hold_s, 300)
+inj_y0 = np.random.normal(inj_m, inj_s, 300)
 
+font=fm.FontProperties(fname='C:/Windows/Fonts/H2GTRE.TTF').get_name()
+rc('font',family=font)
 fig, ax = plt.subplots(2,2, figsize = (20,20))
-ax[0,0].set_facecolor("black")
-ax[0,0].xticks(color="white")
+
+ax[0,0].tick_params(axis="x",colors="white", labelsize=20)
 ax[0,0].spines['bottom'].set_color('white')
-ax[0,0].plot(melt_set,melt_y)
-ax[0,0].hist(melt_y0, density=True, bins=30, color="mediumspringgreen")
-ax[0,0].set_title("Melt_temp")
+ax[0,0].set_facecolor("black")
+ax[0,0].plot(melt_set,melt_y, color="white")
+ax[0,0].hist(melt_y0, density=True, bins=30, color="mediumaquamarine")
+ax[0,0].set_title("용융 온도", fontdict={'fontsize': 30, 'fontweight': 'bold'}, color="white")
 
+ax[0,1].tick_params(axis="x",colors="white", labelsize=20)
+ax[0,1].spines['bottom'].set_color('white')
 ax[0,1].set_facecolor("black")
-ax[0,1].plot(mold_set,mold_y)
-ax[0,1].hist(mold_y0, density=True, bins=30, color="lawngreen")
-ax[0,1].set_title("Mold_temp")
+ax[0,1].plot(mold_set,mold_y, color="white")
+ax[0,1].hist(mold_y0, density=True, bins=30, color="mediumaquamarine")
+ax[0,1].set_title("금형 온도", fontdict={'fontsize': 30, 'fontweight': 'bold'}, color="white")
 
+ax[1,0].tick_params(axis="x",colors="white", labelsize=20)
+ax[1,0].spines['bottom'].set_color('white')
 ax[1,0].set_facecolor("black")
-ax[1,0].plot(inj_set,inj_y)
+ax[1,0].plot(inj_set,inj_y, color="white")
 ax[1,0].hist(inj_y0, density=True, bins=30, color="mediumaquamarine")
-ax[1,0].set_title("Injection_speed")
+ax[1,0].set_title("사출 속도", fontdict={'fontsize': 30, 'fontweight': 'bold'}, color="white")
 
+ax[1,1].tick_params(axis="x",colors="white", labelsize=20)
+ax[1,1].spines['bottom'].set_color('white')
 ax[1,1].set_facecolor("black")
-ax[1,1].plot(hold_set,hold_y)
-ax[1,1].hist(hold_y0, density=True, bins=30, color="honeydew")
-ax[1,1].set_title("Hold_pressure")
-
+ax[1,1].plot(hold_set,hold_y, color="white")
+ax[1,1].hist(hold_y0, density=True, bins=30, color="mediumaquamarine")
+ax[1,1].set_title("보압", fontdict={'fontsize': 30, 'fontweight': 'bold'}, color="white")
 
 plt.savefig("./public/img/chart/"+t+".png", facecolor="black")
 

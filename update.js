@@ -98,9 +98,8 @@ module.exports={
                                 if(err){
                                     console.log(err)
                                 }else{
-                                    var n=0;
+                                    var n=result[0].total;
                                     for (var i=0; i<result.length; i++){
-                                        n += result[i].quantity
                                         if (result[0].cnt<n){
                                             break
                                         }else if (result[0].cnt==n){

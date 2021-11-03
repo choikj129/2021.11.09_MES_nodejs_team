@@ -33,15 +33,28 @@ router.get("/", function(req,res){
                 if(err){
                     console.log(err)
                 }else{
+                    if(result.length==0){
+                        yy = 0
+                        nn = 0
+                        crack = 0
+                        color = 0
+                        size = 0
+                    }else{
+                        yy = result[0].yy
+                        nn = result[0].nn
+                        crack = result[0].crack
+                        color = result[0].color
+                        size =  result[0].size
+                    }
                     res.render("defect",{
                         "defect" : result,
                         "linkcode" : req.session.logged.linkcode,
                         "run" : req.session.run,
-                        "Y" : result[0].yy,
-                        "N" : result[0].nn,
-                        "crack" : result[0].crack,
-                        "color" : result[0].color,
-                        "size" : result[0].size,
+                        "Y" : yy,
+                        "N" : nn,
+                        "crack" : crack,
+                        "color" : color,
+                        "size" : size,
                         "today" : today,
                         "lastM" : moment().subtract(1, 'M').format("YYYY-MM-DD")
                     })

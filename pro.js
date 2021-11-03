@@ -22,7 +22,7 @@ router.get("/",function(req,res){
             res.redirect("/alert")
         }else{
             connection.query(
-                `select * from performance order by order_id`,
+                `select * from performance order by order_id desc`,
                 function(err, result){
                     if(err){
                         console.log(err);
@@ -31,7 +31,8 @@ router.get("/",function(req,res){
                         res.render("product",{
                             "date" : date,
                             "performance" : result,
-                            "linkcode" : req.session.logged.linkcode
+                            "linkcode" : req.session.logged.linkcode,
+                            "date2" : moment().format("YYYYMMDD")
                         })
                     }
                 }
@@ -160,5 +161,6 @@ router.get("/register", function(req, res){
         }
     )
 })
+
 
 module.exports = router
