@@ -26,7 +26,7 @@
         }
     </style>
 </head>
-<body style="background-color: black; overflow-y:hidden">
+<body style="background-color: black; overflow-y:hidden; overflow-x:hidden">
     <!-- 용융온도 -->
     <div>
         <div class="wrapper1" style="position: absolute; top:4.5vh; left:11vw;">
@@ -621,8 +621,6 @@
                 option2.xAxis[0].data.push(axisData);
                 //차트에 반영
                 myChart2.setOption(option2);
-                })
-
 
                 // 압력
                 var data3 = option3.series[0].data; //순수익 데이터
@@ -637,6 +635,7 @@
                 option3.xAxis[0].data.push(axisData);
                 //차트에 반영
                 myChart3.setOption(option3);
+                })
             }, 2100);
         }
     </script>

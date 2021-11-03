@@ -320,16 +320,22 @@
                 $("tbody").prepend(body)
                 $(".pagination").html("")
                 pagination()
-                config0.data.datasets[0].data[0] = yy + result.count.yy
-                config0.data.datasets[0].data[1] = nn + result.count.nn
-                pieChart0.update();
-
-                config1.data.datasets[0].data[0] = crack + result.count.crack
-                config1.data.datasets[0].data[1] = color + result.count.color
-                config1.data.datasets[0].data[2] = size + result.count.size
-                pieChart1.update();
               }
             }
+            if (result.count.nn==null){
+              result.count.nn=0
+            }
+            if (result.count.yy==null){
+              result.count.yy=0
+            }
+            config0.data.datasets[0].data[0] = yy + result.count.yy
+            config0.data.datasets[0].data[1] = nn + result.count.nn
+            pieChart0.update();
+
+            config1.data.datasets[0].data[0] = crack + result.count.crack
+            config1.data.datasets[0].data[1] = color + result.count.color
+            config1.data.datasets[0].data[2] = size + result.count.size
+            pieChart1.update();
           }
         )
       }, 2000)

@@ -127,6 +127,7 @@ router.get("/reset", function(req,res){
 
 router.get("/ajax", function(req, res){
     var date = moment().format("YYYYMMDD")
+    var today = moment().format("YYYY-MM-DD")
     connection.query(
         `select (select count(*) from monitoring`+date+`) cnt, 
         (select sum(quantity) from ordert where date(date)=?) total,
@@ -150,7 +151,9 @@ router.get("/ajax", function(req, res){
                             res.json({
                                 "defect" : result[0],
                                 "run" : req.session.run,
-                                "count" : result0[0]
+                                "count" : result0[0],
+                                "today" : today,
+                                "lastM" : moment().subtract(1, 'M').format("YYYY-MM-DD")
                             })
                         }
                     }

@@ -49,7 +49,7 @@
     </style>
 </head>
 
-<body style="background-color: black; overflow-y:hidden">
+<body style="background-color: black; overflow-y:hidden; overflow-x:hidden">
 
   <!-- 상단바 -->
   <div class="wrapper_nav" style="position: absolute; top:5vh; left:7vw;">
@@ -311,29 +311,11 @@
     $(".modal_btn").click(function () {
       $(".modal_wrap").css("display", "block")
       $(".black_bg").css("display", "block")
-      $(".modal_btn2").attr("disabled", true)
     })
 
     $(".modal_close").click(function () {
       $(".modal_wrap").css("display", "none")
       $(".black_bg").css("display", "none")
-      $(".modal_btn2").attr("disabled", false)
-    })
-
-    $(".modal_btn2").click(function () {
-      $(".modal_btn").attr("disabled", true)
-      var tr = $(this).parent().parent()
-      var td = tr.children()
-
-      $("#_custname_M").val(td.eq(2).text())
-      $("#_legoname_M").val(td.eq(3).text())
-      $("#_quantity_M").val(td.eq(4).text())
-      $("#_date_o_M").val(td.eq(5).text())
-      $("#_date_d_M").val(td.eq(6).text())
-      $("#_cid_M").val(td.eq(7).text())
-
-      $(".modal_wrap2").css("display", "block")
-      $(".black_bg2").css("display", "block")
     })
 
     $(".modal_close2").click(function () {
@@ -367,39 +349,39 @@
         _date_o: $("#_date_o").val(),
         _date_d: $("#_date_d").val()
       },
-        function (result) {
-          var body;
-          for (var i = 0; i < result.orders.length; i++) {
-            body += "<tr>"
-            body += "<td onclick='event.cancelBubble=true'><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
-            for (key in result.orders[0]) {
-              if (key == "regist") {
-                continue
-              }
-              if (result.orders[i][key] == null) {
-                body += "<td></td>"
-              } else {
-                body += "<td>" + result.orders[i][key] + "</td>"
-              }
+      function (result) {
+        var body;
+        for (var i = 0; i < result.orders.length; i++) {
+          body += "<tr>"
+          body += "<td onclick='event.cancelBubble=true'><input type='checkbox' id='del_row' class='chk' name='_selected_'></td>"
+          for (key in result.orders[0]) {
+            if (key == "regist") {
+              continue
             }
-            body += "</tr>"
+            if (result.orders[i][key] == null) {
+              body += "<td></td>"
+            } else {
+              body += "<td>" + result.orders[i][key] + "</td>"
+            }
           }
-          $("tbody").html(body)
-          $(".pagination").html("")
-          pagination()
-        })
+          body += "</tr>"
+        }
+        $("tbody").html(body)
+        $(".pagination").html("")
+        pagination()
+      })
     }
     // 행클릭 수정모달창
-    $("#iTable tr").click(function () {
+    $("#tbody2 tr").click(function () {
       var tr = $(this)
       var td = tr.children()
       id = td.eq(1).text()
-      $("#_custname_M").val(td.eq(2).text())
-      $("#_legoname_M").val(td.eq(3).text())
-      $("#_quantity_M").val(td.eq(4).text())
-      $("#_date_o_M").val(td.eq(5).text())
-      $("#_date_d_M").val(td.eq(6).text())
-      $("#_cid_M").val(td.eq(7).text())
+      $("#_custname_M").val((td.eq(2).text()).trim())
+      $("#_legoname_M").val((td.eq(3).text()).trim())
+      $("#_quantity_M").val((td.eq(4).text()).trim())
+      $("#_date_o_M").val((td.eq(5).text()).trim())
+      $("#_date_d_M").val((td.eq(6).text()).trim())
+      $("#_cid_M").val((td.eq(7).text()).trim())
       $(".modal_wrap2").css("display", "block")
       $(".black_bg2").css("display", "block")
     })
