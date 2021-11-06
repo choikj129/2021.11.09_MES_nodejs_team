@@ -91,14 +91,20 @@ module.exports={
                             `select *,
                             (select count(*) from monitoring`+date+`) cnt, 
                             (select sum(quantity) from ordert where date(date) =`+date+`) total,
-                            (select count(*) from monitoring`+date+` where defect="N") defect
+                            (select count(*) from monitoring`+date+` where defect="N") defect,
+                            (select sum(qty_def) from performance where date(date)=`+date+` order by date desc limit 1) last_def
                             from ordert where date(date)=?`,
                             [date],
                             function(err, result){
                                 if(err){
                                     console.log(err)
                                 }else{
-                                    var n=0
+                                    var n=0;
+                                    if(result[0].last_def==null){
+                                        var d = 0
+                                    }else{
+                                        var d = result[0].last_def
+                                    }
                                     for (var i=0; i<result.length; i++){
                                         n += result[0].quantity
                                         if (result[0].cnt<n){
@@ -109,7 +115,7 @@ module.exports={
                                                 `insert into performance(order_id, date, lego_name, quantity, qty_good, qty_def, manager)
                                                 values (?, now(), ?, ?, ?, ?, ?)`,
                                                 [id.order_id, id.lego_name, id.quantity,
-                                                id.quantity-result[0].defect, result[0].defect, id.manager.trim()],
+                                                id.quantity-result[0].defect-d, result[0].defect-d, id.manager.trim()],
                                                 function(err){
                                                     if (err){
                                                         console.log(err)
