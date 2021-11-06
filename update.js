@@ -98,8 +98,9 @@ module.exports={
                                 if(err){
                                     console.log(err)
                                 }else{
-                                    var n=result[0].total;
+                                    var n=0
                                     for (var i=0; i<result.length; i++){
+                                        n += result[0].quantity
                                         if (result[0].cnt<n){
                                             break
                                         }else if (result[0].cnt==n){
@@ -113,7 +114,7 @@ module.exports={
                                                     if (err){
                                                         console.log(err)
                                                     }else{
-                                                        if(n==result[0].total){
+                                                        if(result[0].cnt==result[0].total){
                                                             ps.PythonShell.run("./public/py/xchart.py",options,
                                                             function(err){
                                                                 if(err){
