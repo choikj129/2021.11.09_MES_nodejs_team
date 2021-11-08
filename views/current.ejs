@@ -123,6 +123,7 @@
         var myChart0 = echarts.init(document.getElementById('Chart0'));
         //UCL, LCL
         const markLine0 = [];
+        const markLine01 = [];
         for (var i = 0; i < 3; i++) {
             markLine0.push(
                 {
@@ -146,7 +147,7 @@
                     }
                 }
             );
-            markLine0.push(
+            markLine01.push(
                 {
                     name: 'Setting'+i,
                     yAxis: set_melt,
@@ -221,7 +222,17 @@
                         itemStyle: {color: 'red'}
                     },
                     color: 'orange'
-                }   
+                },
+                {   
+                    name : "",
+                    type : "scatter",
+                    data:[],
+                    markLine:{
+                        data: markLine01,
+                        symbol: 'none'
+                    },
+                    color: "green"
+                } 
             ]
         };
 
@@ -229,6 +240,7 @@
         myChart0.setOption(option0); 
         //UCL, LCL
         const markLine1 = [];
+        const markLine11 = [];
         for (var i = 0; i < 3; i++) {
             markLine1.push(
                 {
@@ -252,7 +264,7 @@
                     }
                 }
             );
-            markLine1.push(
+            markLine11.push(
                 {
                     name: 'Setting'+i,
                     yAxis: set_mold,
@@ -307,7 +319,7 @@
                 {
                     type: 'log',
                     scale: true,
-                    max: 35,
+                    max: 45,
                     min: 15,
                     boundaryGap: [0.2, 0.2],
                     axisLabel: {
@@ -333,6 +345,16 @@
                         itemStyle: {color: 'red'}
                     },
                     color: 'orange'
+                },
+                {   
+                    name : "",
+                    type : "scatter",
+                    data:[],
+                    markLine:{
+                        data: markLine11,
+                        symbol: 'none'
+                    },
+                    color: "green"
                 }
             ]
         };
@@ -342,6 +364,7 @@
 
         //UCL, LCL
         const markLine2 = [];
+        const markLine21 = []
         for (var i = 0; i < 3; i++) {
             markLine2.push(
                 {
@@ -365,7 +388,7 @@
                     }
                 }
             );
-            markLine2.push(
+            markLine21.push(
                 {
                     name: 'Setting'+i,
                     yAxis: set_inj,
@@ -447,6 +470,16 @@
                         itemStyle: {color: 'red'}
                     },
                     color: 'orange'
+                },
+                {   
+                    name : "",
+                    type : "scatter",
+                    data:[],
+                    markLine:{
+                        data: markLine21,
+                        symbol: 'none'
+                    },
+                    color: "green"
                 }
             ]
         };
@@ -456,6 +489,7 @@
 
         //UCL, LCL
         const markLine3 = [];
+        const markLine31= [];
         for (var i = 0; i < 3; i++) {
             markLine3.push(
                 {
@@ -479,7 +513,7 @@
                     }
                 }
             );
-            markLine3.push(
+            markLine31.push(
                 {
                     name: 'Setting'+i,
                     yAxis: set_hold,
@@ -561,6 +595,16 @@
                         itemStyle: {color: 'red'}
                     },
                     color: 'orange'
+                },
+                {   
+                    name : "",
+                    type : "scatter",
+                    data:[],
+                    markLine:{
+                        data: markLine31,
+                        symbol: 'none'
+                    },
+                    color: "green"
                 }
             ]
         };

@@ -34,37 +34,37 @@
 <body style="background-color: black; overflow-x:hidden;">
 
   <!--불량품 차트-->
-  <div style="position:absolute;left:-2vw; top:10vh;">
-    <canvas id="pieChart" style="width:40vw; height:40vh;"></canvas>
+  <div style="position:absolute;left:0vw; top:10vh;">
+    <canvas id="pieChart" style="width:35vw;"></canvas>
   </div>
 
   <!--불량유형 차트-->
-  <div style="position:absolute;left:-2vw; top:52vh;">
-    <canvas id="pieChart1" style="width:40vw; height:40vh;"></canvas>
+  <div style="position:absolute;left:0vw; top:55vh;">
+    <canvas id="pieChart1" style="width:35vw;"></canvas>
   </div>
   
 
-  <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width:57vw;">
-    <div class="font_nav">불량확인</div>
-    <div class="input_nav" style="top:2.5vh; left:8vw;" for="inputGroupSelect01">작업 날짜</div>
+  <div class="wrapper_nav" style="position: absolute; top:5vh; left:31vw; width:67.5vw;">
+    <div class="font_nav">불량관리</div>
+    <div class="input_nav" style="top:2.5vh; left:13vw;" for="inputGroupSelect01">작업 날짜</div>
     <input type="text" class="datepicker wdate text" id="datepicker" name="_date"
-      style="top:2.5vh; left:15vw; width:15vw; height:5vh;" value="<%=lastM%>">
+      style="top:2.5vh; left:20vw; width:15vw; height:5vh;" value="<%=lastM%>">
     <input type="text" class="datepicker wdate text" id="datepicker2" name="_date"
-      style="top:2.5vh; left:30vw; width:15vw; height:5vh;" value="<%=today%>">
-    <button class="btn btn-outline-secondary" onclick="search()"
-      style="position:absolute; top:2.5vh; right:9vw">조회</button>
-    <button class="btn btn-outline-secondary" onclick="reset()" style="position:absolute; top:2.5vh; right:2vw">검색초기화</button>
+      style="top:2.5vh; left:35vw; width:15vw; height:5vh;" value="<%=today%>">
+    <button class="btn btn-secondary" onclick="search()"
+      style="position:absolute; top:2vh; right:9vw">조회</button>
+    <button class="btn btn-secondary" onclick="reset()" style="position:absolute; top:2vh; right:1vw">검색초기화</button>
   </div>
-  <div class="tableb" style="width:57vw; left:31vw; top:16vh;">
-    <table class="table table-bordered" style="width:57vw;">
-      <thead class="thead" style="width:57vw;">
+  <div class="tableb" style="width:67.5vw; left:31vw; top:16vh;">
+    <table class="table table-bordered" style="width:67.5vw;">
+      <thead class="thead" style="width:67.5vw;">
         <tr>
-          <th scope="col" style="width: 17vw;">시간</th>
-          <th scope="col" style="width: 6vw;">용융온도</th>
-          <th scope="col" style="width: 6vw;">금형온도</th>
-          <th scope="col" style="width: 6vw;">사출속도</th>
-          <th scope="col" style="width: 6vw;">보압</th>
-          <th scope="col" style="width: 15vw">불량 유형</th>
+          <th scope="col" style="width: 18vw;">시간</th>
+          <th scope="col" style="width: 8vw;">용융온도</th>
+          <th scope="col" style="width: 8vw;">금형온도</th>
+          <th scope="col" style="width: 8vw;">사출속도</th>
+          <th scope="col" style="width: 8vw;">보압</th>
+          <th scope="col" style="width: 17.5vw">불량 유형</th>
         </tr>
       </thead>
       <tbody id="tbody2">
@@ -94,7 +94,7 @@
     </table>
   </div>
   <nav aria-label="Page navigation example" >
-    <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+    <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-8vh; left: 55%; width:4.6vw; 
     height:5.6vh;">
     </ul>
   </nav>
@@ -136,7 +136,7 @@
 
     var dataset1 = {
       label: "불량유형",
-      backgroundColor: ['green', 'greenyellow', 'goldenrod'],//라벨별 컬러설정 
+      backgroundColor: ['olive', 'slateblue', 'orange'],//라벨별 컬러설정 
       borderColor: 'white', data: ["<%=crack%>", "<%=color%>", "<%=size%>" ]
     }
     var labels1 = ['크랙', '색 불량', '치수 불량'];

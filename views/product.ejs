@@ -29,7 +29,7 @@
     </head>
     <body style="background-color: black; overflow-y:hidden; overflow-x:hidden">
         <div class="wrapper_nav" style="position: absolute; top:5vh; left:7vw">
-            <div class="font_nav">작업실적조회</div>
+            <div class="font_nav">생산실적관리</div>
             <div class="input_nav" style="top:2.5vh; left:17vw;" for="inputGroupSelect01">품목명</div>
             <select class="form-select text select" id="product_i" name="search_i" style="top:2.5vh; left:24vw;">
                 <option value=""></option>
@@ -43,8 +43,8 @@
             <input type="text" class="datepicker wdate text" id="product_d" name="_date"
                 style="top:2.5vh; left:54vw; width:15vw; height: 5vh;">
 
-            <button class="btn btn-outline-secondary" onclick="search()" style="position:absolute; top:2.5vh; right:10vw">조회</button>
-            <button class="btn btn-outline-secondary" onclick="reset()" style="position:absolute; top:2.5vh; right:2vw">검색 초기화</button>
+            <button class="btn btn-secondary" onclick="search()" style="position:absolute; top:2vh; right:10.5vw">조회</button>
+            <button class="btn btn-secondary" onclick="reset()" style="position:absolute; top:2vh; right:2vw">검색 초기화</button>
         </div>
         <div class="tableb" style="top:17vh; left:7vw;">
             <table class="table table-bordered table-responsive">
@@ -91,22 +91,22 @@
         </div>
 
         <div class="black_bg"></div>
-        <div class="modal_wrap modal_name" style="height:5vh; top: 20vh; background-color: rgb(151, 161, 170); 
+        <div class="modal_wrap modal_name" style="position:absolute; left:33%; height:8vh; width:40vw; top: 5vh; background-color: rgb(151, 161, 170); 
         font-size: 19px; line-height:5.3vh; font-weight: bold;">
-            <input type="text" class="datepicker text" id="datepicker2" value="<%=date%>">
-            <button class="btn btn-outline-secondary" id="search">조회</button>
-            <button class="btn btn-outline-light modal_close">X</button>
+            <input type="text" class="datepicker text" id="datepicker2" value="<%=date%>" style="top:1vh; left:10vw;">
+            <button class="btn btn-outline-light" id="search" style="top:1vh; left:29vw;">조회</button>
+            <button class="btn btn-outline-light modal_close" style="position: absolute; left: 36.5vw; top:1vh">X</button>
         </div>
-        <div class="modal_wrap">
-            <img src="/img/chart/<%=date2%>.png" onerror="this.src='/img/unnamed.png', this.style.width='410px'" style="width: 40vw;">
+        <div class="modal_wrap" style="position:absolute; top:15vh; left:33%; ">
+            <img src="/img/chart/<%=date2%>.png" onerror="this.src='/img/unnamed.png', this.style.width='40vw'" style="width: 40vw;">
         </div>
 
 
         <nav aria-label="Page navigation example" >
-            <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-5vh; left: 40%; width:4.6vw; 
+            <ul class="pagination justify-content-center" style="page-break-inside: avoid; position:absolute; bottom:-8vh; left: 45%; width:4.6vw; 
             height:5.6vh;">
             </ul>
-            <button class="btn btn-outline-secondary modal_btn" style="position:absolute; top:88vh; right: 5%;">통계그래프</button>
+            <button class="btn btn-secondary modal_btn" style="position:absolute; top:90vh; right: 5%;">통계그래프</button>
         </nav>
 
         
